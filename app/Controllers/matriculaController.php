@@ -19,6 +19,10 @@ class matriculaController extends Controller
 
         $curso = $this->sessao->verificaCurso();
 
+        $cursoInfo = $this->cursosModel->getCurso($curso);
+
+        $data['curso'] = $cursoInfo;
+
         // Defina a variável de sessão para indicar a página atual
         $_SESSION['pagina_atual'] = 'identificacao';
 
@@ -27,7 +31,7 @@ class matriculaController extends Controller
 
         //set page data
         $data['view'] = 'cadastro';
-        $data['title'] = 'Matrícula | Identificação';
+        $data['title'] = 'Identificação | ' . $cursoInfo['nome'];
         $data['description'] = 'Faça matrícula utilizando pagamento seguro e comece agora mesmo seu curso.';
         $data['styles'] = array('matricula');
         $data['scripts_head'] = array('');
@@ -78,7 +82,7 @@ class matriculaController extends Controller
 
                 //set page data
                 $data['view'] = 'checkout';
-                $data['title'] = 'Matrícula | Pagamento';
+                $data['title'] = 'Check-out | ' . $cursoInfo['nome'];
                 $data['description'] = 'Faça matrícula utilizando pagamento seguro e comece agora mesmo seu curso.';
                 $data['styles'] = array('matricula');
                 $data['scripts_head'] = array('');
@@ -112,6 +116,10 @@ class matriculaController extends Controller
 
         $curso = $this->sessao->verificaCurso();
 
+        $cursoInfo = $this->cursosModel->getCurso($curso);
+
+        $data['curso'] = $cursoInfo;
+
         // Defina a variável de sessão para indicar a página atual
         $_SESSION['pagina_atual'] = 'concluir';
 
@@ -120,7 +128,7 @@ class matriculaController extends Controller
 
         //set page data
         $data['view'] = 'concluir_matricula';
-        $data['title'] = 'Matrícula | Concluir';
+        $data['title'] = 'Concluir Matrícula | ' . $cursoInfo['nome'];
         $data['description'] = 'Faça matrícula utilizando pagamento seguro e comece agora mesmo seu curso.';
         $data['styles'] = array('matricula');
 
@@ -132,6 +140,10 @@ class matriculaController extends Controller
     public function concluida()
     {
         $curso = $this->sessao->verificaCurso();
+
+        $cursoInfo = $this->cursosModel->getCurso($curso);
+
+        $data['curso'] = $cursoInfo;
 
         // Acesso aos dados temporários que foram salvos na etapa de identificação
         if (isset($_SESSION['dadosTemporarios'])) {
@@ -159,7 +171,7 @@ class matriculaController extends Controller
 
                 //set page data
                 $data['view'] = 'matricula_concluida';
-                $data['title'] = 'Matrícula | Concluida';
+                $data['title'] = 'Matrícula Concluída | ' . $cursoInfo['nome'];
                 $data['description'] = 'Faça matrícula utilizando pagamento seguro e comece agora mesmo seu curso.';
                 $data['styles'] = array('matricula');
 

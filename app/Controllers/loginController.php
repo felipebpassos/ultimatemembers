@@ -28,7 +28,7 @@ class loginController extends Controller
 
         //set page data
         $data['view'] = 'login';
-        $data['title'] = 'Login';
+        $data['title'] = 'Login | ' . $cursoInfo['nome'];
         $data['description'] = 'Faça login e comece agora mesmo seu curso.';
         $data['styles'] = array('login');
         $data['scripts_head'] = array('');
@@ -54,7 +54,7 @@ class loginController extends Controller
 
         //set page data
         $data['view'] = 'redefinir_senha';
-        $data['title'] = 'Redefinir Senha';
+        $data['title'] = 'Redefinir Senha | ' . $cursoInfo['nome'];
         $data['description'] = 'Redefina aqui sua senha e a enviaremos por e-mail.';
         $data['styles'] = array('login');
         $data['scripts_head'] = array('');

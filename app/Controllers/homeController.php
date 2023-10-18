@@ -21,7 +21,7 @@ Class homeController extends Controller {
 
         //set page data
         $data['view'] = '';
-        $data['title'] = 'Nome Curso';
+        $data['title'] = $cursoInfo['nome'];
         $data['description'] = 'Descrição do curso';
         $data['styles'] = array('footer', 'styles');
         $data['scripts_head'] = array('accordion-pre-set');

@@ -52,7 +52,7 @@ class painelController extends Controller
 
         //set page data
         $data['view'] = 'painel';
-        $data['title'] = 'Reels de Cinema | Painel';
+        $data['title'] = $cursoInfo['nome'] . ' | Painel';
         $data['description'] = 'Assista às aulas e estude através do nosso material';
         $data['styles'] = array('painel', 'header', 'banners');
         $data['scripts_head'] = array('abas');
@@ -154,7 +154,7 @@ class painelController extends Controller
 
         //set page data
         $data['view'] = 'relatorios';
-        $data['title'] = 'Relatórios | Reels de Cinema';
+        $data['title'] = 'Relatórios | ' . $cursoInfo['nome'];
         $data['description'] = 'Descrição do curso';
         $data['styles'] = array('painel', 'header', 'relatorios');
         $data['scripts_head'] = array('');
@@ -181,7 +181,7 @@ class painelController extends Controller
 
         //set page data
         $data['view'] = 'sobre';
-        $data['title'] = 'Sobre o [NOME DO CURSO]';
+        $data['title'] = 'Sobre | ' . $cursoInfo['nome'];
         $data['description'] = 'Descrição do curso';
         $data['styles'] = array('painel', 'header');
         $data['scripts_head'] = array('');
@@ -208,7 +208,7 @@ class painelController extends Controller
 
         //set page data
         $data['view'] = 'preferencias';
-        $data['title'] = '[NOME DO CURSO] | Preferências';
+        $data['title'] = 'Painel Administrativo | ' . $cursoInfo['nome'];
         $data['description'] = '';
         $data['styles'] = array('painel', 'header');
         $data['scripts_head'] = array('');
@@ -235,7 +235,7 @@ class painelController extends Controller
 
         //set page data
         $data['view'] = 'ajuda';
-        $data['title'] = '[NOME DO CURSO] | Ajuda';
+        $data['title'] = 'Ajuda | ' . $cursoInfo['nome'];
         $data['description'] = '';
         $data['styles'] = array('painel', 'header');
         $data['scripts_head'] = array('');

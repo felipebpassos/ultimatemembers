@@ -1,15 +1,22 @@
 use reelsdecinema;
 
-drop table cursos;
+drop table discussoes_tags;
 
 ALTER TABLE usuarios
 ADD COLUMN instagram VARCHAR(255),
 ADD COLUMN facebook VARCHAR(255),
 ADD COLUMN linkedin VARCHAR(255);
 
-UPDATE usuarios
-SET adm = true 
-WHERE id = 8;  -- Condição para identificar o registro específico
+ALTER TABLE respostas_comentarios DROP FOREIGN KEY fk_respostas_comentarios_curso;
+
+ALTER TABLE respostas_comentarios
+DROP COLUMN id_curso;
+
+SHOW CREATE TABLE notificacoes;
+
+UPDATE cursos
+SET url_principal = 'instaempreendedor/' 
+WHERE id = 2;  -- Condição para identificar o registro específico
 
 INSERT INTO fontes (nome)
 VALUES ('Bai Jamjuree, sans-serif');
@@ -17,16 +24,26 @@ VALUES ('Bai Jamjuree, sans-serif');
 INSERT INTO infoprodutores (nome, user_id, email, whatsapp, plano)
 VALUES ('Thomaz Messias', 8, 'paidorec@gmail.com', '79999211992', 1);
 
-INSERT INTO cursos (nome, url_logo, url_principal, cor_texto, cor_fundo, fonte_id, infoprodutor_id)
-VALUES ('Reels de Cinema', '/', 'http://localhost/reelsdecinema', '#FF0000', '#00FF00', 1, 1);
+INSERT INTO cursos (nome, url_logo, url_principal, fonte_id, infoprodutor_id)
+VALUES ('Instagram Empreendedor', '/uploads/cursos/logos/logo.png', 'http://localhost/instaempreendedor/', 1, 1);
 
 INSERT INTO cursos (nome, url_logo, url_principal, fonte_id, infoprodutor_id)
-VALUES ('Reels de Cinema', '/uploads/cursos/logos/logo.png', 'http://localhost/reelsdecinema', 1, 1);
+VALUES ('Reels de Cinema', '/uploads/cursos/logos/logo.png', 'http://localhost/reelsdecinema/', 1, 1);
 
+ALTER TABLE tags_forum
+ADD COLUMN id_curso INT NOT NULL;
+
+SET SQL_SAFE_UPDATES = 1;
+
+UPDATE tags_forum SET id_curso = 1;
+
+ALTER TABLE tags_forum
+ADD CONSTRAINT fk_tags_forum_curso
+FOREIGN KEY (id_curso) REFERENCES cursos(id);
 
 select * from cursos;
 
-select * from usuarios;
+select * from notificacoes;
 
 INSERT INTO lancamentos (nome, capa, link_url)
 VALUES ('Reels de Cinema', './uploads/lançamentos/banners/lançamento01.png', 'http://localhost/ReelsDeCinema/');
