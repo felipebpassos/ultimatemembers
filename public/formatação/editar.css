@@ -1,0 +1,113 @@
+main {padding-bottom: 20px;}
+
+.edit-container {
+    max-width: 700px;
+    margin: auto;
+}
+
+.edit-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.edit-foto-box {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.foto-perfil-edit {
+    padding: 10px;
+    border: 1px dashed var(--cor-primaria-lighter);
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+}
+
+.pelicula {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    /* Começa invisível */
+    transition: opacity 0.5s;
+    /* Adiciona uma transição suave */
+}
+
+.foto-perfil-edit:hover .pelicula {
+    opacity: 1;
+    /* Torna a pelicula visível quando hover */
+}
+
+.btn-upload-img {
+    cursor: pointer;
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.edit-options {
+    margin-bottom: 35px;
+    padding: 0px;
+    border-bottom: solid 1px var(--sombra-light);
+}
+
+.edit-options a {
+    margin-right: 20px;
+    color: var(--cor-primaria);
+}
+
+.edit-options a:hover {
+    transition: 0.3s;
+    color: var(--cor-primaria-lighter);
+}
+
+.edit-options a i {
+    margin-right: 5px;
+}
+
+.campo {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    margin-bottom: 30px;
+    align-items: center;
+    position: relative;
+}
+
+.campo input {
+    width: 100%;
+    height: 100%;
+    padding-left: 15px;
+    transition: 0.2s;
+    border: 1px solid var(--cor-primaria);
+    background-color: var(--cor-secundaria);
+    color: var(--cor-primaria);
+}
+
+.campo input:focus {
+    outline: 3px solid var(--cor-primaria-lighter);
+    border: none;
+}
+
+.btn-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}

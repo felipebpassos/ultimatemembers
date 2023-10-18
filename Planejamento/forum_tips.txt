@@ -1,0 +1,3 @@
+Your two parts were merged to make the “body” of the question. Please review and edit to make sure that the question in its entirety makes sense.
+
+When creating questions in the future, there will be only one body field, but for best results remember to include both a description of your problem and what you’ve tried.

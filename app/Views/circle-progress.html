@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        body {
+            background-color: rgba(15, 15, 15);
+            font-family: 'Poppins', sans-serif;
+            color: rgb(100, 100, 100);
+        }
+        
+        .circular-progress {
+            width: 120px;
+            height: 120px;
+            position: relative;
+        }
+        
+        .outer {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            box-shadow: 6px 6px 10px -1px rgba(255, 255, 255, 0.15), -6px -6px 10px -1px rgba(255, 255, 255, 0.15);
+            padding: 20px;
+        }
+        
+        .inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            box-shadow: inset 4px 4px 6px -1px rgba(255, 255, 255, 0.2), inset -4px -4px 6px -1px rgba(255, 255, 255, 0.3), -0.5px -0.5px 0px rgba(255, 255, 255, 0.3), 0.5px 0.5px 0px rgba(0, 0, 0, 0.15), 0px 12px 10px -10px rgba(0, 0, 0, 0.05);
+        }
+        
+        circle {
+            fill: none;
+            stroke: url(#GradientColor);
+            stroke-width: 20px;
+            stroke-dasharray: 310;
+        }
+        
+        svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="circular-progress">
+        <div class="outer">
+            <div class="inner">
+                <div id="total-progress">
+                    65%
+                </div>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="120px" height="120px">
+                <defs>
+                   <linearGradient id="GradientColor">
+                      <stop offset="0%" stop-color="#e91e63" />
+                      <stop offset="100%" stop-color="#673ab7" />
+                   </linearGradient>
+                </defs>
+                <circle id="progress-circle" cx="60" cy="60" r="50" stroke-linecap="round" />
+             </svg>
+        </div>
+    </div>
+
+
+    <script>
+        // Função para atualizar o valor da porcentagem e o stroke-dashoffset
+        function atualizarPorcentagem(valorPorcentagem) {
+            // Atualize o valor da porcentagem na tela
+            document.getElementById('total-progress').innerText = valorPorcentagem + '%';
+            const circle = document.getElementById('progress-circle');
+
+            circle.setAttribute('stroke-dashoffset', '310');
+
+            // Calcule o novo valor de stroke-dashoffset
+            const novoStroke = 310 * (100 - valorPorcentagem) / 100;
+
+            // Adicione um pequeno atraso (10ms) antes de aplicar a transição
+            setTimeout(function() {
+                circle.setAttribute('stroke-dashoffset', novoStroke);
+                circle.style.transition = 'stroke-dashoffset 2s linear';
+            }, 10);
+        }
+
+        // Chamada inicial para definir a porcentagem inicial
+        atualizarPorcentagem(50); // Por exemplo, 65%
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+.dashboard {width: 960px; margin: auto;}
+
+.grafico, .dado {
+    width: 100%;
+    background-color: var(--cor-secundaria-lighter); 
+    margin-bottom: 20px;
+    border-radius: 6px;
+    padding: 25px;
+}
+
+.grafico {
+    height: 220px; 
+}
+
+.dado {
+    height: 100px;
+    display: flex;
+    align-items: center;
+}
+
+.dado i, .dado label {color: var(--cor-primaria-light);}
+
+.dado i {margin-right: 20px; font-size: 20px;}
+
+.dado span {display: block; font-size: 18px; color: var(--cor-primaria-lighter);}

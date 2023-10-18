@@ -1,0 +1,593 @@
+/* Importar a fonte Quincy CF */
+
+@import url(https://db.onlinewebfonts.com/c/d162a260eb6b9b288f54503ee22aa9ff?family=Quincy+CF+Regular);
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,500&display=swap');
+@import 'http://localhost/ultimatemembers/public/formatação/variables.css';
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Bai Jamjuree', sans-serif;
+}
+
+
+/* Estilizando a barra de rolagem lateral */
+
+::-webkit-scrollbar {
+    width: 8px;
+    /* Largura da barra de rolagem */
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--cor-secundaria-light);
+    /* Cor de fundo da área de rastreamento da barra de rolagem */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--cor-primaria-darker);
+    /* Cor da barra de rolagem */
+    background-clip: content-box;
+    border-radius: 5px;
+    /* Borda arredondada da barra de rolagem */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--cor-primaria-dark);
+    /* Cor da barra de rolagem ao passar o mouse */
+}
+
+input::placeholder {
+    color: var(--cor-primaria-light);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.dropdown {
+    display: none;
+    position: absolute !important;
+}
+
+.rotate {
+    transform: rotate(180deg);
+}
+
+a {
+    text-decoration: none !important;
+    cursor: pointer;
+}
+
+li {
+    list-style: none;
+}
+
+button {
+    transition: 0.3s;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button p {
+    margin-bottom: 0px !important;
+    margin-top: 0px !important;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+button:active {
+    opacity: 0.7;
+}
+
+button i {
+    margin-right: 10px;
+}
+
+.fade-in-slide-up {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 2.5s ease;
+}
+
+.fade-in-slide-up.ativo {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.box-txt-center-block {
+    width: 100%;
+    text-align: center;
+}
+
+.box-flex-full {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.btn-1 {
+    background-color: var(--cor-primaria);
+    color: var(--cor-secundaria);
+    height: 40px;
+    width: 160px;
+    border: none;
+    border-radius: 10px;
+}
+
+.btn-2 {
+    min-width: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50px;
+    border: none;
+    border-radius: 8px;
+    color: var(--cor-primaria-lighter);
+    font-weight: bold;
+    padding: 0 10px;
+    background-color: var(--cor-primaria-dark);
+    box-shadow: 0px 3px 10px var(--cor-primaria-transparent);
+}
+
+.btn-2:hover {
+    background-color: var(--cor-primaria);
+    box-shadow: 0px 3px 12px var(--cor-primaria-transparent-2);
+}
+
+body {
+    width: 100%;
+}
+
+.logo {
+    margin-right: 50px;
+    margin-top: -8px;
+    height: 25px;
+}
+
+.logo:hover {
+    transition: transform 0.5s ease-in-out;
+    transform: scale(1.1);
+}
+
+.whatsapp-button {
+    position: fixed;
+    bottom: 35px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: var(--grey);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease-in-out;
+    z-index: 995;
+}
+
+.whatsapp-button:hover {
+    transform: scale(1.1);
+}
+
+.whatsapp-button img {
+    height: 60px;
+}
+
+.fade-left,
+.fade-right,
+.fade-top,
+.fade-bottom {
+    position: absolute;
+    z-index: 2;
+}
+
+.fade-left,
+.fade-right {
+    top: 0;
+    width: 60px;
+    height: 600px;
+}
+
+.fade-top,
+.fade-bottom {
+    left: 0;
+    width: 100%;
+    height: 10px;
+}
+
+.fade-left {
+    left: 0;
+    background: linear-gradient(to left, transparent, var(--cor-secundaria));
+}
+
+.fade-right {
+    right: 0;
+    background: linear-gradient(to right, transparent, var(--cor-secundaria));
+}
+
+.fade-top {
+    top: 0;
+    background: linear-gradient(to top, transparent, var(--cor-secundaria));
+}
+
+.fade-bottom {
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent, var(--cor-secundaria));
+}
+
+.foto-box {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.foto-perfil {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.foto-perfil-micro {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+
+.foto-perfil-mini {
+    position: relative;
+    min-width: 50px;
+    max-width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.perfil-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+#img-aula,
+#img-aula-2,
+#img-aula-3 {
+    display: flex;
+    position: relative;
+    background-color: var(--background-container);
+    margin-right: 20px;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+#img-aula {
+    margin: 0;
+    min-width: 180px;
+    max-width: 180px;
+    height: 120px;
+}
+
+#img-aula .duracao-aula {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    background-color: var(--cor-secundaria);
+    color: var(--cor-primaria-light);
+    padding: 3px 5px;
+    font-size: 13px;
+    border-radius: 5px;
+}
+
+#img-aula-2 {
+    width: 100%;
+    height: 180px;
+    margin-bottom: 15px;
+    border: none;
+    float: left;
+}
+
+#img-aula-3 {
+    min-width: 90px;
+    max-width: 90px;
+    height: 60px;
+}
+
+#img-aula img,
+#img-aula-2 img,
+#img-aula-3 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.3s;
+}
+
+#img-aula:hover,
+#img-aula-2:hover,
+#img-aula-3:hover {
+    opacity: 0.65;
+}
+
+#img-aula:hover::before,
+#img-aula-2:hover::before,
+#img-aula-3:hover::before {
+    content: "\f04b";
+    /* Código do ícone play */
+    font-family: "Font Awesome 5 Free";
+    /* Fonte do ícone */
+    font-weight: 900;
+    /* Peso do ícone */
+    font-size: 50px;
+    /* Tamanho do ícone */
+    color: #d6d6d6;
+    /* Cor do ícone */
+    position: absolute;
+    /* Posição absoluta em relação ao pai */
+    top: 50%;
+    /* Centraliza verticalmente */
+    left: 50%;
+    /* Centraliza horizontalmente */
+    transform: translate(-50%, -50%);
+    /* Centraliza totalmente */
+}
+
+#img-aula-3:hover::before {
+    font-size: 20px;
+}
+
+.textarea1 {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-primaria);
+    flex: 1;
+    padding: 5px;
+    border: none;
+    outline: none;
+    resize: none;
+    border-bottom: 1px solid var(--sombra);
+    transition: border-bottom 0.3s;
+    overflow: hidden;
+    line-height: 1.0em;
+}
+
+.textarea1::placeholder {
+    color: var(--cor-primaria);
+    /* Defina a cor desejada para o placeholder */
+}
+
+.textarea1:focus {
+    border-bottom: 2px solid var(--cor-primaria);
+}
+
+.redes-sociais button:hover {
+    box-shadow: none !important;
+    background-color: rgb(200, 200, 200);
+}
+
+.redes-sociais {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    margin-left: 25px;
+}
+
+.redes-sociais button {border: none; background-color: rgb(210, 210, 210);}
+
+.facebook-button {
+    color: #3b5998;
+}
+
+.google-button {
+    color: #db4a39;
+}
+
+.redes-sociais i {
+    font-size: 20px;
+}
+
+.fade-in-element {
+    opacity: 0;
+    transition: opacity 2.5s ease-in-out;
+}
+
+.fade-in {
+    opacity: 1 !important;
+}
+
+#fundo-loader {
+    width: 100%;
+    height: 100vh;
+    background-color: var(--cor-secundaria);
+    position: fixed;
+    top: 0;
+    z-index: 9996;
+}
+
+#loader {
+    width: 60%;
+    height: 80vh;
+    background: var(--cor-secundaria) url("http://localhost/ultimatemembers/public/img/loader.gif") center no-repeat;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9997;
+}
+
+.legenda {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgb(88, 88, 88);
+    color: white;
+    font-size: 14px;
+    padding: 4px;
+    border-radius: 4px;
+    display: none;
+    width: 120px;
+    line-height: 10px;
+    /* Centralizar verticalmente o texto */
+    z-index: 9998;
+    overflow: visible;
+}
+
+.titulo-pagina {
+    width: 95%;
+    text-align: center;
+    margin-top: 80px;
+    margin-bottom: 50px;
+    color: var(--cor-primaria);
+}
+
+.titulo-pagina h1 {
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.slide-left {
+    opacity: 0;
+}
+
+.animate {
+    animation: slideAndFade 3s ease;
+    /* Inicia a animação */
+}
+
+.finalState {
+    opacity: 1;
+}
+
+@keyframes slideAndFade {
+    0% {
+        transform: translateX(300px);
+        /* Começa 200px afastado */
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        /* Retorna à posição original */
+        opacity: 1;
+    }
+}
+
+
+/* Pop Ups */
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 620px;
+    height: 430px;
+    border-radius: 10px;
+    background-color: var(--popup);
+    color: var(--cor-primaria);
+    padding: 20px 20px 30px 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+#aulaFormAdd,
+#aulaFormEdit {
+    height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#confirmacao {
+    height: fit-content;
+}
+
+#confirmacao .btn-box {
+    width: fit-content;
+    margin: auto;
+}
+
+#confirmacao button {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.popup label {
+    font-weight: bold;
+}
+
+.popup .txt-input {
+    display: flex;
+    margin: 20px;
+}
+
+.popup .txt-input div {
+    position: relative;
+}
+
+.popup label {
+    padding: 0 3px;
+    margin-left: 10px;
+    position: absolute;
+    top: -13px;
+    background-color: transparent;
+    width: fit-content;
+}
+
+.popup .txt-input input,
+.popup textarea {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-primaria);
+    padding: 10px;
+    margin-right: 20px;
+    border-radius: 5px;
+    border: none;
+}
+
+.popup .txt-input input {
+    height: 40px;
+    margin-bottom: 25px;
+}
+
+.popup textarea {
+    width: 100%;
+    min-height: 100px;
+}
+
+.popup input:focus {
+    border: none;
+    transition: outline 0.3s ease-in-out;
+    outline: 1px solid var(--cor-primaria-light);
+}
+
+#indice {
+    width: 70px;
+}
+
+#nomeAula {
+    width: 400px;
+}
+
+.blur {
+    transition: 0.5s;
+    filter: blur(15px);
+}

@@ -1,0 +1,28 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Curtidas</title>
+</head>
+<body>
+    <div id="message"></div> <!-- Elemento para exibir a mensagem "Curtiu" -->
+    <button id="like">Curtir</button>
+
+    <script>
+        const messageElement = document.getElementById('message');
+        const likeButton = document.getElementById('like');
+        const socket = new WebSocket('ws://localhost:8080');
+
+        socket.onmessage = function(event) {
+            const message = event.data;
+            messageElement.textContent = message; // Exibe a mensagem recebida do servidor
+        };
+
+        likeButton.addEventListener('click', function() {
+            const message = 'like';
+            socket.send(message);
+        });
+    </script>
+</body>
+</html>

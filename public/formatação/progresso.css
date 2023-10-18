@@ -1,0 +1,82 @@
+.titulo-pagina {
+    margin-bottom: 60px;
+}
+
+.quadro-container {min-width: 500px; margin: auto;}
+
+.quadro {
+    padding: 20px 30px;
+    height: 280px;
+    min-width: 500px;
+    background-color: var(--cor-secundaria-light);
+    border-radius: 12px;
+    position: relative;
+}
+
+.dados {
+    display: flex;
+    padding-top: 30px;
+}
+
+.dado-numerico {text-align: center; margin-right: 50px; color: var(--cor-primaria-light);}
+
+.dado-numerico h1, .dado-numerico label {font-family: 'Poppins', sans-serif;}
+
+.quadro label, .quadro span {color: var(--cor-primaria);}
+
+.label-data {font-size: 13px;}
+
+.chart-box {
+    height: 280px;
+    background-color: transparent;
+}
+
+.chart-box canvas#graficoEvolucao {
+    height: 230px !important;
+}
+
+.graph-progress {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.circular-progress {
+    width: 120px;
+    height: 120px;
+    position: relative;
+}
+
+.outer {
+    background-color: transparent;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    box-shadow: 6px 6px 10px -1px rgba(255, 255, 255, 0.15), -6px -6px 10px -1px rgba(255, 255, 255, 0.15);
+    padding: 20px;
+}
+
+.inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    box-shadow: inset 4px 4px 6px -1px rgba(255, 255, 255, 0.2), inset -4px -4px 6px -1px rgba(255, 255, 255, 0.3), -0.5px -0.5px 0px rgba(255, 255, 255, 0.3), 0.5px 0.5px 0px rgba(0, 0, 0, 0.15), 0px 12px 10px -10px rgba(0, 0, 0, 0.05);
+}
+
+circle {
+    fill: none;
+    stroke: url(#GradientColor);
+    stroke-width: 20px;
+    stroke-dasharray: 310;
+}
+
+.circular-progress svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+}

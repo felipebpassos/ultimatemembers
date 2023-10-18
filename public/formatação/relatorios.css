@@ -1,0 +1,13 @@
+.relatorios {width: 700px; margin: auto;}
+
+.relatorio {
+    display: flex; 
+    margin-bottom: 40px; 
+    width: 280px; 
+    height: 60px; 
+    border: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.relatorio:hover {transform: translateY(-5px);}

@@ -1,0 +1,59 @@
+.titulo-pagina {
+    margin-bottom: 30px;
+}
+
+.container2 {
+    margin-top: 30px;
+    margin-bottom: 60px;
+    padding: 0px;
+}
+
+.seçao {
+    vertical-align: top;
+    display: inline-block;
+    min-width: 400px;
+}
+
+.seção-titulo {
+    display: flex;
+}
+
+.seção-titulo i {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.proximos-passos {
+    width: 401.6px;
+}
+
+.sugestões {
+    display: flex;
+}
+
+.sug_principal {
+    width: 400px;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--cor-secundaria-lighter);
+    border: 1px solid var(--cor-secundaria);
+}
+
+.sug_secundarias ul {
+    padding: 0px;
+    display: block;
+}
+
+.sug_secundarias ul li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    background-color: var(--cor-secundaria-lighter);
+    border: 1px solid var(--cor-secundaria);
+    width: 120px;
+    height: 90px;
+}

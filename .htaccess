@@ -1,0 +1,11 @@
+# Aumentar o limite de tamanho de upload
+php_value upload_max_filesize 800M
+php_value post_max_size 800M
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Roteamento para o arquivo "ultimatemembers/index.php" para qualquer URL
+RewriteRule ^reelsdecinema/(.*)$ /ultimatemembers/index.php?curso=1&pag=$1 [QSA,L]
+RewriteRule ^instaempreendedor/(.*)$ /ultimatemembers/index.php?curso=2&pag=$1 [QSA,L]

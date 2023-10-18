@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barra de Progresso do Sabre de Luz</title>
+    <style>
+        .sabre-de-luz {
+            width: 300px;
+            /* Largura da barra de progresso */
+            height: 20px;
+            /* Altura da barra de progresso */
+            background-color: #000;
+            /* Cor de fundo da barra de progresso (cor do sabre de luz) */
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .sintilante {
+            width: 0;
+            /* Largura inicial da parte que se enche */
+            height: 100%;
+            /* A parte que se enche deve ter a mesma altura da barra de progresso */
+            background-color: rgb(100, 100, 100);
+            /* Cor da parte que se enche (cor da sintilação) */
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: width 1s ease;
+            /* Animação para preencher gradualmente */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sabre-de-luz">
+        <div class="sintilante"></div>
+    </div>
+
+    <!-- Exemplo: Preencher a barra de progresso em 50% -->
+    <script>
+        // JavaScript para preencher a barra de progresso em 50%
+        const sintilante = document.querySelector('.sintilante');
+        sintilante.style.width = '80%';
+    </script>
+</body>
+
+</html>

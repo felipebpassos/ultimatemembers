@@ -1,0 +1,212 @@
+button:active {
+    opacity: 0.6; 
+}
+
+header {
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    display: flex;
+    padding: 10px 30px 10px 30px;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--cor-secundaria);
+    height: 80px;
+    box-shadow: 0px 0px 10px var(--sombra);
+}
+
+main {margin-bottom: 100px;}
+
+.apresentação-principal {
+    height: 100vh;
+    background-color: var(--cor-primaria-dark);
+    padding: 110px 0px 40px 0px;
+}
+
+.descrição {color: var(--cor-secundaria); margin-bottom: 40px;}
+
+.descrição a {color: var(--cor-secundaria);}
+
+.descrição a:hover {
+    text-decoration: underline !important;
+}
+
+.matricula-box {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: var(--cor-secundaria);
+    width: 360px;
+    height: 360px;
+    margin-bottom: 40px;
+    border-radius: 30px;
+    box-shadow: 0px 0px 10px var(--sombra);
+}
+
+.matricula-title {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 30px;
+    width: 250px;
+    height: 50px;
+    border-radius: 10px;
+    color: var(--cor-secundaria);
+    font-size: 22px;
+    font-weight: bold;
+    background-color: var(--cor-primaria-dark);
+}
+
+.btn-box {
+    position: absolute;
+    bottom: 70px;
+}
+
+#btn-matricula {
+    background-color: #3cbb2d;
+}
+
+.sessao-titulo {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.6);
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.quadro{
+    max-width: 320px;
+    height: 440px;
+    display: flex;
+    margin-bottom: 40px;
+    padding: 30px;
+    background-color: var(--background-container);
+    border-radius: 10px;
+}
+
+#f1, #f2, #f3, #f4 {display: flex; justify-content: center;}
+
+.quadro h5 {font-weight: 800; color: var(--sombra); display: flex; align-items: baseline;}
+.quadro h5 div {margin-left: 2px; width: 5px; height: 5px; border-radius: 50%; background-color: var(--cor-primaria);}
+.quadro h3 {
+    font-weight: 700;
+    background-image: linear-gradient(to right, #0249ff, #00d4ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+.quadro p {text-align: justify;}
+
+.vantagens {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+
+.ok-circulo {
+    color: var(--cor-secundaria);
+    min-width: 25px;
+    min-height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--cor-primaria-less-light);
+    font-size: 10px;
+    margin-right: 15px;
+}
+
+.lista-vantagens {
+    padding: 0px;
+}
+
+.lista-vantagens li {
+    display: flex;
+    align-items: center;
+    padding: 20px 10px 20px 10px;
+    border-bottom: 2px solid var(--cor-primaria);
+}
+
+.lista-vantagens li p {margin: 0px;}
+
+.FAQ {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.accordion-1 li {
+    font-weight: bold;
+    font-size: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    cursor: pointer;
+    width: 100%;
+    padding: 20px 0px 20px 0px;
+    border-bottom: 2px solid #f1f1f1;
+}
+
+.accordion-1 li p {margin: 0px; max-width: 90%;}
+
+.resposta {
+    color: rgb(102, 102, 102);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.8s ease;
+}
+
+.pergunta.ativo .resposta {
+    max-height: 600px;
+    animation: fade 1s ease-in-out;
+}
+
+.pergunta.ativo svg {
+    transform: rotate(180deg);
+}
+
+svg {
+    margin-top: 10px;
+    fill: rgba(0, 0, 0, 0.7);
+    transition: transform 1s ease-in;
+}
+
+.accordion-1 {width: 300px;}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+@media (min-width: 768px) {
+    #f1, #f3 {
+        justify-content: right;
+    }
+
+    #f2, #f4 {
+        justify-content: left;
+    }
+}
+
+@media (min-width: 500px) {
+    .lista-vantagens li {padding: 20px 50px 20px 50px;}
+}
+
+@media (min-width: 820px) {
+    .accordion-1 {width: 800px !important;}
+}
+
+@media (min-width: 500px) {
+    .accordion-1 {width: 500px;}
+}

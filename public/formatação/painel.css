@@ -1,0 +1,289 @@
+.user-info {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    height: 250px;
+    width: 95%;
+    display: flex;
+    justify-content: center;
+}
+
+.info-box {
+    width: 100%;
+}
+
+.info-txt {
+    text-align: center;
+}
+
+.info-txt div {
+    display: flex;
+    justify-content: center;
+}
+
+.info-txt a {
+    color: var(--cor-primaria);
+    margin-left: 10px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.options a {
+    height: 55px;
+    display: flex;
+    align-items: center;
+    color: var(--sombra-dark);
+}
+
+.options a:hover {
+    transition: 0.3s;
+    background-color: var(--sombra-lighter);
+}
+
+.options a i {
+    color: var(--cor-primaria);
+    margin: 0px 20px 0px 20px;
+    font-size: 22px;
+}
+
+.tab.ativo {
+    color: var(--cor-primaria);
+    background-color: var(--car-primaria-sombra);
+    border-right: 3px solid var(--cor-primaria);
+}
+
+.main-banner {
+    width: 88%;
+    max-width: 1800px;
+    margin: 90px auto;
+    margin-bottom: 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.main-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+main {
+    width: 85%;
+    max-width: 1400px;
+    margin: 50px auto;
+    overflow: hidden;
+}
+
+#proximos-passos ul {
+    padding: 0px;
+}
+
+#proximos-passos ul li {
+    vertical-align: top;
+    display: inline-block;
+}
+
+.proximos-passos {
+    width: 60%;
+}
+
+.seçao {
+    margin-bottom: 100px;
+}
+
+.seção-titulo {
+    display: flex;
+    margin: 0px 0px 15px 5px;
+    color: var(--cor-primaria-dark);
+    z-index: 9998;
+}
+
+.seção-titulo i {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    font-size: 22px;
+    color: var(--cor-primaria-dark);
+}
+
+#titulo-banner {
+    position: absolute;
+    top: 0;
+    left: 10px;
+}
+
+.meus-cursos {
+    width: 600px;
+    margin-right: 50px;
+}
+
+.lista-preferências ul {
+    width: 500px;
+    margin-bottom: 0px;
+    padding: 0px;
+    border-bottom: solid 1px var(--cor-secundaria-light);
+}
+
+.lista-preferências ul li {
+    display: inline-block;
+}
+
+.aba {
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--cor-secundaria-lighter);
+    background-color: var(--cor-secundaria);
+    padding-bottom: 8px;
+    margin-right: 20px;
+}
+
+.aba:hover {
+    color: var(--cor-primaria);
+    box-shadow: none !important;
+}
+
+.aba-ativa {
+    color: var(--cor-primaria-dark);
+    border-bottom: 3px solid var(--cor-primaria-light);
+}
+
+.content {
+    display: none;
+}
+
+.content ul {
+    padding: 0px;
+}
+
+.content ul li {
+    list-style-type: none;
+    width: 500px;
+    height: 60px;
+    border-bottom: solid 1px var(--cor-secundaria-light);
+}
+
+.content ul li a {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    width: 500px;
+    height: 60px;
+    padding: 0px 10px 0px 10px;
+}
+
+.content ul li a:hover {
+    transition: 0.15s;
+    background-color: var(--cor-secundaria-light);
+}
+
+.seção-container {
+    width: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--cor-secundaria-light);
+}
+
+#img-aula.seção-container {
+    margin: 0px 0px 15px 0px;
+    min-height: 200px;
+    width: 100% !important;
+}
+
+#news.seção-container {
+    height: 270px;
+    border-radius: 10px;
+}
+
+.activity {
+    padding-bottom: 20px;
+    margin-bottom: 80px;
+    border-bottom: solid 1px var(--cor-secundaria-lighter);
+}
+
+.activity ul {
+    padding: 0px;
+    margin: 0px;
+}
+
+.activity ul li {
+    display: inline-block;
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+.activity ul li a {
+    padding-left: 10px;
+    min-height: 100px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.activity-titulo {
+    display: flex;
+}
+
+.icon-border {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border: solid 2px var(--cor-secundaria-lighter);
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.icon-border i {
+    font-size: 12px;
+}
+
+@media (min-width: 1100px) {
+    .proximos-passos {
+        margin-right: 50px !important;
+    }
+}
+
+@media (min-width: 450px) {
+    .menu-toggle {
+        position: fixed;
+    }
+}
+
+@media (min-width: 1200px) {
+    .proximos-passos {
+        margin-right: 100px !important;
+    }
+}
+
+@media (min-width: 1020px) {
+    .proximos-passos {
+        margin-right: 30px;
+    }
+}
+
+@media (min-width: 992px) {
+    .content ul li {
+        width: 700px;
+    }
+    .content ul li a {
+        width: 700px;
+    }
+    .lista-preferências ul {
+        width: 700px;
+    }
+}
+
+@media (min-width: 840px) {
+    #img-aula.seção-container {
+        height: 180px !important;
+        width: 300px !important;
+    }
+    .proximos-passos {
+        margin-right: 60px;
+        width: fit-content;
+    }
+}

@@ -1,0 +1,18 @@
+.drop-area {
+    font-size: 16px;
+    border: 3px dashed var(--cor-primaria);
+    padding: 30px 20px;
+    margin: 0 40px 30px 20px;
+    cursor: pointer;
+    text-align: center;
+    overflow: hidden;
+}
+
+.drop-area.active {
+    border: 2px dashed var(--cor-primaria-lighter);
+}
+
+#imgInfo, #videoInfo {
+    margin-top: 10px;
+    font-weight: bold;
+}

@@ -1,0 +1,74 @@
+use curso;
+ALTER TABLE aulas
+ADD foto VARCHAR(80);
+
+select * from usuarios;
+select * from aulas;
+select * from modulos;
+
+
+drop table usuarios;
+
+create table usuarios (
+    id int not null auto_increment primary key,
+    nome varchar(60) not null,
+    email varchar(80) not null,
+    senha varchar(60),
+    whatsapp varchar(20) not null,
+    nascimento date,
+    adm boolean not null,
+    plano tinyint not null,
+    data_matricula date not null,
+    última_visita datetime
+) default charset = utf8;
+
+use curso;
+ALTER TABLE usuarios
+ADD foto_caminho VARCHAR(80);
+
+
+-- Tabela de Aulas
+CREATE TABLE aulas (
+    id INT auto_increment KEY,
+    id_modulo INT,
+    nome VARCHAR(100) NOT NULL,
+    video VARCHAR(200) NOT NULL,
+    atividade VARCHAR(100),
+    apostila VARCHAR(100),
+    FOREIGN KEY (id_modulo) REFERENCES modulos(id)
+) DEFAULT CHARSET=utf8;
+
+-- Tabela de Módulos
+CREATE TABLE modulos (
+    id INT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    banner VARCHAR(100),
+    video VARCHAR(100),
+    dados JSON
+) DEFAULT CHARSET=utf8;
+
+
+INSERT INTO aulas (id, id_modulo, nome, video) VALUES (1, 1, 'Mágica', 'http://localhost/CursoOnline/uploads/modulos/aulas/videos/Aula%201%20-%20Mágica_-HD%201080p.mov');
+INSERT INTO aulas (id, id_modulo, nome, video) VALUES (2, 1, 'Muito Mais Que um Vídeo Legal', 'http://localhost/CursoOnline/uploads/modulos/aulas/videos/Aula%202%20-%20Muito%20mais%20que%20um%20vídeo%20legal-HD%201080p.mov');
+INSERT INTO aulas (id, id_modulo, nome, video) VALUES (3, 1, 'Transições Estáticas VS Transições Dinâmicas', 'http://localhost/CursoOnline/uploads/modulos/aulas/videos/Aula%203%20-%20Transições%20Estáticas%20VS%20Transições%20Dinâmicas-HD%201080p.mov');
+INSERT INTO aulas (id, id_modulo, nome, video) VALUES (4, 2, 'Match Cut', 'http://localhost/CursoOnline/uploads/modulos/aulas/videos/Aula%204%20-%20Match%20Cut-HD%201080p.mov');
+INSERT INTO aulas (id, id_modulo, nome, video) VALUES (5, 2, 'Transição de Borrão', 'http://localhost/CursoOnline/uploads/modulos/aulas/videos/Aula%205%20-%20Transição%20de%20Borrão-HD%201080p.mov');
+INSERT INTO aulas (id, id_modulo, nome, video) VALUES (6, 2, 'Transição de Parede', 'http://localhost/CursoOnline/uploads/modulos/aulas/videos/Aula%206%20-%20Transição%20de%20Parede-HD%201080p.mov');
+
+
+SET SQL_SAFE_UPDATES = 1;
+
+UPDATE usuarios
+SET foto_caminho = null
+WHERE id = 1;
+
+
+
+
+
+
+
+
+
+
+

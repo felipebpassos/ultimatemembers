@@ -1,0 +1,4 @@
+Fazer "detalhes da matricula"
+Fazer getAulas para cada módulo
+chamar dados das aulas pelo getAula
+Salvar módulos numa variável de sessão

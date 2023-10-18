@@ -1,0 +1,121 @@
+.banner-box {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    height: 410px;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.banner-box.lançamentos {
+    height: 600px;
+    align-items:start;
+    margin-bottom: 60px;
+}
+
+.banner-section {
+    position: relative;
+    overflow-x: clip;
+    padding: 0 10px;
+    width: 100%;
+    max-width: 100%;
+    height: 300px;
+}
+
+.banner-section.lançamentos {
+    margin-top: 80px;
+}
+
+.fade-before,
+.fade-after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    min-height: 600px;
+    width: 50px;
+    /* Largura das faixas de esvanecimento */
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 990;
+}
+
+.fade-before {
+    left: 0;
+    background: linear-gradient(to left, transparent, rgb(5, 5, 5));
+}
+
+.fade-after {
+    right: 0;
+    background: linear-gradient(to right, transparent, rgb(5, 5, 5));
+}
+
+.banner-container {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+}
+
+.banners {
+    display: flex;
+}
+
+.banner {
+    width: 210px;
+    height: 300px;
+    margin-right: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background-container);
+    border-radius: 10px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.6s ease;
+    overflow: hidden;
+}
+
+#modulos:hover {
+    transform: scale(1.1);
+}
+
+.banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#lancamentos {
+    width: 300px;
+    height: 480px;
+    border-radius: 5px;
+}
+
+#lancamentos:hover {
+    transform: translateY(-20px);
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 50px;
+    background-color: transparent;
+    cursor: pointer;
+    z-index: 991;
+}
+
+.left-arrow {
+    left: 0px;
+}
+
+.right-arrow {
+    right: -10px;
+}
+
+.arrow img {
+    object-fit: cover;
+    height: 100%;
+}

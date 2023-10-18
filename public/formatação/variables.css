@@ -1,0 +1,23 @@
+:root {
+    --cor-primaria: rgb(80, 80, 80);
+    --cor-primaria-transparent: rgba(80, 80, 80, 0.5);
+    --cor-primaria-transparent-2: rgba(80, 80, 80, 0.7);
+    --cor-primaria-transparent-3: rgba(80, 80, 80, 0.1);
+    --cor-primaria-dark: rgb(60, 60, 60);
+    --cor-primaria-darker: rgb(40, 40, 40);
+    --cor-primaria-less-light: rgb(120, 1, 175);
+    --cor-primaria-light: rgb(120, 120, 120);
+    --cor-primaria-lighter: rgb(150, 150, 150);
+    --cor-secundaria: rgb(5, 5, 5);
+    --cor-secundaria-light: rgb(10, 10, 10);
+    --cor-secundaria-lighter: rgb(25, 25, 25);
+    --background-container: #1b1b1b;
+    --sombra: rgb(14, 14, 14);
+    --sombra-light: rgb(25, 25, 25);
+    --sombra-lighter: rgb(14, 14, 14);
+    --sombra-dark: rgb(10, 10, 10);
+    --whatsapp-2: #25d366;
+    --grey: rgb(25, 25, 25);
+    --red: rgb(204, 0, 0);
+    --popup: rgb(12, 12, 12);
+}
