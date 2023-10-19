@@ -1,10 +1,8 @@
 /* select simples */
 
-.periodo-tempo {
+.fontes {
     padding: 0px;
-    width: 960px;
-    margin: auto;
-    margin-bottom: 40px;
+    margin: 0px;
     font-size: 16px;
     font-weight: lighter;
 }
@@ -110,29 +108,3 @@ label {
     background-color: rgb(225, 225, 225);
     cursor: pointer;
 }
-
-.dashboard {width: 960px; margin: auto;}
-
-.grafico, .dado {
-    width: 100%;
-    background-color: var(--cor-secundaria-lighter); 
-    margin-bottom: 20px;
-    border-radius: 6px;
-    padding: 25px;
-}
-
-.grafico {
-    height: 220px; 
-}
-
-.dado {
-    height: 100px;
-    display: flex;
-    align-items: center;
-}
-
-.dado i, .dado label {color: var(--cor-primaria-light);}
-
-.dado i {margin-right: 20px; font-size: 20px;}
-
-.dado span {display: block; font-size: 18px; color: var(--cor-primaria-lighter);}

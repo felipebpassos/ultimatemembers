@@ -15,8 +15,8 @@ class Cursos
     {
         try {
             $sql = "SELECT nome, url_principal, cor_texto, cor_fundo, fonte_id, infoprodutor_id FROM cursos WHERE id = :curso";
-            $stmt = $this->con->prepare($sql);
-            $stmt->bindParam(':curso', $curso, PDO::PARAM_STR);
+            $stmt = $this->con->prepare($sql); 
+            $stmt->bindParam(':curso', $curso, PDO::PARAM_STR); 
             $stmt->execute();
 
             // Retorna os resultados como um array associativo

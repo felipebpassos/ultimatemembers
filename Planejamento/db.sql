@@ -15,7 +15,7 @@ DROP COLUMN id_curso;
 SHOW CREATE TABLE notificacoes;
 
 UPDATE cursos
-SET url_principal = 'instaempreendedor/' 
+SET cor_fundo = '#12001a' 
 WHERE id = 2;  -- Condição para identificar o registro específico
 
 INSERT INTO fontes (nome)
@@ -43,7 +43,7 @@ FOREIGN KEY (id_curso) REFERENCES cursos(id);
 
 select * from cursos;
 
-select * from notificacoes;
+select * from usuarios;
 
 INSERT INTO lancamentos (nome, capa, link_url)
 VALUES ('Reels de Cinema', './uploads/lançamentos/banners/lançamento01.png', 'http://localhost/ReelsDeCinema/');

@@ -31,7 +31,11 @@
     <link href="https://db.onlinewebfonts.com/c/d162a260eb6b9b288f54503ee22aa9ff?family=Quincy+CF+Regular"
         rel="stylesheet">
 
-    <script>url_principal = <?php echo $curso['url_principal']; ?>;</script>
+    <script>
+        var url_principal = "<?php echo $curso['url_principal']; ?>";
+        var corTexto = "<?php echo $curso['cor_texto']; ?>";
+        var corFundo = "<?php echo $curso['cor_fundo']; ?>";
+    </script>
 
 </head>
 
@@ -80,8 +84,8 @@
                                 </div>
                                 <h7>OU À VISTA POR R$ 197,00</h7>
                             </div>
-                            <a href="<?php echo $curso['url_principal']; ?>matricula/" class="btn-box"><button class="btn-1"
-                                    id="btn-matricula">Matricule-se</button></a>
+                            <a href="<?php echo $curso['url_principal']; ?>matricula/" class="btn-box"><button
+                                    class="btn-1" id="btn-matricula">Matricule-se</button></a>
                             <p style="position: absolute; bottom: 20px;">Experimente por 7 dias</p>
                         </div>
                     </div>
@@ -359,6 +363,7 @@
     </footer>
 
     <!-- Bootstrap and Scripts -->
+    <script src="http://localhost/ultimatemembers/public/script/dinamic-color.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="http://localhost/ultimatemembers/public/script/accordion.js"></script>
     <script src="http://localhost/ultimatemembers/public/script/fade_in_element.js"></script>

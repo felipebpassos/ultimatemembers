@@ -39,13 +39,12 @@ header {
     display: flex;
     justify-content: center;
     margin-bottom: 25px;
-    color: var(--cor-primaria-light);
 }
 
 .logo {margin-bottom: 15px;}
 
 header h3 {margin-bottom: 10px;}
-header p {font-size: 14px;}
+header p {font-size: 14px; color: rgb(80, 80, 80);}
 
 button {
     display: block;
@@ -67,12 +66,11 @@ button {
 }
 
 .erro-login {
-    width: 400px;
+    width: 320px;
     height: 40px;
     background-color: rgb(255, 198, 198);
     color: rgb(230, 15, 15);
     margin: auto;
-    margin-left: 30px;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
@@ -122,6 +120,7 @@ button {
 
 .olho i {
     transform: translateY(-50%);
+    color: rgb(80, 80, 80);
 }
 
 .senha-visivel {

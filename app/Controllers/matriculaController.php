@@ -47,6 +47,8 @@ class matriculaController extends Controller
         $curso = $this->sessao->verificaCurso();
 
         $cursoInfo = $this->cursosModel->getCurso($curso);
+
+        $data['curso'] = $cursoInfo;
         
         // Verifica se todas as variáveis do formulário foram enviadas via POST
         if (isset($_POST['nome'], $_POST['email'], $_POST['senha'], $_POST['whatsapp'], $_POST['nascimento'])) {

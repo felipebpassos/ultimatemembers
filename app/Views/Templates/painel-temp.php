@@ -14,6 +14,7 @@
     <link rel="icon" href="http://localhost/ultimatemembers/public/img/icone.ico">
 
     <!-- ... estilos ... -->
+    <link rel="stylesheet" type="text/css" href="http://localhost/ultimatemembers/public/formatação/dynamic-color.php">
     <link rel="stylesheet" href="http://localhost/ultimatemembers/public/formatação/default.css">
     <link rel="stylesheet" href="http://localhost/ultimatemembers/public/formatação/footer.css">
     <?php
@@ -39,7 +40,11 @@
     <script src="http://localhost/ultimatemembers/public/script/header-effect.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <script>url_principal = <?php echo $curso['url_principal']; ?>;</script>
+    <script>
+        var url_principal = "<?php echo $curso['url_principal']; ?>";
+        var corTexto = "<?php echo $curso['cor_texto']; ?>";
+        var corFundo = "<?php echo $curso['cor_fundo']; ?>";
+    </script>
 
 </head>
 
@@ -256,6 +261,7 @@
         echo '<script src="http://localhost/ultimatemembers/public/script/' . $script . '.js"></script>';
     }
     ?>
+    <script src="http://localhost/ultimatemembers/public/script/dinamic-color.js"></script>
     <script src="http://localhost/ultimatemembers/public/script/loading.js"></script>
     <script src="http://localhost/ultimatemembers/public/script/slide-element-left.js"></script>
     <script src="http://localhost/ultimatemembers/public/script/menu-perfil-toggle.js"></script>

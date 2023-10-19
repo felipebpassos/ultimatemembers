@@ -90,6 +90,8 @@ button i {
     margin-right: 10px;
 }
 
+input, textarea {display: block;}
+
 .fade-in-slide-up {
     opacity: 0;
     transform: translateY(60px);
@@ -130,9 +132,8 @@ button i {
     min-height: 50px;
     border: none;
     border-radius: 8px;
-    color: var(--cor-primaria-lighter);
-    font-weight: bold;
     padding: 0 10px;
+    color: var(--cor-primaria-lighter);
     background-color: var(--cor-primaria-dark);
     box-shadow: 0px 3px 10px var(--cor-primaria-transparent);
 }
@@ -142,9 +143,17 @@ button i {
     box-shadow: 0px 3px 12px var(--cor-primaria-transparent-2);
 }
 
+.btn-2 p{
+    color: var(--cor-primaria-lighter);
+    font-weight: bold;
+}
+
 body {
     width: 100%;
+    color: var(--cor-primaria-dark);
 }
+
+label, span, p, h1, h2, h3, h4, h5, h6 {color: var(--cor-primaria-dark);}
 
 .logo {
     margin-right: 50px;

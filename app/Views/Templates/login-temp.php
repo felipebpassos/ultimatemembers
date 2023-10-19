@@ -14,17 +14,21 @@
     <link rel="icon" href="http://localhost/ultimatemembers/public/img/icone.ico">
 
     <!-- ... estilos ... -->
+    <link rel="stylesheet" href="http://localhost/ultimatemembers/public/formatação/default.css">
     <?php
     foreach ($styles as $style) {
         echo '<link rel="stylesheet" href="http://localhost/ultimatemembers/public/formatação/' . $style . '.css">' . PHP_EOL;
     }
     ?>
-    <link rel="stylesheet" href="http://localhost/ultimatemembers/public/formatação/default.css">
 
     <!-- Font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-    <script>url_principal = <?php echo $curso['url_principal']; ?>;</script>
+    <script>
+        var url_principal = "<?php echo $curso['url_principal']; ?>";
+        var corTexto = "<?php echo $curso['cor_texto']; ?>";
+        var corFundo = "<?php echo $curso['cor_fundo']; ?>";
+    </script>
 
 </head>
 
@@ -52,6 +56,7 @@
 
     </main>
 
+    <script src="http://localhost/ultimatemembers/public/script/dinamic-color.js"></script>
     <script src="http://localhost/ultimatemembers/public/script/mostra_senha.js"></script>
 
 </body>

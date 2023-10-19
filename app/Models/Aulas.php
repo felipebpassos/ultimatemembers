@@ -253,34 +253,167 @@ class Aulas
             // Exclua o vídeo do servidor
             if (unlink($video)) {
                 // Se o vídeo foi excluído com sucesso, agora podemos excluir a aula
+
+                // Excluir os dados associados à aula
+
+                $this->deleteAulasConcluidas($id_aula);
+
+                $delComentarios = $this->deleteComentariosDaAula($id_aula);
+
+                $delLikes = $this->deleteLikesComentarios($delComentarios);
+
+                $delDislikes = $this->deleteDislikesComentarios($delComentarios);
+
+                $this->deleteNotificacoesPorItens(1, $delLikes);
+
+                $this->deleteNotificacoesPorItens(1, $delDislikes);
+
+                // Agora podemos excluir a aula
                 $query = 'DELETE FROM aulas WHERE id = :id_aula';
 
                 $stmt = $this->con->prepare($query);
 
                 $stmt->bindValue(':id_aula', $id_aula, PDO::PARAM_INT);
 
-                $deleted = $stmt->execute();
+                $deletedAula = $stmt->execute();
 
-                // Verifique se a exclusão da aula foi bem-sucedida
-                if ($deleted) {
+                if ($deletedAula) {
                     // Se a aula foi excluída com sucesso, agora podemos excluir a capa (se existir)
                     if (!empty($capa) && file_exists($capa)) {
                         unlink($capa);
                     }
 
                     return true;
-                } else {
-                    // Se houve um problema ao excluir a aula, retorne false ou lide com o erro conforme necessário
-                    return false;
                 }
-            } else {
-                // Se houve um problema ao excluir o vídeo, retorne false ou lide com o erro conforme necessário
-                return false;
             }
+        }
+
+        return false;
+    }
+
+    public function deleteAulasConcluidas($id_aula)
+    {
+        // Query para excluir registros da tabela aulas_concluidas onde aula_id seja igual a $id_aula
+        $query = 'DELETE FROM aulas_concluidas WHERE aula_id = :id_aula';
+
+        $stmt = $this->con->prepare($query);
+
+        $stmt->bindValue(':id_aula', $id_aula, PDO::PARAM_INT);
+
+        $deleted = $stmt->execute();
+
+        return $deleted;
+    }
+
+    private function deleteComentariosDaAula($id_aula)
+    {
+        // Recupere os IDs dos comentários associados a esta aula
+        $query = 'SELECT id FROM comentarios WHERE aula_id = :id_aula';
+
+        $stmt = $this->con->prepare($query);
+
+        $stmt->bindValue(':id_aula', $id_aula, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        $deletedCommentIds = [];
+
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $deletedCommentIds[] = $row['id'];
+        }
+
+        // Exclua os comentários associados a esta aula
+        $deleteQuery = 'DELETE FROM comentarios WHERE aula_id = :id_aula';
+
+        $stmt = $this->con->prepare($deleteQuery);
+
+        $stmt->bindValue(':id_aula', $id_aula, PDO::PARAM_INT);
+
+        $deleted = $stmt->execute();
+
+        if ($deleted) {
+            return $deletedCommentIds; // Retorna os IDs dos comentários apagados
         } else {
-            // Não foi possível encontrar o vídeo e a capa associados à aula, retorne false ou lide com o erro conforme necessário
             return false;
         }
+    }
+
+    private function deleteLikesComentarios($deletedComentarios)
+    {
+        // Certifique-se de que $deletedComentarios seja um array válido com IDs dos comentários
+        if (!is_array($deletedComentarios) || empty($deletedComentarios)) {
+            return false; // Nada a fazer, ou IDs inválidos
+        }
+
+        $comentarioIds = implode(', ', $deletedComentarios);
+
+        // Selecione os IDs dos likes que serão excluídos
+        $querySelectLikes = "SELECT id FROM likes_comentarios WHERE comentario_id IN ($comentarioIds)";
+        $stmtSelectLikes = $this->con->prepare($querySelectLikes);
+        $stmtSelectLikes->execute();
+
+        $deletedLikes = [];
+
+        while ($row = $stmtSelectLikes->fetch(PDO::FETCH_ASSOC)) {
+            $deletedLikes[] = $row['id'];
+        }
+
+        // Excluir registros na tabela likes_comentarios onde comentario_id esteja na lista de comentários deletados
+        $queryDeleteLikes = "DELETE FROM likes_comentarios WHERE comentario_id IN ($comentarioIds)";
+        $stmtDeleteLikes = $this->con->prepare($queryDeleteLikes);
+        $stmtDeleteLikes->execute();
+
+        return $deletedLikes;
+    }
+
+    private function deleteDislikesComentarios($deletedComentarios)
+    {
+        // Certifique-se de que $deletedComentarios seja um array válido com IDs dos comentários
+        if (!is_array($deletedComentarios) || empty($deletedComentarios)) {
+            return false; // Nada a fazer, ou IDs inválidos
+        }
+
+        $comentarioIds = implode(', ', $deletedComentarios);
+
+        // Selecione os IDs dos dislikes que serão excluídos
+        $querySelectDislikes = "SELECT id FROM dislikes_comentarios WHERE comentario_id IN ($comentarioIds)";
+        $stmtSelectDislikes = $this->con->prepare($querySelectDislikes);
+        $stmtSelectDislikes->execute();
+
+        $deletedDislikes = [];
+
+        while ($row = $stmtSelectDislikes->fetch(PDO::FETCH_ASSOC)) {
+            $deletedDislikes[] = $row['id'];
+        }
+
+        // Excluir registros na tabela dislikes_comentarios onde comentario_id esteja na lista de comentários deletados
+        $queryDeleteDislikes = "DELETE FROM dislikes_comentarios WHERE comentario_id IN ($comentarioIds)";
+        $stmtDeleteDislikes = $this->con->prepare($queryDeleteDislikes);
+        $stmtDeleteDislikes->execute();
+
+        return $deletedDislikes;
+    }
+
+    public function deleteNotificacoesPorItens($tipo_notificacao, $ids_itens)
+    {
+        // Certifique-se de que $ids_itens seja um array válido
+        if (!is_array($ids_itens) || empty($ids_itens)) {
+            return false; // Nada a fazer, ou IDs inválidos
+        }
+
+        // Use implode para criar uma lista de IDs
+        $itensIds = implode(', ', $ids_itens);
+
+        // Query para excluir registros da tabela notificacoes com base em tipo_notificacao e vários id_item
+        $query = "DELETE FROM notificacoes WHERE tipo_notificacao = :tipo_notificacao AND id_item IN ($itensIds)";
+
+        $stmt = $this->con->prepare($query);
+
+        $stmt->bindValue(':tipo_notificacao', $tipo_notificacao, PDO::PARAM_STR);
+
+        $deleted = $stmt->execute();
+
+        return $deleted;
     }
 
     public function getAulasConcluidas($usuarioId, $id_curso)

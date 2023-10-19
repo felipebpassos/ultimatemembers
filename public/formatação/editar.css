@@ -34,7 +34,6 @@ main {padding-bottom: 20px;}
     position: absolute;
     top: 10px;
     left: 10px;
-    color: white;
     background-color: rgba(0, 0, 0, 0.4);
     width: 128px;
     height: 128px;
@@ -47,6 +46,8 @@ main {padding-bottom: 20px;}
     transition: opacity 0.5s;
     /* Adiciona uma transição suave */
 }
+
+.pelicula p, .pelicula i {color: white;}
 
 .foto-perfil-edit:hover .pelicula {
     opacity: 1;

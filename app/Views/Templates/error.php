@@ -14,14 +14,18 @@
     <link rel="icon" href="./public/img/icone.ico">
 
     <!-- ... estilos ... -->
+    <link rel="stylesheet" href="http://localhost/ultimatemembers/public/formatação/default.css">
     <?php
     foreach ($styles as $style) {
         echo '<link rel="stylesheet" href="http://localhost/ultimatemembers/public/formatação/' . $style . '.css">' . PHP_EOL;
     }
     ?>
-    <link rel="stylesheet" href="http://localhost/ultimatemembers/public/formatação/default.css">
 
-    <script>url_principal = <?php echo $curso['url_principal']; ?>;</script>
+    <script>
+        var url_principal = "<?php echo $curso['url_principal']; ?>";
+        var corTexto = "<?php echo $curso['cor_texto']; ?>";
+        var corFundo = "<?php echo $curso['cor_fundo']; ?>";
+    </script>
 
 </head>
 
@@ -33,6 +37,8 @@
     <a href="https://api.whatsapp.com/send?phone=SEU_NUMERO_DE_TELEFONE" class="whatsapp-button" target="_blank">
         <img src="http://localhost/ultimatemembers/public/img/whatsapp.png" alt="Ícone do WhatsApp">
     </a>
+
+    <script src="http://localhost/ultimatemembers/public/script/dinamic-color.js"></script>
 </body>
 
 </html>

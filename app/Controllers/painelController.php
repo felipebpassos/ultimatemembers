@@ -130,8 +130,8 @@ class painelController extends Controller
         $data['title'] = 'Dashboard | Vendas';
         $data['description'] = '';
         $data['styles'] = array('painel', 'header', 'vendas');
-        $data['scripts_head'] = array('');
-        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo');
+        $data['scripts_head'] = array('select');
+        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'simple_select');
 
         //load view
         $this->loadTemplates($template, $data, $usuario);
@@ -210,9 +210,9 @@ class painelController extends Controller
         $data['view'] = 'preferencias';
         $data['title'] = 'Painel Administrativo | ' . $cursoInfo['nome'];
         $data['description'] = '';
-        $data['styles'] = array('painel', 'header');
-        $data['scripts_head'] = array('');
-        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo');
+        $data['styles'] = array('painel', 'header', 'preferencias');
+        $data['scripts_head'] = array('select');
+        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'simple_select');
 
         // Carrega a view passando $_SESSION['usuario']
         $this->loadTemplates($template, $data, $usuario);

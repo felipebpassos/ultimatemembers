@@ -91,7 +91,7 @@
                                             <div class="row" style="align-items:center; justify-content: space-between;">
                                                 <div class="col-md-8" style="display:flex; align-items:center;">
 
-                                                <div class="foto-perfil-mini"><img class="perfil-img" name="imagem" src="http://localhost/reelsdecinema' . (!empty($foto_autor) ? $foto_autor : '/public/img/default.png') . '" alt="Foto de Perfil" /></div>
+                                                <div class="foto-perfil-mini"><img class="perfil-img" name="imagem" src="http://localhost/ultimatemembers' . (!empty($foto_autor) ? $foto_autor : '/public/img/default.png') . '" alt="Foto de Perfil" /></div>
                                                 <div class="box">
                                                     <span style="font-size: 22px; font-weight: bold;">' . $titulo . '</span>
                                                     <div style="display:flex;">

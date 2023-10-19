@@ -40,7 +40,15 @@ class editarController extends Controller
 
     public function edita()
     {
+        //Inicia os Modelos
+        $sessao = new Sessao;
 
+        $cursosModel = new Cursos();
+
+        $curso = $sessao->verificaCurso();
+
+        $cursoInfo = $cursosModel->getCurso($curso);
+        
         // Verifica se o formulário foi enviado via método POST
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -99,12 +107,12 @@ class editarController extends Controller
 
             }
 
-            header("Location: http://localhost/reelsdecinema/painel/");
+            header("Location: " . $cursoInfo['url_principal'] . "painel/");
             exit(); // Certifica-se de que o script seja encerrado após o redirecionamento
 
         } else {
 
-            header("Location: http://localhost/reelsdecinema/error/");
+            header("Location: " . $cursoInfo['url_principal'] . "error/");
             exit(); // Certifica-se de que o script seja encerrado após o redirecionamento
 
         }

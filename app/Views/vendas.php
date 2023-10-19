@@ -4,6 +4,13 @@
         <h1>Dashboard de Vendas</h1>
     </div>
 
+    <ul class="periodo-tempo"></ul>
+    <script>
+
+        $(".periodo-tempo").append(SelectSimples('', 'Hoje', ['Hoje', 'Últimos 7 dias', 'Últimos 30 dias', 'Tempo todo'], 'select-fonte', false));
+
+    </script>
+
     <div class="dashboard">
 
         <div class="container" style="margin:0;">

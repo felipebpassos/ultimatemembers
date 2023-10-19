@@ -42,7 +42,7 @@
             <input type="password" name="senha" id="senha1" autocomplete="off" placeholder="Senha" class="campo-input"
                 required>
             <span class="olho" onclick="togglePasswordVisibility('senha1', 'togglePassword1')">
-                <i class="fa-solid fa-eye-slash" style="color: #000000;" id="togglePassword1"></i>
+                <i class="fa-solid fa-eye-slash" id="togglePassword1"></i>
             </span>
         </div>
 
