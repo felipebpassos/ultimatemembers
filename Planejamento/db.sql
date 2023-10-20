@@ -15,7 +15,7 @@ DROP COLUMN id_curso;
 SHOW CREATE TABLE notificacoes;
 
 UPDATE cursos
-SET cor_fundo = '#12001a' 
+SET cor_fundo = '#0b000f' 
 WHERE id = 2;  -- Condição para identificar o registro específico
 
 INSERT INTO fontes (nome)
@@ -41,7 +41,7 @@ ALTER TABLE tags_forum
 ADD CONSTRAINT fk_tags_forum_curso
 FOREIGN KEY (id_curso) REFERENCES cursos(id);
 
-select * from cursos;
+select * from aulas;
 
 select * from usuarios;
 
