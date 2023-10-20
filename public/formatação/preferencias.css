@@ -1,3 +1,8 @@
+.lista-preferências {width: 80%; margin: auto;}
+.lista-preferências ul {min-width: 100%; margin: auto;}
+
+.content {width: 80%; margin: 30px auto;}
+
 /* select simples */
 
 .fontes {

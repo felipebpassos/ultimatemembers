@@ -15,6 +15,13 @@
         </ul>
     </div>
 
+    <ul class="periodo-tempo"></ul>
+    <script>
+
+        $(".periodo-tempo").append(SelectSimples('', 'Hoje', ['Hoje', 'Últimos 7 dias', 'Últimos 30 dias', 'Tempo todo'], 'select-tempo', false));
+
+    </script>
+
     <div id="tabela" class="content">
 
         <h1>tabela</h1>
@@ -24,18 +31,13 @@
 
     <div id="dashboard" class="content">
 
-        <ul class="periodo-tempo"></ul>
-        <script>
-
-            $(".periodo-tempo").append(SelectSimples('', 'Hoje', ['Hoje', 'Últimos 7 dias', 'Últimos 30 dias', 'Tempo todo'], 'select-fonte', false));
-
-        </script>
-
-        <div class="container" style="margin:0;">
+        <div class="container" style="margin:0; padding:0;">
             <div class="row">
                 <div class="col-md-6">
                     <div class="grafico">
-
+                        <canvas id="grafico"
+                            style="width: 400px; display: block; box-sizing: border-box; height: 170px;" height="152"
+                            width="400"></canvas>
                     </div>
                 </div>
                 <div class="col-md-6">

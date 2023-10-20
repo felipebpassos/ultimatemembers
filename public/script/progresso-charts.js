@@ -1,7 +1,7 @@
 // Função para atualizar o valor da porcentagem e o stroke-dashoffset
 function atualizarPorcentagem(valorPorcentagem) {
     // Atualize o valor da porcentagem na tela
-    document.getElementById('total-progress').innerText = valorPorcentagem + '%';
+    document.getElementById('total-progress').innerText = valorPorcentagem.toFixed(2) + '%';
     const circle = document.getElementById('progress-circle');
 
     circle.setAttribute('stroke-dashoffset', '310');

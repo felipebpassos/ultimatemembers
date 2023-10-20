@@ -9,7 +9,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <a href=""><button class="relatorio">Receita do curso</button></a>
+                    <a href=""><button class="relatorio">Assinaturas</button></a>
                 </div>
                 <div class="col-md-6">
                     <a href=""><button class="relatorio">Saldo a receber</button></a>

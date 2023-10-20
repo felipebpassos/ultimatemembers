@@ -25,13 +25,13 @@ $foto_autor = $discussao['foto'];
                 </p>
             </div>
             <ul class="engajamento" style="position:absolute; right:0; bottom:0;">
-                <li><i class="fa-regular fa-heart"></i><span>
+                <li><i class="fa-solid fa-heart"></i><span>
                         <?php echo $discussao['likes']; ?>
                     </span></li>
-                <li><i class="fa-regular fa-comments"></i><span>
+                <li><i class="fa-solid fa-comments"></i><span>
                         <?php echo $discussao['respostas']; ?>
                     </span></li>
-                <li><i class="fa-regular fa-eye"></i><span>
+                <li><i class="fa-solid fa-eye"></i><span>
                         <?php echo $discussao['views']; ?>
                     </span></li>
             </ul>

@@ -90,7 +90,7 @@ Class comunidadeController extends Controller {
         // Carrega dados do usuário
         $usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
 
-        $this->sessao->checkParametro($id);
+        $this->sessao->checkParametro($id, $cursoInfo['url_principal']);
 
         $discussao = $comunidade->getDiscussao($id);
 

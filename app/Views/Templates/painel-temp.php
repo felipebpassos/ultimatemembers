@@ -14,7 +14,6 @@
     <link rel="icon" href="http://localhost/ultimatemembers/public/img/icone.ico">
 
     <!-- ... estilos ... -->
-    <link rel="stylesheet" type="text/css" href="http://localhost/ultimatemembers/public/formatação/dynamic-color.php">
     <link rel="stylesheet" href="http://localhost/ultimatemembers/public/formatação/default.css">
     <link rel="stylesheet" href="http://localhost/ultimatemembers/public/formatação/footer.css">
     <?php
@@ -210,10 +209,10 @@
                         <div class="txt-box" style="margin-bottom: 20px;">
                             <p>REDES SOCIAIS:</p>
                             <ul class="redes-sociais">
-                                <li><a href="https://www.instagram.com/paidorec/"><i
+                                <li><a href="https://www.instagram.com/paidorec/" target="_blank"><i
                                             class="fa-brands fa-instagram"></i></a></li>
-                                <li><a href=""><i class="fa-brands fa-facebook-f"></i></a></li>
-                                <li><a href=""><i class="fa-brands fa-linkedin-in"></i></a></li>
+                                <li><a href="" target="_blank"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                <li><a href="" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -243,7 +242,7 @@
         <div class="bottom">
 
             <div class="copyright">
-                &copy; 2023, Pai do Rec | Desenvolvido por <a href="http://localhost/simplifyweb.com.br">Simplify
+                &copy; 2023, Pai do Rec | Desenvolvido por <a href="http://localhost/simplifyweb.com.br" target="_blank">Simplify
                     Web</a>
             </div>
 

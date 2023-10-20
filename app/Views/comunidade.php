@@ -4,7 +4,7 @@
         <h1>Comunidade</h1>
     </div>
 
-    <div class="container" style="padding:0; margin-top: 80px;">
+    <div class="container" style="padding:5px; margin-top: 80px;">
 
         <div class="row">
 
@@ -15,11 +15,21 @@
 
                     <div class="opcoes-comunidade">
 
-                        <a class="nova-publicacao"
-                            href="<?php echo $curso['url_principal']; ?>comunidade/publicar/"><button class="btn-2"
-                                id="pergunta">
-                                <p>Nova Publicação</p><i class="fa-regular fa-comment"></i>
-                            </button></a>
+                        <div class="botoes-publicacao">
+
+                            <a class="nova-publicacao"
+                                href="<?php echo $curso['url_principal']; ?>comunidade/publicar/"><button class="btn-2"
+                                    id="pergunta">
+                                    <p>Faça uma pergunta</p><i class="fa-regular fa-comment"></i>
+                                </button></a>
+
+                            <a class="nova-publicacao"
+                                href="<?php echo $curso['url_principal']; ?>comunidade/publicar/"><button class="btn-2"
+                                    id="experiencia">
+                                    <p>Publicar Experiência</p><i class="fa-regular fa-comment"></i>
+                                </button></a>
+
+                        </div>
 
                         <div class="search-container">
 
@@ -104,9 +114,9 @@
                                                 <div class="col-md-4" style="width:fit-content;">
 
                                                 <ul class="engajamento">
-                                                    <li><i class="fa-regular fa-heart"></i><span>' . $likes . '</span></li>
-                                                    <li><i class="fa-regular fa-comments"></i><span>' . $respostas . '</span></li>
-                                                    <li><i class="fa-regular fa-eye"></i><span>' . $views . '</span></li>
+                                                    <li><i class="fa-solid fa-heart"></i><span>' . $likes . '</span></li>
+                                                    <li><i class="fa-solid fa-comments"></i><span>' . $respostas . '</span></li>
+                                                    <li><i class="fa-solid fa-eye"></i><span>' . $views . '</span></li>
                                                 </ul>
 
                                                 </div>
