@@ -28,7 +28,7 @@ class modulosController extends Controller
         $data['curso'] = $cursoInfo;
 
         // Carrega dados do usuário
-        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario']);
+        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
 
         //Busca no banco de dados pelo módulo
         $modulos = $modulosModel->getModulos($curso);
@@ -77,9 +77,9 @@ class modulosController extends Controller
         $data['curso'] = $cursoInfo;
 
         // Carrega dados do usuário
-        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario']);
+        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
 
-        $this->sessao->checkParametro($id);
+        $this->sessao->checkParametro($id, $cursoInfo['url_principal']);
 
         //Busca no banco de dados pelo módulo
         $modulo = $modulosModel->getModulo($id);
@@ -126,9 +126,9 @@ class modulosController extends Controller
         $data['curso'] = $cursoInfo;
 
         // Carrega dados do usuário
-        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario']);
+        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
 
-        $this->sessao->checkParametro($id);
+        $this->sessao->checkParametro($id, $cursoInfo['url_principal']);
 
         //Busca no banco de dados pelas aulas do módulo
         $aula = $aulasModel->getAula($id);
@@ -189,9 +189,6 @@ class modulosController extends Controller
     public function nova_aula()
     {
         $curso = $this->sessao->verificaCurso();
-
-        // Carrega dados do usuário
-        $this->sessao->carregarUsuario($_SESSION['usuario']);
 
         // Verifica se o formulário foi enviado via método POST
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -257,9 +254,6 @@ class modulosController extends Controller
     public function edita_aula()
     {
         $this->sessao->verificaCurso();
-
-        // Carrega dados do usuário
-        $this->sessao->carregarUsuario($_SESSION['usuario']);
 
         // Verifica se o formulário foi enviado via método POST
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -369,9 +363,6 @@ class modulosController extends Controller
     {
         $this->sessao->verificaCurso();
 
-        // Carrega dados do usuário
-        $this->sessao->carregarUsuario($_SESSION['usuario']);
-
         // Verifica se o formulário foi enviado via método POST
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -409,10 +400,6 @@ class modulosController extends Controller
 
     public function concluida()
     {
-        $this->sessao->verificaCurso();
-
-        // Carrega dados do usuário
-        $this->sessao->carregarUsuario($_SESSION['usuario']);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Verifique se as variáveis POST estão definidas
@@ -459,7 +446,7 @@ class modulosController extends Controller
         $cursoInfo = $this->cursosModel->getCurso($curso);
 
         // Carrega dados do usuário
-        $this->sessao->carregarUsuario($_SESSION['usuario']);
+        $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
 
         // Verifique se o formulário de comentários foi submetido
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comentario']) && isset($_POST['aula_id'])) {

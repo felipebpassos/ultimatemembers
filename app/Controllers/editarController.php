@@ -19,7 +19,7 @@ class editarController extends Controller
         $data['curso'] = $cursoInfo;
 
         // Carrega dados do usuário
-        $usuario = $sessao->carregarUsuario($_SESSION['usuario']);
+        $usuario = $sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
 
         // Dados da página (title, meta description, css, js ... usados na página)
         $template = 'painel-temp';

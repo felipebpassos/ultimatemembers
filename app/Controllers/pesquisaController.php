@@ -21,7 +21,7 @@ Class pesquisaController extends Controller {
         $data['curso'] = $cursoInfo;
 
         // Carrega dados do usuário
-        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario']);
+        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
 
         //set template
         $template = 'painel-temp';

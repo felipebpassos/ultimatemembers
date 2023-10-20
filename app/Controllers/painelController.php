@@ -29,7 +29,7 @@ class painelController extends Controller
         $data['curso'] = $cursoInfo;
 
         // Carrega dados do usuário
-        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario']);
+        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
 
         //Busca no banco de dados pelo módulo
         $modulos = $modulosModel->getModulos($curso);
@@ -79,7 +79,7 @@ class painelController extends Controller
         $data['curso'] = $cursoInfo;
 
         // Carrega dados do usuário
-        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario']);
+        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
 
         //Busca no banco de dados pelo módulo
         $modulos = $modulosModel->getModulos($curso);
@@ -120,7 +120,7 @@ class painelController extends Controller
         $data['curso'] = $cursoInfo;
 
         // Carrega dados do usuário
-        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario']);
+        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
 
         //set template
         $template = 'painel-temp';
@@ -130,8 +130,8 @@ class painelController extends Controller
         $data['title'] = 'Dashboard | Vendas';
         $data['description'] = '';
         $data['styles'] = array('painel', 'header', 'vendas');
-        $data['scripts_head'] = array('select');
-        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'simple_select');
+        $data['scripts_head'] = array('abas', 'select');
+        $data['scripts_body'] = array('btn-selected', 'toggleSearch', 'menu-responsivo', 'simple_select');
 
         //load view
         $this->loadTemplates($template, $data, $usuario);
@@ -147,7 +147,7 @@ class painelController extends Controller
         $data['curso'] = $cursoInfo;
 
         // Carrega dados do usuário
-        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario']);
+        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
 
         //set template
         $template = 'painel-temp';
@@ -174,7 +174,7 @@ class painelController extends Controller
         $data['curso'] = $cursoInfo;
 
         // Carrega dados do usuário
-        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario']);
+        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
 
         //set template
         $template = 'painel-temp';
@@ -201,7 +201,7 @@ class painelController extends Controller
         $data['curso'] = $cursoInfo;
 
         // Carrega dados do usuário
-        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario']);
+        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
 
         //set template
         $template = 'painel-temp';
@@ -228,7 +228,7 @@ class painelController extends Controller
         $data['curso'] = $cursoInfo;
 
         // Carrega dados do usuário
-        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario']);
+        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
 
         //set template
         $template = 'painel-temp';

@@ -18,7 +18,7 @@ Class liveController extends Controller {
         $data['curso'] = $cursoInfo;
         
         // Carrega dados do usuário
-        $usuario = $sessao->carregarUsuario($_SESSION['usuario']);
+        $usuario = $sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
 
         //set template
         $template = 'painel-temp';

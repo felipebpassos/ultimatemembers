@@ -154,7 +154,6 @@ label {
     align-items: center;
     height: 70px;
     padding: 30px 20px;
-    color: white;
     user-select: none;
     transition: width 2s ease;
 }
@@ -170,6 +169,7 @@ label {
     margin: 0;
     font-size: 11px;
     text-align: center;
+    color: white;
 }
 
 .titulo-modulo .titulo {
@@ -178,11 +178,11 @@ label {
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
     background-color: var(--cor-secundaria);
-    border-bottom-right-radius: 15px;
 }
 
 .titulo-modulo .pre-titulo h2,
 .titulo-modulo .titulo h2 {
+    color: white;
     -webkit-text-stroke: 1px var(--cor-primaria-light);
     margin: 0;
     text-align: center;

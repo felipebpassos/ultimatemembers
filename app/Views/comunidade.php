@@ -8,35 +8,35 @@
 
         <div class="row">
 
-            <div class="col-md-8" style="min-width:600px;">
+            <div class="col-md-8" style="min-width:600px; padding-right:30px;">
 
                 <!-- Mostra a lista as discussões do forum -->
                 <div class="lista-discussoes">
 
                     <div class="opcoes-comunidade">
 
-                        <a class="nova-publicacao" href="<?php echo $curso['url_principal']; ?>comunidade/publicar/"><button
-                                class="btn-2" id="pergunta">
+                        <a class="nova-publicacao"
+                            href="<?php echo $curso['url_principal']; ?>comunidade/publicar/"><button class="btn-2"
+                                id="pergunta">
                                 <p>Nova Publicação</p><i class="fa-regular fa-comment"></i>
                             </button></a>
 
                         <div class="search-container">
 
-                            <ul class="select-categorias"></ul>
-
                             <div class="pesquisar">
                                 <input type="text" id="campoPesquisa" name="pesquisa" placeholder="Pesquisar">
-                                <a href="<?php echo $curso['url_principal']; ?>pesquisa/resultados/"><button type="submit"
-                                        id="botaoPesquisa"><i class="fa fa-search"></i></button></a>
+                                <a href="<?php echo $curso['url_principal']; ?>pesquisa/resultados/"><button
+                                        type="submit" id="botaoPesquisa"><i class="fa fa-search"></i></button></a>
                             </div>
+
+                            <ul class="select-categorias"></ul>
+                            <script>
+                                $(".select-categorias").append(MultiploSelect('', 'Categorias', ['Perguntas', 'Experiênicias', 'Tag 1', 'Tag 2', 'Tag 3'], true));
+                            </script>
 
                         </div>
 
                     </div>
-
-                    <script>
-                        $(".select-categorias").append(MultiploSelect('', 'Categorias', ['Perguntas', 'Experiênicias', 'Tag 1', 'Tag 2', 'Tag 3'], true));
-                    </script>
 
                     <p class="legenda-filtro-pesquisa">Filtre as publicações selecionando as categorias.</p>
 

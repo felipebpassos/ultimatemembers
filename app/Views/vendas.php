@@ -1,17 +1,35 @@
 <main>
 
     <div class="titulo-pagina" style="margin-bottom: 100px;">
-        <h1>Dashboard de Vendas</h1>
+        <h1>Vendas</h1>
     </div>
 
-    <ul class="periodo-tempo"></ul>
-    <script>
+    <div class="lista-preferências">
+        <ul>
+            <li>
+                <button class="aba" onclick="abrirAba(event, 'tabela')">Vendas</button>
+            </li>
+            <li>
+                <button class="aba" onclick="abrirAba(event, 'dashboard')">Dashboards</button>
+            </li>
+        </ul>
+    </div>
 
-        $(".periodo-tempo").append(SelectSimples('', 'Hoje', ['Hoje', 'Últimos 7 dias', 'Últimos 30 dias', 'Tempo todo'], 'select-fonte', false));
+    <div id="tabela" class="content">
 
-    </script>
+        <h1>tabela</h1>
 
-    <div class="dashboard">
+
+    </div>
+
+    <div id="dashboard" class="content">
+
+        <ul class="periodo-tempo"></ul>
+        <script>
+
+            $(".periodo-tempo").append(SelectSimples('', 'Hoje', ['Hoje', 'Últimos 7 dias', 'Últimos 30 dias', 'Tempo todo'], 'select-fonte', false));
+
+        </script>
 
         <div class="container" style="margin:0;">
             <div class="row">

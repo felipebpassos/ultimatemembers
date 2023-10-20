@@ -9,19 +9,19 @@
 }
 
 .pesquisar input {
-    width: 600px;
     height: 50px;
     padding: 8px 15px;
     background-color: black;
     color: var(--cor-primaria);
     border-radius: 15px;
     border: none;
-    outline: none;
+    outline: 1px solid var(--cor-secundaria-lighter);
 }
 
 .pesquisar input:hover {
-    outline: 1px solid var(--cor-secundaria-lighter);
-    transition: outline 0.2s ease;
+    border: 1px solid var(--cor-secundaria-lighter);
+    transition: outline 0.3s ease-in-out;
+    outline: 4px solid var(--cor-primaria-transparent-3);
 }
 
 .pesquisar input:focus {

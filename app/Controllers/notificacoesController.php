@@ -34,10 +34,12 @@ class notificacoesController extends Controller
     public function usuario_conexao()
     {
 
-        $this->sessao->verificaCurso();
+        $curso = $this->sessao->verificaCurso();
+
+        $cursoInfo = $this->cursosModel->getCurso($curso);
 
         // Carrega dados do usuário
-        $userId = $this->sessao->carregarUsuario($_SESSION['usuario']);
+        $userId = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
 
         // Retorne o ID do usuário como uma resposta
         if ($userId !== null) {
@@ -51,10 +53,12 @@ class notificacoesController extends Controller
     public function buscarnotificacoes()
     {
 
-        $this->sessao->verificaCurso();
+        $curso = $this->sessao->verificaCurso();
+
+        $cursoInfo = $this->cursosModel->getCurso($curso);
 
         // Carrega dados do usuário
-        $this->sessao->carregarUsuario($_SESSION['usuario']);
+        $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
 
         $notificacoes = new Notificacoes();
 

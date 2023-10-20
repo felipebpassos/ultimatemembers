@@ -258,15 +258,7 @@ class Aulas
 
                 $this->deleteAulasConcluidas($id_aula);
 
-                $delComentarios = $this->deleteComentariosDaAula($id_aula);
-
-                $delLikes = $this->deleteLikesComentarios($delComentarios);
-
-                $delDislikes = $this->deleteDislikesComentarios($delComentarios);
-
-                $this->deleteNotificacoesPorItens(1, $delLikes);
-
-                $this->deleteNotificacoesPorItens(1, $delDislikes);
+                $this->deleteComentariosDaAula($id_aula);
 
                 // Agora podemos excluir a aula
                 $query = 'DELETE FROM aulas WHERE id = :id_aula';
@@ -322,6 +314,10 @@ class Aulas
             $deletedCommentIds[] = $row['id'];
         }
 
+        $this->deleteLikesComentarios($deletedCommentIds);
+
+        $this->deleteDislikesComentarios($deletedCommentIds);
+
         // Exclua os comentários associados a esta aula
         $deleteQuery = 'DELETE FROM comentarios WHERE aula_id = :id_aula';
 
@@ -358,6 +354,8 @@ class Aulas
             $deletedLikes[] = $row['id'];
         }
 
+        $this->deleteNotificacoesPorItens(1, $deletedLikes);
+
         // Excluir registros na tabela likes_comentarios onde comentario_id esteja na lista de comentários deletados
         $queryDeleteLikes = "DELETE FROM likes_comentarios WHERE comentario_id IN ($comentarioIds)";
         $stmtDeleteLikes = $this->con->prepare($queryDeleteLikes);
@@ -385,6 +383,8 @@ class Aulas
         while ($row = $stmtSelectDislikes->fetch(PDO::FETCH_ASSOC)) {
             $deletedDislikes[] = $row['id'];
         }
+
+        $this->deleteNotificacoesPorItens(1, $deletedDislikes);
 
         // Excluir registros na tabela dislikes_comentarios onde comentario_id esteja na lista de comentários deletados
         $queryDeleteDislikes = "DELETE FROM dislikes_comentarios WHERE comentario_id IN ($comentarioIds)";

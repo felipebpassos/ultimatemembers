@@ -10,11 +10,11 @@ Class homeController extends Controller {
 
         $curso = $sessao->verificaCurso();
 
-        $sessao->verificaLogin();
-
         $cursoInfo = $cursosModel->getCurso($curso);
 
         $data['curso'] = $cursoInfo;
+
+        $sessao->verificaLogin($cursoInfo['url_principal']);
 
         //set template
         $template = 'home';
