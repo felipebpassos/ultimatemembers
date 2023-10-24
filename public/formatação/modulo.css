@@ -367,6 +367,8 @@ label {
     margin-bottom: 50px;
 }
 
+.nome-aula {color: var(--cor-primaria-dark);}
+
 .info-aula {
     max-width: 350px;
     height: fit-content;
@@ -392,7 +394,7 @@ label {
 .opções-aula button {
     border: none;
     background-color: inherit;
-    color: var(--cor-primaria);
+    color: var(--cor-primaria-dark);
     font-size: 18px;
     margin-right: 10px;
     transition: transform 0.3s;

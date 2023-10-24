@@ -336,7 +336,7 @@ label {
 }
 
 .aulas {
-    margin-top: 10px;
+    padding-top: 10px;
     max-height: 390px;
     overflow-y: auto;
     position: relative;
@@ -358,6 +358,8 @@ label {
 .aulas::-webkit-scrollbar-thumb {
     background-color: transparent;
 }
+
+.nome-aula {color: var(--cor-primaria-dark);}
 
 .info-aula {
     max-width: 150px;
@@ -395,7 +397,7 @@ label {
 .excluir-aula {
     border: none;
     background-color: inherit;
-    color: var(--cor-primaria);
+    color: var(--cor-primaria-dark);
     font-size: 22px;
     transition: transform 0.3s;
 }

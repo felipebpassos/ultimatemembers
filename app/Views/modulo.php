@@ -100,7 +100,7 @@ if ($modulo['id'] >= 0 && $modulo['id'] <= 9) {
             <div class="col-lg-6" style="min-width: 500px; padding: 10px 0 0 25px !important;">
 
                 <div class="section-header">
-                    <h3><i class="fa-solid fa-film" style="margin-right: 20px;"></i>Aulas Gravadas</h3>
+                    <h3><i class="fa-solid fa-video" style="margin-right: 20px;"></i>Aulas Gravadas</h3>
 
                     <?php
 

@@ -1,4 +1,4 @@
-.relatorios {width: 700px; margin: auto;}
+.relatorios {max-width: 960px; margin: auto;}
 
 .relatorio {
     display: flex; 
@@ -8,6 +8,12 @@
     border: none;
     justify-content: center;
     align-items: center;
+    background-color: var(--cor-primaria-light);
 }
 
-.relatorio:hover {transform: translateY(-5px);}
+.relatorio:hover {
+    transform: translateY(-5px);
+    background-color: var(--cor-primaria-lighter);
+}
+
+.relatorio i {font-size: 20px;}

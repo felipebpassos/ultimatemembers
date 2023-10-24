@@ -129,7 +129,7 @@ class painelController extends Controller
         $data['view'] = 'vendas';
         $data['title'] = 'Dashboard | Vendas';
         $data['description'] = '';
-        $data['styles'] = array('painel', 'header', 'vendas');
+        $data['styles'] = array('painel', 'header', 'search-bar', 'vendas');
         $data['scripts_head'] = array('abas', 'select');
         $data['scripts_body'] = array('btn-selected', 'toggleSearch', 'menu-responsivo', 'simple_select', 'sales-charts');
 

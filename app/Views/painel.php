@@ -167,7 +167,7 @@
                             } else {
                                 $formattedId = $id; // Mantém o ID como está se não estiver entre 0 e 9
                             }
-                            echo '<a class="banner" id=lancamentos href="' . $link . '"><img
+                            echo '<a class="banner" id=lancamentos href="' . $link . '"><div class="lock-sign"><i class="fa-solid fa-lock"></i></div><img
                             src="http://localhost/ultimatemembers/uploads/lançamentos/banners/lançamento' . $formattedId . '.png" alt="Lançamento ' . $formattedId . '"></a>';
                         }
                     } else {

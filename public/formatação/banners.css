@@ -62,6 +62,7 @@
 }
 
 .banner {
+    position: relative;
     width: 210px;
     height: 300px;
     margin-right: 25px;
@@ -119,3 +120,22 @@
     object-fit: cover;
     height: 100%;
 }
+
+.lock-sign {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgb(185, 185, 185);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lock-sign:hover {
+    background-color: rgb(204, 204, 204);
+}
+
+.lock-sign i {color: rgb(78, 78, 78); font-size: 13px;}

@@ -3,7 +3,6 @@
     height: 40px;
     background-color: transparent;
     display: flex;
-    justify-content: flex-end;
     align-items: center;
     border-radius: 15px;
 }

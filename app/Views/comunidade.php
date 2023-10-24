@@ -26,7 +26,7 @@
                             <a class="nova-publicacao"
                                 href="<?php echo $curso['url_principal']; ?>comunidade/publicar/"><button class="btn-2"
                                     id="experiencia">
-                                    <p>Publicar Experiência</p><i class="fa-regular fa-comment"></i>
+                                    <p>Publicar Experiência</p><i class="fa-regular fa-lightbulb"></i>
                                 </button></a>
 
                         </div>
