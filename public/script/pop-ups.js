@@ -1,6 +1,13 @@
+//Aulas
+
 // Quando o botão de adicionar aula for clicado
 $('#add-aula').click(function() {
-    exibirFormulario('add'); // Função para exibir o formulário
+    exibirFormulario('add-aula'); // Função para exibir o formulário
+});
+
+// Quando o botão de fechar for clicado
+$('#closePopup').click(function() {
+    fecharFormulario('add-aula');
 });
 
 // Quando os botões de editar aula forem clicados
@@ -23,9 +30,34 @@ $('.editar-aula').click(function() {
         console.error('Aula não encontrada ou propriedades ausentes.');
     }
 
-    exibirFormulario('edit'); // Função para exibir o formulário
+    exibirFormulario('edit-aula'); // Função para exibir o formulário
 });
 
+// Quando o botão de fechar for clicado
+$('#closePopupEdit').click(function() {
+    fecharFormulario('edit-aula');
+});
+
+//Módulos
+
+$('#editar-modulos').click(function() {
+    exibirFormulario('modulos'); // Função para exibir o formulário
+});
+
+// Quando o botão de fechar for clicado
+$('#closePopupModulos').click(function() {
+    fecharFormulario('modulos');
+});
+
+// Quando o botão de adicionar modulo for clicado
+$('#add-modulo').click(function() {
+    $('#add-modulo-form').show(); // Exibir o formulário
+});
+
+// Quando o botão de fechar for clicado
+$('#closePopupModulo').click(function() {
+    $('#add-modulo-form').hide();
+});
 
 // Função para encontrar aula por ID
 function encontrarAulaPorId(aulaId, aulasData) {
@@ -40,24 +72,17 @@ function encontrarAulaPorId(aulaId, aulasData) {
     return aula;
 }
 
-// Quando o botão de adicionar aula for clicado
-$('#closePopup').click(function() {
-    fecharFormulario('add'); // Função para exibir o formulário
-});
-
-// Quando o botão de adicionar aula for clicado
-$('#closePopupEdit').click(function() {
-    fecharFormulario('edit'); // Função para exibir o formulário
-});
-
 // Função para exibir o formulário
 function exibirFormulario(option) {
-    if (option === 'add') {
+    if (option === 'add-aula') {
         $('#add').show();
-    } else {
+    } else if (option === 'edit-aula') {
         $('#edit').show();
+    } else if (option === 'modulos') {
+        $('#modulos-list').show();
     }
     $('header').addClass('hidden');
+    $('.main-banner').addClass('blur');
     $('main').addClass('blur');
     $('footer').addClass('blur');
     $('.video-intro-container').addClass('blur');
@@ -66,12 +91,15 @@ function exibirFormulario(option) {
 
 // Função para exibir o formulário
 function fecharFormulario(option) {
-    if (option === 'add') {
+    if (option === 'add-aula') {
         $('#add').hide();
-    } else {
+    } else if (option === 'edit-aula') {
         $('#edit').hide();
+    } else if (option === 'modulos') {
+        $('#modulos-list').hide();
     }
     $('header').removeClass('hidden');
+    $('.main-banner').removeClass('blur');
     $('main').removeClass('blur');
     $('footer').removeClass('blur');
     $('.video-intro-container').removeClass('blur');
@@ -118,7 +146,7 @@ $('#aulaFormEdit').submit(function(e) {
         success: function(response) {
             // A resposta do servidor foi recebida e processada com sucesso.
             // Você pode adicionar aqui lógica para fechar o popup, atualizar a interface do usuário, etc.
-            fecharFormulario('edit');
+            fecharFormulario('edit-aula');
             console.log('Resposta do servidor:', response);
         },
         error: function() {

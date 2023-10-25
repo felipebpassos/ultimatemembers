@@ -153,7 +153,7 @@ body {
     color: var(--cor-primaria-dark);
 }
 
-label, span, p, h1, h2, h3, h4, h5, h6 {color: var(--cor-primaria-dark);}
+label, span, p, h1, h2, h3, h4, h5, h6 {color: var(--cor-primaria-darker);}
 
 .logo {
     margin-right: 50px;
@@ -434,12 +434,8 @@ label, span, p, h1, h2, h3, h4, h5, h6 {color: var(--cor-primaria-dark);}
 }
 
 .legenda {
-    display: flex;
     align-items: center;
     position: absolute;
-    bottom: -25px;
-    left: 50%;
-    transform: translateX(-50%);
     background-color: rgb(88, 88, 88);
     color: white;
     font-size: 14px;
@@ -451,6 +447,33 @@ label, span, p, h1, h2, h3, h4, h5, h6 {color: var(--cor-primaria-dark);}
     /* Centralizar verticalmente o texto */
     z-index: 9998;
     overflow: visible;
+}
+
+.editar {
+    position: absolute;
+    padding: 5px 10px;
+    right: 20px;
+    border: none;
+    background-color: inherit;
+    color: var(--cor-primaria-dark);
+    transition: transform 0.3s;
+}
+
+.editar i{
+    margin-right: 0 !important;
+    font-size: 22px !important;
+}
+
+.editar:hover {
+    box-shadow: none;
+    transform: scale(1.1);
+    /* Aumenta o tamanho do botão em 10% ao passar o mouse */
+}
+
+.editar:hover .legenda {
+    display: block;
+    left: -130px;
+    top: 25%;
 }
 
 .titulo-pagina {
@@ -502,18 +525,21 @@ label, span, p, h1, h2, h3, h4, h5, h6 {color: var(--cor-primaria-dark);}
     left: 50%;
     transform: translate(-50%, -50%);
     width: 620px;
-    height: 430px;
+    height: 500px;
     border-radius: 10px;
     background-color: var(--popup);
     color: var(--cor-primaria);
-    padding: 20px 20px 30px 20px;
+    padding: 20px 30px;
+    padding-bottom: 30px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     z-index: 9999;
 }
 
 #aulaFormAdd,
-#aulaFormEdit {
-    height: 300px;
+#aulaFormEdit,
+#moduloFormAdd {
+    margin-top: 30px;
+    height: 360px;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -550,14 +576,11 @@ label, span, p, h1, h2, h3, h4, h5, h6 {color: var(--cor-primaria-dark);}
 }
 
 .popup .txt-input div {
-    position: relative;
+    display: block;
 }
 
 .popup label {
-    padding: 0 3px;
-    margin-left: 10px;
-    position: absolute;
-    top: -13px;
+    padding: 0 5px;
     background-color: transparent;
     width: fit-content;
 }
@@ -575,6 +598,7 @@ label, span, p, h1, h2, h3, h4, h5, h6 {color: var(--cor-primaria-dark);}
 .popup .txt-input input {
     height: 40px;
     margin-bottom: 25px;
+    flex: 1;
 }
 
 .popup textarea {
@@ -588,13 +612,27 @@ label, span, p, h1, h2, h3, h4, h5, h6 {color: var(--cor-primaria-dark);}
     outline: 1px solid var(--cor-primaria-light);
 }
 
-#indice {
+#indice, #indiceEdit {
     width: 70px;
 }
 
 #nomeAula {
     width: 400px;
 }
+
+.modulos-list {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid var(--cor-secundaria-lighter);
+    padding: 0 10px;
+    margin: 30px 0;
+}
+
+.modulos-list li {padding: 20px 10px; width: 100%; display: flex; justify-content: space-between;}
+
+.op-modulo button {position: unset;}
+
+.op-modulo button i {font-size: 16px !important;}
 
 .blur {
     transition: 0.5s;

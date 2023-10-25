@@ -4,9 +4,10 @@
 
         <span class="close" id="closePopup">&times;</span>
 
-        <h2 style="margin: 0 0 30px 20px; font-weight: bold;">Nova aula</h2>
+        <h2 style="margin: auto; font-weight: bold; width:fit-content;">Nova aula</h2>
 
-        <form id="aulaFormAdd" action="<?php echo $curso['url_principal']; ?>modulos/nova_aula/" method="POST" enctype="multipart/form-data">
+        <form id="aulaFormAdd" action="<?php echo $curso['url_principal']; ?>modulos/nova_aula/" method="POST"
+            enctype="multipart/form-data">
 
             <div class="txt-input">
 
@@ -24,7 +25,7 @@
             </div>
 
             <div style="position: relative; margin: 0 40px 25px 20px;">
-                <label for="nomeAula">Descrição da Aula (Opcional)</label>
+                <label for="descricaoAula">Descrição da Aula (Opcional)</label>
                 <textarea id="descricaoAula" name="descricaoAula"></textarea>
             </div>
 
@@ -37,7 +38,7 @@
 
             <p style="margin: 10px 20px; font-weight: bold;">Vídeo da aula</p>
             <div class="drop-area" id="dropVideo">
-                Arraste e solte um arquivo de vídeo aqui ou clique para fazer upload.
+                Arraste e solte um vídeo aqui ou clique para fazer upload.
                 <span id="videoInfo"></span>
                 <input type="file" id="videoAula" style="width: 0; height:0; margin:0;" name="videoAula"
                     accept="video/*" required>
@@ -54,19 +55,20 @@
 
         <span class="close" id="closePopupEdit">&times;</span>
 
-        <h2 style="margin: 0 0 30px 20px; font-weight: bold;">Editar aula</h2>
+        <h2 style="margin: auto; font-weight: bold; width:fit-content;">Editar aula</h2>
 
-        <form id="aulaFormEdit" action="<?php echo $curso['url_principal']; ?>modulos/edita_aula/" method="POST" enctype="multipart/form-data">
+        <form id="aulaFormEdit" action="<?php echo $curso['url_principal']; ?>modulos/edita_aula/" method="POST"
+            enctype="multipart/form-data">
 
             <div class="txt-input">
 
                 <div>
-                    <label for="indice">Índice</label>
+                    <label for="indiceEdit">Índice</label>
                     <input type="text" id="indiceEdit" name="indice">
                 </div>
 
                 <div>
-                    <label for="nomeAula">Nome da Aula</label>
+                    <label for="nomeAulaEdit">Nome da Aula</label>
                     <input type="text" id="nomeAulaEdit" name="nomeAula" required>
                 </div>
 
@@ -76,21 +78,22 @@
             </div>
 
             <div style="position: relative; margin: 0 40px 25px 20px;">
-                <label for="nomeAula">Descrição da Aula (Opcional)</label>
+                <label for="descricaoAulaEdit">Descrição da Aula (Opcional)</label>
                 <textarea id="descricaoAulaEdit" name="descricaoAula"></textarea>
             </div>
 
             <p style="margin: 10px 20px; font-weight: bold;">Imagem de capa da aula (Opcional)</p>
             <div class="drop-area" id="dropImgEdit">
                 Arraste e solte uma imagem aqui ou clique para fazer upload.
-                <span id="imgInfo"></span>
-                <input type="file" id="capaAulaEdit" style="width: 0; height:0; margin:0;" name="capaAula" accept="img/*">
+                <span id="imgInfoEdit"></span>
+                <input type="file" id="capaAulaEdit" style="width: 0; height:0; margin:0;" name="capaAula"
+                    accept="img/*">
             </div>
 
             <p style="margin: 10px 20px; font-weight: bold;">Vídeo da aula</p>
             <div class="drop-area" id="dropVideoEdit">
-                Arraste e solte um arquivo de vídeo aqui ou clique para fazer upload.
-                <span id="videoInfo"></span>
+                Arraste e solte um vídeo aqui ou clique para fazer upload.
+                <span id="videoInfoEdit"></span>
                 <input type="file" id="videoAulaEdit" style="width: 0; height:0; margin:0;" name="videoAula"
                     accept="video/*">
             </div>
@@ -107,5 +110,91 @@
     <div class="btn-box">
         <button class="btn-2" id="btn-deletar">Deletar</button>
         <button class="btn-2" id="btn-cancelar">Cancelar</button>
+    </div>
+</div>
+
+<!-- Formulário para editar módulos -->
+<div id="modulos-list" class="popup">
+    <div class="popup-content">
+
+        <span class="close" id="closePopupModulos">&times;</span>
+
+        <h2 style="margin: auto; font-weight: bold; width:fit-content;">Módulos</h2>
+
+        <ul class="modulos-list">
+
+            <?php
+            if (isset($modulos) && !empty($modulos)) {
+
+                foreach ($modulos as $modulo) {
+                    $id = $modulo['id'];
+
+                    if ($id >= 0 && $id <= 9) {
+                        $formattedId = sprintf("0%d", $id); // Formata o ID para 0X (sendo X o ID)
+                    } else {
+                        $formattedId = $id; // Mantém o ID como está se não estiver entre 0 e 9
+                    }
+                    echo '<li><span>' . $formattedId . ' - ' . $modulo['nome'] . '</span>
+                    <div class="op-modulo">
+                        <button class="editar" id="editar-modulo"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
+                        <button class="editar" id="delete-modulo"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>
+                    </div> 
+                    </li>';
+                }
+            } else {
+                // Caso a variável de sessão 'modulos' não exista ou esteja vazia
+                echo 'Nenhum módulo criado.';
+            }
+            ?>
+
+        </ul>
+
+        <button class="btn-2" id="add-modulo" style="margin:auto;">Novo Módulo</button>
+
+    </div>
+</div>
+
+
+<!-- Formulário para adicionar módulo -->
+<div id="add-modulo-form" class="popup">
+    <div class="popup-content">
+
+        <span class="close" id="closePopupModulo">&times;</span>
+
+        <h2 style="margin: auto; font-weight: bold; width:fit-content;">Novo Módulo</h2>
+
+        <form id="moduloFormAdd" action="<?php echo $curso['url_principal']; ?>modulos/novo_modulo/" method="POST"
+            enctype="multipart/form-data">
+
+            <div class="txt-input">
+
+                <div>
+                    <label for="indice">Índice</label>
+                    <input type="text" id="indice" name="indice">
+                </div>
+
+                <div>
+                    <label for="nomeModulo">Nome do Módulo</label>
+                    <input type="text" id="nomeModulo" name="nomeModulo" required>
+                </div>
+
+            </div>
+
+            <p style="margin: 10px 20px; font-weight: bold;">Capa do módulo (Opcional)</p>
+            <div class="drop-area" id="dropImgModulo">
+                Arraste e solte uma imagem aqui ou clique para fazer upload.
+                <span id="imgInfoModulo"></span>
+                <input type="file" id="capaModulo" style="width: 0; height:0; margin:0;" name="capaModulo" accept="img/*">
+            </div>
+
+            <p style="margin: 10px 20px; font-weight: bold;">Vídeo Introdutório do módulo (Opcional)</p>
+            <div class="drop-area" id="dropVideoModulo">
+                Arraste e solte um vídeo aqui ou clique para fazer upload.
+                <span id="videoInfoModulo"></span>
+                <input type="file" id="videoModulo" style="width: 0; height:0; margin:0;" name="videoModulo" accept="video/*">
+            </div>
+
+            <button class="btn-2" type="submit" style="margin: auto; margin-top: 40px;">Adicionar Módulo</button>
+        </form>
     </div>
 </div>

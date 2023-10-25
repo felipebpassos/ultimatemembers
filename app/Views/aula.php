@@ -61,15 +61,8 @@
                                 class="legenda">Apostila</span></button>
                         <button class="op-aula"><i class="fa-solid fa-pen"></i><span
                                 class="legenda">Exercício</span></button>
-                        <label class="checkbox" data-id="<?php echo $aula['id']; ?>">
-                            <input type="checkbox" <?php echo ($checkbox ? 'checked' : ''); ?>>
-                            <div class="checkmark"><i class="fa-solid fa-check"></i></div>
-                        </label>
-                        <a href="">
-                            <button class="btn-2" id="proxima"><i class="fa-solid fa-forward"></i>
-                                <P>Próxima Aula</P>
-                            </button>
-                        </a>
+                        <button class="op-aula"><i class="fa-regular fa-bookmark"></i><span
+                                class="legenda">Salvar Aula</span></button>
                     </div>
                 </div>
 
@@ -311,6 +304,12 @@
                         </div>
 
                     </div>
+
+                    <a href="">
+                        <button class="btn-2" id="proxima"><i class="fa-solid fa-forward"></i>
+                            <P>Próxima Aula</P>
+                        </button>
+                    </a>
 
                 </div>
 

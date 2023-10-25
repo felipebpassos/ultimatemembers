@@ -13,6 +13,11 @@
         <div class="seção-titulo" id="titulo-banner">
             <i class="fa-solid fa-folder-open"></i>
             <h3 style="margin: 0px;">Módulos</h3>
+            <?php
+            if ($adm == 1) {
+                echo '<button class="editar" id="editar-modulos"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>';
+            }
+            ?>
         </div>
         <div class="fade-before"></div>
         <div class="fade-after"></div>
@@ -43,7 +48,8 @@
                 </div>
             </div>
             <div class="arrow left-arrow"><img src="http://localhost/ultimatemembers/public/img/left.png" alt=""></div>
-            <div class="arrow right-arrow"><img src="http://localhost/ultimatemembers/public/img/right.png" alt=""></div>
+            <div class="arrow right-arrow"><img src="http://localhost/ultimatemembers/public/img/right.png" alt="">
+            </div>
         </section>
     </div>
 

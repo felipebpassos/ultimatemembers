@@ -54,9 +54,9 @@ class painelController extends Controller
         $data['view'] = 'painel';
         $data['title'] = $cursoInfo['nome'] . ' | Painel';
         $data['description'] = 'Assista às aulas e estude através do nosso material';
-        $data['styles'] = array('painel', 'header', 'banners');
+        $data['styles'] = array('drag-drop-files', 'painel', 'header', 'banners');
         $data['scripts_head'] = array('abas');
-        $data['scripts_body'] = array('btn-selected', 'toggleSearch', 'banner-roller', 'menu-responsivo', 'fade-in-slide-up');
+        $data['scripts_body'] = array('btn-selected', 'toggleSearch', 'pop-ups', 'drag-drop-files', 'banner-roller', 'menu-responsivo', 'fade-in-slide-up');
 
         // Carrega a view passando $_SESSION['usuario']
         $this->loadTemplates($template, $data, $usuario);

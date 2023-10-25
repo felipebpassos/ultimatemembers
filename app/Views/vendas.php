@@ -100,9 +100,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="grafico">
-                        <canvas id="grafico"
-                            style="width: 400px; display: block; box-sizing: border-box; height: 170px;" height="152"
-                            width="400"></canvas>
+                        <canvas id="grafico" height="152" width="360"></canvas>
                     </div>
                 </div>
                 <div class="col-md-6">

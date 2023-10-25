@@ -96,6 +96,8 @@ main {
     display: flex;
     margin: 0px 0px 15px 5px;
     color: var(--cor-primaria-dark);
+    width: 100%;
+    position: relative;
     z-index: 9998;
 }
 

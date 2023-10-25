@@ -4,7 +4,24 @@ var dados = [
     { hora: 1, faturamento: 100 },
     { hora: 2, faturamento: 200 },
     { hora: 3, faturamento: 300 },
-    // Adicione mais dados aqui
+    { hora: 4, faturamento: 330 },
+    { hora: 5, faturamento: 330 },
+    { hora: 6, faturamento: 370 },
+    { hora: 7, faturamento: 370 },
+    { hora: 8, faturamento: 400 },
+    { hora: 9, faturamento: 420 },
+    { hora: 10, faturamento: 420 },
+    { hora: 11, faturamento: 550 },
+    { hora: 12, faturamento: 570 },
+    { hora: 13, faturamento: 570 },
+    { hora: 14, faturamento: 630 },
+    { hora: 15, faturamento: 650 },
+    { hora: 16, faturamento: 670 },
+    { hora: 17, faturamento: 730 },
+    { hora: 18, faturamento: 730 },
+    { hora: 19, faturamento: 800 },
+    { hora: 20, faturamento: 860 },
+    { hora: 21, faturamento: 880 },
     { hora: 22, faturamento: 900 },
     { hora: 23, faturamento: 1000 }
 ];
@@ -64,7 +81,7 @@ var myChart = new Chart(ctx, {
                 ticks: {
                     maxTicksLimit: 2, // Define o número máximo de ticks
                     callback: function (value) {
-                        if (value === valorMinimoX || value === valorMaximoX) {
+                        if (value == valorMinimoX || value == valorMaximoX) {
                             return formatarHora(value); // Formatar apenas os valores mínimos e máximos
                         } else {
                             return ''; // Ocultar outros valores

@@ -385,6 +385,7 @@ label {
 .opções-aula {
     display: flex;
     align-items: center;
+    margin-right: 10px;
 }
 
 .op-aula {
@@ -419,7 +420,10 @@ label {
 .op-aula:hover .legenda,
 .editar-aula:hover .legenda,
 .excluir-aula:hover .legenda {
+    transform: translateX(-50%);
     display: block;
+    bottom: -25px;
+    left: 50%;
 }
 
 .checkbox {
@@ -463,7 +467,7 @@ label {
 
 .checkbox input[type="checkbox"]:checked~.checkmark {
     background-color: var(--cor-primaria-darker);
-    border-color: var(--cor-primaria-darker);
+    border: 2px solid var(--cor-primaria-darker);
 }
 
 .checkbox input[type="checkbox"]:checked~.checkmark i {

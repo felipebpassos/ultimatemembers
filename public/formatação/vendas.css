@@ -24,7 +24,7 @@
 
 .selecao-simples .descricao {
     font-weight: bold;
-    color: var(--cor-primaria-light);
+    color: var(--cor-primaria);
 }
 
 .periodo-tempo label {
@@ -44,7 +44,7 @@
 }
 
 .container-select span {
-    color: var(--cor-primaria-lighter);
+    color: var(--cor-primaria);
 }
 
 .container-select:hover {
@@ -159,11 +159,29 @@
     border: none;
 }
 
-#exportar {width: 160px; height: 40px;}
+#exportar {
+    width: 160px; 
+    height: 40px; 
+    background-color: var(--cor-secundaria-light); 
+    color: var(--cor-primaria);
+    border: none;
+}
 
 .op-table {margin-top: 10px; margin-bottom: 20px;}
 
-.op-table button {margin-right: 20px; padding: 5px;}
+.op-table button {
+    margin-right: 10px; 
+    padding: 5px;
+    background-color: transparent;
+    color: var(--cor-primaria-darker);
+    border: none;
+    border-radius: 8px;
+    padding: 5px 10px;
+}
+
+.op-table button:hover {
+    background-color: var(--cor-secundaria-light);
+}
 
 .table {
     --bs-table-bg: var(--cor-secundaria-light) !important;

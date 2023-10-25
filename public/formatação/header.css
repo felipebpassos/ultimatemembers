@@ -33,7 +33,6 @@ header.show-menu {
 }
 
 .op-menu-high {
-    color: var(--cor-primaria-dark);
     font-weight: bold;
     font-size: 18px;
     margin-top: 10px;
@@ -44,6 +43,7 @@ header.show-menu {
 }
 
 .op-menu-high p {
+    color: var(--cor-primaria-dark);
     cursor: pointer;
 }
 

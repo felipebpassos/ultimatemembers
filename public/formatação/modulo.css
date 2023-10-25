@@ -367,8 +367,6 @@ label {
     margin-bottom: 50px;
 }
 
-.nome-aula {color: var(--cor-primaria-dark);}
-
 .info-aula {
     max-width: 350px;
     height: fit-content;
@@ -394,7 +392,7 @@ label {
 .opções-aula button {
     border: none;
     background-color: inherit;
-    color: var(--cor-primaria-dark);
+    color: var(--cor-primaria-darker);
     font-size: 18px;
     margin-right: 10px;
     transition: transform 0.3s;
@@ -414,6 +412,9 @@ label {
 .add-aula:hover .legenda,
 .opções-aula button:hover .legenda {
     display: block;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .checkbox {
@@ -449,6 +450,7 @@ label {
 .checkmark i {
     color: var(--cor-secundaria);
     font-size: 14px;
+    margin-top: 2px;
 }
 
 .checkbox:hover .checkmark {
@@ -457,7 +459,7 @@ label {
 
 .checkbox input[type="checkbox"]:checked~.checkmark {
     background-color: var(--cor-primaria-darker);
-    border-color: var(--cor-primaria-darker);
+    border: 2px solid var(--cor-primaria-darker);
 }
 
 .checkbox input[type="checkbox"]:checked~.checkmark i {

@@ -104,7 +104,7 @@ class modulosController extends Controller
         $data['description'] = 'Assista às aulas e estude através do nosso material';
         $data['styles'] = array('painel', 'header', 'drag-drop-files', 'modulo');
         $data['scripts_head'] = array('select');
-        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'simple_select', 'add-edit-aula', 'drag-drop-files', 'video-intro', 'scroll-to-section', 'encolher-elemento', 'deletar-aula', 'aula_concluida');
+        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'simple_select', 'pop-ups', 'drag-drop-files', 'video-intro', 'scroll-to-section', 'encolher-elemento', 'deletar-aula', 'aula_concluida');
 
         //load view
         $this->loadTemplates($template, $data, $usuario);
@@ -166,7 +166,7 @@ class modulosController extends Controller
         $data['description'] = 'Assista às aulas e estude através do nosso material';
         $data['styles'] = array('painel', 'header', 'drag-drop-files', 'video-player', 'aula');
         $data['scripts_head'] = array('select');
-        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'add-edit-aula', 'deletar-aula', 'simple_select', 'drag-drop-files', 'comment-box', 'comment-btns', 'aula_concluida', 'like_dislike');
+        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'pop-ups', 'deletar-aula', 'simple_select', 'drag-drop-files', 'comment-box', 'comment-btns', 'aula_concluida', 'like_dislike');
 
 
         //load view
