@@ -155,3 +155,28 @@ $('#aulaFormEdit').submit(function(e) {
         }
     });
 });
+
+// Evento de envio do formulário
+$('#moduloFormAdd').submit(function(e) {
+    e.preventDefault(); // Impede o envio padrão do formulário
+
+    const formData = new FormData(this); // Crie um objeto FormData com os dados do formulário
+
+    $.ajax({
+        type: 'POST',
+        url: this.action, // URL de destino do formulário
+        data: formData, // Dados do formulário
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            // A resposta do servidor foi recebida e processada com sucesso.
+            // Você pode adicionar aqui lógica para fechar o popup, atualizar a interface do usuário, etc.
+            $('#add-modulo-form').hide();
+            console.log('Resposta do servidor:', response);
+        },
+        error: function() {
+            // Lida com erros de solicitação
+            console.error('Erro na solicitação AJAX');
+        }
+    });
+});

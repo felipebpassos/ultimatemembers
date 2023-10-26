@@ -14,6 +14,28 @@ class Modulos
 
     }
 
+    public function setModulo($curso_id, $nome, $banner, $video, $status, $data_lancamento)
+    {
+        $query = "INSERT INTO modulos (id_curso, nome, banner, video, mod_status, data_lancamento) 
+              VALUES (:curso_id, :nome, :banner, :video, :mod_status, :data_lancamento)";
+
+        $stmt = $this->con->prepare($query);
+        $stmt->bindParam(':curso_id', $curso_id, PDO::PARAM_INT);
+        $stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
+        $stmt->bindParam(':banner', $banner, PDO::PARAM_STR);
+        $stmt->bindParam(':video', $video, PDO::PARAM_STR);
+        $stmt->bindParam(':mod_status', $status, PDO::PARAM_INT);
+        $stmt->bindParam(':data_lancamento', $data_lancamento, PDO::PARAM_STR);
+
+        if ($stmt->execute()) {
+            // Retorna o ID do módulo recém-inserido
+            return $this->con->lastInsertId();
+        } else {
+            // Em caso de falha, você pode lidar com erros de alguma maneira, como lançar uma exceção
+            throw new Exception("Erro ao inserir o módulo");
+        }
+    }
+
     // Nova função para pegar todos os módulos do curso
     public function getModulos($curso_id)
     {
@@ -76,7 +98,36 @@ class Modulos
         return $aulasPorModulo;
     }
 
+    public function uploadBannerModulo($file)
+    {
+        $diretorio_upload = "./uploads/modulos/banners/"; // Diretório correspondente
+        $nome_arquivo = basename($file['name']);
+        $extensao_arquivo = strtolower(pathinfo($nome_arquivo, PATHINFO_EXTENSION)); // Obtém a extensão do arquivo em letras minúsculas
+        $novo_nome_arquivo = uniqid() . '.' . $extensao_arquivo; // Gera um novo nome único para o arquivo de perfil
+        $caminho_arquivo = $diretorio_upload . $novo_nome_arquivo; // Concatena o nome do arquivo ao caminho
 
+        if (move_uploaded_file($file['tmp_name'], $caminho_arquivo)) {
+            return $caminho_arquivo; // Retorna o caminho do arquivo em caso de sucesso
+        } else {
+            return false; // Retorna false em caso de erro no upload
+        }
+    }
+
+    //Método para subir arquivo de video introdutório do módulo para servidor
+    public function uploadVideoModulo($file)
+    {
+        $diretorio_upload = "./uploads/modulos/videos/"; // Diretório correspondente
+        $nome_arquivo = basename($file['name']);
+        $extensao_arquivo = strtolower(pathinfo($nome_arquivo, PATHINFO_EXTENSION)); // Obtém a extensão do arquivo em letras minúsculas
+        $novo_nome_arquivo = uniqid() . '.' . $extensao_arquivo; // Gera um novo nome único para o arquivo de perfil
+        $caminho_arquivo = $diretorio_upload . $novo_nome_arquivo; // Concatena o nome do arquivo ao caminho
+
+        if (move_uploaded_file($file['tmp_name'], $caminho_arquivo)) {
+            return $caminho_arquivo; // Retorna o caminho do arquivo em caso de sucesso
+        } else {
+            return false; // Retorna false em caso de erro no upload
+        }
+    }
 
 }
 

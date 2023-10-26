@@ -526,7 +526,7 @@ label, span, p, h1, h2, h3, h4, h5, h6 {color: var(--cor-primaria-darker);}
     transform: translate(-50%, -50%);
     width: 620px;
     height: 500px;
-    border-radius: 10px;
+    border-radius: 8px;
     background-color: var(--popup);
     color: var(--cor-primaria);
     padding: 20px 30px;
@@ -572,7 +572,7 @@ label, span, p, h1, h2, h3, h4, h5, h6 {color: var(--cor-primaria-darker);}
 
 .popup .txt-input {
     display: flex;
-    margin: 20px;
+    margin: 0 40px 0 20px;
 }
 
 .popup .txt-input div {
@@ -598,7 +598,7 @@ label, span, p, h1, h2, h3, h4, h5, h6 {color: var(--cor-primaria-darker);}
 .popup .txt-input input {
     height: 40px;
     margin-bottom: 25px;
-    flex: 1;
+    width: 100%;
 }
 
 .popup textarea {
@@ -623,12 +623,16 @@ label, span, p, h1, h2, h3, h4, h5, h6 {color: var(--cor-primaria-darker);}
 .modulos-list {
     max-height: 300px;
     overflow-y: auto;
-    border: 1px solid var(--cor-secundaria-lighter);
+    border: 2px solid var(--cor-secundaria);
+    border-left-color: var(--cor-secundaria-lighter);
+    border-top-color: var(--cor-secundaria-lighter);
     padding: 0 10px;
     margin: 30px 0;
 }
 
 .modulos-list li {padding: 20px 10px; width: 100%; display: flex; justify-content: space-between;}
+.modulos-list li a {color: var(--cor-primaria);}
+.modulos-list li a:hover {color: var(--cor-primaria-light);}
 
 .op-modulo button {position: unset;}
 

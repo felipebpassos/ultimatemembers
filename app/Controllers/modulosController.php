@@ -176,7 +176,77 @@ class modulosController extends Controller
 
     public function novo_modulo()
     {
-        //A fazer    
+        $curso = $this->sessao->verificaCurso();
+
+        // Verifica se o formulário foi enviado via método POST
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+            if (isset($_POST["nomeModulo"]) && isset($_POST["status"])) {
+
+                $modulosModel = new Modulos();
+
+                $nome = $_POST["nomeModulo"];
+                $status = $_POST["status"];
+
+                // Verifica se há data de lançamento
+                if (isset($_POST["data"]) && !empty($_POST["data"])) {
+                    $data = $_POST["data"];
+                
+                    // Verifica se a hora foi fornecida, caso contrário, defina a hora como 00:00
+                    $hora = isset($_POST["hora"]) && !empty($_POST["hora"]) ? $_POST["hora"] : "00:00";
+                
+                    // Concatena a data e a hora
+                    $data_lancamento = $data . " " . $hora;
+                } else {
+                    $data_lancamento = null;
+                }                
+
+                // Verifica se há foto de banner do módulo fornecida
+                if (isset($_FILES['capaModulo']) && $_FILES['capaModulo']['error'] === UPLOAD_ERR_OK && !empty($_FILES['capaModulo'])) {
+
+                    $banner = $modulosModel->uploadBannerModulo($_FILES['capaModulo']);
+
+                } else {
+
+                    $banner = null;
+
+                }
+
+                // Verifica se há vídeo introdutório do módulo fornecido
+                if (isset($_FILES['videoModulo']) && $_FILES['videoModulo']['error'] === UPLOAD_ERR_OK && !empty($_FILES['videoModulo'])) {
+
+                    $video = $modulosModel->uploadVideoModulo($_FILES['videoModulo']);
+
+                } else {
+
+                    $video = null;
+
+                }
+
+                // Salva dados da nova aula no banco de dados
+                $result = $modulosModel->setModulo($curso, $nome, $banner, $video, $status, $data_lancamento);
+
+                if ($result) {
+
+                    print_r('Módulo adicionado com sucesso');
+
+                } else {
+
+                    print_r('Erro ao criar Novo Módulo');
+
+                }
+
+            } else {
+
+                print_r('Dados do Novo Módulo não enviados');
+
+            }
+
+        } else {
+
+            print_r('Dados do Novo Módulo não enviados');
+
+        }
 
     }
 
@@ -473,7 +543,7 @@ class modulosController extends Controller
             if ($resultado) {
                 // Comentário inserido ou editado com sucesso
                 // Redirecione de volta para a página da aula ou para onde você desejar
-                header('Location: ' . $cursoInfo['url_principal'] . 'modulos/aula/'. $aula_id);
+                header('Location: ' . $cursoInfo['url_principal'] . 'modulos/aula/' . $aula_id);
                 exit();
             } else {
                 // Ocorreu um erro ao inserir ou editar o comentário
@@ -491,7 +561,7 @@ class modulosController extends Controller
     public function likes()
     {
         $this->sessao->verificaCurso();
-        
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Verifique se as variáveis POST estão definidas
             if (isset($_POST['comentarioId']) && isset($_POST['acao'])) {

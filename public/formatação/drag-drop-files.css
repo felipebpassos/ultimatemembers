@@ -1,7 +1,7 @@
 .drop-area {
     font-size: 16px;
     border: 3px dashed var(--cor-primaria);
-    padding: 30px 20px;
+    padding: 40px 20px;
     margin: 0 40px 30px 20px;
     cursor: pointer;
     text-align: center;
@@ -9,7 +9,7 @@
 }
 
 .drop-area.active {
-    border: 2px dashed var(--cor-primaria-lighter);
+    border: 3px dashed var(--cor-primaria-lighter);
 }
 
 #imgInfo, #videoInfo {

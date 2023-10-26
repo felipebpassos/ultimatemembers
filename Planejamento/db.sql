@@ -41,7 +41,7 @@ ALTER TABLE tags_forum
 ADD CONSTRAINT fk_tags_forum_curso
 FOREIGN KEY (id_curso) REFERENCES cursos(id);
 
-select * from aulas;
+select * from modulos;
 
 select * from usuarios;
 
@@ -71,6 +71,10 @@ VALUES (7, 'Bônus: Do Zero a Um Milhão de Seguidores', './uploads/modulos/bann
 
 INSERT INTO modulos (indice, nome, banner, video)
 VALUES (8, 'Bônus: Tráfego Pago Ao Vivo!', './uploads/modulos/banners/modulo08.png', './uploads/modulos/videos/modulo01.mov');
+
+-- Adicione a coluna "status" com valor padrão 1
+ALTER TABLE modulos
+ADD COLUMN status TINYINT DEFAULT 1 NOT NULL;
 
 CREATE TABLE cursos (
     id INT AUTO_INCREMENT PRIMARY KEY,

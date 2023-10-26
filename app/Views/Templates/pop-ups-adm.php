@@ -16,7 +16,7 @@
                     <input type="text" id="indice" name="indice">
                 </div>
 
-                <div>
+                <div style="flex:1;">
                     <label for="nomeAula">Nome da Aula</label>
                     <input type="text" id="nomeAula" name="nomeAula" required>
                 </div>
@@ -67,7 +67,7 @@
                     <input type="text" id="indiceEdit" name="indice">
                 </div>
 
-                <div>
+                <div style="flex:1;">
                     <label for="nomeAulaEdit">Nome da Aula</label>
                     <input type="text" id="nomeAulaEdit" name="nomeAula" required>
                 </div>
@@ -134,7 +134,7 @@
                     } else {
                         $formattedId = $id; // Mantém o ID como está se não estiver entre 0 e 9
                     }
-                    echo '<li><span>' . $formattedId . ' - ' . $modulo['nome'] . '</span>
+                    echo '<li><a href="' . $curso['url_principal'] . 'modulos/modulo/' . $formattedId . '">' . $formattedId . ' - ' . $modulo['nome'] . '</a>
                     <div class="op-modulo">
                         <button class="editar" id="editar-modulo"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
                         <button class="editar" id="delete-modulo"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>
@@ -173,25 +173,51 @@
                     <input type="text" id="indice" name="indice">
                 </div>
 
-                <div>
+                <div style="flex:1;">
                     <label for="nomeModulo">Nome do Módulo</label>
                     <input type="text" id="nomeModulo" name="nomeModulo" required>
                 </div>
 
             </div>
 
+            <div class="container status-modulo " style="padding:20px;">
+                <div class="row">
+                    <div class="col-md-5">
+                        <label style="padding-bottom:10px;">Status do Módulo:</label><br>
+
+                        <input type="radio" id="disponivel" name="status" value="1" style="display:inline-block;"
+                            checked>
+                        <label for="disponivel">Disponível</label><br>
+
+                        <input type="radio" id="em_breve" name="status" value="2" style="display:inline-block;">
+                        <label for="em_breve">Em Breve</label><br>
+
+                        <input type="radio" id="indisponivel" name="status" value="3" style="display:inline-block;">
+                        <label for="indisponivel">Indisponível</label><br>
+                    </div>
+                    <div class="col-md-7">
+                        <label for="data" style="padding-bottom:10px;">Data de Lançamento (opcional):</label>
+                        <input type="date" id="data" name="data" style="display:inline-block;" disabled>
+                        <input type="time" id="hora" name="hora" style="display:inline-block;" disabled>
+                    </div>
+                </div>
+            </div>
+
+
             <p style="margin: 10px 20px; font-weight: bold;">Capa do módulo (Opcional)</p>
             <div class="drop-area" id="dropImgModulo">
                 Arraste e solte uma imagem aqui ou clique para fazer upload.
                 <span id="imgInfoModulo"></span>
-                <input type="file" id="capaModulo" style="width: 0; height:0; margin:0;" name="capaModulo" accept="img/*">
+                <input type="file" id="capaModulo" style="width: 0; height:0; margin:0;" name="capaModulo"
+                    accept="img/*">
             </div>
 
             <p style="margin: 10px 20px; font-weight: bold;">Vídeo Introdutório do módulo (Opcional)</p>
             <div class="drop-area" id="dropVideoModulo">
                 Arraste e solte um vídeo aqui ou clique para fazer upload.
                 <span id="videoInfoModulo"></span>
-                <input type="file" id="videoModulo" style="width: 0; height:0; margin:0;" name="videoModulo" accept="video/*">
+                <input type="file" id="videoModulo" style="width: 0; height:0; margin:0;" name="videoModulo"
+                    accept="video/*">
             </div>
 
             <button class="btn-2" type="submit" style="margin: auto; margin-top: 40px;">Adicionar Módulo</button>
