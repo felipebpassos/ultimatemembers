@@ -118,6 +118,7 @@ class modulosController extends Controller
 
         // Acesso aos modelos
         $aulasModel = new Aulas();
+        $modulosModel = new Modulos();
 
         $curso = $this->sessao->verificaCurso();
 
@@ -139,6 +140,9 @@ class modulosController extends Controller
         //Busca no banco de dados pelas aulas do módulo
         $aulas_módulo = $aulasModel->getAulas($modulo);
 
+        //Busca no banco de dados pelo módulo
+        $modulos = $modulosModel->getModulos($curso);
+
         //Busca aulas concluidas pelo usuário
         $aulasConcluidas = $aulasModel->getAulasConcluidas($_SESSION['usuario']['id'], $curso);
 
@@ -154,6 +158,7 @@ class modulosController extends Controller
         $data['aula'] = $aula;
         $data['aulas'] = $aulas_módulo;
         $data['modulo']['id'] = $modulo;
+        $data['modulos'] = $modulos;
         $data['aulasConcluidas'] = $aulasConcluidas;
         $data['comentarios'] = $comentarios;
 

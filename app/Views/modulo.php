@@ -9,6 +9,7 @@ if ($modulo['id'] >= 0 && $modulo['id'] <= 9) {
 } else {
     $formattedId = $modulo['id']; // Mantém o ID como está se não estiver entre 0 e 9
 }
+$video = !empty($modulo['video']) ? str_replace("./", "http://localhost/ultimatemembers/", $modulo['video']) : null;
 ?>
 
 <div class="titulo-modulo">
@@ -31,7 +32,7 @@ if ($modulo['id'] >= 0 && $modulo['id'] <= 9) {
 <div class="video-intro-container">
     <div class="fade-bottom" style="height: 120px;"></div>
     <video autoplay loop id="video-intro">
-        <source src="http://localhost/ultimatemembers/uploads/modulos/videos/modulo01.mov" type="video/mp4">
+        <source src="<?php echo $video; ?>" type="video/mp4">
         Seu navegador não suporta a reprodução de vídeos.
     </video>
 

@@ -61,8 +61,8 @@
                                 class="legenda">Apostila</span></button>
                         <button class="op-aula"><i class="fa-solid fa-pen"></i><span
                                 class="legenda">Exercício</span></button>
-                        <button class="op-aula"><i class="fa-regular fa-bookmark"></i><span
-                                class="legenda">Salvar Aula</span></button>
+                        <button class="op-aula"><i class="fa-regular fa-bookmark"></i><span class="legenda">Salvar
+                                Aula</span></button>
                     </div>
                 </div>
 
@@ -209,10 +209,21 @@
                 <!-- Lista de Aulas -->
                 <div class="outras-aulas">
                     <div class="header">
+                        <?php
+                        $options = [];
+
+                        foreach ($modulos as $modulo) {
+                            $formattedOption = sprintf('%02d - %s', $modulo['id'], $modulo['nome']);
+                            $options[] = $formattedOption;
+                        }
+
+                        $optionsJSON = json_encode($options);
+                        ?>
                         <ul class="modulos"></ul>
                         <script>
+                            const selectOptions = <?php echo $optionsJSON; ?>;
 
-                            $(".modulos").append(SelectSimples('', 'Outros Módulos', ['Módulo 1', 'Módulo 2', 'Módulo 3'], 'select-modulo', false));
+                            $(".modulos").append(SelectSimples('', 'Outros Módulos', selectOptions, 'select-modulo', false));
 
                         </script>
                         <button class="op-aula"><i class="fa-solid fa-repeat"></i><span class="legenda">Repetir

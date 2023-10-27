@@ -17,9 +17,7 @@ $('.editar-aula').click(function() {
     $('#idAula').val(aulaId);
 
     // Encontra aula correspondente
-    const aula = encontrarAulaPorId(aulaId, aulasData);
-
-    console.log(aula);
+    const aula = encontrarPorId(aulaId, aulasData);
 
     // Verifique se aula é definido e possui as propriedades 'nome' e 'descricao'
     if (aula) {
@@ -59,17 +57,44 @@ $('#closePopupModulo').click(function() {
     $('#add-modulo-form').hide();
 });
 
+// Quando os botões de editar modulo for clicado
+$('.editar-modulo').click(function() {
+    const moduloId = $(this).data('id'); // Obtém o ID da módulo do atributo data-id
+
+    $('#idModulo').val(moduloId);
+
+    // Encontra módulo correspondente
+    const modulo = encontrarPorId(moduloId, modulosData);
+
+    console.log(modulo);
+
+    // Verifique se módulo é definido e possui as propriedades 'nome' e 'descricao'
+    if (modulo) {
+        // Preenche os campos do popup com os valores do módulo
+        $('#nomeModuloEdit').val(modulo['nome']);
+    } else {
+        console.error('Módulo não encontrado ou propriedades ausentes.');
+    }
+
+    $('#edit-modulo-form').show(); 
+});
+
+// Quando o botão de fechar for clicado
+$('#closePopupModuloEdit').click(function() {
+    $('#edit-modulo-form').hide();
+});
+
 // Função para encontrar aula por ID
-function encontrarAulaPorId(aulaId, aulasData) {
+function encontrarPorId(id, data) {
     // Obtém as aulas da variável JavaScript aulasData
-    const aulas = aulasData;
+    const objetos = data;
 
     // Encontra a aula correspondente com base no ID
-    const aula = aulas.find(function(aula) {
-        return aula.id == aulaId;
+    const objeto = objetos.find(function(objeto) {
+        return objeto.id == id;
     });
 
-    return aula;
+    return objeto;
 }
 
 // Função para exibir o formulário

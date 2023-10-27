@@ -136,8 +136,8 @@
                     }
                     echo '<li><a href="' . $curso['url_principal'] . 'modulos/modulo/' . $formattedId . '">' . $formattedId . ' - ' . $modulo['nome'] . '</a>
                     <div class="op-modulo">
-                        <button class="editar" id="editar-modulo"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
-                        <button class="editar" id="delete-modulo"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>
+                        <button class="editar-modulo" id="editar-modulo" data-id="' . $id . '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
+                        <button class="delete-modulo" id="delete-modulo" data-id="' . $id . '"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>
                     </div> 
                     </li>';
                 }
@@ -146,6 +146,10 @@
                 echo 'Nenhum módulo criado.';
             }
             ?>
+
+            <script>
+                var modulosData = <?php echo json_encode($modulos); ?>;
+            </script>
 
         </ul>
 
@@ -183,7 +187,7 @@
             <div class="container status-modulo " style="padding:20px;">
                 <div class="row">
                     <div class="col-md-5">
-                        <label style="padding-bottom:10px;">Status do Módulo:</label><br>
+                        <label style="padding-bottom:10px;">Status do Módulo</label><br>
 
                         <input type="radio" id="disponivel" name="status" value="1" style="display:inline-block;"
                             checked>
@@ -196,7 +200,7 @@
                         <label for="indisponivel">Indisponível</label><br>
                     </div>
                     <div class="col-md-7">
-                        <label for="data" style="padding-bottom:10px;">Data de Lançamento (opcional):</label>
+                        <label for="data" style="padding-bottom:10px;">Data de Lançamento (opcional)</label>
                         <input type="date" id="data" name="data" style="display:inline-block;" disabled>
                         <input type="time" id="hora" name="hora" style="display:inline-block;" disabled>
                     </div>
@@ -217,6 +221,78 @@
                 Arraste e solte um vídeo aqui ou clique para fazer upload.
                 <span id="videoInfoModulo"></span>
                 <input type="file" id="videoModulo" style="width: 0; height:0; margin:0;" name="videoModulo"
+                    accept="video/*">
+            </div>
+
+            <button class="btn-2" type="submit" style="margin: auto; margin-top: 40px;">Adicionar Módulo</button>
+        </form>
+    </div>
+</div>
+
+<!-- Formulário para editar módulo -->
+<div id="edit-modulo-form" class="popup">
+    <div class="popup-content">
+
+        <span class="close" id="closePopupModuloEdit">&times;</span>
+
+        <h2 style="margin: auto; font-weight: bold; width:fit-content;">Editar Módulo</h2>
+
+        <form id="moduloFormEdit" action="<?php echo $curso['url_principal']; ?>modulos/edita_modulo/" method="POST"
+            enctype="multipart/form-data">
+
+            <div class="txt-input">
+
+                <div>
+                    <label for="indice">Índice</label>
+                    <input type="text" id="indice" name="indice">
+                </div>
+
+                <div style="flex:1;">
+                    <label for="nomeModulo">Nome do Módulo</label>
+                    <input type="text" id="nomeModuloEdit" name="nomeModulo" required>
+                </div>
+
+                <input type="hidden" id="idModulo" name="idModulo">
+
+            </div>
+
+            <div class="container status-modulo " style="padding:20px;">
+                <div class="row">
+                    <div class="col-md-5">
+                        <label style="padding-bottom:10px;">Status do Módulo</label><br>
+
+                        <input type="radio" id="disponivelEdit" name="status" value="1" style="display:inline-block;"
+                            checked>
+                        <label for="disponivel">Disponível</label><br>
+
+                        <input type="radio" id="em_breveEdit" name="status" value="2" style="display:inline-block;">
+                        <label for="em_breve">Em Breve</label><br>
+
+                        <input type="radio" id="indisponivelEdit" name="status" value="3" style="display:inline-block;">
+                        <label for="indisponivel">Indisponível</label><br>
+                    </div>
+                    <div class="col-md-7">
+                        <label for="data" style="padding-bottom:10px;">Data de Lançamento (opcional)</label>
+                        <input type="date" id="dataEdit" name="data" style="display:inline-block;" disabled>
+                        <input type="time" id="horaEdit" name="hora" style="display:inline-block;" disabled>
+                    </div>
+                </div>
+            </div>
+
+
+            <p style="margin: 10px 20px; font-weight: bold;">Capa do módulo (Opcional)</p>
+            <div class="drop-area" id="dropImgModuloEdit">
+                Arraste e solte uma imagem aqui ou clique para fazer upload.
+                <span id="imgInfoModuloEdit"></span>
+                <input type="file" id="capaModuloEdit" style="width: 0; height:0; margin:0;" name="capaModulo"
+                    accept="img/*">
+            </div>
+
+            <p style="margin: 10px 20px; font-weight: bold;">Vídeo Introdutório do módulo (Opcional)</p>
+            <div class="drop-area" id="dropVideoModuloEdit">
+                Arraste e solte um vídeo aqui ou clique para fazer upload.
+                <span id="videoInfoModuloEdit"></span>
+                <input type="file" id="videoModuloEdit" style="width: 0; height:0; margin:0;" name="videoModulo"
                     accept="video/*">
             </div>
 

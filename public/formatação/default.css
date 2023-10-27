@@ -449,7 +449,8 @@ label, span, p, h1, h2, h3, h4, h5, h6 {color: var(--cor-primaria-darker);}
     overflow: visible;
 }
 
-.editar {
+.editar, .editar-modulo,
+.delete-modulo {
     position: absolute;
     padding: 5px 10px;
     right: 20px;
@@ -459,18 +460,21 @@ label, span, p, h1, h2, h3, h4, h5, h6 {color: var(--cor-primaria-darker);}
     transition: transform 0.3s;
 }
 
-.editar i{
+.editar i, .editar-modulo i, 
+.delete-modulo i {
     margin-right: 0 !important;
     font-size: 22px !important;
 }
 
-.editar:hover {
+.editar:hover, .editar-modulo:hover,
+.delete-modulo:hover {
     box-shadow: none;
     transform: scale(1.1);
     /* Aumenta o tamanho do botão em 10% ao passar o mouse */
 }
 
-.editar:hover .legenda {
+.editar:hover .legenda, .editar-modulo:hover .legenda,
+.delete-modulo:hover .legenda {
     display: block;
     left: -130px;
     top: 25%;
@@ -537,7 +541,8 @@ label, span, p, h1, h2, h3, h4, h5, h6 {color: var(--cor-primaria-darker);}
 
 #aulaFormAdd,
 #aulaFormEdit,
-#moduloFormAdd {
+#moduloFormAdd,
+#moduloFormEdit {
     margin-top: 30px;
     height: 360px;
     overflow-y: auto;

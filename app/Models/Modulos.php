@@ -57,7 +57,7 @@ class Modulos
     public function getModulo($id)
     {
         $data = array();
-        $query = 'SELECT id, nome FROM modulos WHERE id = :id LIMIT 1';
+        $query = 'SELECT id, nome, video FROM modulos WHERE id = :id LIMIT 1';
 
         $stmt = $this->con->prepare($query);
         $stmt->bindValue(':id', $id);

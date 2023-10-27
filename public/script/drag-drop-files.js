@@ -22,6 +22,14 @@ const dropImgModulo = document.getElementById('dropImgModulo');
 const imgInfoModulo = document.getElementById('imgInfoModulo');
 const capaModulo = document.getElementById('capaModulo');
 
+const dropVideoModuloEdit = document.getElementById('dropVideoModuloEdit');
+const videoInfoModuloEdit = document.getElementById('videoInfoModuloEdit');
+const videoModuloEdit = document.getElementById('videoModuloEdit');
+
+const dropImgModuloEdit = document.getElementById('dropImgModuloEdit');
+const imgInfoModuloEdit = document.getElementById('imgInfoModuloEdit');
+const capaModuloEdit = document.getElementById('capaModuloEdit');
+
 // Impedir o comportamento padrão de arrastar e soltar para dropVideo
 dropVideo.addEventListener('dragover', (e) => {
     e.preventDefault();
@@ -66,6 +74,21 @@ dropVideoModulo.addEventListener('drop', (e) => {
     e.preventDefault();
     dropVideoModulo.classList.remove('active');
     handleVideoFile(videoInfoModulo, e.dataTransfer.files[0]);
+});
+
+dropVideoModuloEdit.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropVideoModuloEdit.classList.add('active');
+});
+
+dropVideoModuloEdit.addEventListener('dragleave', () => {
+    dropVideoModuloEdit.classList.remove('active');
+});
+
+dropVideoModuloEdit.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropVideoModuloEdit.classList.remove('active');
+    handleVideoFile(videoInfoModuloEdit, e.dataTransfer.files[0]);
 });
 
 // Impedir o comportamento padrão de arrastar e soltar para dropImg
@@ -114,6 +137,21 @@ dropImgModulo.addEventListener('drop', (e) => {
     handleImageFile(imgInfoModulo, e.dataTransfer.files[0]);
 });
 
+dropImgModuloEdit.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropImgModuloEdit.classList.add('active');
+});
+
+dropImgModuloEdit.addEventListener('dragleave', () => {
+    dropImgModuloEdit.classList.remove('active');
+});
+
+dropImgModuloEdit.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropImgModuloEdit.classList.remove('active');
+    handleImageFile(imgInfoModuloEdit, e.dataTransfer.files[0]);
+});
+
 // Lidar com o clique para selecionar um arquivo de vídeo
 dropVideo.addEventListener('click', () => {
     videoAula.click();
@@ -139,6 +177,14 @@ videoModulo.addEventListener('change', () => {
     handleVideoFile(videoInfoModulo, videoModulo.files[0]);
 });
 
+dropVideoModuloEdit.addEventListener('click', () => {
+    videoModuloEdit.click();
+});
+
+videoModuloEdit.addEventListener('change', () => {
+    handleVideoFile(videoInfoModuloEdit, videoModuloEdit.files[0]);
+});
+
 // Lidar com o clique para selecionar um arquivo de imagem
 dropImg.addEventListener('click', () => {
     capaAula.click();
@@ -162,6 +208,14 @@ dropImgModulo.addEventListener('click', () => {
 
 capaModulo.addEventListener('change', () => {
     handleImageFile(imgInfoModulo, capaModulo.files[0]);
+});
+
+dropImgModuloEdit.addEventListener('click', () => {
+    capaModuloEdit.click();
+});
+
+capaModuloEdit.addEventListener('change', () => {
+    handleImageFile(imgInfoModuloEdit, capaModuloEdit.files[0]);
 });
 
 // Função para lidar com o arquivo de vídeo selecionado ou arrastado
