@@ -196,15 +196,15 @@ class modulosController extends Controller
                 // Verifica se há data de lançamento
                 if (isset($_POST["data"]) && !empty($_POST["data"])) {
                     $data = $_POST["data"];
-                
+
                     // Verifica se a hora foi fornecida, caso contrário, defina a hora como 00:00
                     $hora = isset($_POST["hora"]) && !empty($_POST["hora"]) ? $_POST["hora"] : "00:00";
-                
+
                     // Concatena a data e a hora
                     $data_lancamento = $data . " " . $hora;
                 } else {
                     $data_lancamento = null;
-                }                
+                }
 
                 // Verifica se há foto de banner do módulo fornecida
                 if (isset($_FILES['capaModulo']) && $_FILES['capaModulo']['error'] === UPLOAD_ERR_OK && !empty($_FILES['capaModulo'])) {
@@ -257,7 +257,95 @@ class modulosController extends Controller
 
     public function edita_modulo()
     {
-        //A fazer
+        $this->sessao->verificaCurso();
+
+        // Verifica se o formulário foi enviado via método POST
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+            if (isset($_POST["idModulo"]) && isset($_POST["nomeModulo"]) && isset($_POST["status"])) {
+
+                $modulosModel = new Modulos();
+
+                $id = $_POST["idModulo"];
+                $nome = $_POST["nomeModulo"];
+                $status = $_POST["status"];
+
+                // Verifica se há data de lançamento
+                if (isset($_POST["data"]) && !empty($_POST["data"])) {
+                    $data = $_POST["data"];
+
+                    // Verifica se a hora foi fornecida, caso contrário, defina a hora como 00:00
+                    $hora = isset($_POST["hora"]) && !empty($_POST["hora"]) ? $_POST["hora"] : "00:00";
+
+                    // Concatena a data e a hora
+                    $data_lancamento = $data . " " . $hora;
+                } else {
+                    $data_lancamento = null;
+                }
+
+                // Verifica se há foto de banner do módulo fornecida
+                if (isset($_FILES['capaModulo']) && $_FILES['capaModulo']['error'] === UPLOAD_ERR_OK && !empty($_FILES['capaModulo'])) {
+
+
+
+                }
+
+                // Verifica se há vídeo introdutório do módulo fornecido
+                if (isset($_FILES['videoModulo']) && $_FILES['videoModulo']['error'] === UPLOAD_ERR_OK && !empty($_FILES['videoModulo'])) {
+
+                    $video = $modulosModel->uploadVideoModulo($_FILES['videoModulo']);
+
+                    if ($video) {
+
+                        // Obtém caminho antigo da do video
+                        $videoAntigo = $modulosModel->getCaminhoVideo($id);
+
+                        $result = $modulosModel->updateVideoModulo($id, $video, $videoAntigo);
+
+                        if ($result) {
+
+                            print_r('Sucesso no upload');
+
+                        } else {
+
+                            print_r('Erro ao editar Módulo');
+                            exit;
+
+                        }
+
+                    } else {
+
+                        print_r('Erro no upload');
+                        exit;
+
+                    }
+
+                }
+
+                // Salva dados da nova aula no banco de dados
+                $result = $modulosModel->updateModulo($id, $nome, $status, $data_lancamento);
+
+                if ($result) {
+
+                    print_r('Módulo editado com sucesso');
+
+                } else {
+
+                    print_r('Erro ao editar Módulo');
+
+                }
+
+            } else {
+
+                print_r('Dados do Módulo não enviados');
+
+            }
+
+        } else {
+
+            print_r('Dados do Módulo não enviados');
+
+        }
 
     }
 
@@ -359,7 +447,7 @@ class modulosController extends Controller
 
                         } else {
 
-                            print_r('Erro ao criar Nova Aula');
+                            print_r('Erro ao editar Aula');
                             exit;
 
                         }
@@ -391,7 +479,7 @@ class modulosController extends Controller
 
                         } else {
 
-                            print_r('Erro ao criar Nova Aula');
+                            print_r('Erro ao editar Aula');
                             exit;
 
                         }

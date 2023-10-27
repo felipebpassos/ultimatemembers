@@ -129,6 +129,75 @@ class Modulos
         }
     }
 
-}
+    public function updateModulo($id, $nome, $status, $data_lancamento)
+    {
+        $query = "UPDATE modulos 
+              SET nome = :nome, mod_status = :status, data_lancamento = :data_lancamento
+              WHERE id = :id";
 
-?>
+        $stmt = $this->con->prepare($query);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
+        $stmt->bindParam(':status', $status, PDO::PARAM_INT);
+        $stmt->bindParam(':data_lancamento', $data_lancamento, PDO::PARAM_STR);
+
+        if ($stmt->execute()) {
+            return true; // Retorna true em caso de sucesso na atualização
+        } else {
+            // Em caso de falha, você pode lidar com erros de alguma maneira, como lançar uma exceção
+            throw new Exception("Erro ao atualizar o módulo");
+        }
+    }
+
+    //Método para pegar url do video no servidor
+    public function getCaminhoVideo($id_modulo)
+    {
+        $query = 'SELECT video FROM modulos WHERE id = :moduloId LIMIT 1';
+
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':moduloId', $id_modulo);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($result) {
+            return $result['video'];
+        } else {
+            return null;
+        }
+    }
+
+    //Método para atualizar no banco de dados a url do video do módulo
+    public function updateVideoModulo($id_modulo, $videoNovo, $videoAntigo)
+    {
+        // Inicie uma transação para garantir consistência nos dados
+        $this->con->beginTransaction();
+
+        try {
+            // Atualiza o campo 'video' na tabela 'modulos' com o novo caminho
+            $sql = "UPDATE modulos SET video = :videoNovo WHERE id = :moduloId";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindValue(':videoNovo', $videoNovo);
+            $stmt->bindValue(':moduloId', $id_modulo);
+            $stmt->execute();
+
+            // Se a atualização ocorreu com sucesso, exclua o video antigo
+            if ($stmt->rowCount() > 0 && !empty($videoAntigo)) {
+                unlink($videoAntigo);
+            }
+
+            // Confirme a transação
+            $this->con->commit();
+
+            return true; // Sucesso
+        } catch (PDOException $e) {
+            // Em caso de erro, reverta a transação
+            $this->con->rollback();
+
+            // Você pode adicionar um log de erro aqui se necessário
+            // Exemplo: error_log("Erro ao atualizar video: " . $e->getMessage());
+
+            return false; // Erro
+        }
+    }
+
+}

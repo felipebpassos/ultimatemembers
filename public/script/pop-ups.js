@@ -66,8 +66,6 @@ $('.editar-modulo').click(function() {
     // Encontra módulo correspondente
     const modulo = encontrarPorId(moduloId, modulosData);
 
-    console.log(modulo);
-
     // Verifique se módulo é definido e possui as propriedades 'nome' e 'descricao'
     if (modulo) {
         // Preenche os campos do popup com os valores do módulo
@@ -197,6 +195,31 @@ $('#moduloFormAdd').submit(function(e) {
             // A resposta do servidor foi recebida e processada com sucesso.
             // Você pode adicionar aqui lógica para fechar o popup, atualizar a interface do usuário, etc.
             $('#add-modulo-form').hide();
+            console.log('Resposta do servidor:', response);
+        },
+        error: function() {
+            // Lida com erros de solicitação
+            console.error('Erro na solicitação AJAX');
+        }
+    });
+});
+
+// Evento de envio do formulário
+$('#moduloFormEdit').submit(function(e) {
+    e.preventDefault(); // Impede o envio padrão do formulário
+
+    const formData = new FormData(this); // Crie um objeto FormData com os dados do formulário
+
+    $.ajax({
+        type: 'POST',
+        url: this.action, // URL de destino do formulário
+        data: formData, // Dados do formulário
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            // A resposta do servidor foi recebida e processada com sucesso.
+            // Você pode adicionar aqui lógica para fechar o popup, atualizar a interface do usuário, etc.
+            $('#edit-modulo-form').hide();
             console.log('Resposta do servidor:', response);
         },
         error: function() {
