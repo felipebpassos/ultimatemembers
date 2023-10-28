@@ -200,4 +200,53 @@ class Modulos
         }
     }
 
+    public function getCaminhoBanner($id_modulo)
+    {
+        $query = 'SELECT banner FROM modulos WHERE id = :moduloId LIMIT 1';
+
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':moduloId', $id_modulo);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($result) {
+            return $result['banner'];
+        } else {
+            return null;
+        }
+    }
+
+    public function updateBannerModulo($id_modulo, $bannerNovo, $bannerAntigo)
+    {
+        // Inicie uma transação para garantir consistência nos dados
+        $this->con->beginTransaction();
+
+        try {
+            // Atualiza o campo 'capa' na tabela 'aulas' com o novo caminho
+            $sql = "UPDATE modulos SET banner = :bannerNovo WHERE id = :moduloId";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindValue(':bannerNovo', $bannerNovo);
+            $stmt->bindValue(':moduloId', $id_modulo);
+            $stmt->execute();
+
+            // Se a atualização ocorreu com sucesso, exclua a capa antiga
+            if ($stmt->rowCount() > 0 && !empty($bannerAntigo)) {
+                unlink($bannerAntigo);
+            }
+
+            // Confirme a transação
+            $this->con->commit();
+
+            return true; // Sucesso
+        } catch (PDOException $e) {
+            // Em caso de erro, reverta a transação
+            $this->con->rollback();
+
+            // Você pode adicionar um log de erro aqui se necessário
+            // Exemplo: error_log("Erro ao atualizar capa: " . $e->getMessage());
+
+            return false; // Erro
+        }
+    }
+
 }

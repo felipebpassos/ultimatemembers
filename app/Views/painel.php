@@ -30,14 +30,16 @@
 
                         foreach ($modulos as $modulo) {
                             $id = $modulo['id'];
+                            $banner = !empty($modulo['banner']) ? str_replace("./", "http://localhost/ultimatemembers/", $modulo['banner']) : "http://localhost/ultimatemembers/public/img/video-default.png";
 
                             if ($id >= 0 && $id <= 9) {
                                 $formattedId = sprintf("0%d", $id); // Formata o ID para 0X (sendo X o ID)
                             } else {
                                 $formattedId = $id; // Mantém o ID como está se não estiver entre 0 e 9
                             }
+
                             echo '<a class="banner" id="modulos" href="' . $curso['url_principal'] . 'modulos/modulo/' . $formattedId . '"><img
-                            src="http://localhost/ultimatemembers/uploads/modulos/banners/modulo' . $formattedId . '.png" alt="Módulo ' . $formattedId . '"></a>';
+                            src="' . $banner . '" alt="Módulo ' . $formattedId . '"></a>';
                         }
                     } else {
                         // Caso a variável de sessão 'modulos' não exista ou esteja vazia

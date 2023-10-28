@@ -286,7 +286,32 @@ class modulosController extends Controller
                 // Verifica se há foto de banner do módulo fornecida
                 if (isset($_FILES['capaModulo']) && $_FILES['capaModulo']['error'] === UPLOAD_ERR_OK && !empty($_FILES['capaModulo'])) {
 
+                    $banner = $modulosModel->uploadBannerModulo($_FILES['capaModulo']);
 
+                    if ($banner) {
+
+                        // Obtém caminho antigo da do video
+                        $bannerAntigo = $modulosModel->getCaminhoBanner($id);
+
+                        $result = $modulosModel->updateBannerModulo($id, $banner, $bannerAntigo);
+
+                        if ($result) {
+
+                            print_r('Sucesso no upload');
+
+                        } else {
+
+                            print_r('Erro ao editar Módulo');
+                            exit;
+
+                        }
+
+                    } else {
+
+                        print_r('Erro no upload');
+                        exit;
+
+                    }
 
                 }
 
@@ -682,5 +707,3 @@ class modulosController extends Controller
 
 
 }
-
-?>
