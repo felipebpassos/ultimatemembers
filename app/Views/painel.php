@@ -3,7 +3,30 @@
     <div class="fade-right"></div>
     <div class="fade-top"></div>
     <div class="fade-bottom"></div>
-    <img src="http://localhost/ultimatemembers/public/img/banner.png" alt="Banner Principal">
+    <div class="slides">
+        <img src="http://localhost/ultimatemembers/public/img/banner.png" alt="Banner 1">
+    </div>
+    <div class="slides">
+        <img src="http://localhost/ultimatemembers/public/img/banner2.jpg" alt="Banner 2">
+    </div>
+    <div class="slides">
+        <img src="http://localhost/ultimatemembers/public/img/banner3.jpg" alt="Banner 3">
+    </div>
+    <div class="slides">
+        <img src="http://localhost/ultimatemembers/public/img/banner.png" alt="Banner 4">
+    </div>
+    <div class="slides">
+        <img src="http://localhost/ultimatemembers/public/img/banner2.jpg" alt="Banner 5">
+    </div>
+</div>
+
+<div style="display: flex; justify-content:center; align-items: center;">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+    <span class="dot" onclick="currentSlide(5)"></span>
+    <!-- Adicione mais pontos aqui conforme necessário -->
 </div>
 
 <main>

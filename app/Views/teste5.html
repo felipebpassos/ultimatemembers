@@ -1,58 +1,161 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-
     <style>
+        .slideshow-container {
+            max-width: 800px;
+            position: relative;
+            margin: auto;
+        }
+
+        .slides {
+            display: none;
+        }
+
+        .slideshow-container img {
+            width: 100%;
+        }
+
+        .dot {
+            height: 4px;
+            width: 4px;
+            margin: 0 5px;
+            /* Aumente o espaçamento entre os botões */
+            background-color: #bbb;
+            border-radius: 50%;
+            display: none;
+            transition: background-color 0.6s ease;
+            cursor: pointer;
+        }
+
+        .neighbor {
+            height: 6px;
+            /* Tamanho para dots vizinhos */
+            width: 6px;
+            /* Tamanho para dots vizinhos */
+        }
+
+        .atual {
+            height: 8px;
+            width: 8px;
+            /* Tamanho maior para o botão ativo */
+        }
     </style>
+
 </head>
 
 <body>
-    <form>
-        <label>Status do Módulo:</label><br>
 
-        <input type="radio" id="disponivel" name="status" value="1" checked>
-        <label for="disponivel">Disponível</label><br>
+    <div class="slideshow-container">
+        <div class="slides">
+            <img src="image1.jpg" alt="Image 1">
+        </div>
+        <div class="slides">
+            <img src="image2.jpg" alt="Image 2">
+        </div>
+        <div class="slides">
+            <img src="image3.jpg" alt="Image 3">
+        </div>
+        <div class="slides">
+            <img src="image4.jpg" alt="Image 4">
+        </div>
+        <div class="slides">
+            <img src="image5.jpg" alt="Image 5">
+        </div>
+        <div class="slides">
+            <img src="image6.jpg" alt="Image 6">
+        </div>
+        <!-- Adicione mais imagens aqui -->
 
-        <input type="radio" id="em_breve" name="status" value="2">
-        <label for="em_breve">Em Breve</label><br>
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
 
-        <input type="radio" id="indisponivel" name="status" value="3">
-        <label for="indisponivel">Indisponível</label><br>
-
-        <label for="data_hora">Data e Hora de Lançamento (opcional):</label>
-        <input type="datetime-local" id="data_hora" name="data_hora" disabled>
-    </form>
+    <div style="display: flex; justify-content:center; align-items: center;">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+        <span class="dot" onclick="currentSlide(4)"></span>
+        <span class="dot" onclick="currentSlide(5)"></span>
+        <span class="dot" onclick="currentSlide(6)"></span>
+        <!-- Adicione mais pontos aqui conforme necessário -->
+    </div>
 
     <script>
-        // Obtenha uma referência aos elementos de botões de opção
-        const disponivelRadio = document.getElementById('disponivel');
-        const emBreveRadio = document.getElementById('em_breve');
-        const indisponivelRadio = document.getElementById('indisponivel');
-        const dataHoraInput = document.getElementById('data_hora');
+        let slideIndex = 1;
+        let slideTimer;
 
-        // Adicione ouvintes de eventos para os botões de opção
-        disponivelRadio.addEventListener('change', updateDataHoraInput);
-        emBreveRadio.addEventListener('change', updateDataHoraInput);
-        indisponivelRadio.addEventListener('change', updateDataHoraInput);
+        showSlides(slideIndex);
 
-        function updateDataHoraInput() {
-            // Verifique qual botão de opção está selecionado
-            if (emBreveRadio.checked) {
-                // Se "Em Breve" estiver selecionado, habilite o campo de entrada de data e hora
-                dataHoraInput.disabled = false;
-            } else {
-                // Caso contrário, desabilite o campo de entrada de data e hora
-                dataHoraInput.disabled = true;
-                // Limpe o valor do campo de entrada de data e hora
-                dataHoraInput.value = '';
-            }
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
         }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("slides");
+            let dots = document.getElementsByClassName("dot");
+
+            // Cancela o temporizador anterior, se existir
+            if (slideTimer) {
+                clearTimeout(slideTimer);
+            }
+
+            if (n > slides.length) {
+                slideIndex = 1;
+            }
+
+            if (n < 1) {
+                slideIndex = slides.length;
+            }
+
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+
+            // Remove a classe "neighbor" de todos os dots
+            for (i = 0; i < dots.length; i++) {
+                dots[i].classList.remove("neighbor");
+                dots[i].className = dots[i].className.replace("atual", "");
+                dots[i].style.display = "none"; // Oculta todos os dots
+            }
+
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " atual";
+            dots[slideIndex - 1].style.display = "inline-block"; // Mostra o dot ativo
+
+            if (slides.length <= 3) {
+                for (i = 0; i < dots.length; i++) {
+                    dots[i].style.display = "inline-block";
+
+                    // Adicione a classe "neighbor" aos dots vizinhos do ativo
+                    if (i === slideIndex - 2 || i === slideIndex) {
+                        dots[i].classList.add("neighbor");
+                    }
+                }
+            } else {
+                const startIndex = Math.max(0, slideIndex - 3); // Índice mínimo a ser mostrado
+                const endIndex = Math.min(slides.length, slideIndex + 2); // Índice máximo a ser mostrado
+
+                for (i = startIndex; i < endIndex; i++) {
+                    dots[i].style.display = "inline-block";
+
+                    // Adicione a classe "neighbor" aos dots vizinhos do ativo
+                    if (i === slideIndex - 2 || i === slideIndex) {
+                        dots[i].classList.add("neighbor");
+                    }
+                }
+            }
+
+            slideTimer = setTimeout(() => plusSlides(1), 5000); // Altera a cada 5 segundos
+        }
+
+
     </script>
 
 </body>
