@@ -30,7 +30,7 @@ function showSlides(n) {
     }
 
     for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
+        slides[i].style.opacity = 0;
     }
 
     // Remove a classe "neighbor" de todos os dots
@@ -40,7 +40,7 @@ function showSlides(n) {
         dots[i].style.display = "none"; // Oculta todos os dots
     }
 
-    slides[slideIndex - 1].style.display = "block";
+    slides[slideIndex - 1].style.opacity = 1;
     dots[slideIndex - 1].className += " atual";
     dots[slideIndex - 1].style.display = "inline-block"; // Mostra o dot ativo
 
@@ -67,5 +67,5 @@ function showSlides(n) {
         }
     }
 
-    slideTimer = setTimeout(() => plusSlides(1), 7000); // Altera a cada 5 segundos
+    slideTimer = setTimeout(() => plusSlides(1), 8000); // Altera a cada 5 segundos
 }

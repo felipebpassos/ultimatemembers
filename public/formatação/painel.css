@@ -59,13 +59,15 @@
     margin-bottom: 20px;
     position: relative;
     overflow: hidden;
-    height: 400px;
+    height: 380px;
 }
 
 .main-banner .slides {
+    position: absolute;
     width: 100%;
     height: 100%;
-    display: none;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
 }
 
 .main-banner .slides img {
@@ -104,7 +106,7 @@
 main {
     width: 85%;
     max-width: 1400px;
-    margin: 50px auto;
+    margin: 30px auto;
     overflow: hidden;
 }
 
