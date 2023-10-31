@@ -95,5 +95,48 @@ class Comunidade
         return 0; // Retornar 0 em caso de erro ou nenhuma discussão encontrada
     }
 
+    // Modelo para criar nova resposta
+    public function setResposta($usuario, $discussao, $texto, $id_curso)
+    {
+        $query = 'INSERT INTO discussoes_respostas (user_id, discussion_id, content, id_curso) 
+              VALUES (:usuario, :discussao, :texto, :id_curso)';
+
+        $stmt = $this->con->prepare($query);
+
+        $stmt->bindValue(':usuario', $usuario);
+        $stmt->bindValue(':discussao', $discussao);
+        $stmt->bindValue(':texto', $texto);
+        $stmt->bindValue(':id_curso', $id_curso);
+
+        // Tente executar a consulta
+        if ($stmt->execute()) {
+            // A inserção foi bem-sucedida
+            $respostaid = $this->con->lastInsertId();
+
+            $notificacoes = new Notificacoes();
+            $usuario_notificado = $notificacoes->getUserByDiscussion($discussao);
+            $notificacoes->setNotificacao(4, $respostaid, $usuario_notificado, $usuario);
+
+            return true;
+        } else {
+            // Houve um erro na execução da consulta
+            throw new Exception("Erro ao inserir resposta no banco de dados.");
+        }
+    }
+
+    public function getRespostasPorDiscussao($discussion_id)
+    {
+        $query = 'SELECT r.id, r.content, r.publish_date, u.nome AS autor, u.foto_caminho AS foto
+              FROM discussoes_respostas r
+              INNER JOIN usuarios u ON r.user_id = u.id
+              WHERE r.discussion_id = :discussion_id';
+
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':discussion_id', $discussion_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 
 }

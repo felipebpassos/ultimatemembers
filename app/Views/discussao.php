@@ -10,12 +10,14 @@ $foto_autor = $discussao['foto'];
     <div class="discussao">
         <div class="titulo-pergunta">
             <!-- Título da Discussão -->
-            <h1>
+            <h1 style="color: var(--cor-primaria-darker);">
                 <?php echo $discussao['title']; ?>
             </h1>
-            <div style="position: absolute; bottom: 0; left: 0; display:flex; margin-bottom: 15px;">
+            <div class="post-info" style="left:0;">
                 <div class="foto-perfil-micro" style="margin-left:10px; margin-right:15px;"><img class="perfil-img"
-                        name="imagem" src="<?php echo 'http://localhost/ultimatemembers' . (!empty($foto_autor) ? $foto_autor : '/public/img/default.png'); ?>" alt="Foto de Perfil" /></div>
+                        name="imagem"
+                        src="<?php echo 'http://localhost/ultimatemembers' . (!empty($foto_autor) ? $foto_autor : '/public/img/default.png'); ?>"
+                        alt="Foto de Perfil" /></div>
                 <p style="font-size: 13px; margin: 0 20px 0px 0px;">
                     <?php echo $autor; ?>
                 </p>
@@ -46,25 +48,52 @@ $foto_autor = $discussao['foto'];
                 <?php echo $discussao['content']; ?>
             </p>
         </div>
-        <div class="top-answer">
-            <!-- Resposta Principal (Top Answer) -->
-            <h2>Resposta em Destaque</h2>
-            <p>Conteúdo da Resposta Principal...</p>
-        </div>
+        <form class="barra-superior" style="justify-content: space-between;">
+            <?php
+
+            $numeroDeRespostas = count($respostas);
+
+            if ($numeroDeRespostas >= 0 && $numeroDeRespostas <= 9) {
+                $numeroDeRespostas = sprintf("0%d", $numeroDeRespostas);
+            }
+
+            ?>
+            <h5 style="margin-bottom: 0px !important;">
+                <?php echo $numeroDeRespostas . ' Resposta(s)'; ?>
+            </h5>
+            <select name="sort" class="sort_by">
+                <option value="" disabled selected>Ordenar por</option>
+                <option value="likes">Curtidas</option>
+                <option value="recente">Mais recente</option>
+                <option value="antigo">Mais antigo</option>
+            </select>
+        </form>
         <div class="answers">
-            <!-- Respostas -->
-            <h2>Respostas</h2>
             <div class="answer">
-                <!-- Resposta 1 -->
-                <p>Conteúdo da Resposta 1...</p>
+                <div class="botoes">
+                    <button><i class="fa-regular fa-heart"></i></button>
+                </div>
+                <p>
+                    <?php echo $respostas[0]['content']; ?>
+                </p>
+                <div class="post-info" style="right:0; margin-bottom:25px;">
+                    <div class="foto-perfil-micro" style="margin-left:10px; margin-right:15px;"><img class="perfil-img"
+                            name="imagem"
+                            src="<?php echo 'http://localhost/ultimatemembers' . (!empty($respostas[0]['foto']) ? $respostas[0]['foto'] : '/public/img/default.png'); ?>"
+                            alt="Foto de Perfil" /></div>
+                    <p style="font-size: 13px; margin: 0 20px 0px 0px;">
+                        <?php echo obterPrimeiroEUltimoNome($respostas[0]['autor']); ?>
+                    </p>
+                    <p style="font-size: 13px; margin: 0 20px 0px 0px;"><i class="fa-regular fa-clock"
+                            style="margin-right:5px;"></i></i>
+                        <?php echo calcularTempoDecorrido($respostas[0]['publish_date']); ?>
+                    </p>
+                </div>
             </div>
-            <div class="answer">
-                <!-- Resposta 2 -->
-                <p>Conteúdo da Resposta 2...</p>
-            </div>
-            <!-- Adicione mais respostas conforme necessário -->
         </div>
-        <form action="<?php echo $curso['url_principal']; ?>">
+        <form id="addResposta"
+            action="<?php echo $curso['url_principal']; ?>comunidade/responder/<?php echo $discussao['id']; ?>"
+            method="POST" enctype="multipart/form-data">
             <h3>Responder</h3>
             <div class="campo" style="padding:20px;">
                 <div class="texto">

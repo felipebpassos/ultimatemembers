@@ -10,7 +10,7 @@ class painelController extends Controller
     {
         $this->sessao = new Sessao();
         $this->cursosModel = new Cursos();
-        
+
     }
 
     public function index()
@@ -45,7 +45,7 @@ class painelController extends Controller
         $data['modulos'] = $modulos;
         $data['aulasPorModulo'] = $aulasPorModulo;
         $data['aulasConcluidas'] = $aulasConcluidas;
-        $data['lancamentos'] = $lancamentos;        
+        $data['lancamentos'] = $lancamentos;
 
         //set template
         $template = 'painel-temp';
@@ -217,6 +217,54 @@ class painelController extends Controller
         // Carrega a view passando $_SESSION['usuario']
         $this->loadTemplates($template, $data, $usuario);
 
+    }
+
+    public function edit_geral()
+    {
+        $curso = $this->sessao->verificaCurso();
+
+        // Verifica se o formulário foi enviado via método POST
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            if (isset($_POST['nome_curso']) && isset($_POST["cor_texto"]) && isset($_POST["cor_fundo"])) {
+
+                $nomeCurso = $_POST['nome_curso'];
+                $corTexto = $_POST["cor_texto"];
+                $corFundo = $_POST["cor_fundo"];
+
+
+                $cursosModel = new Cursos();
+
+                $cursoInfo = $cursosModel->getCurso($curso);
+
+                // Salva dados da nova aula no banco de dados
+                $result = $cursosModel->updateCurso($curso, $nomeCurso, $corTexto, $corFundo);
+
+                if ($result) {
+
+                    header("Location: " . $cursoInfo['url_principal'] . "painel/");
+                    exit(); // Certifica-se de que o script seja encerrado após o redirecionamento
+
+                } else {
+
+                    header("Location: " . $cursoInfo['url_principal'] . "painel/");
+                    exit(); // Certifica-se de que o script seja encerrado após o redirecionamento
+
+                }
+
+
+
+            } else {
+
+                print_r('Dados do Curso não enviados');
+
+            }
+
+        } else {
+
+            print_r('Dados do Curso não enviados');
+            exit;
+
+        }
     }
 
     public function ajuda()

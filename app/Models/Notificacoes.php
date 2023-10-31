@@ -31,6 +31,26 @@ class Notificacoes
         }
     }
 
+    public function getUserByDiscussion($discussaoId)
+    {
+        try {
+            $stmt = $this->con->prepare("SELECT user_id FROM discussoes WHERE id = :discussaoId");
+            $stmt->bindParam(':discussaoId', $discussaoId, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($result && isset($result['user_id'])) {
+                return $result['user_id'];
+            }
+
+            return null; // Retorna null se o ID do comentário não existir ou não estiver associado a um usuário
+        } catch (PDOException $e) {
+            // Trate qualquer exceção do banco de dados aqui (por exemplo, registre-a ou envie uma resposta de erro)
+            return null;
+        }
+    }
+
     public function verificaNotificacoes($email, $id_curso)
     {
         $sql = "SELECT 1 FROM notificacoes WHERE 

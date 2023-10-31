@@ -95,9 +95,9 @@
                                 alt="Imagem da Aula">
                         </a>
                         <div class="info-aula" style="width: 300px !important">
-                            <div class="nome-aula" style="font-weight: bold;">Aula 01 - Nome da aula</div>
-                            <div class="descricao-aula">Descrição: Lorem ipsum dolor sit amet, consectetur adipiscing
-                                elit.
+                            <div class="nome-aula" style="font-weight: bold;"><p>Aula 01 - Nome da aula</p></div>
+                            <div class="descricao-aula"><p>Descrição: Lorem ipsum dolor sit amet, consectetur adipiscing
+                                elit.</p>
                             </div>
                         </div>
                     </div>
@@ -110,7 +110,7 @@
                             <i class="fa-solid fa-circle-question"></i>
                             <h3 style="margin: 0px;">Quiz Diário</h3>
                         </div>
-                        <div class="seção-container" id="news">Quiz</div>
+                        <div class="seção-container" id="news"><span>Quiz</span></div>
                     </div>
                 </div>
             </li>

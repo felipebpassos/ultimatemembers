@@ -177,7 +177,7 @@ header .right {
 }
 
 .perfil-menu-toggle {
-    background-color: var(--cor-primaria-darker);
+    background-color: rgb(50, 50, 50);
     border: none;
     height: 40px;
     width: 75px;
@@ -189,7 +189,7 @@ header .right {
 
 svg {
     margin-left: 9px;
-    fill: var(--cor-primaria-darker);
+    fill: rgb(50, 50, 50);
     transition: transform 1s ease-in;
 }
 

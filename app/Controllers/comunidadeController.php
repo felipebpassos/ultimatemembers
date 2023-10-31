@@ -1,6 +1,7 @@
 <?php
 
-Class comunidadeController extends Controller {
+class comunidadeController extends Controller
+{
 
     private $sessao;
     private $cursosModel;
@@ -9,10 +10,11 @@ Class comunidadeController extends Controller {
     {
         $this->sessao = new Sessao();
         $this->cursosModel = new Cursos();
-        
+
     }
 
-    public function index() {
+    public function index()
+    {
 
         $comunidade = new Comunidade;
 
@@ -48,7 +50,8 @@ Class comunidadeController extends Controller {
 
     }
 
-    public function publicar() {
+    public function publicar()
+    {
 
         $curso = $this->sessao->verificaCurso();
 
@@ -68,14 +71,15 @@ Class comunidadeController extends Controller {
         $data['description'] = '';
         $data['styles'] = array('painel', 'header', 'comunidade');
         $data['scripts_head'] = array('accordion-pre-set', 'select');
-        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo','accordion', 'comment-box', 'multiplo_select', 'publicar');
+        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'accordion', 'comment-box', 'multiplo_select', 'publicar');
 
         //load view
         $this->loadTemplates($template, $data, $usuario);
 
     }
 
-    public function discussao($id) {
+    public function discussao($id)
+    {
 
         $id = intval($id);
 
@@ -94,7 +98,10 @@ Class comunidadeController extends Controller {
 
         $discussao = $comunidade->getDiscussao($id);
 
+        $respostas = $comunidade->getRespostasPorDiscussao($id);
+
         $data['discussao'] = $discussao;
+        $data['respostas'] = $respostas;
 
         //set template
         $template = 'painel-temp';
@@ -103,7 +110,7 @@ Class comunidadeController extends Controller {
         $data['view'] = 'discussao';
         $data['title'] = $discussao['title'] . ' | Comunidade';
         $data['description'] = '';
-        $data['styles'] = array('painel', 'header', 'comunidade');
+        $data['styles'] = array('painel', 'header', 'lista_resultados', 'comunidade');
         $data['scripts_head'] = array('');
         $data['scripts_body'] = array('toggleSearch', 'menu-responsivo');
 
@@ -113,7 +120,8 @@ Class comunidadeController extends Controller {
     }
 
     //Controller para adicionar nova discussão
-    public function nova_discussao() {
+    public function nova_discussao()
+    {
 
         $curso = $this->sessao->verificaCurso();
 
@@ -154,6 +162,53 @@ Class comunidadeController extends Controller {
 
     }
 
-}
+    public function responder($discussao)
+    {
 
-?>
+        $curso = $this->sessao->verificaCurso();
+
+        $cursoInfo = $this->cursosModel->getCurso($curso);
+
+        $discussao = intval($discussao);
+
+        $this->sessao->checkParametro($discussao, $cursoInfo['url_principal']);
+
+        $comunidade = new Comunidade();
+
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+            if (isset($_POST["texto"])) {
+
+                $comunidade = new Comunidade();
+
+                $usuario = $_SESSION['usuario']['id'];
+                $texto = $_POST["texto"];
+
+                $resposta = $comunidade->setResposta($usuario, $discussao, $texto, $curso);
+
+                if ($resposta) {
+
+                    print_r('Resposta publicada com sucesso.');
+
+                } else {
+
+                    print_r('Erro ao publicar resposta :(');
+
+                }
+
+
+            } else {
+
+                print_r('Dados não foram enviados corretamente.');
+
+            }
+
+        } else {
+
+            print_r('Dados não enviados.');
+
+        }
+
+    }
+
+}

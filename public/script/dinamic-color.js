@@ -28,13 +28,15 @@ const corPrimaria = calcularCorMaisEscura(corTextoObj, 0);
 const corPrimariaTransparent = calcularCorTransparente(corTextoObj, 0.5);
 const corPrimariaTransparent2 = calcularCorTransparente(corTextoObj, 0.7);
 const corPrimariaTransparent3 = calcularCorTransparente(corTextoObj, 0.1);
-const corPrimariaDark = calcularCorMaisEscura(corTextoObj, 20);
-const corPrimariaDarker = calcularCorMaisEscura(corTextoObj, 40);
+const corPrimariaDark = calcularCorMaisEscura(corTextoObj, 30);
+const corPrimariaDarker = calcularCorMaisEscura(corTextoObj, 60);
+const corPrimariaLight = calcularCorMaisEscura(corTextoObj, -30);
+const corPrimariaLighter = calcularCorMaisEscura(corTextoObj, -60);
 
 // Calcula as variações das cores secundárias com base na cor de fundo
 const corFundoObj = hexToRgb(corFundo);
 const corSecundaria = calcularCorMaisEscura(corFundoObj, 0);
-const corSecundariaLight = calcularCorMaisEscura(corFundoObj, -5);
+const corSecundariaLight = calcularCorMaisEscura(corFundoObj, -10);
 const corSecundariaLighter = calcularCorMaisEscura(corFundoObj, -20); //valor negativo para fazer a cor mais clara
 
 // Selecione o elemento CSS personalizado onde você deseja aplicar as variáveis
@@ -47,6 +49,8 @@ dinamicroot.style.setProperty("--cor-primaria-transparent-2", corPrimariaTranspa
 dinamicroot.style.setProperty("--cor-primaria-transparent-3", corPrimariaTransparent3);
 dinamicroot.style.setProperty("--cor-primaria-dark", corPrimariaDark);
 dinamicroot.style.setProperty("--cor-primaria-darker", corPrimariaDarker);
+dinamicroot.style.setProperty("--cor-primaria-light", corPrimariaLight);
+dinamicroot.style.setProperty("--cor-primaria-lighter", corPrimariaLighter);
 dinamicroot.style.setProperty("--cor-secundaria", corSecundaria);
 dinamicroot.style.setProperty("--cor-secundaria-light", corSecundariaLight);
 dinamicroot.style.setProperty("--cor-secundaria-lighter", corSecundariaLighter);
