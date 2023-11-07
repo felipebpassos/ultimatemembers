@@ -96,7 +96,12 @@ class comunidadeController extends Controller
 
         $this->sessao->checkParametro($id, $cursoInfo['url_principal']);
 
-        $discussao = $comunidade->getDiscussao($id);
+        $discussao = $comunidade->getDiscussao($id, $usuario['id']);
+
+        if ($discussao === false) {
+            header('Location: ' . $cursoInfo['url_principal'] . 'error/'); // Redireciona para uma página de erro
+            exit;
+        }
 
         $respostas = $comunidade->getRespostasPorDiscussao($id);
 
@@ -112,7 +117,7 @@ class comunidadeController extends Controller
         $data['description'] = '';
         $data['styles'] = array('painel', 'header', 'lista_resultados', 'comunidade');
         $data['scripts_head'] = array('');
-        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo');
+        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'publicar', 'like_dislike');
 
         //load view
         $this->loadTemplates($template, $data, $usuario);
@@ -209,6 +214,28 @@ class comunidadeController extends Controller
 
         }
 
+    }
+
+    public function likes()
+    {
+        $this->sessao->verificaCurso();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Verifique se as variáveis POST estão definidas
+            if (isset($_POST['discussaoId'])) {
+                // Recupere os valores das variáveis POST e armazene em variáveis locais
+                $discussaoId = $_POST['discussaoId'];
+
+                $usuario_acao = $_SESSION['usuario']['id'];
+
+                $comunidade = new Comunidade();
+
+                // Executar a lógica para adicionar um like ao comentário
+                $likes = $comunidade->setLikeDiscussao($usuario_acao, $discussaoId);
+
+                echo $likes;
+            }
+        }
     }
 
 }

@@ -36,14 +36,15 @@ $video = !empty($modulo['video']) ? str_replace("./", "http://localhost/ultimate
         Seu navegador não suporta a reprodução de vídeos.
     </video>
 
-    <button id="play-pause" class="play"><img src="http://localhost/ultimatemembers/public/img/pause.png" alt=""></button>
+    <button id="play-pause" class="play"><img src="http://localhost/ultimatemembers/public/img/pause.png"
+            alt=""></button>
     <button id="mute" class="unmute"><img src="http://localhost/ultimatemembers/public/img/sound.png" alt=""></button>
     <button id="aulas-btn" class="aulas-btn">Ir para Aulas</button>
 </div>
 
 <main>
 
-    <ul class="modulos" style="display: none;"></ul>
+    <ul class="modulos" style="margin: auto;"></ul>
     <script>
 
         $(".modulos").append(SelectSimples('', 'Outros Módulos', ['Módulo 1', 'Módulo 2', 'Módulo 3'], 'select-modulo', false));
@@ -58,7 +59,7 @@ $video = !empty($modulo['video']) ? str_replace("./", "http://localhost/ultimate
 
                     <div class="descricao-modulo">
                         <div class="section-header" style="margin: 0;">
-                            <h3>Introdução</h3>
+                            <h4>Introdução</h4>
                         </div>
                         <p>Este módulo se concentra em explorar as estratégias avançadas para criar conteúdo
                             envolvente
@@ -74,7 +75,7 @@ $video = !empty($modulo['video']) ? str_replace("./", "http://localhost/ultimate
 
                 <section class="preview-expand-component">
 
-                    <h3>O que você aprenderá</h3>
+                    <h4>O que você aprenderá</h4>
 
                     <ul>
                         <li>Entendendo o poder do conteúdo visual para marketing digital</li>
@@ -88,7 +89,7 @@ $video = !empty($modulo['video']) ? str_replace("./", "http://localhost/ultimate
 
                 <section class="preview-expand-component">
 
-                    <h3>Pré-requisitos</h3>
+                    <h4>Pré-requisitos</h4>
 
                     <p>Este módulo é recomendado para alunos que já tenham conhecimento básico em edição de vídeos e
                         marketing
@@ -101,16 +102,31 @@ $video = !empty($modulo['video']) ? str_replace("./", "http://localhost/ultimate
             <div class="col-lg-6" style="min-width: 500px; padding: 10px 0 0 25px !important;">
 
                 <div class="section-header">
-                    <h3><i class="fa-solid fa-video" style="margin-right: 20px;"></i>Aulas (<?php echo count($aulas); ?>)</h3>
+                    <h4><i class="fa-solid fa-video" style="margin-right: 20px;"></i>Aulas Gravadas</h4>
 
                     <?php
+
+                    $concluidas_modulo = 0;
+
+                    if (isset($aulas) && !empty($aulas)) {
+                        foreach ($aulas as $aula) {
+                            $id_aula = $aula['id'];
+                            if (in_array($id_aula, $aulasConcluidas)) {
+                                $concluidas_modulo += 1;
+                            }
+                        }
+                    }
 
                     // Se for adm, cria botão de adicionar aula no módulo
                     if ($adm) {
                         echo '<button class="op-aula" id="add-aula"><i class="fa-solid fa-plus"></i><span class="legenda">Adicionar</span></button>';
+                    } else {
+                        echo '<span>' . $concluidas_modulo . '/' . count($aulas) . '</span>';
                     }
 
                     ?>
+
+
 
                 </div>
 
@@ -134,7 +150,7 @@ $video = !empty($modulo['video']) ? str_replace("./", "http://localhost/ultimate
 
                                 // Verifica se a aula está marcada como concluída
                                 $checkboxMarcado = in_array($id_aula, $aulasConcluidas);
-                                
+
                                 if ($id_aula >= 0 && $id_aula <= 9) {
                                     $formattedId = sprintf("0%d", $id_aula); // Formata o ID para 0X (sendo X o ID)
                                 } else {

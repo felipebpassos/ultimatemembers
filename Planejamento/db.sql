@@ -1,6 +1,6 @@
 use reelsdecinema;
 
-drop table discussoes_tags;
+drop table discussoes_likes;
 
 ALTER TABLE usuarios
 ADD COLUMN instagram VARCHAR(255),
@@ -153,9 +153,7 @@ CREATE TABLE discussoes_likes (
     item_id INT NOT NULL,
     item_type ENUM('d', 'r') NOT NULL, -- Use 'd' para discussão e 'r' para resposta, em minúsculas.
     publish_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES usuarios(id),
-    FOREIGN KEY (item_id) REFERENCES discussoes(id) ON DELETE CASCADE,
-    FOREIGN KEY (item_id) REFERENCES discussoes_respostas(id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES usuarios(id)
 ) CHARSET=utf8;
 
 CREATE TABLE aulas_concluidas (

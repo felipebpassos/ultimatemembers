@@ -359,7 +359,9 @@ label {
     background-color: transparent;
 }
 
-.nome-aula {color: var(--cor-primaria-dark);}
+.nome-aula {
+    color: var(--cor-primaria-dark);
+}
 
 .info-aula {
     max-width: 150px;
@@ -462,12 +464,12 @@ label {
 }
 
 .checkbox:hover .checkmark {
-    background-color: var(--cor-secundaria-lighter) !important;
+    background-color: rgb(20, 20, 20) !important;
 }
 
 .checkbox input[type="checkbox"]:checked~.checkmark {
-    background-color: var(--cor-primaria-darker);
-    border: 2px solid var(--cor-primaria-darker);
+    background-color: rgb(35, 35, 35);
+    border: 2px solid rgb(25, 25, 25);
 }
 
 .checkbox input[type="checkbox"]:checked~.checkmark i {
@@ -478,12 +480,15 @@ label {
     #proxima {
         width: 50px;
     }
+
     #proxima i {
         margin: 0;
     }
+
     #proxima p {
         display: none;
     }
+
     #proxima {
         margin-left: 20px;
     }
@@ -493,20 +498,25 @@ label {
     .video-options {
         display: block;
     }
+
     .avaliação,
     .opções-aula {
         margin: auto;
         max-width: 250px;
     }
+
     .avaliação div {
         margin: auto;
     }
+
     .avaliação p {
         text-align: center;
     }
+
     .opções-aula {
         padding-left: 30px;
     }
+
     .avaliação {
         margin-bottom: 20px;
     }

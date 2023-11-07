@@ -88,7 +88,7 @@ class modulosController extends Controller
         $aulas_módulo = $aulasModel->getAulas($id);
 
         //Busca aulas concluidas pelo usuário
-        $aulasConcluidas = $aulasModel->getAulasConcluidas($_SESSION['usuario']['id'], $curso);
+        $aulasConcluidas = $aulasModel->getAulasConcluidas($usuario['id'], $curso);
 
         //Armazena variáveis de dados
         $data['modulo'] = $modulo;
@@ -134,6 +134,11 @@ class modulosController extends Controller
         //Busca no banco de dados pelas aulas do módulo
         $aula = $aulasModel->getAula($id);
 
+        if ($aula === null) {
+            header('Location: ' . $cursoInfo['url_principal'] . 'error/'); // Redireciona para uma página de erro
+            exit;
+        }
+
         //Busca no banco de dados pelo id do módulo da aula
         $modulo = $aulasModel->getIdModuloDaAula($id);
 
@@ -144,15 +149,10 @@ class modulosController extends Controller
         $modulos = $modulosModel->getModulos($curso);
 
         //Busca aulas concluidas pelo usuário
-        $aulasConcluidas = $aulasModel->getAulasConcluidas($_SESSION['usuario']['id'], $curso);
+        $aulasConcluidas = $aulasModel->getAulasConcluidas($usuario['id'], $curso);
 
         //Busca Comentários da aula
-        $comentarios = $aulasModel->getComentariosAula($id, $_SESSION['usuario']['id']);
-
-        if ($aula === null) {
-            header('Location: ' . $cursoInfo['url_principal'] . 'error/'); // Redireciona para uma página de erro
-            exit;
-        }
+        $comentarios = $aulasModel->getComentariosAula($id, $usuario['id']);
 
         //Armazena dados necessários
         $data['aula'] = $aula;

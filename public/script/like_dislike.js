@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    // Evento de clique no botão de curtir
+    // Evento de clique no botão de curtir comentario
     $(".like").click(function() {
         var comentarioId = $(this).data("id");
         var likeButton = $(this); // Armazene uma referência ao botão 'like'
@@ -28,7 +28,7 @@ $(document).ready(function() {
     });
 
 
-    // Evento de clique no botão de descurtir
+    // Evento de clique no botão de descurtir comentario
     $(".dislike").click(function() {
         var comentarioId = $(this).data("id");
         var dislikeButton = $(this); // Armazene uma referência ao botão 'dislike'
@@ -49,6 +49,30 @@ $(document).ready(function() {
                 } else {
                     likesElement.text(response);
                 }
+            },
+            error: function(error) {
+                console.error("Erro na solicitação AJAX");
+            }
+        });
+    });
+
+    // Evento de clique no botão de curtir discussao
+    $("#like-discussao").click(function() {
+        var discussaoId = $(this).data("id");
+        var likeButton = $(this); // Armazene uma referência ao botão 'like'
+
+        $.ajax({
+            type: "POST",
+            url: url_principal + "comunidade/likes/",
+            data: { discussaoId: discussaoId },
+            success: function(response) {
+                // Atualize os icones do botão de like
+                likeButton.find('#liked').toggleClass('hidden');
+                likeButton.find('#notliked').toggleClass('hidden');
+
+                // Atualize o número de curtidas na interface do usuário
+                var likesElement = $("#num-likes-discussao");
+                likesElement.text(response);
             },
             error: function(error) {
                 console.error("Erro na solicitação AJAX");

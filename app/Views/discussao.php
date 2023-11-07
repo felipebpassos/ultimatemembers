@@ -27,7 +27,7 @@ $foto_autor = $discussao['foto'];
                 </p>
             </div>
             <ul class="engajamento" style="position:absolute; right:0; bottom:0;">
-                <li><i class="fa-solid fa-heart"></i><span>
+                <li><i class="fa-solid fa-heart"></i><span id="num-likes-discussao">
                         <?php echo $discussao['likes']; ?>
                     </span></li>
                 <li><i class="fa-solid fa-comments"></i><span>
@@ -40,8 +40,14 @@ $foto_autor = $discussao['foto'];
         </div>
         <div class="conteudo-pergunta">
             <div class="botoes">
-                <button><i class="fa-regular fa-heart"></i></button>
-                <button><i class="fa-regular fa-bookmark"></i></button>
+                <button id="like-discussao" data-id="<?php echo $discussao['id']; ?>">
+                    <i id="notliked"
+                        class="fa-regular fa-heart <?php echo $discussao['user_liked'] ? 'hidden' : ''; ?>"></i>
+                    <i id="liked" class="fa-solid fa-heart <?php echo $discussao['user_liked'] ? '' : 'hidden'; ?>"></i>
+                </button>
+                <button id="save-discussao" data-id="<?php echo $discussao['id']; ?>">
+                    <i class="fa-regular fa-bookmark"></i>
+                </button>
             </div>
             <!-- Conteúdo da Discussão -->
             <p>
@@ -69,33 +75,39 @@ $foto_autor = $discussao['foto'];
             </select>
         </form>
         <div class="answers">
-            <div class="answer">
-                <div class="botoes">
-                    <button><i class="fa-regular fa-heart"></i></button>
-                </div>
-                <p>
-                    <?php echo $respostas[0]['content']; ?>
-                </p>
-                <div class="post-info" style="right:0; margin-bottom:25px;">
-                    <div class="foto-perfil-micro" style="margin-left:10px; margin-right:15px;"><img class="perfil-img"
-                            name="imagem"
-                            src="<?php echo 'http://localhost/ultimatemembers' . (!empty($respostas[0]['foto']) ? $respostas[0]['foto'] : '/public/img/default.png'); ?>"
-                            alt="Foto de Perfil" /></div>
-                    <p style="font-size: 13px; margin: 0 20px 0px 0px;">
-                        <?php echo obterPrimeiroEUltimoNome($respostas[0]['autor']); ?>
-                    </p>
-                    <p style="font-size: 13px; margin: 0 20px 0px 0px;"><i class="fa-regular fa-clock"
-                            style="margin-right:5px;"></i></i>
-                        <?php echo calcularTempoDecorrido($respostas[0]['publish_date']); ?>
-                    </p>
-                </div>
+            <div class="answers">
+                <?php foreach ($respostas as $resposta): ?>
+                    <div class="answer">
+                        <div class="botoes">
+                            <button id="like-resposta"><i class="fa-regular fa-heart"></i></button>
+                            <span>0</span>
+                        </div>
+                        <p>
+                            <?php echo $resposta['content']; ?>
+                        </p>
+                        <div class="post-info" style="right:0; margin-bottom:25px;">
+                            <div class="foto-perfil-micro" style="margin-left:10px; margin-right:15px;">
+                                <img class="perfil-img" name="imagem"
+                                    src="<?php echo 'http://localhost/ultimatemembers' . (!empty($resposta['foto']) ? $resposta['foto'] : '/public/img/default.png'); ?>"
+                                    alt="Foto de Perfil" />
+                            </div>
+                            <p style="font-size: 13px; margin: 0 20px 0px 0px;">
+                                <?php echo obterPrimeiroEUltimoNome($resposta['autor']); ?>
+                            </p>
+                            <p style="font-size: 13px; margin: 0 20px 0px 0px;"><i class="fa-regular fa-clock"
+                                    style="margin-right:5px;"></i>
+                                <?php echo calcularTempoDecorrido($resposta['publish_date']); ?>
+                            </p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </div>
         <form id="addResposta"
             action="<?php echo $curso['url_principal']; ?>comunidade/responder/<?php echo $discussao['id']; ?>"
             method="POST" enctype="multipart/form-data">
-            <h3>Responder</h3>
             <div class="campo" style="padding:20px;">
+                <h4>Publique uma Resposta</h4>
                 <div class="texto">
                     <div class="botoes-formatar">
                         <button type="button" id="btn-font-size"><i class="fa-solid fa-text-height"></i></button>
