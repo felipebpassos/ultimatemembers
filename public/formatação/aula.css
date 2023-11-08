@@ -206,10 +206,10 @@ main {
 
 .outras-aulas {
     background-color: var(--cor-secundaria-light);
-    height: 500px;
+    max-height: 500px;
     border-radius: 6px;
-    padding: 10px 20px;
-    padding-right: 10px;
+    padding: 20px;
+    padding-bottom: 10px;
 }
 
 .outras-aulas .header {
@@ -360,7 +360,7 @@ label {
 }
 
 .nome-aula {
-    color: var(--cor-primaria-dark);
+    color: var(--cor-primaria);
 }
 
 .info-aula {
@@ -382,6 +382,7 @@ label {
 
 .duracao-aula {
     font-size: 13px;
+    color: var(--cor-primaria);
 }
 
 .opções-aula {
@@ -393,7 +394,10 @@ label {
 .op-aula {
     margin-left: 10px;
     padding: 0 10px;
+    width: fit-content;
 }
+
+.op-aula i {margin: 0;}
 
 .op-aula,
 .editar-aula,

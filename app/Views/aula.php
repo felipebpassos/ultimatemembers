@@ -219,6 +219,7 @@
 
                         $optionsJSON = json_encode($options);
                         ?>
+
                         <ul class="modulos"></ul>
                         <script>
                             const selectOptions = <?php echo $optionsJSON; ?>;
@@ -226,8 +227,14 @@
                             $(".modulos").append(SelectSimples('', 'Outros Módulos', selectOptions, 'select-modulo', false));
 
                         </script>
-                        <button class="op-aula"><i class="fa-solid fa-repeat"></i><span class="legenda">Repetir
-                                Aula</span></button>
+
+                        <div style="flex">
+                            <a href=""><button class="op-aula"><i class="fa-solid fa-forward-step"></i><span
+                                        class="legenda">Próxima Aula</span></button></a>
+                            <button class="op-aula"><i class="fa-solid fa-repeat"></i><span class="legenda">Repetir
+                                    Aula</span></button>
+                        </div>
+
                     </div>
 
                     <div style="position:relative;">
@@ -315,12 +322,6 @@
                         </div>
 
                     </div>
-
-                    <a href="">
-                        <button class="btn-2" id="proxima"><i class="fa-solid fa-forward"></i>
-                            <P>Próxima Aula</P>
-                        </button>
-                    </a>
 
                 </div>
 

@@ -193,6 +193,8 @@
     --bs-table-color: var(--cor-primaria-light);
 }
 
+.table tbody {--bs-table-color: var(--cor-primaria);}
+
 .table tr, .table .td {text-align: center;}
 
 .grafico,

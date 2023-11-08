@@ -170,19 +170,19 @@ main {
     border: none;
     cursor: pointer;
     font-size: 16px;
-    color: var(--cor-secundaria-lighter);
+    color: var(--cor-primaria-darker);
     background-color: var(--cor-secundaria);
     padding-bottom: 8px;
     margin-right: 20px;
 }
 
 .aba:hover {
-    color: var(--cor-primaria);
+    color: var(--cor-primaria-lighter);
     box-shadow: none !important;
 }
 
 .aba-ativa {
-    color: var(--cor-primaria-dark);
+    color: var(--cor-primaria-light);
     border-bottom: 3px solid var(--cor-primaria-light);
 }
 

@@ -59,12 +59,12 @@ $foto_autor = $discussao['foto'];
 
             $numeroDeRespostas = count($respostas);
 
-            if ($numeroDeRespostas >= 0 && $numeroDeRespostas <= 9) {
+            if ($numeroDeRespostas > 0 && $numeroDeRespostas <= 9) {
                 $numeroDeRespostas = sprintf("0%d", $numeroDeRespostas);
             }
 
             ?>
-            <h5 style="margin-bottom: 0px !important;">
+            <h5 style="color: var(--cor-primaria-dark); margin-bottom: 0px !important;">
                 <?php echo $numeroDeRespostas . ' Resposta(s)'; ?>
             </h5>
             <select name="sort" class="sort_by">
@@ -79,7 +79,7 @@ $foto_autor = $discussao['foto'];
                 <?php foreach ($respostas as $resposta): ?>
                     <div class="answer">
                         <div class="botoes">
-                            <button id="like-resposta"><i class="fa-regular fa-heart"></i></button>
+                            <button class="like-resposta"><i class="fa-regular fa-heart"></i></button>
                             <span>0</span>
                         </div>
                         <p>
@@ -106,8 +106,8 @@ $foto_autor = $discussao['foto'];
         <form id="addResposta"
             action="<?php echo $curso['url_principal']; ?>comunidade/responder/<?php echo $discussao['id']; ?>"
             method="POST" enctype="multipart/form-data">
-            <div class="campo" style="padding:20px;">
-                <h4>Publique uma Resposta</h4>
+            <div class="campo" style="padding:20px; padding-bottom: 30px;">
+                <h5 style="color: var(--cor-primaria-dark); margin-bottom:20px;">Publique uma Resposta</h5>
                 <div class="texto">
                     <div class="botoes-formatar">
                         <button type="button" id="btn-font-size"><i class="fa-solid fa-text-height"></i></button>

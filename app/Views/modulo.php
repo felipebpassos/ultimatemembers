@@ -44,6 +44,13 @@ $video = !empty($modulo['video']) ? str_replace("./", "http://localhost/ultimate
 
 <main>
 
+    <!-- Tútulo do módulo -->
+    <div class="titulo-pagina">
+        <h1>
+            <?php echo $formattedId . ' - ' . $modulo['nome']; ?>
+        </h1>
+    </div>
+
     <ul class="modulos" style="margin: auto;"></ul>
     <script>
 
@@ -59,7 +66,7 @@ $video = !empty($modulo['video']) ? str_replace("./", "http://localhost/ultimate
 
                     <div class="descricao-modulo">
                         <div class="section-header" style="margin: 0;">
-                            <h4>Introdução</h4>
+                            <h4>Resumo</h4>
                         </div>
                         <p>Este módulo se concentra em explorar as estratégias avançadas para criar conteúdo
                             envolvente

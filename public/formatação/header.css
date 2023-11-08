@@ -43,7 +43,7 @@ header.show-menu {
 }
 
 .op-menu-high p {
-    color: var(--cor-primaria-dark);
+    color: var(--cor-primaria);
     cursor: pointer;
 }
 
@@ -82,7 +82,7 @@ header.show-menu {
 }
 
 .op-menu-high .dropdown a:hover {
-    color: var(--cor-primaria-light);
+    color: var(--cor-primaria-lighter);
 }
 
 header .right {

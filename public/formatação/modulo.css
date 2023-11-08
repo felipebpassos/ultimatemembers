@@ -29,6 +29,8 @@ main {
     margin: 0px;
     font-size: 16px;
     font-weight: lighter;
+    display: flex;
+    justify-content: center;
 }
 
 .selecao-simples {
@@ -38,7 +40,7 @@ main {
 
 .selecao-simples .descricao {
     font-weight: bold;
-    color: var(--cor-secundaria-lighter);
+    color: var(--cor-primaria-darker);
 }
 
 label {
@@ -161,7 +163,7 @@ label {
 .titulo-modulo .pre-titulo {
     justify-content: end;
     width: 120px;
-    background-color: var(--cor-primaria-dark);
+    background-color: rgb(30, 30, 30);
     cursor: pointer;
 }
 
@@ -212,6 +214,8 @@ label {
     border-right: 12px solid var(--cor-primaria-lighter);
 }
 
+.titulo-pagina {padding-top: 40px; margin-bottom: 5px;}
+
 .section-header {
     display: flex;
     justify-content: space-between;
@@ -224,6 +228,12 @@ label {
     font-size: 24px;
     margin: 0;
     width: fit-content;
+    color: var(--cor-primaria-dark);
+    font-weight: bold;
+}
+
+.section-header span {
+    transform: translateY(5px);
     color: var(--cor-primaria-dark);
     font-weight: bold;
 }
@@ -368,6 +378,12 @@ label {
     justify-content: space-between;
     margin-bottom: 50px;
 }
+
+.nome-aula {
+    color: var(--cor-primaria-dark);
+}
+
+.descricao-aula {color: var(--cor-primaria-darker);}
 
 .info-aula {
     max-width: 350px;

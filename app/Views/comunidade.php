@@ -54,7 +54,7 @@
                         <form class="barra-superior">
                             <?php
 
-                            if ($num_de_discussoes >= 0 && $num_de_discussoes <= 9) {
+                            if ($num_de_discussoes > 0 && $num_de_discussoes <= 9) {
                                 $num_de_discussoes = sprintf("0%d", $num_de_discussoes);
                             }
 
