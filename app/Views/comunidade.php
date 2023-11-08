@@ -66,7 +66,6 @@
                                 <option value="" disabled selected>Ordenar por</option>
                                 <option value="respostas">Respostas</option>
                                 <option value="likes">Curtidas</option>
-                                <option value="views">Views</option>
                                 <option value="recente">Mais recente</option>
                                 <option value="antigo">Mais antigo</option>
                             </select>
@@ -92,7 +91,6 @@
                                         $ultima_edicao = calcularTempoDecorrido($discussao['last_edit_date']);
                                         $likes = $discussao['likes'];
                                         $respostas = $discussao['respostas'];
-                                        $views = $discussao['views'];
 
                                         // Cria o link com base no valor do ID do usuário e adiciona os dados do perfil como parâmetro GET
                                         echo '<li class="resultado">
@@ -116,7 +114,6 @@
                                                 <ul class="engajamento">
                                                     <li><i class="fa-solid fa-heart"></i><span>' . $likes . '</span></li>
                                                     <li><i class="fa-solid fa-comments"></i><span>' . $respostas . '</span></li>
-                                                    <li><i class="fa-solid fa-eye"></i><span>' . $views . '</span></li>
                                                 </ul>
 
                                                 </div>

@@ -438,16 +438,17 @@ textarea:focus {
 .answer .botoes button {
     display: block;
     width: 40px;
-    padding: 5px;
     background-color: transparent;
     border: none;
     margin-bottom: 10px;
+    padding: 5px 0px;
 }
 
 .conteudo-pergunta .botoes button i,
 .answer .botoes button i {
     color: var(--cor-primaria);
     font-size: 22px;
+    margin: auto;
 }
 
 .answers {
@@ -462,5 +463,12 @@ textarea:focus {
     box-sizing: border-box;
     position: relative;
     background-color: var(--cor-secundaria-light);
-    border-bottom: solid 1px var(--cor-secundaria);
+    border-bottom: solid 2px var(--cor-secundaria);
+}
+
+.num-likes {
+    display: block;
+    width: 40px;
+    font-size: 20px;
+    text-align: center;
 }

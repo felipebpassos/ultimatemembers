@@ -36,7 +36,7 @@ class Comunidade
         $query = 'SELECT d.id, u.nome AS autor, u.foto_caminho AS foto, d.title, d.content, d.publish_date, d.last_edit_date, d.views,
                     COUNT(DISTINCT dl.like_id) AS likes,
                     COUNT(DISTINCT r.id) AS respostas,
-                    (CASE WHEN (SELECT COUNT(*) FROM discussoes_likes dl WHERE dl.item_id = d.id AND dl.user_id = :usuario_id) > 0 THEN 1 ELSE 0 END) AS user_liked
+                    (CASE WHEN (SELECT COUNT(*) FROM discussoes_likes dl WHERE dl.item_id = d.id AND dl.item_type = "d" AND dl.user_id = :usuario_id) > 0 THEN 1 ELSE 0 END) AS user_liked
               FROM discussoes d
               INNER JOIN usuarios u ON d.user_id = u.id
               LEFT JOIN discussoes_likes dl ON d.id = dl.item_id AND dl.item_type = "d"
@@ -125,35 +125,41 @@ class Comunidade
         }
     }
 
-    public function getRespostasPorDiscussao($discussion_id)
+    public function getRespostasPorDiscussao($discussion_id, $usuario_id)
     {
-        $query = 'SELECT r.id, r.content, r.publish_date, u.nome AS autor, u.foto_caminho AS foto
+        $query = 'SELECT r.id, r.content, r.publish_date, u.nome AS autor, u.foto_caminho AS foto,
+                COUNT(DISTINCT dl.like_id) AS likes,
+                (CASE WHEN (SELECT COUNT(*) FROM discussoes_likes dl WHERE dl.item_id = r.id AND dl.item_type = "r" AND dl.user_id = :usuario_id) > 0 THEN 1 ELSE 0 END) AS user_liked
               FROM discussoes_respostas r
               INNER JOIN usuarios u ON r.user_id = u.id
-              WHERE r.discussion_id = :discussion_id';
+              LEFT JOIN discussoes_likes dl ON r.id = dl.item_id AND dl.item_type = "r"
+              WHERE r.discussion_id = :discussion_id
+              GROUP BY r.id';
 
         $stmt = $this->con->prepare($query);
         $stmt->bindValue(':discussion_id', $discussion_id, PDO::PARAM_INT);
+        $stmt->bindParam(":usuario_id", $usuario_id, PDO::PARAM_INT);
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function setLikeDiscussao($user_id, $discussao_id)
+    public function setLikeDiscussao($type, $user_id, $discussao_id)
     {
-        $likeid = $this->hasUserLikedDiscussao($user_id, $discussao_id);
+        $likeid = $this->hasUserLikedDiscussao($type, $user_id, $discussao_id);
 
         // Verifique se já existe uma curtida do usuário para o comentário
         if ($likeid) {
             // Se já existe, anule a curtida (remova a entrada)
-            $this->removeLikeDiscussao($user_id, $discussao_id, $likeid);
+            $this->removeLikeDiscussao($type, $user_id, $discussao_id, $likeid);
             // A curtida foi removida com sucesso, recupere o número atualizado de likes
-            $likes = $this->getLikesDiscussao($discussao_id);
+            $likes = $this->getLikesDiscussao($type, $discussao_id);
         } else {
             // Adicione a curtida
-            $query = 'INSERT INTO discussoes_likes (user_id, item_id) VALUES (:user_id, :discussao_id)';
+            $query = 'INSERT INTO discussoes_likes (item_type, user_id, item_id) VALUES (:item_type, :user_id, :discussao_id)';
 
             $stmt = $this->con->prepare($query);
+            $stmt->bindValue(':item_type', $type);
             $stmt->bindValue(':user_id', $user_id);
             $stmt->bindValue(':discussao_id', $discussao_id);
 
@@ -167,7 +173,7 @@ class Comunidade
                 $notificacoes->setNotificacao(3, $likeid, $usuario_notificado, $user_id);
 
                 // A curtida foi adicionada com sucesso, recupere o número atualizado de likes
-                $likes = $this->getLikesDiscussao($discussao_id);
+                $likes = $this->getLikesDiscussao($type, $discussao_id);
             }
         }
 
@@ -175,11 +181,12 @@ class Comunidade
         return $likes;
     }
 
-    public function hasUserLikedDiscussao($user_id, $discussao_id)
+    public function hasUserLikedDiscussao($type, $user_id, $discussao_id)
     {
-        $query = 'SELECT like_id FROM discussoes_likes WHERE user_id = :user_id AND item_id = :discussao_id';
+        $query = 'SELECT like_id FROM discussoes_likes WHERE user_id = :user_id AND item_id = :discussao_id AND item_type = :item_type';
 
         $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':item_type', $type);
         $stmt->bindValue(':user_id', $user_id);
         $stmt->bindValue(':discussao_id', $discussao_id);
         $stmt->execute();
@@ -189,12 +196,13 @@ class Comunidade
         return ($likeId !== false) ? $likeId : false;
     }
 
-    public function removeLikeDiscussao($user_id, $discussao_id, $likeid)
+    public function removeLikeDiscussao($type, $user_id, $discussao_id, $likeid)
     {
         // Remove o like do usuário no comentário
-        $query = 'DELETE FROM discussoes_likes WHERE user_id = :user_id AND item_id = :discussao_id';
+        $query = 'DELETE FROM discussoes_likes WHERE user_id = :user_id AND item_id = :discussao_id AND item_type = :item_type';
 
         $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':item_type', $type);
         $stmt->bindValue(':user_id', $user_id);
         $stmt->bindValue(':discussao_id', $discussao_id);
 
@@ -209,12 +217,13 @@ class Comunidade
         }
     }
 
-    public function getLikesDiscussao($discussao_id)
+    public function getLikesDiscussao($type, $discussao_id)
     {
 
-        $query = 'SELECT COUNT(*) AS total_likes FROM discussoes_likes WHERE item_id = :discussao_id';
+        $query = 'SELECT COUNT(*) AS total_likes FROM discussoes_likes WHERE item_id = :discussao_id AND item_type = :item_type';
 
         $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':item_type', $type);
         $stmt->bindValue(':discussao_id', $discussao_id);
 
         if ($stmt->execute()) {

@@ -103,7 +103,7 @@ class comunidadeController extends Controller
             exit;
         }
 
-        $respostas = $comunidade->getRespostasPorDiscussao($id);
+        $respostas = $comunidade->getRespostasPorDiscussao($id, $usuario['id']);
 
         $data['discussao'] = $discussao;
         $data['respostas'] = $respostas;
@@ -221,19 +221,33 @@ class comunidadeController extends Controller
         $this->sessao->verificaCurso();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            
             // Verifique se as variáveis POST estão definidas
-            if (isset($_POST['discussaoId'])) {
-                // Recupere os valores das variáveis POST e armazene em variáveis locais
+
+            $usuario_acao = $_SESSION['usuario']['id'];
+
+            $comunidade = new Comunidade();
+
+            if (isset($_POST['discussaoId']) && isset($_POST['type'])) {
+
                 $discussaoId = $_POST['discussaoId'];
+                $type = $_POST['type'];
 
-                $usuario_acao = $_SESSION['usuario']['id'];
-
-                $comunidade = new Comunidade();
-
-                // Executar a lógica para adicionar um like ao comentário
-                $likes = $comunidade->setLikeDiscussao($usuario_acao, $discussaoId);
+                // Executar a lógica para adicionar um like à discussão
+                $likes = $comunidade->setLikeDiscussao($type, $usuario_acao, $discussaoId);
 
                 echo $likes;
+                
+            } else if (isset($_POST['respostaId']) && isset($_POST['type'])) {
+
+                $respostaId = $_POST['respostaId'];
+                $type = $_POST['type'];
+
+                // Executar a lógica para adicionar um like à resposta
+                $likes = $comunidade->setLikeDiscussao($type, $usuario_acao, $respostaId);
+
+                echo $likes;
+
             }
         }
     }

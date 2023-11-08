@@ -33,9 +33,6 @@ $foto_autor = $discussao['foto'];
                 <li><i class="fa-solid fa-comments"></i><span>
                         <?php echo $discussao['respostas']; ?>
                     </span></li>
-                <li><i class="fa-solid fa-eye"></i><span>
-                        <?php echo $discussao['views']; ?>
-                    </span></li>
             </ul>
         </div>
         <div class="conteudo-pergunta">
@@ -79,8 +76,13 @@ $foto_autor = $discussao['foto'];
                 <?php foreach ($respostas as $resposta): ?>
                     <div class="answer">
                         <div class="botoes">
-                            <button class="like-resposta"><i class="fa-regular fa-heart"></i></button>
-                            <span>0</span>
+                            <button class="like-resposta" data-id="<?php echo $resposta['id']; ?>">
+                                <i id="notliked"
+                                    class="fa-regular fa-heart <?php echo $resposta['user_liked'] ? 'hidden' : ''; ?>"></i>
+                                <i id="liked"
+                                    class="fa-solid fa-heart <?php echo $resposta['user_liked'] ? '' : 'hidden'; ?>"></i>
+                            </button>
+                            <span class="num-likes" data-id="<?php echo $resposta['id']; ?>"><?php echo $resposta['likes']; ?></span>
                         </div>
                         <p>
                             <?php echo $resposta['content']; ?>
