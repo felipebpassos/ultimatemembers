@@ -208,25 +208,28 @@
 
                 <!-- Lista de Aulas -->
                 <div class="outras-aulas">
+                    <?php
+                    $options = [];
+
+                    foreach ($modulos as $modulo) {
+                        $formattedOption = sprintf('Módulo %02d - %s', $modulo['id'], $modulo['nome']);
+                        $options[] = $formattedOption;
+                    }
+
+                    $optionsJSON = json_encode($options);
+                    ?>
+
+                    <ul class="modulos"></ul>
+                    <script>
+                        const selectOptions = <?php echo $optionsJSON; ?>;
+
+                        <?php $formattedModulo = sprintf('Módulo %02d - %s', $aula['id_modulo'], $aula['nome_modulo']); ?>
+
+                        $(".modulos").append(SelectSimples('', '<?php echo $formattedModulo; ?>', selectOptions, 'select-modulo', false));
+
+                    </script>
+
                     <div class="header">
-                        <?php
-                        $options = [];
-
-                        foreach ($modulos as $modulo) {
-                            $formattedOption = sprintf('%02d - %s', $modulo['id'], $modulo['nome']);
-                            $options[] = $formattedOption;
-                        }
-
-                        $optionsJSON = json_encode($options);
-                        ?>
-
-                        <ul class="modulos"></ul>
-                        <script>
-                            const selectOptions = <?php echo $optionsJSON; ?>;
-
-                            $(".modulos").append(SelectSimples('', 'Outros Módulos', selectOptions, 'select-modulo', false));
-
-                        </script>
 
                         <div style="flex">
                             <a href=""><button class="op-aula"><i class="fa-solid fa-forward-step"></i><span
@@ -234,6 +237,28 @@
                             <button class="op-aula"><i class="fa-solid fa-repeat"></i><span class="legenda">Repetir
                                     Aula</span></button>
                         </div>
+
+                        <?php
+
+                        $concluidas_modulo = 0;
+
+                        if (isset($aulas) && !empty($aulas)) {
+                            foreach ($aulas as $aula) {
+                                $id_aula = $aula['id'];
+                                if (in_array($id_aula, $aulasConcluidas)) {
+                                    $concluidas_modulo += 1;
+                                }
+                            }
+                        }
+
+                        // Se for adm, cria botão de adicionar aula no módulo
+                        if ($adm) {
+                            echo '<button class="op-aula" id="add-aula"><i class="fa-solid fa-plus"></i><span class="legenda">Adicionar</span></button>';
+                        } else {
+                            echo '<span>' . $concluidas_modulo . '/' . count($aulas) . '</span>';
+                        }
+
+                        ?>
 
                     </div>
 

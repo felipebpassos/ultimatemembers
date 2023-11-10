@@ -139,11 +139,8 @@ class modulosController extends Controller
             exit;
         }
 
-        //Busca no banco de dados pelo id do módulo da aula
-        $modulo = $aulasModel->getIdModuloDaAula($id);
-
         //Busca no banco de dados pelas aulas do módulo
-        $aulas_módulo = $aulasModel->getAulas($modulo);
+        $aulas_módulo = $aulasModel->getAulas($aula['id_modulo']);
 
         //Busca no banco de dados pelo módulo
         $modulos = $modulosModel->getModulos($curso);
@@ -157,7 +154,6 @@ class modulosController extends Controller
         //Armazena dados necessários
         $data['aula'] = $aula;
         $data['aulas'] = $aulas_módulo;
-        $data['modulo']['id'] = $modulo;
         $data['modulos'] = $modulos;
         $data['aulasConcluidas'] = $aulasConcluidas;
         $data['comentarios'] = $comentarios;

@@ -10,6 +10,9 @@
                 <button class="aba" onclick="abrirAba(event, 'geral')">Geral</button>
             </li>
             <li>
+                <button class="aba" onclick="abrirAba(event, 'comunidade')">Comunidade</button>
+            </li>
+            <li>
                 <button class="aba" onclick="abrirAba(event, 'gamificacao')">Gamificação</button>
             </li>
             <li>
@@ -65,6 +68,8 @@
         </form>
 
     </section>
+
+    <section id="comunidade" class="content"></section>
 
     <section id="gamificacao" class="content"></section>
 

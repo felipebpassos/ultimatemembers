@@ -108,7 +108,7 @@ $foto_autor = $discussao['foto'];
         <form id="addResposta"
             action="<?php echo $curso['url_principal']; ?>comunidade/responder/<?php echo $discussao['id']; ?>"
             method="POST" enctype="multipart/form-data">
-            <div class="campo" style="padding:20px; padding-bottom: 30px;">
+            <div class="campo" style="padding:20px 30px; padding-bottom: 40px; border-radius: 0px;">
                 <h5 style="color: var(--cor-primaria-dark); margin-bottom:20px;">Publique uma Resposta</h5>
                 <div class="texto">
                     <div class="botoes-formatar">
@@ -119,7 +119,7 @@ $foto_autor = $discussao['foto'];
                         <button type="button" id="btn-num-list"><i class="fa-solid fa-list-ol"></i></button>
                         <button type="button" id="btn-img"><i class="fa-regular fa-image"></i></button>
                     </div>
-                    <textarea id="texto" name="texto" rows="4" cols="50" required></textarea>
+                    <textarea id="texto" name="texto" rows="4" cols="50" required style="border-radius: 3px;"></textarea>
                 </div>
             </div>
             <div class="submeter">

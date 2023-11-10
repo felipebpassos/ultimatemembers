@@ -108,7 +108,7 @@
                     <div>
                         <div class="seção-titulo">
                             <i class="fa-solid fa-circle-question"></i>
-                            <h3 style="margin: 0px;">Quiz Diário</h3>
+                            <h3 style="margin: 0px;">Quiz</h3>
                         </div>
                         <div class="seção-container" id="news"><span>Quiz</span></div>
                     </div>

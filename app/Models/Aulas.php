@@ -33,7 +33,10 @@ class Aulas
     // Método para pegar dados de uma aula específica
     public function getAula($id)
     {
-        $query = 'SELECT id, nome, video, descricao, capa FROM aulas WHERE id = :id LIMIT 1';
+        $query = 'SELECT a.id, a.id_modulo, a.nome, a.video, a.descricao, a.capa, m.nome AS nome_modulo
+              FROM aulas a
+              JOIN modulos m ON a.id_modulo = m.id
+              WHERE a.id = :id LIMIT 1';
 
         $stmt = $this->con->prepare($query);
         $stmt->bindValue(':id', $id);
@@ -50,22 +53,6 @@ class Aulas
         return null;
     }
 
-
-    // Método para pegar id de módulo de uma aula específica
-    public function getIdModuloDaAula($id)
-    {
-        $id_modulo = null;
-        $query = 'SELECT id_modulo FROM aulas WHERE id = :id LIMIT 1';
-
-        $stmt = $this->con->prepare($query);
-        $stmt->bindValue(':id', $id);
-
-        if ($stmt->execute()) {
-            $id_modulo = $stmt->fetchColumn(); // Retorna o valor da coluna id_modulo
-        }
-
-        return $id_modulo;
-    }
 
     //Método para subir arquivo de video da aula para servidor
     public function uploadVideoAula($file)
