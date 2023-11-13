@@ -222,7 +222,7 @@
                         </div>
                         <span>Concluídos</span>
                     </div>
-                    <h2 style="margin: 10px 0;">0</h2>
+                    <h2 style="margin: 10px 0; color: var(--cor-primaria);">0</h2>
                     <span style="font-size: 14px; color: var(--cor-primaria);">Total concluído</span>
                 </a>
 
@@ -235,7 +235,7 @@
                         </div>
                         <span>Salvos</span>
                     </div>
-                    <h2 style="margin: 10px 0;">0</h2>
+                    <h2 style="margin: 10px 0; color: var(--cor-primaria);">0</h2>
                     <span style="font-size: 14px; color: var(--cor-primaria);">Total salvo</span>
                 </a>
             </li>
@@ -247,7 +247,7 @@
                         </div>
                         <span>Conquistas</span>
                     </div>
-                    <h2 style="margin: 10px 0;">0</h2>
+                    <h2 style="margin: 10px 0; color: var(--cor-primaria);">0</h2>
                     <span style="font-size: 14px; color: var(--cor-primaria);">Total de conquistas</span>
                 </a>
             </li>
@@ -259,7 +259,7 @@
                         </div>
                         <span>Comentários</span>
                     </div>
-                    <h2 style="margin: 10px 0;">0</h2>
+                    <h2 style="margin: 10px 0; color: var(--cor-primaria);">0</h2>
                     <span style="font-size: 14px; color: var(--cor-primaria);">Total comentado</span>
                 </a>
             </li>
@@ -271,7 +271,7 @@
                         </div>
                         <span>Publicações</span>
                     </div>
-                    <h2 style="margin: 10px 0;">0</h2>
+                    <h2 style="margin: 10px 0; color: var(--cor-primaria);">0</h2>
                     <span style="font-size: 14px; color: var(--cor-primaria);">Total publicado</span>
                 </a>
             </li>

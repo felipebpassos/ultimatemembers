@@ -167,7 +167,7 @@ class modulosController extends Controller
         $data['description'] = 'Assista às aulas e estude através do nosso material';
         $data['styles'] = array('painel', 'header', 'drag-drop-files', 'video-player', 'aula');
         $data['scripts_head'] = array('select');
-        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'pop-ups', 'deletar-aula', 'simple_select', 'drag-drop-files', 'comment-box', 'comment-btns', 'aula_concluida', 'like_dislike', 'op-btn');
+        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'pop-ups', 'deletar-aula', 'simple_select', 'drag-drop-files', 'comment-box', 'comment-btns', 'aula_concluida', 'like_dislike', 'op-btn', 'select-modulo');
 
 
         //load view
@@ -697,6 +697,18 @@ class modulosController extends Controller
                 }
 
                 echo $likes;
+            }
+        }
+    }
+
+    public function aulas_modulo()
+    {
+        $this->sessao->verificaCurso();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Verifique se as variáveis POST estão definidas
+            if (isset($_POST['id_modulo'])) {
+                echo "done!";
             }
         }
     }
