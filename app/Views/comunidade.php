@@ -135,7 +135,22 @@
             <div class="col-md-4" style="min-width:250px;">
                 <!-- Esta div ocupará 1/5 da largura da div pai -->
                 <div class="top-contribuintes">
-                    Top Contribuintes
+                    <div class="header">
+                        <h4>Top Contribuintes</h4>
+                    </div>
+                    <ul class="contributors">
+                        <?php foreach ($contributors as $contributor): ?>
+                            <li>
+                                <div class="foto-perfil-mini">
+                                    <img class="perfil-img" name="imagem"
+                                        src="http://localhost/ultimatemembers<?php echo (!empty($contributor['foto_usuario']) ? $contributor['foto_usuario'] : '/public/img/default.png'); ?>"
+                                        alt="Foto de Perfil" />
+                                </div>
+                                <h5><?php echo obterPrimeiroEUltimoNome($contributor['nome_usuario']); ?></h5>
+                                <?php echo $contributor['total_curtidas']; ?> curtidas
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
                 </div>
             </div>
         </div>

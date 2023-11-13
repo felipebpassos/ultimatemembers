@@ -31,8 +31,11 @@ class comunidadeController extends Controller
 
         $num_de_discussoes = $comunidade->getNumeroDeDiscussoes($curso);
 
+        $contributors = $comunidade->obterTopUsuariosCurtidas($curso);
+
         $data['discussoes'] = $discussoes;
         $data['num_de_discussoes'] = $num_de_discussoes;
+        $data['contributors'] = $contributors;
 
         //set template
         $template = 'painel-temp';

@@ -5,7 +5,7 @@
 
     <!-- Tútulo da Aula -->
     <div class="titulo-pagina">
-        <h1>Aula
+        <h1>
             <?php
             $video = str_replace("./", "http://localhost/ultimatemembers/", $aula['video']);
             $descricao = isset($aula["descricao"]) ? $aula["descricao"] : "Sem descrição.";
@@ -18,7 +18,7 @@
                 $formattedId = $aula['id']; // Mantém o ID como está se não estiver entre 0 e 9
             }
 
-            echo $formattedId . ' | ' . $aula['nome'];
+            echo $formattedId . ' - ' . $aula['nome'];
             ?>
         </h1>
 
@@ -142,6 +142,7 @@
                         // Loop para printar comentários da Aula
                         if (!empty($comentarios)) {
                             foreach ($comentarios as $comentario) {
+                                $id_autor = $comentario['id_autor'];
                                 $id_comentario = $comentario['id'];
                                 $nomeCompleto = $comentario['usuario'];
                                 $fotoUsuario = $comentario['foto_usuario'];
@@ -184,11 +185,17 @@
                                 echo '<button class="reply-btn">Responder</button>';
                                 echo '</div>';
                                 echo '</div>';
-                                echo '<div class="op-comentario">';
+                                echo '<div class="op-comentario" id="op-' . $id_comentario . '">';
                                 // Botões de operação, como denunciar ou outras opções
-                                echo '<button class="op-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button>';
-                                echo '<div class="dropdown">';
-                                echo '<button><i class="fa-solid fa-flag"></i></button>';
+                                echo '<button class="op-btn" data-id="' . $id_comentario . '"><i class="fa-solid fa-ellipsis-vertical"></i></button>';
+                                echo '<div class="dropdown" id="dropdown-' . $id_comentario . '">';
+                                if ($id_autor === $id) {
+                                    // Se o usuário logado for o autor do comentário
+                                    echo '<button class="acao-btn deletar-btn" data-id="' . $id_comentario . '"><i class="fa-solid fa-trash"></i>Deletar</button>';
+                                } else {
+                                    // Se o usuário logado não for o autor do comentário
+                                    echo '<button class="acao-btn" data-id="' . $id_comentario . '"><i class="fa-solid fa-flag"></i>Denunciar</button>';
+                                }
                                 echo '</div>';
                                 echo '</div>';
                                 echo '</div>';
@@ -265,7 +272,7 @@
                     <div style="position:relative;">
 
                         <div class="fade-top"
-                            style="background: linear-gradient(to top, transparent, var(--cor-secundaria-light));">
+                            style="background: linear-gradient(to top, transparent, var(--cor-secundaria-light)); z-index: 0;">
                         </div>
                         <div class="fade-bottom"
                             style="height:50px; background: linear-gradient(to bottom, transparent, var(--cor-secundaria-light));">

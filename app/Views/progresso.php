@@ -98,7 +98,7 @@ foreach ($aulasPorModulo as $modulo => $aulas) {
 
             <!-- Quiz Diário -->
             <div class="quadro mb-4">
-                <h3>Quiz Diário</h3>
+                <h3>Quiz</h3>
                 <!-- Adicione informações e histórico de quizzes aqui -->
                 <div class="dados" style="margin-top: 20px;">
                     <div class="dado-numerico">

@@ -156,7 +156,7 @@ main {
 }
 
 .comentario:hover .op-comentario {
-    display: flex;
+    display: flex !important;
 }
 
 .op-comentario {
@@ -180,6 +180,8 @@ main {
 .op-comentario .op-btn:hover {
     background-color: var(--cor-secundaria-light);
 }
+
+.op-comentario .acao-btn {display: flex; padding: 5px; border-radius: 3px;}
 
 .like,
 .dislike {
@@ -340,8 +342,6 @@ label {
     padding-top: 10px;
     max-height: 390px;
     overflow-y: auto;
-    position: relative;
-    z-index: 1;
 }
 
 .aula {
@@ -397,6 +397,8 @@ label {
     margin-left: 10px;
     padding: 0 10px;
     width: fit-content;
+    position: relative;
+    z-index: 1;
 }
 
 .op-aula i {margin: 0;}

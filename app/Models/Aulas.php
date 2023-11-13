@@ -491,7 +491,7 @@ class Aulas
     public function getComentariosAula($aula_id, $usuario_id)
     {
         // Query para buscar os comentários da aula com informações do usuário e a quantidade de likes
-        $query = "SELECT c.id, u.nome AS usuario, u.foto_caminho AS foto_usuario, c.aula_id, c.comentario, c.data_comentario, c.editado,
+        $query = "SELECT c.id, u.id AS id_autor, u.nome AS usuario, u.foto_caminho AS foto_usuario, c.aula_id, c.comentario, c.data_comentario, c.editado,
               (SELECT COUNT(*) FROM likes_comentarios lc WHERE lc.comentario_id = c.id) AS likes,
               (CASE WHEN (SELECT COUNT(*) FROM likes_comentarios lc WHERE lc.comentario_id = c.id AND lc.user_id = :usuario_id) > 0 THEN 1 ELSE 0 END) AS user_liked
               FROM comentarios c

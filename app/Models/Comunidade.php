@@ -239,5 +239,31 @@ class Comunidade
         return 0;
     }
 
+    public function obterTopUsuariosCurtidas($id_curso)
+    {
+        $query = ' SELECT
+                u.nome as nome_usuario, u.foto_caminho as foto_usuario,
+                COUNT(n.id_usuario_notificado) as total_curtidas
+            FROM
+                notificacoes n
+            JOIN
+                usuarios u ON n.id_usuario_notificado = u.id
+            WHERE
+                n.tipo_notificacao = 3
+                AND u.id_curso = :id_curso
+            GROUP BY
+                u.id
+            ORDER BY
+                total_curtidas DESC
+            LIMIT 8
+        ';
+
+        $stmt = $this->con->prepare($query);
+        $stmt->bindParam(':id_curso', $id_curso, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 
 }
