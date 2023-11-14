@@ -1,23 +1,108 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
     <style>
-            * {margin: 0; padding: 0;}
-            header {display: flex; height: 80px; width: 100%; border-bottom: 1px solid; position: relative; align-items: center;} 
-            .redes-sociais {position: absolute; left: 90px; border: 1px solid;}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body,
+        .container {
+            height: 100%;
+            width: 100;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 5em;
+        }
+
+        .color-pickers>div {
+            margin-bottom: 0.5em;
+        }
+
+        .container>button {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            outline: none;
+            padding: 0.5em 0.75em;
+            cursor: pointer;
+            border-radius: 0.1em;
+        }
     </style>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css" />
 </head>
+
 <body>
-    <header>
-        <div class="redes-sociais">
-            <button class="facebook">facebook</button>
-            <button class="twitter">twittwer</button>
-            <button class="instagram">intagram</button>
-        </div>
-        
-    </header>
+    <section class="container">
+        <div class="color-pickers"></div>
+        <button>Add another pickr</button>
+    </section>
+
+    <script>
+        const container = document.querySelector('.color-pickers');
+        const btn = document.querySelector('button');
+
+
+        btn.addEventListener('click', () => {
+            const newElement = document.createElement('div');
+            container.appendChild(newElement);
+
+            const pickr = new Pickr({
+                el: newElement,
+                default: '#42445A',
+                theme: 'nano',
+                lockOpacity: true,
+
+                swatches: [
+                    'rgba(244, 67, 54, 1)',
+                    'rgba(233, 30, 99, 0.95)',
+                    'rgba(156, 39, 176, 0.9)',
+                    'rgba(103, 58, 183, 0.85)',
+                    'rgba(63, 81, 181, 0.8)',
+                    'rgba(33, 150, 243, 0.75)',
+                    'rgba(3, 169, 244, 0.7)',
+                    'rgba(0, 188, 212, 0.7)',
+                    'rgba(0, 150, 136, 0.75)',
+                    'rgba(76, 175, 80, 0.8)',
+                    'rgba(139, 195, 74, 0.85)',
+                    'rgba(205, 220, 57, 0.9)',
+                    'rgba(255, 235, 59, 0.95)',
+                    'rgba(255, 193, 7, 1)'
+                ],
+
+                components: {
+                    preview: true,
+                    opacity: true,
+                    hue: true,
+
+                    interaction: {
+                        hex: true,
+                        rgba: true,
+                        hsva: true,
+                        input: true,
+                        clear: true,
+                        save: true
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
 </body>
+
 </html>

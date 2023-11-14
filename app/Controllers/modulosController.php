@@ -167,7 +167,7 @@ class modulosController extends Controller
         $data['description'] = 'Assista às aulas e estude através do nosso material';
         $data['styles'] = array('painel', 'header', 'drag-drop-files', 'video-player', 'aula');
         $data['scripts_head'] = array('select');
-        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'pop-ups', 'deletar-aula', 'simple_select', 'drag-drop-files', 'comment-box', 'comment-btns', 'aula_concluida', 'like_dislike', 'op-btn', 'select-modulo');
+        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'pop-ups', 'deletar-aula', 'simple_select', 'drag-drop-files', 'comment-box', 'comment-btns', 'aula_concluida', 'like_dislike', 'dropdown', 'select-modulo');
 
 
         //load view
@@ -703,12 +703,38 @@ class modulosController extends Controller
 
     public function aulas_modulo()
     {
-        $this->sessao->verificaCurso();
+        $curso = $this->sessao->verificaCurso();
+
+        $cursoInfo = $this->cursosModel->getCurso($curso);
+
+        // Carrega dados do usuário
+        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Verifique se as variáveis POST estão definidas
             if (isset($_POST['id_modulo'])) {
-                echo "done!";
+
+                $id = $_POST['id_modulo'];
+
+                $this->sessao->checkParametro($id, $cursoInfo['url_principal']);
+
+                // Acesso ao modelo "Aulas"
+                $aulasModel = new Aulas();
+
+                //Busca no banco de dados pelas aulas do módulo
+                $aulas_modulo = $aulasModel->getAulas($id);
+
+                //Busca aulas concluidas pelo usuário
+                $aulasConcluidas = $aulasModel->getAulasConcluidas($usuario['id'], $curso);
+
+                // Adiciona as aulas concluídas ao array
+                foreach ($aulas_modulo as &$aula) {
+                    $aula['concluida'] = in_array($aula['id'], $aulasConcluidas);
+                }
+
+                // Retorna os dados em formato JSON
+                echo json_encode($aulas_modulo);
+
             }
         }
     }

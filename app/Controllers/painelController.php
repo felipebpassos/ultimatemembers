@@ -131,7 +131,7 @@ class painelController extends Controller
         $data['description'] = '';
         $data['styles'] = array('painel', 'header', 'search-bar', 'vendas');
         $data['scripts_head'] = array('abas', 'select');
-        $data['scripts_body'] = array('btn-selected', 'toggleSearch', 'menu-responsivo', 'simple_select', 'sales-charts');
+        $data['scripts_body'] = array('btn-selected', 'toggleSearch', 'menu-responsivo', 'simple_select', 'sales-charts', 'dropdown');
 
         //load view
         $this->loadTemplates($template, $data, $usuario);

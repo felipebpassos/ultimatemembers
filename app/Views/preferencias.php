@@ -46,9 +46,11 @@
 
                         <label for="">Cor de texto</label>
                         <input id="cor_texto" type="text" name="cor_texto" value="<?php echo $curso['cor_texto']; ?>" required>
+                        <div class="picker-primario"></div>
 
                         <label for="">Cor de fundo</label>
                         <input id="cor_fundo" type="text" name="cor_fundo" value="<?php echo $curso['cor_fundo']; ?>" required>
+                        <div class="picker-secundario"></div>
 
                         <ul class="fontes"></ul>
                         <script>

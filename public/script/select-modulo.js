@@ -38,8 +38,72 @@ $(document).ready(function () {
                 method: "POST",
                 data: { id_modulo: idModuloSelecionado },
                 success: function (data) {
-                    // Manipula a resposta bem-sucedida aqui
-                    console.log('Resposta da requisição AJAX:', data);
+
+                    // Parsing da resposta como JSON
+                    try {
+                        // Verifica se a resposta é um objeto (e não um array diretamente)
+                        data = typeof data === 'object' ? data : JSON.parse(data);
+                    } catch (error) {
+                        console.error('Erro ao fazer o parsing da resposta JSON:', error);
+                        return;
+                    }
+
+                    // Limpa o conteúdo atual das aulas
+                    $('.aulas').empty();
+
+                    // Adiciona as novas aulas ao conteúdo
+                    data.forEach(function (aula) {
+                        var nome_aula = aula['nome'];
+                        var id_aula = aula['id'];
+                        var capa = aula['capa'] ? aula['capa'].replace("./", "http://localhost/ultimatemembers/") : "http://localhost/ultimatemembers/public/img/video-default.png";
+
+                        // Verifica se a aula está marcada como concluída
+                        var checkboxMarcado = aula['concluida'];
+
+                        if (id_aula >= 0 && id_aula <= 9) {
+                            formattedId = "0" + id_aula; // Formata o ID para 0X (sendo X o ID)
+                        } else {
+                            formattedId = id_aula; // Mantém o ID como está se não estiver entre 0 e 9
+                        }
+
+                        // Verificar o comprimento da string
+                        if (nome_aula.length > 27) {
+                            // Cortar a string para os primeiros 22 caracteres e adicionar "..."
+                            nome_aula = nome_aula.substr(0, 27) + '...';
+                        }
+
+                        // Título, capa e descrição da aula.
+                        var aulaHtml = '<div class="aula">';
+                        aulaHtml += '<div class="aula-left-box">';
+                        aulaHtml += '<a href="' + url_principal + 'modulos/aula/' + formattedId + '" id="img-aula-3">';
+                        aulaHtml += '<img class="imagem-aula" src="' + capa + '" alt="Imagem da Aula">';
+                        aulaHtml += '</a>';
+                        aulaHtml += '<section>';
+                        aulaHtml += '<div class="info-aula">';
+                        aulaHtml += '<div class="nome-aula" style="font-weight: bold;">Aula ' + formattedId + ' - ' + nome_aula + '</div>';
+                        aulaHtml += '<div class="duracao-aula">00:00</div>';
+                        aulaHtml += '</div>';
+                        aulaHtml += '</section>';
+                        aulaHtml += '</div>';
+
+                        // Botões de ação da aula.
+                        aulaHtml += '<div class="opções-aula">';
+                        if (false) {
+                            aulaHtml += '<button class="editar-aula" id="editar-aula" data-id="' + id_aula + '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar Aula</span></button>';
+                            aulaHtml += '<button class="excluir-aula" id="excluir-aula" data-id="' + id_aula + '" style="margin-left:10px;"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>';
+                        } else {
+                            aulaHtml += '<label class="checkbox" style="margin-right:10px;" data-id="' + id_aula + '">';
+                            aulaHtml += '<input type="checkbox" ' + (checkboxMarcado ? 'checked' : '') + '>';
+                            aulaHtml += '<div class="checkmark"><i class="fa-solid fa-check"></i></div>';
+                            aulaHtml += '</label>';
+                        }
+                        aulaHtml += '</div>';
+
+                        aulaHtml += '</div>'; // Feche a div 'aula'
+
+                        // Adicione a aula ao conteúdo
+                        $('.aulas').append(aulaHtml);
+                    });
                 },
                 error: function (xhr, status, error) {
                     // Manipula erros aqui

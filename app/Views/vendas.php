@@ -34,7 +34,13 @@
 
         </div>
 
-        <button id="exportar"><i class="fa-solid fa-file-export"></i>Exportar</button>
+        <div class="exportar" style="position:relative;">
+            <button id="exportar"><i class="fa-solid fa-file-export"></i>Exportar</button>
+            <div class="dropdown">
+                <button id="xls-btn">XLS</button>
+                <button id="csv-btn">CSV</button>
+            </div>
+        </div>
 
     </div>
 

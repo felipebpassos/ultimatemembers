@@ -22,6 +22,8 @@
     }
     ?>
 
+    <!-- Pickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <!-- Font awesome -->
@@ -242,7 +244,8 @@
         <div class="bottom">
 
             <div class="copyright">
-                &copy; 2023, Pai do Rec | Desenvolvido por <a href="http://localhost/simplifyweb.com.br" target="_blank">Simplify
+                &copy; 2023, Pai do Rec | Desenvolvido por <a href="http://localhost/simplifyweb.com.br"
+                    target="_blank">Simplify
                     Web</a>
             </div>
 
@@ -274,7 +277,83 @@
         }
 
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
 
+    <script>
+        // Simple example, see optional options for more configuration.
+        const pickrPrimario = Pickr.create({
+            el: '.picker-primario',
+            theme: 'nano', // or 'monolith', or 'nano'
+
+            swatches: null,
+
+            default: corPrimaria,
+
+            defaultRepresentation: 'HEX',
+
+            components: {
+
+                // Main components
+                preview: true,
+                opacity: true,
+                hue: true,
+
+                // Input / output Options
+                interaction: {
+                    hex: true,
+                    rgba: true,
+                    input: true,
+                    clear: true,
+                    save: true
+                }
+            }
+        });
+
+        const pickrSecundario = Pickr.create({
+            el: '.picker-secundario',
+            theme: 'nano', // or 'monolith', or 'nano'
+
+            swatches: null,
+
+            default: corSecundaria,
+
+            defaultRepresentation: 'HEX',
+
+            components: {
+
+                // Main components
+                preview: true,
+                opacity: true,
+                hue: true,
+
+                // Input / output Options
+                interaction: {
+                    hex: true,
+                    rgba: true,
+                    input: true,
+                    clear: true,
+                    save: true
+                }
+            }
+        });
+
+        pickrPrimario.on('save', (color, instance) => {
+            // Obtenha o valor no formato desejado
+            var novaCor = color.toHEXA().toString('t');
+
+            // Atualize o valor do input #cor_texto
+            $('#cor_texto').val(novaCor);
+        });
+
+        pickrSecundario.on('save', (color, instance) => {
+            // Obtenha o valor no formato desejado
+            var novaCor = color.toHEXA().toString('t');
+
+            // Atualize o valor do input #cor_fundo
+            $('#cor_fundo').val(novaCor);
+        });
+
+    </script>
 
 </body>
 
