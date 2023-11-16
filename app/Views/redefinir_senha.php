@@ -18,17 +18,21 @@
         </div>
 
         <div class="campo">
-            <input type="password" name="senha" id="senha" placeholder="Nova senha" class="campo-input" required>
-            <span class="olho" onclick="togglePasswordVisibility()">
-                <i class="fa-solid fa-eye-slash" style="color: #000000;" id="togglePassword"></i>
+            <input type="email" name="email" autocomplete="email" placeholder="Repetir e-mail" class="campo-input" required>
+        </div>
+
+        <div class="campo">
+            <input type="password" name="senha" id="senha1" placeholder="Nova senha" class="campo-input" required>
+            <span class="olho" onclick="togglePasswordVisibility('senha1', 'togglePassword1')">
+                <i class="fa-solid fa-eye-slash" id="togglePassword1"></i>
             </span>
         </div>
 
         <div class="campo">
-            <input type="password" name="senha" id="senha" placeholder="Repetir nova senha" class="campo-input"
+            <input type="password" name="senha" id="senha2" placeholder="Repetir nova senha" class="campo-input"
                 required>
-            <span class="olho" onclick="togglePasswordVisibility()">
-                <i class="fa-solid fa-eye-slash" style="color: #000000;" id="togglePassword"></i>
+            <span class="olho" onclick="togglePasswordVisibility('senha2', 'togglePassword2')">
+                <i class="fa-solid fa-eye-slash" id="togglePassword2"></i>
             </span>
         </div>
 

@@ -57,9 +57,6 @@ $(document).ready(function () {
                         var id_aula = aula['id'];
                         var capa = aula['capa'] ? aula['capa'].replace("./", "http://localhost/ultimatemembers/") : "http://localhost/ultimatemembers/public/img/video-default.png";
 
-                        // Verifica se a aula está marcada como concluída
-                        var checkboxMarcado = aula['concluida'];
-
                         if (id_aula >= 0 && id_aula <= 9) {
                             formattedId = "0" + id_aula; // Formata o ID para 0X (sendo X o ID)
                         } else {
@@ -88,15 +85,10 @@ $(document).ready(function () {
 
                         // Botões de ação da aula.
                         aulaHtml += '<div class="opções-aula">';
-                        if (false) {
-                            aulaHtml += '<button class="editar-aula" id="editar-aula" data-id="' + id_aula + '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar Aula</span></button>';
-                            aulaHtml += '<button class="excluir-aula" id="excluir-aula" data-id="' + id_aula + '" style="margin-left:10px;"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>';
-                        } else {
-                            aulaHtml += '<label class="checkbox" style="margin-right:10px;" data-id="' + id_aula + '">';
-                            aulaHtml += '<input type="checkbox" ' + (checkboxMarcado ? 'checked' : '') + '>';
-                            aulaHtml += '<div class="checkmark"><i class="fa-solid fa-check"></i></div>';
-                            aulaHtml += '</label>';
-                        }
+
+                        // Adicione os botões HTML diretamente aos dados
+                        aulaHtml += aula['botoes_html'];
+
                         aulaHtml += '</div>';
 
                         aulaHtml += '</div>'; // Feche a div 'aula'

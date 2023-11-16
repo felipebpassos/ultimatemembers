@@ -730,6 +730,17 @@ class modulosController extends Controller
                 // Adiciona as aulas concluídas ao array
                 foreach ($aulas_modulo as &$aula) {
                     $aula['concluida'] = in_array($aula['id'], $aulasConcluidas);
+                    // Se o usuário for um administrador, adicione botões HTML aos dados
+                    if ($usuario['adm']) {
+                        // Adicione os botões HTML diretamente aos dados
+                        $aula['botoes_html'] = '<button class="editar-aula" id="editar-aula" data-id="' . $aula['id'] . '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar Aula</span></button>' .
+                            '<button class="excluir-aula" id="excluir-aula" data-id="' . $aula['id'] . '"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>';
+                    } else {
+                        $aula['botoes_html'] = '<label class="checkbox" style="margin-right:10px;" data-id="' . $aula['id'] . '">' .
+                        '<input type="checkbox" ' . ($aula['concluida'] ? 'checked' : '') . '>' . 
+                        '<div class="checkmark"><i class="fa-solid fa-check"></i></div>' . 
+                        '</label>';
+                    }
                 }
 
                 // Retorna os dados em formato JSON

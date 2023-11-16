@@ -2,12 +2,38 @@
     width: 80%;
     margin: auto;
 }
+
 .lista-preferências ul {
-    min-width: 100%; 
+    min-width: 100%;
     margin: auto;
 }
 
-.content {width: 80%; margin: 30px auto;}
+.content {
+    width: 80%;
+    margin: 40px auto;
+}
+
+.campo {margin-bottom: 20px;}
+
+.campo label {margin-bottom: 3px;}
+
+.campo-texto {
+    border-radius: 8px;
+    padding: 8px 10px;
+    color: var(--cor-primaria);
+    background-color: black;
+    width: 80%;
+    height: 40px;
+    box-sizing: border-box;
+    border: none;
+    outline: 1px solid var(--cor-secundaria-lighter);
+}
+
+#descricao_curso {
+    min-height: 200px;
+}
+
+#cor_texto, #cor_fundo {width: 100px;}
 
 /* select simples */
 

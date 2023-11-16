@@ -296,7 +296,7 @@
                     accept="video/*">
             </div>
 
-            <button class="btn-2" type="submit" style="margin: auto; margin-top: 40px;">Adicionar Módulo</button>
+            <button class="btn-2" type="submit" style="margin: auto; margin-top: 40px;">Editar Módulo</button>
         </form>
     </div>
 </div>

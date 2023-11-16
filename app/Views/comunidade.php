@@ -31,6 +31,10 @@
 
                         </div>
 
+                        <div class="publicacoes-relevantes">
+                            <h4>Publicações fixadas/relevantes</h4>
+                        </div>
+
                         <div class="search-container">
 
                             <div class="pesquisar">
@@ -141,13 +145,22 @@
                     <ul class="contributors">
                         <?php foreach ($contributors as $contributor): ?>
                             <li>
-                                <div class="foto-perfil-mini">
-                                    <img class="perfil-img" name="imagem"
-                                        src="http://localhost/ultimatemembers<?php echo (!empty($contributor['foto_usuario']) ? $contributor['foto_usuario'] : '/public/img/default.png'); ?>"
-                                        alt="Foto de Perfil" />
+                                <div style="display: flex;">
+                                    <div class="foto-perfil-mini">
+                                        <img class="perfil-img" name="imagem"
+                                            src="http://localhost/ultimatemembers<?php echo (!empty($contributor['foto_usuario']) ? $contributor['foto_usuario'] : '/public/img/default.png'); ?>"
+                                            alt="Foto de Perfil" />
+                                    </div>
+                                    <h5>
+                                        <?php echo obterPrimeiroEUltimoNome($contributor['nome_usuario']); ?>
+                                    </h5>
                                 </div>
-                                <h5><?php echo obterPrimeiroEUltimoNome($contributor['nome_usuario']); ?></h5>
-                                <?php echo $contributor['total_curtidas']; ?> curtidas
+                                <div style="display:flex;">
+                                    <span style="margin-right: 8px;">
+                                        <?php echo $contributor['total_curtidas']; ?>
+                                    </span>
+                                    <span><i class="fa-solid fa-heart"></i></span>
+                                </div>
                             </li>
                         <?php endforeach; ?>
                     </ul>

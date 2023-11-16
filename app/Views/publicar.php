@@ -16,7 +16,7 @@
                             <h3>Como fazer uma boa pergunta</h3><i class="fa-solid fa-circle-question"></i>
                         </div>
                         <svg width="18" height="12" viewBox="0 0 42 25">
-                            <path d="M3 3L21 21L39 3" stroke="black" stroke-width="7" stroke-linecap="round"></path>
+                            <path d="M3 3L21 21L39 3" stroke="var(--cor-primaria-dark)" stroke-width="7" stroke-linecap="round"></path>
                         </svg>
                     </li>
                     <div class="resposta">

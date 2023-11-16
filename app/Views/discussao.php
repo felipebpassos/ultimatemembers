@@ -37,14 +37,22 @@ $foto_autor = $discussao['foto'];
         </div>
         <div class="conteudo-pergunta">
             <div class="botoes">
-                <button id="like-discussao" data-id="<?php echo $discussao['id']; ?>">
-                    <i id="notliked"
-                        class="fa-regular fa-heart <?php echo $discussao['user_liked'] ? 'hidden' : ''; ?>"></i>
-                    <i id="liked" class="fa-solid fa-heart <?php echo $discussao['user_liked'] ? '' : 'hidden'; ?>"></i>
-                </button>
-                <button id="save-discussao" data-id="<?php echo $discussao['id']; ?>">
-                    <i class="fa-regular fa-bookmark"></i>
-                </button>
+                <?php if ($discussao['autor_id'] == $id): ?>
+                    <!-- Mostra os botões de excluir se o autor_id for igual a $id -->
+                    <button id="delete-discussao" data-id="<?php echo $discussao['id']; ?>">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                <?php else: ?>
+                    <!-- Mostra os botões de like e salvar se o autor_id não for igual a $id -->
+                    <button id="like-discussao" data-id="<?php echo $discussao['id']; ?>">
+                        <i id="notliked"
+                            class="fa-regular fa-heart <?php echo $discussao['user_liked'] ? 'hidden' : ''; ?>"></i>
+                        <i id="liked" class="fa-solid fa-heart <?php echo $discussao['user_liked'] ? '' : 'hidden'; ?>"></i>
+                    </button>
+                    <button id="save-discussao" data-id="<?php echo $discussao['id']; ?>">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </button>
+                <?php endif; ?>
             </div>
             <!-- Conteúdo da Discussão -->
             <p>
@@ -82,7 +90,9 @@ $foto_autor = $discussao['foto'];
                                 <i id="liked"
                                     class="fa-solid fa-heart <?php echo $resposta['user_liked'] ? '' : 'hidden'; ?>"></i>
                             </button>
-                            <span class="num-likes" data-id="<?php echo $resposta['id']; ?>"><?php echo $resposta['likes']; ?></span>
+                            <span class="num-likes" data-id="<?php echo $resposta['id']; ?>">
+                                <?php echo $resposta['likes']; ?>
+                            </span>
                         </div>
                         <p>
                             <?php echo $resposta['content']; ?>
@@ -105,26 +115,29 @@ $foto_autor = $discussao['foto'];
                 <?php endforeach; ?>
             </div>
         </div>
-        <form id="addResposta"
-            action="<?php echo $curso['url_principal']; ?>comunidade/responder/<?php echo $discussao['id']; ?>"
-            method="POST" enctype="multipart/form-data">
-            <div class="campo" style="padding:20px 30px; padding-bottom: 40px; border-radius: 0px;">
-                <h5 style="color: var(--cor-primaria-dark); margin-bottom:20px;">Publique uma Resposta</h5>
-                <div class="texto">
-                    <div class="botoes-formatar">
-                        <button type="button" id="btn-font-size"><i class="fa-solid fa-text-height"></i></button>
-                        <button type="button" id="btn-negrito"><i class="fa-solid fa-bold"></i></button>
-                        <button type="button" id="btn-italico"><i class="fa-solid fa-italic"></i></button>
-                        <button type="button" id="btn-list"><i class="fa-solid fa-list-ul"></i></button>
-                        <button type="button" id="btn-num-list"><i class="fa-solid fa-list-ol"></i></button>
-                        <button type="button" id="btn-img"><i class="fa-regular fa-image"></i></button>
+        <?php if ($discussao['autor_id'] != $id): ?>
+            <form id="addResposta"
+                action="<?php echo $curso['url_principal']; ?>comunidade/responder/<?php echo $discussao['id']; ?>"
+                method="POST" enctype="multipart/form-data">
+                <div class="campo" style="padding:20px 30px; padding-bottom: 40px; border-radius: 0px;">
+                    <h5 style="color: var(--cor-primaria-dark); margin-bottom:20px;">Publique uma Resposta</h5>
+                    <div class="texto">
+                        <div class="botoes-formatar">
+                            <button type="button" id="btn-font-size"><i class="fa-solid fa-text-height"></i></button>
+                            <button type="button" id="btn-negrito"><i class="fa-solid fa-bold"></i></button>
+                            <button type="button" id="btn-italico"><i class="fa-solid fa-italic"></i></button>
+                            <button type="button" id="btn-list"><i class="fa-solid fa-list-ul"></i></button>
+                            <button type="button" id="btn-num-list"><i class="fa-solid fa-list-ol"></i></button>
+                            <button type="button" id="btn-img"><i class="fa-regular fa-image"></i></button>
+                        </div>
+                        <textarea id="texto" name="texto" rows="4" cols="50" required
+                            style="border-radius: 3px;"></textarea>
                     </div>
-                    <textarea id="texto" name="texto" rows="4" cols="50" required style="border-radius: 3px;"></textarea>
                 </div>
-            </div>
-            <div class="submeter">
-                <button class="btn-2" type="submit">Publicar</button>
-            </div>
-        </form>
+                <div class="submeter">
+                    <button class="btn-2" type="submit">Publicar</button>
+                </div>
+            </form>
+        <?php endif; ?>
     </div>
 </main>

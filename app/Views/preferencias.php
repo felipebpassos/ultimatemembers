@@ -23,41 +23,63 @@
 
     <section id="geral" class="content">
 
-        <form action="<?php echo $curso['url_principal']; ?>painel/edit_geral/" method="post" enctype="multipart/form-data">
+        <form action="<?php echo $curso['url_principal']; ?>painel/edit_geral/" method="post"
+            enctype="multipart/form-data">
 
             <div class="container" style="padding:0px; margin:0px; margin-bottom:50px;">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-7">
 
-                        <label for="">Nome do Curso</label>
-                        <input id="nome_curso" type="text" name="nome_curso" value="<?php echo $curso['nome']; ?>" required>
+                        <div class="campo">
+                            <label for="">Nome do Curso</label>
+                            <input class="campo-texto" id="nome_curso" type="text" name="nome_curso"
+                                value="<?php echo $curso['nome']; ?>" required>
+                        </div>
 
-                        <label for="">Descrição do Curso</label>
-                        <textarea id="descricao_curso" name="descricao_curso"></textarea>
+                        <div class="campo">
+                            <label for="">Descrição do Curso</label>
+                            <textarea class="campo-texto" id="descricao_curso" name="descricao_curso"></textarea>
+                        </div>
 
-                        <label for="logo">Logo do Curso (Formatos aceitos: .png ou .jpeg):</label>
-                        <input type="file" id="logo" name="logo" accept=".ico, .png">
+                        <div class="campo">
+                            <label for="logo">Logo do Curso (Formatos aceitos: .png ou .jpeg):</label>
+                            <input type="file" id="logo" name="logo" accept=".ico, .png">
+                        </div>
 
-                        <label for="favicon">Favicon do Curso (Formato aceito: .ico):</label>
-                        <input type="file" id="favicon" name="favicon" accept=".ico, .png">
+                        <div class="campo">
+                            <label for="favicon">Favicon do Curso (Formato aceito: .ico):</label>
+                            <input type="file" id="favicon" name="favicon" accept=".ico, .png">
+                        </div>
 
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
 
-                        <label for="">Cor de texto</label>
-                        <input id="cor_texto" type="text" name="cor_texto" value="<?php echo $curso['cor_texto']; ?>" required>
-                        <div class="picker-primario"></div>
+                        <div class="campo">
+                            <label for="">Cor de texto</label>
+                            <div style="display:flex;">
+                                <input class="campo-texto" id="cor_texto" type="text" name="cor_texto"
+                                    value="<?php echo $curso['cor_texto']; ?>" required>
+                                <div class="picker-primario"></div>
+                            </div>
+                        </div>
 
-                        <label for="">Cor de fundo</label>
-                        <input id="cor_fundo" type="text" name="cor_fundo" value="<?php echo $curso['cor_fundo']; ?>" required>
-                        <div class="picker-secundario"></div>
+                        <div class="campo">
+                            <label for="">Cor de fundo</label>
+                            <div style="display:flex;">
+                                <input class="campo-texto" id="cor_fundo" type="text" name="cor_fundo"
+                                    value="<?php echo $curso['cor_fundo']; ?>" required>
+                                <div class="picker-secundario"></div>
+                            </div>
+                        </div>
 
-                        <ul class="fontes"></ul>
-                        <script>
+                        <div class="campo">
+                            <ul class="fontes"></ul>
+                            <script>
 
-                            $(".fontes").append(SelectSimples('', 'Selecione a fonte', ['Bai Jamjuree, sans-serif', 'Hind, sans-serif', 'Poppins, sans-serif', 'Roboto, sans-serif'], 'select-fonte', false));
+                                $(".fontes").append(SelectSimples('', 'Selecione a fonte', ['Bai Jamjuree, sans-serif', 'Hind, sans-serif', 'Poppins, sans-serif', 'Roboto, sans-serif'], 'select-fonte', false));
 
-                        </script>
+                            </script>
+                        </div>
 
                     </div>
                 </div>
