@@ -44,15 +44,15 @@
                     <div class="avaliação">
                         <p style="margin-left: 12px; margin-bottom: 0px;">Avalie esta aula:</p>
                         <div class="avaliacao-estrelas" style="margin-top: -3px;">
-                            <input type="radio" id="estrela5" name="avaliacao" value="5">
+                            <input type="radio" id="estrela5" name="avaliacao" value="5" <?php echo ($avaliacao == 5) ? 'checked' : ''; ?>>
                             <label for="estrela5"></label>
-                            <input type="radio" id="estrela4" name="avaliacao" value="4">
+                            <input type="radio" id="estrela4" name="avaliacao" value="4" <?php echo ($avaliacao == 4) ? 'checked' : ''; ?>>
                             <label for="estrela4"></label>
-                            <input type="radio" id="estrela3" name="avaliacao" value="3">
+                            <input type="radio" id="estrela3" name="avaliacao" value="3" <?php echo ($avaliacao == 3) ? 'checked' : ''; ?>>
                             <label for="estrela3"></label>
-                            <input type="radio" id="estrela2" name="avaliacao" value="2">
+                            <input type="radio" id="estrela2" name="avaliacao" value="2" <?php echo ($avaliacao == 2) ? 'checked' : ''; ?>>
                             <label for="estrela2"></label>
-                            <input type="radio" id="estrela1" name="avaliacao" value="1">
+                            <input type="radio" id="estrela1" name="avaliacao" value="1" <?php echo ($avaliacao == 1) ? 'checked' : ''; ?>>
                             <label for="estrela1"></label>
                         </div>
                     </div>

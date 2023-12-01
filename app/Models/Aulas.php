@@ -715,6 +715,62 @@ class Aulas
         return 0;
     }
 
+    // Método para pegar dados da avaliação de uma aula específica
+    public function getAvaliacao($aula_id, $user_id)
+    {
+        $query = 'SELECT nota
+              FROM avaliacoes
+              WHERE user_id = :user_id AND aula_id = :aula_id
+              LIMIT 1';
 
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':user_id', $user_id);
+        $stmt->bindValue(':aula_id', $aula_id);
+
+        if ($stmt->execute()) {
+            // Verifique se a avaliação foi encontrada
+            if ($stmt->rowCount() > 0) {
+                // Avaliação encontrada, retorne diretamente o valor da nota
+                return $stmt->fetchColumn();
+            }
+        }
+
+        // Se a avaliação não for encontrada, retorne null
+        return null;
+    }
+
+    // Método para criar nova avaliação
+    public function setAvaliacao($user_id, $aula_id, $nota, $feedback, $anonimo)
+    {
+        // Verifica se já existe uma avaliação do aluno na mesma aula
+        $existingAvaliacao = $this->getAvaliacao($user_id, $aula_id);
+
+        if ($existingAvaliacao) {
+            // Se existir, faz um UPDATE
+            $query = 'UPDATE avaliacoes
+                  SET nota = :nota, feedback = :feedback, data_avaliacao = NOW(), anonimo = :anonimo
+                  WHERE user_id = :user_id AND aula_id = :aula_id';
+
+            $stmt = $this->con->prepare($query);
+            $stmt->bindValue(':nota', $nota);
+            $stmt->bindValue(':feedback', $feedback);
+            $stmt->bindValue(':anonimo', $anonimo);
+            $stmt->bindValue(':user_id', $user_id);
+            $stmt->bindValue(':aula_id', $aula_id);
+        } else {
+            // Se não existir, faz uma INSERT
+            $query = 'INSERT INTO avaliacoes (user_id, aula_id, nota, feedback, data_avaliacao, anonimo) 
+                  VALUES (:user_id, :aula_id, :nota, :feedback, NOW(), :anonimo)';
+
+            $stmt = $this->con->prepare($query);
+            $stmt->bindValue(':user_id', $user_id);
+            $stmt->bindValue(':aula_id', $aula_id);
+            $stmt->bindValue(':nota', $nota);
+            $stmt->bindValue(':feedback', $feedback);
+            $stmt->bindValue(':anonimo', $anonimo);
+        }
+
+        return $stmt->execute();
+    }
 
 }

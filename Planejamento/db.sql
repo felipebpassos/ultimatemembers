@@ -1,6 +1,6 @@
 use reelsdecinema;
 
-drop table discussoes_likes;
+drop table discussoes_tags;
 
 ALTER TABLE usuarios
 ADD COLUMN instagram VARCHAR(255),
@@ -14,9 +14,9 @@ DROP COLUMN id_curso;
 
 SHOW CREATE TABLE notificacoes;
 
-UPDATE cursos
-SET cor_fundo = '#0b000f' 
-WHERE id = 2;  -- Condição para identificar o registro específico
+UPDATE lancamentos
+SET link_url = 'http://localhost/reelsdecinema/' 
+WHERE id = 1;  -- Condição para identificar o registro específico
 
 INSERT INTO fontes (nome)
 VALUES ('Bai Jamjuree, sans-serif');
@@ -41,12 +41,12 @@ ALTER TABLE tags_forum
 ADD CONSTRAINT fk_tags_forum_curso
 FOREIGN KEY (id_curso) REFERENCES cursos(id);
 
-select * from modulos;
-
 select * from usuarios;
 
+select * from notificacoes;
+
 INSERT INTO lancamentos (nome, capa, link_url)
-VALUES ('Reels de Cinema', './uploads/lançamentos/banners/lançamento01.png', 'http://localhost/ReelsDeCinema/');
+VALUES ('Reels de Cinema', './uploads/lançamentos/banners/lançamento01.png', 'http://localhost/reelsdecinema/');
 
 INSERT INTO lancamentos (nome, capa, link_url)
 VALUES ('Instagram Empreendedor', './uploads/lançamentos/banners/lançamento02.png', 'http://localhost/instaempreendedor/');
@@ -74,7 +74,14 @@ VALUES (8, 'Bônus: Tráfego Pago Ao Vivo!', './uploads/modulos/banners/modulo08
 
 -- Adicione a coluna "status" com valor padrão 1
 ALTER TABLE modulos
-ADD COLUMN status TINYINT DEFAULT 1 NOT NULL;
+ADD COLUMN mod_status TINYINT DEFAULT 1 NOT NULL;
+
+-- Adicione a coluna "data_lancamento" (assumindo que seja do tipo DATE)
+ALTER TABLE modulos
+ADD COLUMN data_lancamento DATE;
+
+ALTER TABLE modulos
+DROP COLUMN status;
 
 CREATE TABLE cursos (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -153,7 +160,9 @@ CREATE TABLE discussoes_likes (
     item_id INT NOT NULL,
     item_type ENUM('d', 'r') NOT NULL, -- Use 'd' para discussão e 'r' para resposta, em minúsculas.
     publish_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES usuarios(id)
+    FOREIGN KEY (user_id) REFERENCES usuarios(id),
+    FOREIGN KEY (item_id) REFERENCES discussoes(id) ON DELETE CASCADE,
+    FOREIGN KEY (item_id) REFERENCES discussoes_respostas(id) ON DELETE CASCADE
 ) CHARSET=utf8;
 
 CREATE TABLE aulas_concluidas (
@@ -223,6 +232,18 @@ CREATE TABLE notificacoes (
     viewed BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (id_usuario_notificado) REFERENCES usuarios(id),
     FOREIGN KEY (id_usuario_acao) REFERENCES usuarios(id)
+) CHARSET=utf8;
+
+CREATE TABLE avaliacoes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    aula_id INT NOT NULL,
+    nota TINYINT NOT NULL,
+    feedback TEXT,
+    data_avaliacao DATETIME NOT NULL,
+    anonimo BOOLEAN NOT NULL DEFAULT 0,
+    FOREIGN KEY (user_id) REFERENCES usuarios (id),
+    FOREIGN KEY (aula_id) REFERENCES aulas (id)
 ) CHARSET=utf8;
 
 

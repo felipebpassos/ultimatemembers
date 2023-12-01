@@ -151,12 +151,15 @@ class modulosController extends Controller
         //Busca Comentários da aula
         $comentarios = $aulasModel->getComentariosAula($id, $usuario['id']);
 
+        $avaliacao = $aulasModel->getAvaliacao($id, $usuario['id']);
+
         //Armazena dados necessários
         $data['aula'] = $aula;
         $data['aulas'] = $aulas_módulo;
         $data['modulos'] = $modulos;
         $data['aulasConcluidas'] = $aulasConcluidas;
         $data['comentarios'] = $comentarios;
+        $data['avaliacao'] = $avaliacao;
 
         //set template
         $template = 'painel-temp';
@@ -167,7 +170,7 @@ class modulosController extends Controller
         $data['description'] = 'Assista às aulas e estude através do nosso material';
         $data['styles'] = array('painel', 'header', 'drag-drop-files', 'video-player', 'aula');
         $data['scripts_head'] = array('select');
-        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'pop-ups', 'deletar-aula', 'simple_select', 'drag-drop-files', 'comment-box', 'comment-btns', 'aula_concluida', 'like_dislike', 'dropdown', 'select-modulo');
+        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'pop-ups', 'deletar-aula', 'simple_select', 'drag-drop-files', 'comment-box', 'comment-btns', 'aula_concluida', 'like_dislike', 'dropdown', 'select-modulo', 'avaliação');
 
 
         //load view
@@ -745,6 +748,28 @@ class modulosController extends Controller
 
                 // Retorna os dados em formato JSON
                 echo json_encode($aulas_modulo);
+
+            }
+        }
+    }
+
+    public function avalia_aula()
+    {
+        $this->sessao->verificaCurso();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Verifique se as variáveis POST estão definidas
+            if (isset($_POST['idAula']) && isset($_POST['avaliacao']) && isset($_POST['manterAnonimato']) && isset($_POST['aluno'])) {
+
+                $aula = $_POST['idAula'];
+                $avaliacao = $_POST['avaliacao'];
+                $anonimo = $_POST['manterAnonimato'];
+                $feedback = isset($_POST['feedback']) ? $_POST['feedback'] : null;
+                $aluno = $_POST['aluno'];
+
+                $aulasModel = new Aulas();
+
+                $aulasModel->setAvaliacao($aluno, $aula, $avaliacao, $feedback, $anonimo);
 
             }
         }

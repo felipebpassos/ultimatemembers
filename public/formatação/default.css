@@ -406,7 +406,7 @@ h6 {
 
 .redes-sociais button {
     border: none;
-    background-color: rgb(210, 210, 210);
+    background-color: rgb(40, 40, 40);
 }
 
 .facebook-button {
@@ -419,6 +419,7 @@ h6 {
 
 .redes-sociais i {
     font-size: 20px;
+    margin: 0;
 }
 
 .fade-in-element {

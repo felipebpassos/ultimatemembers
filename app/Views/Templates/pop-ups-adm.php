@@ -103,7 +103,7 @@
     </div>
 </div>
 
-<!-- Formulário para confirmação -->
+<!-- Formulário para confirmação para deletar -->
 <div id="confirmacao" class="popup">
     <span class="close" id="closeDelPopup">&times;</span>
     <h3>Tem certeza que deseja excluir a aula?</h3>

@@ -52,4 +52,4 @@
 
 </div>
 
-<p><a href="<?php echo $curso['url_principal']; ?>login/redefinir_senha/">Esqueci minha senha</a></p>
+<p><a href="<?php echo $curso['url_principal']; ?>login/redefinir_senha/">Esqueceu sua senha?</a></p>

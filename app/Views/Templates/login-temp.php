@@ -36,19 +36,21 @@
 
     <main>
 
-        <div class="pelicula-transparente">
+        <div class="banner-curso">
 
-            <div class="login-box">
+            <div class="pelicula-transparente"></div>
 
-                <div class="login-container">
+        </div>
 
-                    <?php
+        <div class="login-box">
 
-                    $this->loadViewOnTemplate($view, $pageData, $model_data);
+            <div class="login-container">
 
-                    ?>
+                <?php
 
-                </div>
+                $this->loadViewOnTemplate($view, $pageData, $model_data);
+
+                ?>
 
             </div>
 
