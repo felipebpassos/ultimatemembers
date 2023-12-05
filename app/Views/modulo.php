@@ -62,47 +62,52 @@ $video = !empty($modulo['video']) ? str_replace("./", "http://localhost/ultimate
         <div class="row">
             <div class="col-lg-6" style="padding: 0 25px 0 0 !important;">
 
-                <section class="geral">
+                <div class="moduloInfo" style="background-color: var(--cor-secundaria-light); border-radius: 5px; padding-bottom: 10px;">
 
-                    <div class="descricao-modulo">
-                        <div class="section-header" style="margin: 0;">
-                            <h4>Resumo</h4>
+                    <section class="geral">
+
+                        <div class="descricao-modulo">
+                            <div class="section-header" style="margin: 0;">
+                                <h4>Resumo</h4>
+                            </div>
+                            <p>Este módulo se concentra em explorar as estratégias avançadas para criar conteúdo
+                                envolvente
+                                e
+                                impactante nas plataformas de mídia social. Você aprenderá a utilizar ferramentas
+                                poderosas
+                                para
+                                a edição de vídeos, além de entender como contar histórias cativantes através de vídeos
+                                curtos.
+                                Prepare-se para elevar suas habilidades de criação de conteúdo ao próximo nível.</p>
                         </div>
-                        <p>Este módulo se concentra em explorar as estratégias avançadas para criar conteúdo
-                            envolvente
-                            e
-                            impactante nas plataformas de mídia social. Você aprenderá a utilizar ferramentas poderosas
-                            para
-                            a edição de vídeos, além de entender como contar histórias cativantes através de vídeos
-                            curtos.
-                            Prepare-se para elevar suas habilidades de criação de conteúdo ao próximo nível.</p>
-                    </div>
 
-                </section>
+                    </section>
 
-                <section class="preview-expand-component">
+                    <section class="preview-expand-component">
 
-                    <h4>O que você aprenderá</h4>
+                        <h4>O que você aprenderá</h4>
 
-                    <ul>
-                        <li>Entendendo o poder do conteúdo visual para marketing digital</li>
-                        <li>Explorando o formato Reels no Instagram</li>
-                        <li>Desvendar as principais ferramentas o CapCut</li>
-                        <li>Como contar histórias envolventes através de vídeos curtos</li>
-                        <li>Criando um início atraente, meio cativante e final impactante</li>
-                    </ul>
+                        <ul>
+                            <li>Entendendo o poder do conteúdo visual para marketing digital</li>
+                            <li>Explorando o formato Reels no Instagram</li>
+                            <li>Desvendar as principais ferramentas o CapCut</li>
+                            <li>Como contar histórias envolventes através de vídeos curtos</li>
+                            <li>Criando um início atraente, meio cativante e final impactante</li>
+                        </ul>
 
-                </section>
+                    </section>
 
-                <section class="preview-expand-component">
+                    <section class="preview-expand-component">
 
-                    <h4>Pré-requisitos</h4>
+                        <h4>Pré-requisitos</h4>
 
-                    <p>Este módulo é recomendado para alunos que já tenham conhecimento básico em edição de vídeos e
-                        marketing
-                        digital. Familiaridade com as plataformas de mídia social é uma vantagem.</p>
+                        <p>Este módulo é recomendado para alunos que já tenham conhecimento básico em edição de vídeos e
+                            marketing
+                            digital. Familiaridade com as plataformas de mídia social é uma vantagem.</p>
 
-                </section>
+                    </section>
+
+                </div>
 
             </div>
 

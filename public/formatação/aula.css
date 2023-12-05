@@ -50,6 +50,10 @@ main {
     color: gold;
 }
 
+.avaliacao-estrelas label:hover {
+    color: darkgray; /* Cor mais escura ao passar o mouse */
+}
+
 #proxima {
     display: flex;
     align-items: center;
@@ -296,10 +300,10 @@ label {
     overflow-y: auto;
     width: 100%;
     margin-top: 0px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
     padding: 16px;
-    background-color: #ededed;
+    background-color: #222222;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
     display: none;
     z-index: 9999;
@@ -310,12 +314,12 @@ label {
 }
 
 .items::-webkit-scrollbar-track {
-    background: rgb(231, 231, 231);
+    background: #222222;
     border-radius: 25px;
 }
 
 .items::-webkit-scrollbar-thumb {
-    background: rgb(200, 200, 200);
+    background: #151515;
     border-radius: 25px;
 }
 
@@ -329,10 +333,11 @@ label {
     border-radius: 10px;
     transition: 0.3s;
     margin: 0px;
+    color: var(--cor-primaria-light);
 }
 
 .item:hover {
-    background-color: rgb(225, 225, 225);
+    background-color: #151515;
     cursor: pointer;
 }
 

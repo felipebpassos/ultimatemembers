@@ -13,9 +13,13 @@
     margin: 40px auto;
 }
 
-.campo {margin-bottom: 20px;}
+.campo {
+    margin-bottom: 20px;
+}
 
-.campo label {margin-bottom: 3px;}
+.campo label {
+    margin-bottom: 3px;
+}
 
 .campo-texto {
     border-radius: 8px;
@@ -33,115 +37,21 @@
     min-height: 200px;
 }
 
-#cor_texto, #cor_fundo {width: 100px;}
-
-/* select simples */
-
-.fontes {
-    padding: 0px;
-    margin: 0px;
-    font-size: 16px;
-    font-weight: lighter;
+.preview {
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    border: 1px solid var(--cor-primaria);
+    margin-right: 10px;
 }
 
-.selecao-simples {
-    display: inline-block;
-    margin-right: 20px;
+#cor_texto,
+#cor_fundo {
+    width: 100px;
 }
 
-.selecao-simples .descricao {
-    font-weight: bold;
-    color: var(--cor-secundaria-lighter);
-}
-
-.fontes label {
-    padding-left: 10px;
-    width: 100%;
-}
-
-.container-select {
-    width: calc(100%);
-    height: 25px;
-    background-color: transparent;
-    margin-top: 3px;
-    margin-right: 20px;
-    border-radius: 8px;
-}
-
-.container-select.disabled {
-    background-color: var(--background-container);
-    border-color: gray;
-}
-
-.opçoes_selecao {
-    display: flex;
-    height: 25px;
-    width: calc(100% - 20px);
-    padding-left: 15px;
-    border-radius: 10px;
-    cursor: pointer;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.opçoes_selecao.open~.items {
+#fontes {
+    padding: 5px;
     display: block;
-}
-
-.flecha {
-    margin-left: 5px;
-}
-
-.opçoes_selecao.open .flecha i {
-    transform: rotate(-180deg);
-    transition: 0.5s;
-}
-
-.opçoes_selecao.disabled {
-    cursor: not-allowed;
-}
-
-.items {
-    position: absolute;
-    max-height: 240px;
-    overflow-y: auto;
-    width: 260px;
-    margin-top: 15px;
-    border-radius: 10px;
-    padding: 16px;
-    background-color: #ededed;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-    display: none;
-    z-index: 9999;
-}
-
-.items::-webkit-scrollbar {
-    width: 7px;
-}
-
-.items::-webkit-scrollbar-track {
-    background: rgb(231, 231, 231);
-    border-radius: 25px;
-}
-
-.items::-webkit-scrollbar-thumb {
-    background: rgb(200, 200, 200);
-    border-radius: 25px;
-}
-
-.item {
-    display: flex;
-    align-items: center;
-    list-style: none;
-    height: 50px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 10px;
-    transition: 0.3s;
-    margin: 0px;
-}
-
-.item:hover {
-    background-color: rgb(225, 225, 225);
-    cursor: pointer;
+    height: 40px;
 }

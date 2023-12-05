@@ -40,9 +40,9 @@
     transition: all 0.2s ease;
 }
 
-.pesquisar button:hover {
-    background-color: var(--cor-primaria-dark);
-    box-shadow: none !important;
+.pesquisar button:hover i {
+    transform: scale(1.08);
+    transition: transform 0.5s ease;
 }
 
 .pesquisar button:active {

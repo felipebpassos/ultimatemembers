@@ -13,6 +13,8 @@
     position: relative;
 }
 
+.quadro h3, .chart-box h3 {color: var(--cor-primaria-light);}
+
 .dados {
     display: flex;
     padding-top: 30px;

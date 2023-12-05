@@ -21,7 +21,7 @@
                     <a href=""><button class="relatorio"><i class="fa-solid fa-wallet"></i>Saldo a receber</button></a>
                 </div>
                 <div class="col-md-4">
-                    <a href=""><button class="relatorio"><i class="fa-solid fa-star"></i>Avaliação dos assinantes</button></a>
+                    <a href="<?php echo $curso['url_principal'] . 'relatorios/avaliacoes/';?>"><button class="relatorio"><i class="fa-solid fa-star"></i>Avaliação dos assinantes</button></a>
                 </div>
                 <div class="col-md-4">
                     <a href=""><button class="relatorio"><i class="fa-solid fa-face-smile"></i>Engajamento dos alunos</button></a>

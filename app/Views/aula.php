@@ -42,20 +42,58 @@
                 <div class="video-options">
 
                     <div class="avaliação">
-                        <p style="margin-left: 12px; margin-bottom: 0px;">Avalie esta aula:</p>
-                        <div class="avaliacao-estrelas" style="margin-top: -3px;">
-                            <input type="radio" id="estrela5" name="avaliacao" value="5" <?php echo ($avaliacao == 5) ? 'checked' : ''; ?>>
-                            <label for="estrela5"></label>
-                            <input type="radio" id="estrela4" name="avaliacao" value="4" <?php echo ($avaliacao == 4) ? 'checked' : ''; ?>>
-                            <label for="estrela4"></label>
-                            <input type="radio" id="estrela3" name="avaliacao" value="3" <?php echo ($avaliacao == 3) ? 'checked' : ''; ?>>
-                            <label for="estrela3"></label>
-                            <input type="radio" id="estrela2" name="avaliacao" value="2" <?php echo ($avaliacao == 2) ? 'checked' : ''; ?>>
-                            <label for="estrela2"></label>
-                            <input type="radio" id="estrela1" name="avaliacao" value="1" <?php echo ($avaliacao == 1) ? 'checked' : ''; ?>>
-                            <label for="estrela1"></label>
-                        </div>
+
+                        <?php if ($adm): ?>
+
+                            <?php
+                            if (!empty($avaliacao)) {
+                                // Calcula a média das notas
+                                $totalNotas = count($avaliacao);
+                                $somaNotas = array_sum(array_column($avaliacao, 'nota'));
+                                $mediaNota = $somaNotas / $totalNotas;
+
+                                // Verifica se a média é um número inteiro
+                                if ($mediaNota == intval($mediaNota)) {
+                                    // Se for inteiro, não adiciona casas decimais
+                                    $mediaNota = intval($mediaNota) . '/5<i class="fa-solid fa-star"
+                                    style="color: gold; padding-left:8px;"></i>';
+                                } else {
+                                    // Se não for inteiro, usa number_format para uma casa decimal
+                                    $mediaNota = number_format($mediaNota, 1) . '/5<i class="fa-solid fa-star"
+                                    style="color: gold; padding-left:8px;"></i>';
+                                }
+                            } else {
+                                $mediaNota = '-';
+                            }
+                            ?>
+
+                            <div class="nota-media" style="display: flex; max-width: 300px;">
+                                <p style="margin-left: 12px; margin-bottom: 0px; margin-right: 8px;">Avaliação média:</p>
+                                <span id="nota-media" style="margin-right: 5px;">
+                                    <?php echo $mediaNota; ?>
+                                </span><label style="width: fit-content;"></label>
+                            </div>
+
+                        <?php else: ?>
+
+                            <p style="margin-left: 12px; margin-bottom: 0px;">Avalie esta aula:</p>
+                            <div class="avaliacao-estrelas" style="margin-top: -3px;">
+                                <input type="radio" id="estrela5" name="avaliacao" value="5" <?php echo ($avaliacao == 5) ? 'checked' : ''; ?>>
+                                <label for="estrela5"></label>
+                                <input type="radio" id="estrela4" name="avaliacao" value="4" <?php echo ($avaliacao == 4) ? 'checked' : ''; ?>>
+                                <label for="estrela4"></label>
+                                <input type="radio" id="estrela3" name="avaliacao" value="3" <?php echo ($avaliacao == 3) ? 'checked' : ''; ?>>
+                                <label for="estrela3"></label>
+                                <input type="radio" id="estrela2" name="avaliacao" value="2" <?php echo ($avaliacao == 2) ? 'checked' : ''; ?>>
+                                <label for="estrela2"></label>
+                                <input type="radio" id="estrela1" name="avaliacao" value="1" <?php echo ($avaliacao == 1) ? 'checked' : ''; ?>>
+                                <label for="estrela1"></label>
+                            </div>
+
+                        <?php endif; ?>
+
                     </div>
+
                     <div class="opções-aula">
                         <button class="op-aula"><i class="fa-regular fa-file-pdf"></i><span
                                 class="legenda">Apostila</span></button>
@@ -101,8 +139,26 @@
 
                 <div class="comentarios-box">
 
+                    <?php
+
+                    $num_de_comentarios = count($comentarios);
+
+                    if ($num_de_comentarios > 0 && $num_de_comentarios <= 9) {
+                        $num_de_comentarios = sprintf("0%d", $num_de_comentarios);
+                    }
+
+                    if ($num_de_comentarios == 1) {
+                        $num_de_comentarios = $num_de_comentarios . " Comentário";
+                    } elseif ($num_de_comentarios == 0) {
+                        $num_de_comentarios = "Nenhum Comentário";
+                    } else {
+                        $num_de_comentarios = $num_de_comentarios . " Comentários";
+                    }
+
+                    ?>
+
                     <form class="comentarios-header">
-                        <p style="margin: 0px;">69 Comentários</p>
+                        <p style="margin: 0px;"><?php echo $num_de_comentarios;?></p>
                         <select name="sort" class="sort_by">
                             <option value="" disabled selected>Ordenar por</option>
                             <option value="relevancia">Relevância</option>

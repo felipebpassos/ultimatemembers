@@ -4,14 +4,16 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
 
     <!-- ... meta tags, título e icone ... -->
     <?php echo isset($description) && !empty($description) ? '<meta name="description" content="' . $description . '">' : ''; ?>
     <title>
         <?php echo $title; ?>
     </title>
-    <link rel="icon" href="http://localhost/ultimatemembers/public/img/icone.ico">
+
+    <?php $favicon = !empty($curso['url_favicon']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_favicon']) : "http://localhost/ultimatemembers/public/img/logo-default.png"; ?>
+    <link rel="icon" href="<?php echo $favicon; ?>">
 
     <!-- ... estilos ... -->
     <link rel="stylesheet" href="http://localhost/ultimatemembers/public/formatação/default.css">
@@ -57,7 +59,8 @@
 
             <ul class="menu">
                 <li><a href="<?php echo $curso['url_principal']; ?>painel/">
-                        <img class="logo" src="http://localhost/ultimatemembers/public/img/logo.png" alt="logo">
+                        <?php $logo = !empty($curso['url_logo']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_logo']) : "http://localhost/ultimatemembers/public/img/logo-default.png"; ?>
+                        <img class="logo" src="<?php echo $logo; ?>" alt="logo">
                     </a></li>
                 <li class="op-menu-high">
                     <p>Aulas</p>
@@ -146,7 +149,7 @@
                             echo '<a href="' . $curso['url_principal'] . 'painel/vendas/">
                                     <li><i class="fa-solid fa-arrow-trend-up"></i><span>Vendas</span></li>
                                 </a>
-                                <a href="' . $curso['url_principal'] . 'painel/relatorios/">
+                                <a href="' . $curso['url_principal'] . 'relatorios/">
                                     <li><i class="fa-solid fa-magnifying-glass-chart"></i><span>Relatórios</span></li>
                                 </a>';
                         } else {

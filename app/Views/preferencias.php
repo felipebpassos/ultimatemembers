@@ -42,13 +42,27 @@
                         </div>
 
                         <div class="campo">
-                            <label for="logo">Logo do Curso (Formatos aceitos: .png ou .jpeg):</label>
-                            <input type="file" id="logo" name="logo" accept=".ico, .png">
+                            <div style="display:flex; align-items:center;">
+                                <div class="preview">
+                                    <img src="" alt="">
+                                </div>
+                                <div>
+                                    <label for="logo">Logo do Curso (Formatos aceitos: .png ou .jpeg):</label>
+                                    <input type="file" id="logo" name="logo" accept=".ico, .png">
+                                </div>
+                            </div>
                         </div>
 
                         <div class="campo">
-                            <label for="favicon">Favicon do Curso (Formato aceito: .ico):</label>
-                            <input type="file" id="favicon" name="favicon" accept=".ico, .png">
+                            <div style="display:flex; align-items:center;">
+                                <div class="preview">
+                                    <img src="" alt="">
+                                </div>
+                                <div>
+                                    <label for="favicon">Favicon do Curso (Formato aceito: .ico):</label>
+                                    <input type="file" id="favicon" name="favicon" accept=".ico, .png">
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -64,7 +78,7 @@
                         </div>
 
                         <div class="campo">
-                            <label for="">Cor de fundo</label>
+                            <label for="cor_fundo">Cor de fundo</label>
                             <div style="display:flex;">
                                 <input class="campo-texto" id="cor_fundo" type="text" name="cor_fundo"
                                     value="<?php echo $curso['cor_fundo']; ?>" required>
@@ -73,12 +87,14 @@
                         </div>
 
                         <div class="campo">
-                            <ul class="fontes"></ul>
-                            <script>
-
-                                $(".fontes").append(SelectSimples('', 'Selecione a fonte', ['Bai Jamjuree, sans-serif', 'Hind, sans-serif', 'Poppins, sans-serif', 'Roboto, sans-serif'], 'select-fonte', false));
-
-                            </script>
+                            <label for="fontes">Fonte</label>
+                            <select id="fontes" name="fontes">
+                                <option value="jamjuree" selected style="font-family: 'Bai Jamjuree', sans-serif;">Bai Jamjuree, sans-serif</option>
+                                <option value="hindi" style="font-family: 'Hindi', sans-serif;">Hind, sans-serif</option>
+                                <option value="roboto" style="font-family: 'Roboto', sans-serif;">Roboto, sans-serif</option>
+                                <option value="poppins" style="font-family: 'Poppins', sans-serif;">Poppins, sans-serif</option>
+                                <option value="montserrat" style="font-family: 'Montserrat', sans-serif;">Montserrat, sans-serif</option>
+                            </select>
                         </div>
 
                     </div>

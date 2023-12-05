@@ -151,7 +151,11 @@ class modulosController extends Controller
         //Busca Comentários da aula
         $comentarios = $aulasModel->getComentariosAula($id, $usuario['id']);
 
-        $avaliacao = $aulasModel->getAvaliacao($id, $usuario['id']);
+        if ($usuario['adm']) {
+            $avaliacao = $aulasModel->getAvaliacoesDaAula($id);
+        } else {
+            $avaliacao = $aulasModel->getAvaliacao($id, $usuario['id']);
+        }
 
         //Armazena dados necessários
         $data['aula'] = $aula;
@@ -170,7 +174,11 @@ class modulosController extends Controller
         $data['description'] = 'Assista às aulas e estude através do nosso material';
         $data['styles'] = array('painel', 'header', 'drag-drop-files', 'video-player', 'aula');
         $data['scripts_head'] = array('select');
-        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'pop-ups', 'deletar-aula', 'simple_select', 'drag-drop-files', 'comment-box', 'comment-btns', 'aula_concluida', 'like_dislike', 'dropdown', 'select-modulo', 'avaliação');
+        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'pop-ups', 'deletar-aula', 'simple_select', 'drag-drop-files', 'comment-box', 'comment-btns', 'aula_concluida', 'like_dislike', 'dropdown', 'select-modulo');
+        if (!$usuario['adm']) {
+            $data['scripts_body'][] = 'avaliação';
+        }
+
 
 
         //load view
@@ -740,9 +748,9 @@ class modulosController extends Controller
                             '<button class="excluir-aula" id="excluir-aula" data-id="' . $aula['id'] . '"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>';
                     } else {
                         $aula['botoes_html'] = '<label class="checkbox" style="margin-right:10px;" data-id="' . $aula['id'] . '">' .
-                        '<input type="checkbox" ' . ($aula['concluida'] ? 'checked' : '') . '>' . 
-                        '<div class="checkmark"><i class="fa-solid fa-check"></i></div>' . 
-                        '</label>';
+                            '<input type="checkbox" ' . ($aula['concluida'] ? 'checked' : '') . '>' .
+                            '<div class="checkmark"><i class="fa-solid fa-check"></i></div>' .
+                            '</label>';
                     }
                 }
 

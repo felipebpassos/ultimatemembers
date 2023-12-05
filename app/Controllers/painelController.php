@@ -129,38 +129,11 @@ class painelController extends Controller
         $data['view'] = 'vendas';
         $data['title'] = 'Dashboard | Vendas';
         $data['description'] = '';
-        $data['styles'] = array('painel', 'header', 'search-bar', 'vendas');
+        $data['styles'] = array('painel', 'header', 'search-bar', 'relatorios');
         $data['scripts_head'] = array('abas', 'select');
         $data['scripts_body'] = array('btn-selected', 'toggleSearch', 'menu-responsivo', 'simple_select', 'sales-charts', 'dropdown');
 
         //load view
-        $this->loadTemplates($template, $data, $usuario);
-
-    }
-
-    public function relatorios()
-    {
-        $curso = $this->sessao->verificaCurso();
-
-        $cursoInfo = $this->cursosModel->getCurso($curso);
-
-        $data['curso'] = $cursoInfo;
-
-        // Carrega dados do usuário
-        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
-
-        //set template
-        $template = 'painel-temp';
-
-        //set page data
-        $data['view'] = 'relatorios';
-        $data['title'] = 'Relatórios | ' . $cursoInfo['nome'];
-        $data['description'] = 'Descrição do curso';
-        $data['styles'] = array('painel', 'header', 'relatorios');
-        $data['scripts_head'] = array('');
-        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo');
-
-        // Carrega a view passando $_SESSION['usuario']
         $this->loadTemplates($template, $data, $usuario);
 
     }
@@ -225,16 +198,80 @@ class painelController extends Controller
 
         // Verifica se o formulário foi enviado via método POST
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
             if (isset($_POST['nome_curso']) && isset($_POST["cor_texto"]) && isset($_POST["cor_fundo"])) {
 
                 $nomeCurso = $_POST['nome_curso'];
                 $corTexto = $_POST["cor_texto"];
                 $corFundo = $_POST["cor_fundo"];
 
-
                 $cursosModel = new Cursos();
 
                 $cursoInfo = $cursosModel->getCurso($curso);
+
+                // Verifica se há foto de logo fornecida
+                if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK && !empty($_FILES['logo'])) {
+
+                    $logo = $cursosModel->uploadFile($_FILES['logo'], $cursoInfo['dir_name']);
+
+                    if ($logo) {
+
+                        // Obtém caminho antigo da do video
+                        $logoAntiga = $cursosModel->getPathFile($curso, 'logo');
+
+                        $result = $cursosModel->updateFile($curso, $logo, $logoAntiga, 'logo');
+
+                        if ($result) {
+
+                            print_r('Sucesso no upload');
+
+                        } else {
+
+                            print_r('Erro ao editar Logo');
+                            exit;
+
+                        }
+
+                    } else {
+
+                        print_r('Erro no upload');
+                        exit;
+
+                    }
+
+                }
+
+                // Verifica se há favicon fornecido
+                if (isset($_FILES['favicon']) && $_FILES['favicon']['error'] === UPLOAD_ERR_OK && !empty($_FILES['favicon'])) {
+
+                    $favicon = $cursosModel->uploadFile($_FILES['favicon'], $cursoInfo['dir_name']);
+
+                    if ($favicon) {
+
+                        // Obtém caminho antigo da do video
+                        $faviconAntigo = $cursosModel->getPathFile($curso, 'favicon');
+
+                        $result = $cursosModel->updateFile($curso, $favicon, $faviconAntigo, 'favicon');
+
+                        if ($result) {
+
+                            print_r('Sucesso no upload');
+
+                        } else {
+
+                            print_r('Erro ao editar favicon');
+                            exit;
+
+                        }
+
+                    } else {
+
+                        print_r('Erro no upload');
+                        exit;
+
+                    }
+
+                }
 
                 // Salva dados da nova aula no banco de dados
                 $result = $cursosModel->updateCurso($curso, $nomeCurso, $corTexto, $corFundo);

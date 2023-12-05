@@ -32,8 +32,102 @@
                         </div>
 
                         <div class="publicacoes-relevantes">
-                            <h4>Publicações fixadas/relevantes</h4>
+
+                            <?php foreach ($topDiscussoes as $discussao): ?>
+                                <?php
+                                $discussaoid = $discussao['id'];
+                                $title = $discussao['title'];
+                                $content = $discussao['content'];
+                                $autor_id = $discussao['autor_id'];
+                                $autor = obterPrimeiroEUltimoNome($discussao['autor']);
+                                $foto_autor = (!empty($discussao['foto']) ? $discussao['foto'] : '/public/img/default.png');
+                                $user_liked = $discussao['user_liked'];
+                                $publicacao = calcularTempoDecorrido($discussao['publish_date']);
+                                ?>
+
+                                <div class="slides">
+
+                                    <div style="display:flex; align-items:center;">
+
+                                        <div class="foto-perfil-mini"><img class="perfil-img" name="imagem"
+                                                src="http://localhost/ultimatemembers<?php echo $foto_autor; ?>"
+                                                alt="Foto de Perfil" /></div>
+                                        <div class="box">
+                                            <span style="font-size: 22px; font-weight: bold;">
+                                                <?php echo $title; ?>
+                                            </span>
+                                            <div style="display:flex;">
+                                                <p style="font-size: 13px; margin: 10px 20px 0px 0px;"><i
+                                                        class="fa-regular fa-circle-user " style="margin-right:5px;"></i>
+                                                    <?php echo $autor; ?>
+                                                </p>
+                                                <p style="font-size: 13px; margin: 10px 20px 0px 0px;"><i
+                                                        class="fa-regular fa-clock"></i>
+                                                    <?php echo $publicacao; ?>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="conteudo-pergunta">
+                                        <div class="botoes">
+                                            <?php if ($autor_id == $id): ?>
+                                                <!-- Mostra os botões de excluir se o autor_id for igual a $id -->
+                                                <button id="delete-discussao" data-id="<?php echo $discussaoid; ?>">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            <?php else: ?>
+                                                <!-- Mostra os botões de like e salvar se o autor_id não for igual a $id -->
+                                                <button id="like-discussao" data-id="<?php echo $discussaoid; ?>">
+                                                    <i id="notliked"
+                                                        class="fa-regular fa-heart <?php echo $user_liked ? 'hidden' : ''; ?>"></i>
+                                                    <i id="liked"
+                                                        class="fa-solid fa-heart <?php echo $user_liked ? '' : 'hidden'; ?>"></i>
+                                                </button>
+                                                <button id="save-discussao" data-id="<?php echo $discussaoid; ?>">
+                                                    <i class="fa-regular fa-bookmark"></i>
+                                                </button>
+                                            <?php endif; ?>
+                                        </div>
+                                        <!-- Conteúdo da Discussão -->
+                                        <p>
+                                            <?php echo $content; ?>
+                                        </p>
+                                    </div>
+
+                                </div>
+
+                            <?php endforeach; ?>
+
+                            <div class="fade-bottom"></div>
+
+                            <div class="dots">
+                                <?php for ($i = 0; $i < count($topDiscussoes); $i++): ?>
+                                    <span class="dot" onclick="currentSlide(<?php echo $i + 1; ?>)"></span>
+                                <?php endfor; ?>
+                            </div>
+
+                            <div class="bottom-options">
+                                <ul class="engajamento" style="padding-left: 60px;">
+                                    <li><i class="fa-solid fa-heart"></i><span>12</span></li>
+                                    <li><i class="fa-solid fa-comments"></i><span>6</span></li>
+                                </ul>
+                                <a href="">Ver Publicação</a>
+                            </div>
+
+                            <div class="arrows">
+                                <button class="prev" onclick="plusSlides(-1)"
+                                    style="margin-right: 15px; background-color: transparent; border: none;"><img
+                                        src="http://localhost/ultimatemembers/public/img/preview.png" width="40px"
+                                        alt="anterior"></button>
+                                <button class="next" onclick="plusSlides(1)"
+                                    style="background-color: transparent; border: none;"><img
+                                        src="http://localhost/ultimatemembers/public/img/next.png" width="40px"
+                                        alt="próximo"></button>
+                            </div>
                         </div>
+
 
                         <div class="search-container">
 

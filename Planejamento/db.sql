@@ -9,8 +9,8 @@ ADD COLUMN linkedin VARCHAR(255);
 
 ALTER TABLE respostas_comentarios DROP FOREIGN KEY fk_respostas_comentarios_curso;
 
-ALTER TABLE respostas_comentarios
-DROP COLUMN id_curso;
+ALTER TABLE cursos
+DROP COLUMN dir_name;
 
 SHOW CREATE TABLE notificacoes;
 
@@ -30,20 +30,20 @@ VALUES ('Instagram Empreendedor', '/uploads/cursos/logos/logo.png', 'http://loca
 INSERT INTO cursos (nome, url_logo, url_principal, fonte_id, infoprodutor_id)
 VALUES ('Reels de Cinema', '/uploads/cursos/logos/logo.png', 'http://localhost/reelsdecinema/', 1, 1);
 
-ALTER TABLE tags_forum
-ADD COLUMN id_curso INT NOT NULL;
+ALTER TABLE cursos
+ADD COLUMN url_favicon VARCHAR(255);
 
 SET SQL_SAFE_UPDATES = 1;
 
-UPDATE tags_forum SET id_curso = 1;
+UPDATE cursos SET dir_name = 'instaempreendedor' WHERE id = 2;
 
 ALTER TABLE tags_forum
 ADD CONSTRAINT fk_tags_forum_curso
 FOREIGN KEY (id_curso) REFERENCES cursos(id);
 
-select * from usuarios;
+select * from  cursos;
 
-select * from notificacoes;
+select * from usuarios;
 
 INSERT INTO lancamentos (nome, capa, link_url)
 VALUES ('Reels de Cinema', './uploads/lançamentos/banners/lançamento01.png', 'http://localhost/reelsdecinema/');

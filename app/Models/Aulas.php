@@ -773,4 +773,24 @@ class Aulas
         return $stmt->execute();
     }
 
+    // Método para pegar todas as avaliações de uma aula específica
+    public function getAvaliacoesDaAula($aula_id)
+    {
+        $query = 'SELECT id, nota
+              FROM avaliacoes
+              WHERE aula_id = :aula_id';
+
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':aula_id', $aula_id);
+
+        if ($stmt->execute()) {
+            // Retorna todas as avaliações como um array associativo
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        // Em caso de erro ou se não houver avaliações, retorna um array vazio
+        return [];
+    }
+
+
 }

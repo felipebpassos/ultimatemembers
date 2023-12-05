@@ -308,11 +308,9 @@ label {
     display: flex;
     width: 100%;
     max-width: 800px;
-    background-color: var(--cor-secundaria-light);
-    border-radius: 12px;
-    margin-bottom: 70px;
+    margin-bottom: 60px;
     text-align: justify;
-    padding: 10px 30px 30px 30px;
+    padding: 10px 30px 10px 30px;
 }
 
 .descricao-modulo {
@@ -327,14 +325,15 @@ label {
 }
 
 .descricao-modulo p {
-    font-size: 16px;
-    line-height: 1.7em;
+    font-size: 18px;
+    line-height: 1.6em;
     margin: 0;
 }
 
 .preview-expand-component {
-    margin-bottom: 70px;
+    margin-bottom: 60px;
     max-width: 600px;
+    padding: 10px 30px 10px 30px;
 }
 
 .preview-expand-component ul li {

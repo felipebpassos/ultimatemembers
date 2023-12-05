@@ -20,7 +20,9 @@ header("Cache-Control: no-cache, must-revalidate");
     <title>
         <?php echo $title; ?>
     </title>
-    <link rel="icon" href="http://localhost/ultimatemembers/public/img/icone.ico">
+    
+    <?php $favicon = !empty($curso['url_favicon']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_favicon']) : "http://localhost/ultimatemembers/public/img/logo-default.png"; ?>
+    <link rel="icon" href="<?php echo $favicon; ?>">
 
     <!-- ... estilos ... -->
     <link rel="stylesheet" href="http://localhost/ultimatemembers/public/formatação/default.css">
