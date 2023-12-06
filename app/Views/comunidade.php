@@ -15,22 +15,6 @@
 
                     <div class="opcoes-comunidade">
 
-                        <div class="botoes-publicacao">
-
-                            <a class="nova-publicacao"
-                                href="<?php echo $curso['url_principal']; ?>comunidade/publicar/"><button class="btn-2"
-                                    id="pergunta">
-                                    <p>Faça uma pergunta</p><i class="fa-regular fa-comment"></i>
-                                </button></a>
-
-                            <a class="nova-publicacao"
-                                href="<?php echo $curso['url_principal']; ?>comunidade/publicar/"><button class="btn-2"
-                                    id="experiencia">
-                                    <p>Publicar Experiência</p><i class="fa-regular fa-lightbulb"></i>
-                                </button></a>
-
-                        </div>
-
                         <div class="publicacoes-relevantes">
 
                             <?php foreach ($topDiscussoes as $discussao): ?>
@@ -43,6 +27,8 @@
                                 $foto_autor = (!empty($discussao['foto']) ? $discussao['foto'] : '/public/img/default.png');
                                 $user_liked = $discussao['user_liked'];
                                 $publicacao = calcularTempoDecorrido($discussao['publish_date']);
+                                $likes = $discussao['likes'];
+                                $replies = $discussao['replies'];
                                 ?>
 
                                 <div class="slides">
@@ -65,6 +51,14 @@
                                                         class="fa-regular fa-clock"></i>
                                                     <?php echo $publicacao; ?>
                                                 </p>
+                                                <ul class="engajamento" style="padding-left: 40px; margin:8px 0 0 0;">
+                                                    <li style="margin-right: 20px;"><i class="fa-solid fa-heart"></i><span>
+                                                            <?php echo $likes; ?>
+                                                        </span></li>
+                                                    <li><i class="fa-solid fa-comments"></i><span>
+                                                            <?php echo $replies; ?>
+                                                        </span></li>
+                                                </ul>
                                             </div>
                                         </div>
 
@@ -109,27 +103,28 @@
                             </div>
 
                             <div class="bottom-options">
-                                <ul class="engajamento" style="padding-left: 60px;">
-                                    <li><i class="fa-solid fa-heart"></i><span>12</span></li>
-                                    <li><i class="fa-solid fa-comments"></i><span>6</span></li>
-                                </ul>
                                 <a href="">Ver Publicação</a>
                             </div>
 
                             <div class="arrows">
                                 <button class="prev" onclick="plusSlides(-1)"
                                     style="margin-right: 15px; background-color: transparent; border: none;"><img
-                                        src="http://localhost/ultimatemembers/public/img/preview.png" width="40px"
+                                        src="http://localhost/ultimatemembers/public/img/preview.png" width="30px"
                                         alt="anterior"></button>
                                 <button class="next" onclick="plusSlides(1)"
                                     style="background-color: transparent; border: none;"><img
-                                        src="http://localhost/ultimatemembers/public/img/next.png" width="40px"
+                                        src="http://localhost/ultimatemembers/public/img/next.png" width="30px"
                                         alt="próximo"></button>
                             </div>
                         </div>
 
-
                         <div class="search-container">
+
+                            <a class="nova-publicacao"
+                                href="<?php echo $curso['url_principal']; ?>comunidade/publicar/"><button class="btn-2"
+                                    id="pergunta">
+                                    <p>Nova publicação</p><i class="fa-regular fa-comment"></i>
+                                </button></a>
 
                             <div class="pesquisar">
                                 <input type="text" id="campoPesquisa" name="pesquisa" placeholder="Pesquisar">

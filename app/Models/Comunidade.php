@@ -268,25 +268,26 @@ class Comunidade
     public function getTopDiscussoes($usuario_id)
     {
         $query = 'SELECT
-            d.id,
-            d.title,
-            d.content,
-            d.publish_date,
-            u.id AS autor_id,
-            u.nome AS autor,
-            u.foto_caminho AS foto,
-            COUNT(DISTINCT dl.like_id) + COUNT(DISTINCT r.id) AS total_likes_replies,
-            (CASE WHEN (SELECT COUNT(*) FROM discussoes_likes dl WHERE dl.item_id = d.id AND dl.item_type = "d" AND dl.user_id = :usuario_id) > 0 THEN 1 ELSE 0 END) AS user_liked
-          FROM
-            discussoes d
-          INNER JOIN usuarios u ON d.user_id = u.id
-          LEFT JOIN discussoes_likes dl ON d.id = dl.item_id AND dl.item_type = "d"
-          LEFT JOIN discussoes_respostas r ON d.id = r.discussion_id
-          GROUP BY
-            d.id, d.title, d.content, u.nome, u.foto_caminho
-          ORDER BY
-            total_likes_replies DESC
-          LIMIT 5';
+        d.id,
+        d.title,
+        d.content,
+        d.publish_date,
+        u.id AS autor_id,
+        u.nome AS autor,
+        u.foto_caminho AS foto,
+        (SELECT COUNT(DISTINCT dl.like_id) FROM discussoes_likes dl WHERE dl.item_id = d.id AND dl.item_type = "d") AS likes,
+        (SELECT COUNT(DISTINCT r.id) FROM discussoes_respostas r WHERE r.discussion_id = d.id) AS replies,
+        (SELECT COUNT(*) FROM discussoes_likes dl WHERE dl.item_id = d.id AND dl.item_type = "d" AND dl.user_id = :usuario_id) AS user_liked
+      FROM
+        discussoes d
+      INNER JOIN usuarios u ON d.user_id = u.id
+      LEFT JOIN discussoes_likes dl ON d.id = dl.item_id AND dl.item_type = "d"
+      LEFT JOIN discussoes_respostas r ON d.id = r.discussion_id
+      GROUP BY
+        d.id, d.title, d.content, u.nome, u.foto_caminho
+      ORDER BY
+        (likes + replies) DESC
+      LIMIT 5';
 
         $stmt = $this->con->prepare($query);
         $stmt->bindParam(':usuario_id', $usuario_id, PDO::PARAM_INT);
@@ -294,6 +295,7 @@ class Comunidade
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
 
 
 }

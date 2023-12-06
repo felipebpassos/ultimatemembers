@@ -6,7 +6,7 @@ main {
 /* comunidade.php */
 
 .publicacoes-relevantes {
-    height: 270px;
+    height: 250px;
     margin-bottom: 30px;
     position: relative;
 }
@@ -23,13 +23,13 @@ main {
     height: 20px;
     position: absolute;
     z-index: 11;
-    bottom: 87px;
+    bottom: 65px;
     background: linear-gradient(to bottom, transparent, var(--cor-secundaria));
 }
 
 .publicacoes-relevantes .bottom-options {
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
     position: absolute;
     bottom: 20px;
     width: 100%;
@@ -142,10 +142,6 @@ main {
 
 .opcoes-comunidade button p {
     margin: 0 10px;
-}
-
-.botoes-publicacao {
-    display: flex;
 }
 
 .lista-discussoes {
@@ -457,7 +453,7 @@ textarea:focus {
 }
 
 .items::-webkit-scrollbar-thumb {
-    background: var(--cor-primaria-dark);
+    background: var(--cor-secundaria-light);
     border-radius: 25px;
 }
 
@@ -473,7 +469,7 @@ textarea:focus {
 }
 
 .item:hover {
-    background-color: var(--cor-primaria-dark);
+    background-color: var(--cor-secundaria-light);
     cursor: pointer;
 }
 
