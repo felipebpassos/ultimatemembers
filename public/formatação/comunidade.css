@@ -6,9 +6,12 @@ main {
 /* comunidade.php */
 
 .publicacoes-relevantes {
-    height: 250px;
+    border-radius: 3px;
+    height: 300px;
     margin-bottom: 30px;
     position: relative;
+    background-color: var(--cor-secundaria-light);
+    box-shadow: 0px 0px 12px var(--sombra);
 }
 
 .publicacoes-relevantes .conteudo-pergunta {
@@ -23,21 +26,20 @@ main {
     height: 20px;
     position: absolute;
     z-index: 11;
-    bottom: 65px;
-    background: linear-gradient(to bottom, transparent, var(--cor-secundaria));
+    bottom: 95px;
+    background: linear-gradient(to bottom, transparent, var(--cor-secundaria-light));
 }
 
 .publicacoes-relevantes .bottom-options {
     display: flex;
     justify-content: end;
     position: absolute;
-    bottom: 20px;
-    width: 100%;
+    bottom: 0;
+    width: 95%;
     z-index: 11;
 }
 
 .publicacoes-relevantes .bottom-options a {
-    margin-right:10px;
     color: var(--cor-primaria-darker);
 }
 
@@ -54,13 +56,14 @@ main {
     width: 100%;
     height: 250px;
     z-index: 1;
+    padding: 15px;
 }
 
 .dots {
     display: flex;
     align-items: center;
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
     left: 50%;
     width: fit-content;
     transform: translateX(-50%);
@@ -96,8 +99,8 @@ main {
 .publicacoes-relevantes .arrows {
     z-index: 11;
     position: absolute;
-    right: 10px;
-    top: 0;
+    right: 20px;
+    top: 20px;
     display: flex;
     justify-content: center;
 }
@@ -136,7 +139,7 @@ main {
 
 .opcoes-comunidade .nova-publicacao {
     display: block;
-    margin: 10px 30px 40px 0;
+    margin: 5px 0 20px 10px;
     width: fit-content;
 }
 
@@ -152,6 +155,7 @@ main {
 .top-contribuintes {
     color: var(--cor-primaria);
     background-color: var(--cor-secundaria-light);
+    box-shadow: 0px 0px 12px var(--sombra);
     max-height: 600px;
     border-radius: 3px;
     padding: 20px;
@@ -276,8 +280,9 @@ main {
 .campo {
     background-color: var(--cor-secundaria-light);
     padding: 10px 20px 20px 20px;
-    margin: 10px 0;
-    border-radius: 8px;
+    margin: 25px 0;
+    border-radius: 3px;
+    box-shadow: 0px 0px 12px var(--sombra);
 }
 
 .campo label {
@@ -586,7 +591,8 @@ textarea:focus {
     box-sizing: border-box;
     position: relative;
     background-color: var(--cor-secundaria-light);
-    border-bottom: solid 2px var(--cor-secundaria);
+    border-bottom: solid 1px var(--cor-secundaria);
+    box-shadow: 0px 0px 12px var(--sombra);
 }
 
 .num-likes {

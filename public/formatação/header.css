@@ -13,7 +13,7 @@ header {
 
 .header-fixed {
     position: fixed;
-    box-shadow: 0px 0px 10px var(--sombra);
+    box-shadow: 0px 0px 12px var(--sombra);
 }
 
 header .left {
@@ -52,9 +52,8 @@ header.show-menu {
     top: 100%;
     left: -20px;
     background-color: var(--cor-secundaria);
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 15px var(--sombra);
+    border-radius: 10px;
     padding: 10px 15px;
     list-style: none;
 }
@@ -199,10 +198,10 @@ svg {
     position: absolute;
     width: 180px;
     left: -100px;
-    top: 140%;
+    top: 200%;
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.9);
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 15px var(--sombra);
     z-index: 999;
     transition: max-height 0.8s ease-in-out;
 }

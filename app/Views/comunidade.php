@@ -39,8 +39,22 @@
                                                 src="http://localhost/ultimatemembers<?php echo $foto_autor; ?>"
                                                 alt="Foto de Perfil" /></div>
                                         <div class="box">
-                                            <span style="font-size: 22px; font-weight: bold;">
+                                            <span style="font-size: 22px; font-weight: bold; display: flex;">
                                                 <?php echo $title; ?>
+                                                <div class="botoes" style="position: unset;">
+                                                    <?php if ($autor_id == $id): ?>
+                                                        <!-- Mostra os botões de excluir se o autor_id for igual a $id -->
+                                                        <button id="delete-discussao" style="margin:0 5px; padding: 0;"
+                                                            data-id="<?php echo $discussaoid; ?>">
+                                                            <i class="fa-solid fa-trash" style="font-size:18px;"></i>
+                                                        </button>
+                                                    <?php else: ?>
+                                                        <button id="save-discussao" style="margin:0 5px; padding: 0;"
+                                                            data-id="<?php echo $discussaoid; ?>">
+                                                            <i class="fa-regular fa-bookmark" style="font-size:20px;"></i>
+                                                        </button>
+                                                    <?php endif; ?>
+                                                </div>
                                             </span>
                                             <div style="display:flex;">
                                                 <p style="font-size: 13px; margin: 10px 20px 0px 0px;"><i
@@ -51,43 +65,59 @@
                                                         class="fa-regular fa-clock"></i>
                                                     <?php echo $publicacao; ?>
                                                 </p>
-                                                <ul class="engajamento" style="padding-left: 40px; margin:8px 0 0 0;">
-                                                    <li style="margin-right: 20px;"><i class="fa-solid fa-heart"></i><span>
-                                                            <?php echo $likes; ?>
-                                                        </span></li>
-                                                    <li><i class="fa-solid fa-comments"></i><span>
-                                                            <?php echo $replies; ?>
-                                                        </span></li>
-                                                </ul>
                                             </div>
                                         </div>
 
                                     </div>
 
-                                    <div class="conteudo-pergunta">
+                                    <div class="conteudo-pergunta" style="padding-left: 70px;">
                                         <div class="botoes">
                                             <?php if ($autor_id == $id): ?>
-                                                <!-- Mostra os botões de excluir se o autor_id for igual a $id -->
-                                                <button id="delete-discussao" data-id="<?php echo $discussaoid; ?>">
-                                                    <i class="fa-solid fa-trash"></i>
+                                                <button id="like-discussao" style="margin-bottom:0px; cursor: auto;"
+                                                    data-id="<?php echo $discussaoid; ?>">
+                                                    <i class="fa-solid fa-heart"></i>
                                                 </button>
+                                                <span class="num-likes" style="margin-bottom:10px;"
+                                                    data-id="<?php echo $discussaoid; ?>">
+                                                    <?php echo $likes; ?>
+                                                </span>
                                             <?php else: ?>
                                                 <!-- Mostra os botões de like e salvar se o autor_id não for igual a $id -->
-                                                <button id="like-discussao" data-id="<?php echo $discussaoid; ?>">
+                                                <button id="like-discussao" style="margin-bottom:0px;"
+                                                    data-id="<?php echo $discussaoid; ?>">
                                                     <i id="notliked"
                                                         class="fa-regular fa-heart <?php echo $user_liked ? 'hidden' : ''; ?>"></i>
                                                     <i id="liked"
                                                         class="fa-solid fa-heart <?php echo $user_liked ? '' : 'hidden'; ?>"></i>
                                                 </button>
-                                                <button id="save-discussao" data-id="<?php echo $discussaoid; ?>">
-                                                    <i class="fa-regular fa-bookmark"></i>
-                                                </button>
+                                                <span class="num-likes" style="margin-bottom:10px;"
+                                                    data-id="<?php echo $discussaoid; ?>">
+                                                    <?php echo $likes; ?>
+                                                </span>
                                             <?php endif; ?>
                                         </div>
                                         <!-- Conteúdo da Discussão -->
                                         <p>
                                             <?php echo $content; ?>
                                         </p>
+                                    </div>
+
+                                    <div class="bottom-options">
+                                        <?php if ($replies == 0): ?>
+                                            <a
+                                                href="<?php echo $curso['url_principal'] . 'comunidade/discussao/' . $discussaoid; ?>">Sem
+                                                resposta ainda</a>
+                                        <?php elseif ($replies == 1): ?>
+                                            <a
+                                                href="<?php echo $curso['url_principal'] . 'comunidade/discussao/' . $discussaoid; ?>">Ver
+                                                resposta</a>
+                                        <?php else: ?>
+                                            <a
+                                                href="<?php echo $curso['url_principal'] . 'comunidade/discussao/' . $discussaoid; ?>">
+                                                Ver as
+                                                <?php echo $replies; ?> respostas
+                                            </a>
+                                        <?php endif; ?>
                                     </div>
 
                                 </div>
@@ -100,10 +130,6 @@
                                 <?php for ($i = 0; $i < count($topDiscussoes); $i++): ?>
                                     <span class="dot" onclick="currentSlide(<?php echo $i + 1; ?>)"></span>
                                 <?php endfor; ?>
-                            </div>
-
-                            <div class="bottom-options">
-                                <a href="">Ver Publicação</a>
                             </div>
 
                             <div class="arrows">
@@ -120,11 +146,10 @@
 
                         <div class="search-container">
 
-                            <a class="nova-publicacao"
-                                href="<?php echo $curso['url_principal']; ?>comunidade/publicar/"><button class="btn-2"
-                                    id="pergunta">
-                                    <p>Nova publicação</p><i class="fa-regular fa-comment"></i>
-                                </button></a>
+                            <ul class="select-categorias"></ul>
+                            <script>
+                                $(".select-categorias").append(MultiploSelect('', 'Categorias', ['Perguntas', 'Experiênicias', 'Tag 1', 'Tag 2', 'Tag 3'], true));
+                            </script>
 
                             <div class="pesquisar">
                                 <input type="text" id="campoPesquisa" name="pesquisa" placeholder="Pesquisar">
@@ -132,10 +157,11 @@
                                         type="submit" id="botaoPesquisa"><i class="fa fa-search"></i></button></a>
                             </div>
 
-                            <ul class="select-categorias"></ul>
-                            <script>
-                                $(".select-categorias").append(MultiploSelect('', 'Categorias', ['Perguntas', 'Experiênicias', 'Tag 1', 'Tag 2', 'Tag 3'], true));
-                            </script>
+                            <a class="nova-publicacao"
+                                href="<?php echo $curso['url_principal']; ?>comunidade/publicar/"><button class="btn-2"
+                                    id="pergunta">
+                                    <p>Nova publicação</p><i class="fa-regular fa-comment"></i>
+                                </button></a>
 
                         </div>
 

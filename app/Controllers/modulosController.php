@@ -103,8 +103,8 @@ class modulosController extends Controller
         $data['title'] = 'Módulo | ' . $modulo['nome'];
         $data['description'] = 'Assista às aulas e estude através do nosso material';
         $data['styles'] = array('painel', 'header', 'drag-drop-files', 'modulo');
-        $data['scripts_head'] = array('select');
-        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'simple_select', 'pop-ups', 'drag-drop-files', 'video-intro', 'scroll-to-section', 'encolher-elemento', 'deletar-aula', 'aula_concluida');
+        $data['scripts_head'] = array('abas', 'select');
+        $data['scripts_body'] = array('btn-selected', 'toggleSearch', 'menu-responsivo', 'simple_select', 'pop-ups', 'drag-drop-files', 'video-intro', 'scroll-to-section', 'encolher-elemento', 'deletar-aula', 'aula_concluida');
 
         //load view
         $this->loadTemplates($template, $data, $usuario);
