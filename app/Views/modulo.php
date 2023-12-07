@@ -62,7 +62,7 @@ $video = !empty($modulo['video']) ? str_replace("./", "http://localhost/ultimate
         </ul>
     </div>
 
-    <div id="aulas" class="content" style="min-width: 500px; padding: 10px 0 0 25px !important;">
+    <div id="aulas" class="content" style="min-width: 500px; padding: 10px 0 !important;">
 
         <div class="section-header">
             <h4><i class="fa-solid fa-video" style="margin-right: 20px;"></i>Aulas Gravadas</h4>
@@ -187,7 +187,7 @@ $video = !empty($modulo['video']) ? str_replace("./", "http://localhost/ultimate
 
     </div>
 
-    <div id="info" class="content" style="padding: 0 25px 0 0 !important; width:60%;">
+    <div id="info" class="content" style="padding: 0 !important; width:60%;">
 
         <div class="moduloInfo">
 

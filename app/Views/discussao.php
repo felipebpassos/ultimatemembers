@@ -40,7 +40,7 @@ $foto_autor = $discussao['foto'];
                 <?php if ($discussao['autor_id'] == $id): ?>
                     <!-- Mostra os botões de excluir se o autor_id for igual a $id -->
                     <button id="delete-discussao" data-id="<?php echo $discussao['id']; ?>">
-                        <i class="fa-solid fa-trash"></i>
+                        <i class="fa-solid fa-trash-can"></i>
                     </button>
                 <?php else: ?>
                     <!-- Mostra os botões de like e salvar se o autor_id não for igual a $id -->

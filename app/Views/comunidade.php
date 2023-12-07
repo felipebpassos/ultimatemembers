@@ -46,7 +46,7 @@
                                                         <!-- Mostra os botões de excluir se o autor_id for igual a $id -->
                                                         <button id="delete-discussao" style="margin:0 5px; padding: 0;"
                                                             data-id="<?php echo $discussaoid; ?>">
-                                                            <i class="fa-solid fa-trash" style="font-size:18px;"></i>
+                                                            <i class="fa-solid fa-trash-can" style="font-size:18px;"></i>
                                                         </button>
                                                     <?php else: ?>
                                                         <button id="save-discussao" style="margin:0 5px; padding: 0;"

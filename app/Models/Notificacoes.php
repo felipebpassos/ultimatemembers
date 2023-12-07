@@ -70,7 +70,7 @@ class Notificacoes
     public function getNotificacoesPorUsuario($usuario)
     {
         try {
-            $stmt = $this->con->prepare("SELECT n.viewed, u.nome AS usuario, u.foto_caminho AS foto, n.tipo_notificacao
+            $stmt = $this->con->prepare("SELECT n.viewed, u.nome AS usuario, u.foto_caminho AS foto, n.tipo_notificacao, n.data_notificacao AS publicacao
                             FROM notificacoes n
                             JOIN usuarios u ON n.id_usuario_acao = u.id
                             WHERE n.id_usuario_notificado = :usuario

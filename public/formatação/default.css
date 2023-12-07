@@ -337,9 +337,12 @@ h6 {
     transition: 0.3s;
 }
 
+#img-aula:hover {transform: scale(1.1);}
+
 #img-aula:hover,
 #img-aula-2:hover,
 #img-aula-3:hover {
+    transition: all 0.8s ease;
     opacity: 0.65;
 }
 
