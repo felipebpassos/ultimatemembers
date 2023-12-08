@@ -70,7 +70,7 @@ class Notificacoes
     public function getNotificacoesPorUsuario($usuario)
     {
         try {
-            $stmt = $this->con->prepare("SELECT n.viewed, u.nome AS usuario, u.foto_caminho AS foto, n.tipo_notificacao, n.data_notificacao AS publicacao
+            $stmt = $this->con->prepare("SELECT n.viewed, u.nome AS usuario, u.foto_caminho AS foto, n.tipo_notificacao, n.id_item, n.data_notificacao AS publicacao
                             FROM notificacoes n
                             JOIN usuarios u ON n.id_usuario_acao = u.id
                             WHERE n.id_usuario_notificado = :usuario
@@ -141,6 +141,48 @@ class Notificacoes
             // Trate qualquer exceção do banco de dados aqui (por exemplo, registre-a ou envie uma resposta de erro)
             return 0; // Retorna 0 em caso de erro
         }
+    }
+
+    public function obterIdOrigemNotificacao($tipo_notificacao, $id_item)
+    {
+        $query = "";
+
+        switch ($tipo_notificacao) {
+            case 1: // likes_comentarios
+                $query = "SELECT c.aula_id FROM comentarios c 
+                JOIN likes_comentarios lc ON c.id = lc.comentario_id
+                WHERE lc.id = :id_item";
+                break;
+
+            case 2: // respostas_comentarios
+                // $query = "SELECT item_id FROM respostas_comentarios WHERE like_id = :id_item";
+                break;
+
+            case 3: // discussoes_likes
+                $query = "SELECT 
+                CASE WHEN item_type = 'd' THEN item_id
+                    WHEN item_type = 'r' THEN dr.discussion_id
+                    ELSE NULL 
+                END AS result
+            FROM discussoes_likes dl
+            LEFT JOIN discussoes_respostas dr ON dl.item_id = dr.id
+            WHERE dl.like_id = :id_item";
+                break;
+
+            case 4: // discussoes_respostas
+                $query = "SELECT discussion_id FROM discussoes_respostas WHERE id = :id_item";
+                break;
+
+            default:
+                return null;
+        }
+
+        $stmt = $this->con->prepare($query);
+        $stmt->bindParam(':id_item', $id_item, PDO::PARAM_INT);
+        $stmt->execute();
+        $resultado = $stmt->fetch(PDO::FETCH_COLUMN);
+
+        return ($resultado !== false) ? $resultado : null;
     }
 
 

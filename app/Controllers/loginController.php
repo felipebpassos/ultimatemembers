@@ -10,7 +10,7 @@ class loginController extends Controller
     {
         $this->sessao = new Sessao();
         $this->cursosModel = new Cursos();
-        
+
     }
 
     // Generates the log-in page
@@ -85,32 +85,25 @@ class loginController extends Controller
             $usuario = $usuarioModel->loginUsuario($email, $curso);
 
             // Verifica se o usuário existe
-            if ($usuario) {
-                // Verifica a senha
-                if (password_verify($senha, $usuario['senha'])) {
-                    // Senha correta, fazer o login
+            if ($usuario && password_verify($senha, $usuario['senha'])) {
+                // Senha correta, fazer o login
 
-                    //Coleta dados do usuário e armazena numa variável de sessão
-                    $dadosUsuario = $usuarioModel->getUsuario($email, $curso);
-                    $_SESSION['usuario'] = $dadosUsuario;
+                //Coleta dados do usuário e armazena numa variável de sessão
+                $dadosUsuario = $usuarioModel->getUsuario($email, $curso);
+                $_SESSION['usuario'] = $dadosUsuario;
 
-                    // Chame o método para verificar notificações
-                    $notificacoes = $notificacoesModel->verificaNotificacoes($email, $curso);
+                // Chame o método para verificar notificações
+                $notificacoes = $notificacoesModel->verificaNotificacoes($email, $curso);
 
-                    // Faça o que você precisa com as notificações (por exemplo, armazene em uma variável de sessão)
-                    $_SESSION['notificacoes'] = $notificacoes;
+                // Faça o que você precisa com as notificações (por exemplo, armazene em uma variável de sessão)
+                $_SESSION['notificacoes'] = $notificacoes;
 
-                    // Aqui você pode redirecionar para a página de painel
-                    header('Location: ' . $cursoInfo['url_principal'] . 'painel/');
-                    exit;
-
-                } else {
-                    // Senha incorreta, define a mensagem de erro
-                    $_SESSION['mensagemErro'] = "Senha Incorreta.";
-                }
+                // Aqui você pode redirecionar para a página de painel
+                header('Location: ' . $cursoInfo['url_principal'] . 'painel/');
+                exit;
             } else {
-                // Usuário não encontrado, define a mensagem de erro
-                $_SESSION['mensagemErro'] = "Usuário não encontrado.";
+                // Senha incorreta ou usuário não encontrado, define a mensagem de erro
+                $_SESSION['mensagemErro'] = "Usuário ou senha incorreta.";
             }
         }
 

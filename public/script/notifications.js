@@ -63,9 +63,17 @@ function buscarNotificacoes() {
             // Preencha as listas de notificações com os dados recebidos
             data.forEach(function (notificacao) {
                 var lista = notificacao.viewed == 1 ? 'antigas' : 'novas';
+                var origemId = notificacao.origemId;
             
                 var li = $('<li>');
                 var a = $('<a>');
+
+                if (notificacao.tipo_notificacao == 1 || notificacao.tipo_notificacao == 2) {
+                    a.attr('href', url_principal + 'modulos/aula/' + origemId);
+                } else if (notificacao.tipo_notificacao == 3 || notificacao.tipo_notificacao == 4) {
+                    a.attr('href', url_principal + '/comunidade/discussao/' + origemId);
+                }
+
                 var fotoPerfilMini = $('<div class="foto-perfil-mini">').append(
                     '<img class="perfil-img" name="imagem" src="http://localhost/ultimatemembers' +
                         (notificacao.foto ? notificacao.foto : '/public/img/default.png') +

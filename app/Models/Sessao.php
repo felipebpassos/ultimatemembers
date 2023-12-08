@@ -20,12 +20,28 @@ class Sessao
         }
     }
 
+    public function autorizaAdm($adm, $url_curso)
+    {
+
+        if ($adm) {
+
+            return True;
+
+        } else {
+
+            // Encaminha para a página de erro
+            header("Location: " . $url_curso . "error");
+            exit();
+
+        }
+    }
+
     public function checkParametro($parametro, $url_curso)
     {
 
         if (!isset($parametro) || empty($parametro)) {
 
-            // Encaminha para a home
+            // Encaminha para a página de erro
             header("Location: " . $url_curso . "error");
             exit();
 

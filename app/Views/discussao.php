@@ -69,9 +69,9 @@ $foto_autor = $discussao['foto'];
             }
 
             ?>
-            <h5 style="color: var(--cor-primaria-dark); margin-bottom: 0px !important;">
+            <h6 style="color: var(--cor-primaria-dark); margin-bottom: 0px !important;">
                 <?php echo $numeroDeRespostas . ' Resposta(s)'; ?>
-            </h5>
+            </h6>
             <select name="sort" class="sort_by">
                 <option value="" disabled selected>Ordenar por</option>
                 <option value="likes">Curtidas</option>
@@ -79,8 +79,11 @@ $foto_autor = $discussao['foto'];
                 <option value="antigo">Mais antigo</option>
             </select>
         </form>
+
         <div class="answers">
-            <div class="answers">
+            <?php if (empty($respostas)): ?>
+                <h5>Nenhuma resposta ainda.</h5>
+            <?php else: ?>
                 <?php foreach ($respostas as $resposta): ?>
                     <div class="answer">
                         <div class="botoes">
@@ -113,8 +116,9 @@ $foto_autor = $discussao['foto'];
                         </div>
                     </div>
                 <?php endforeach; ?>
-            </div>
+            <?php endif; ?>
         </div>
+
         <?php if ($discussao['autor_id'] != $id): ?>
             <form id="addResposta"
                 action="<?php echo $curso['url_principal']; ?>comunidade/responder/<?php echo $discussao['id']; ?>"

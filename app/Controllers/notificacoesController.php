@@ -69,6 +69,7 @@ class notificacoesController extends Controller
 
         foreach ($notificacoesDoUsuario as &$notificacao) {
             $notificacao['publicacao'] = calcularTempoDecorrido($notificacao['publicacao']);
+            $notificacao['origemId'] = $notificacoes->obterIdOrigemNotificacao($notificacao['tipo_notificacao'], $notificacao['id_item']);
         }
 
         //Marca as notificações como vistas pelo usuário

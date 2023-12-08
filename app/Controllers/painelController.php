@@ -121,6 +121,7 @@ class painelController extends Controller
 
         // Carrega dados do usuário
         $usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
+        $this->sessao->autorizaAdm($_SESSION['usuario']['adm'], $cursoInfo['url_principal']);
 
         //set template
         $template = 'painel-temp';

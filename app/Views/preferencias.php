@@ -1,7 +1,7 @@
 <main>
 
     <div class="titulo-pagina" style="margin-bottom: 100px;">
-        <h1>Painel Administrativo</h1>
+        <h1>Preferências</h1>
     </div>
 
     <div class="lista-preferências">
