@@ -18,6 +18,9 @@ class comunidadeController extends Controller
         $this->curso = $this->sessao->verificaCurso();
         $this->cursoInfo = $this->cursosModel->getCurso($this->curso);
 
+        session_name($this->cursoInfo['dir_name']);
+        session_start();
+
         // Carrega dados do usuário no construtor
         $this->usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $this->cursoInfo['url_principal']);
     }
@@ -113,41 +116,41 @@ class comunidadeController extends Controller
     {
         // Carrega dados do usuário
         $usuario = $this->usuario;
-    
+
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    
+
             if (isset($_POST["titulo"]) && isset($_POST["texto"])) {
-    
+
                 $comunidade = new Comunidade();
-    
+
                 $usuario = $this->usuario['id'];
                 $titulo = $_POST["titulo"];
                 $texto = $_POST["texto"];
-    
+
                 $discussao = $comunidade->setDiscussao($usuario, $titulo, $texto, $this->curso);
-    
+
                 if ($discussao) {
-    
+
                     print_r('Discussão criada com sucesso.');
-    
+
                 } else {
-    
+
                     print_r('Erro ao criar discussão :(');
-    
+
                 }
-    
+
             } else {
-    
+
                 print_r('Dados não foram enviados corretamente.');
-    
+
             }
-    
+
         } else {
-    
+
             print_r('Dados não enviados.');
-    
+
         }
-    }    
+    }
 
 
     public function responder($discussao)

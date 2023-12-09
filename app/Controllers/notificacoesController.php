@@ -5,11 +5,24 @@ class notificacoesController extends Controller
 
     private $sessao;
     private $cursosModel;
+    private $curso;
+    private $cursoInfo;
+    private $usuario;
 
     public function __construct()
     {
         $this->sessao = new Sessao();
         $this->cursosModel = new Cursos();
+
+        // Obtém informações do curso no construtor para reutilização nos métodos
+        $this->curso = $this->sessao->verificaCurso();
+        $this->cursoInfo = $this->cursosModel->getCurso($this->curso);
+
+        session_name($this->cursoInfo['dir_name']);
+        session_start();
+
+        // Carrega dados do usuário no construtor
+        $this->usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $this->cursoInfo['url_principal']);
         
     }
 
@@ -17,8 +30,6 @@ class notificacoesController extends Controller
     {
 
         $notificacoes_model = new Notificacoes();
-
-        $this->sessao->verificaCurso();
 
         $userId = $notificacoes_model->getUserByComment($id);
 
@@ -33,13 +44,7 @@ class notificacoesController extends Controller
 
     public function usuario_conexao()
     {
-
-        $curso = $this->sessao->verificaCurso();
-
-        $cursoInfo = $this->cursosModel->getCurso($curso);
-
-        // Carrega dados do usuário
-        $userId = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
+        $userId = $this->usuario['id'];
 
         // Retorne o ID do usuário como uma resposta
         if ($userId !== null) {
@@ -52,20 +57,12 @@ class notificacoesController extends Controller
 
     public function buscarnotificacoes()
     {
-
-        $curso = $this->sessao->verificaCurso();
-
-        $cursoInfo = $this->cursosModel->getCurso($curso);
-
-        // Carrega dados do usuário
-        $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
-
         $notificacoes = new Notificacoes();
 
-        $usuario = $_SESSION['usuario']['id'];
+        $usuarioId = $this->usuario['id'];
 
         // Obtem as notificações para o usuário
-        $notificacoesDoUsuario = $notificacoes->getNotificacoesPorUsuario($usuario);
+        $notificacoesDoUsuario = $notificacoes->getNotificacoesPorUsuario($usuarioId);
 
         foreach ($notificacoesDoUsuario as &$notificacao) {
             $notificacao['publicacao'] = calcularTempoDecorrido($notificacao['publicacao']);
@@ -73,7 +70,7 @@ class notificacoesController extends Controller
         }
 
         //Marca as notificações como vistas pelo usuário
-        $notificacoes->marcarComoVistas($usuario);
+        $notificacoes->marcarComoVistas($usuarioId);
 
         $_SESSION['notificacoes'] = false;
 

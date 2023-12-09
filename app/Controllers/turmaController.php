@@ -15,7 +15,8 @@ Class turmaController extends Controller {
 
         $cursoInfo = $cursosModel->getCurso($curso);
 
-        $data['curso'] = $cursoInfo;
+        session_name($cursoInfo['dir_name']);
+        session_start();
 
         // Carrega dados do usuário
         $usuario = $sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
@@ -34,6 +35,7 @@ Class turmaController extends Controller {
         $template = 'painel-temp';
 
         //set page data
+        $data['curso'] = $cursoInfo;
         $data['view'] = 'turma';
         $data['title'] = 'Curso | Turma';
         $data['description'] = '';

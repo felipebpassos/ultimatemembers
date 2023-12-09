@@ -3,27 +3,37 @@
 class editarController extends Controller
 {
 
+    private $sessao;
+    private $cursosModel;
+    private $cursoInfo;
+    private $usuario;
+
+    public function __construct()
+    {
+        $this->sessao = new Sessao();
+        $this->cursosModel = new Cursos();
+        
+        // Obtém informações do curso no construtor para reutilização nos métodos
+        $curso = $this->sessao->verificaCurso();
+        $this->cursoInfo = $this->cursosModel->getCurso($curso);
+
+        session_name($this->cursoInfo['dir_name']);
+        session_start();
+
+        // Carrega dados do usuário no construtor
+        $this->usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $this->cursoInfo['url_principal']);
+        $this->sessao->autorizaAdm($_SESSION['usuario']['adm'], $this->cursoInfo['url_principal']);
+    }
+
     public function index()
     {
-        //MODELS
-
-        //Inicia os Modelos
-        $sessao = new Sessao;
-
-        $cursosModel = new Cursos();
-
-        $curso = $sessao->verificaCurso();
-
-        $cursoInfo = $cursosModel->getCurso($curso);
-
-        $data['curso'] = $cursoInfo;
-
         // Carrega dados do usuário
-        $usuario = $sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
+        $usuario = $this->usuario;
 
         // Dados da página (title, meta description, css, js ... usados na página)
         $template = 'painel-temp';
 
+        $data['curso'] = $this->cursoInfo;
         $data['view'] = 'editar';
         $data['title'] = 'Editar Perfil';
         $data['description'] = 'Edite seu perfil e salve as alterações.';
@@ -39,16 +49,7 @@ class editarController extends Controller
     }
 
     public function edita()
-    {
-        //Inicia os Modelos
-        $sessao = new Sessao;
-
-        $cursosModel = new Cursos();
-
-        $curso = $sessao->verificaCurso();
-
-        $cursoInfo = $cursosModel->getCurso($curso);
-        
+    {        
         // Verifica se o formulário foi enviado via método POST
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -107,12 +108,12 @@ class editarController extends Controller
 
             }
 
-            header("Location: " . $cursoInfo['url_principal'] . "painel/");
+            header("Location: " . $this->cursoInfo['url_principal'] . "painel/");
             exit(); // Certifica-se de que o script seja encerrado após o redirecionamento
 
         } else {
 
-            header("Location: " . $cursoInfo['url_principal'] . "error/");
+            header("Location: " . $this->cursoInfo['url_principal'] . "error/");
             exit(); // Certifica-se de que o script seja encerrado após o redirecionamento
 
         }

@@ -5,11 +5,24 @@ class painelController extends Controller
 
     private $sessao;
     private $cursosModel;
+    private $curso;
+    private $cursoInfo;
+    private $usuario;
 
     public function __construct()
     {
         $this->sessao = new Sessao();
         $this->cursosModel = new Cursos();
+
+        // Obtém informações do curso no construtor para reutilização nos métodos
+        $this->curso = $this->sessao->verificaCurso();
+        $this->cursoInfo = $this->cursosModel->getCurso($this->curso);
+
+        session_name($this->cursoInfo['dir_name']);
+        session_start();
+
+        // Carrega dados do usuário no construtor
+        $this->usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $this->cursoInfo['url_principal']);
 
     }
 
@@ -22,24 +35,18 @@ class painelController extends Controller
         // Acesso ao modelo "Aulas"
         $aulasModel = new Aulas();
 
-        $curso = $this->sessao->verificaCurso();
-
-        $cursoInfo = $this->cursosModel->getCurso($curso);
-
-        $data['curso'] = $cursoInfo;
-
         // Carrega dados do usuário
-        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
+        $usuario = $this->usuario;
 
         //Busca no banco de dados pelo módulo
-        $modulos = $modulosModel->getModulos($curso);
+        $modulos = $modulosModel->getModulos($this->curso);
 
-        $aulasPorModulo = $modulosModel->getAulasPorModulo($curso);
+        $aulasPorModulo = $modulosModel->getAulasPorModulo($this->curso);
 
         $lancamentos = $this->cursosModel->getLancamentos();
 
         //Busca aulas concluidas pelo usuário
-        $aulasConcluidas = $aulasModel->getAulasConcluidas($_SESSION['usuario']['id'], $curso);
+        $aulasConcluidas = $aulasModel->getAulasConcluidas($usuario['id'], $this->curso);
 
         //Armazena em variável de sessão
         $data['modulos'] = $modulos;
@@ -51,8 +58,9 @@ class painelController extends Controller
         $template = 'painel-temp';
 
         //set page data
+        $data['curso'] = $this->cursoInfo;
         $data['view'] = 'painel';
-        $data['title'] = $cursoInfo['nome'] . ' | Painel';
+        $data['title'] = $this->cursoInfo['nome'] . ' | Painel';
         $data['description'] = 'Assista às aulas e estude através do nosso material';
         $data['styles'] = array('drag-drop-files', 'painel', 'header', 'banners');
         $data['scripts_head'] = array('abas');
@@ -72,22 +80,16 @@ class painelController extends Controller
         // Acesso ao modelo "Aulas"
         $aulasModel = new Aulas();
 
-        $curso = $this->sessao->verificaCurso();
-
-        $cursoInfo = $this->cursosModel->getCurso($curso);
-
-        $data['curso'] = $cursoInfo;
-
         // Carrega dados do usuário
-        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
+        $usuario = $this->usuario;
 
         //Busca no banco de dados pelo módulo
-        $modulos = $modulosModel->getModulos($curso);
+        $modulos = $modulosModel->getModulos($this->curso);
 
-        $aulasPorModulo = $modulosModel->getAulasPorModulo($curso);
+        $aulasPorModulo = $modulosModel->getAulasPorModulo($this->curso);
 
         //Busca aulas concluidas pelo usuário
-        $aulasConcluidas = $aulasModel->getAulasConcluidas($_SESSION['usuario']['id'], $curso);
+        $aulasConcluidas = $aulasModel->getAulasConcluidas($usuario['id'], $this->curso);
 
         //Armazena em variável de sessão
         $data['modulos'] = $modulos;
@@ -98,6 +100,7 @@ class painelController extends Controller
         $template = 'painel-temp';
 
         //set page data
+        $data['curso'] = $this->cursoInfo;
         $data['view'] = 'progresso';
         $data['title'] = 'Progresso';
         $data['description'] = '';
@@ -112,21 +115,16 @@ class painelController extends Controller
 
     public function vendas()
     {
-
-        $curso = $this->sessao->verificaCurso();
-
-        $cursoInfo = $this->cursosModel->getCurso($curso);
-
-        $data['curso'] = $cursoInfo;
-
         // Carrega dados do usuário
-        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
-        $this->sessao->autorizaAdm($_SESSION['usuario']['adm'], $cursoInfo['url_principal']);
+        $usuario = $this->usuario;
+
+        $this->sessao->autorizaAdm($usuario['adm'], $this->cursoInfo['url_principal']);
 
         //set template
         $template = 'painel-temp';
 
         //set page data
+        $data['curso'] = $this->cursoInfo;
         $data['view'] = 'vendas';
         $data['title'] = 'Dashboard | Vendas';
         $data['description'] = '';
@@ -141,21 +139,16 @@ class painelController extends Controller
 
     public function sobre()
     {
-        $curso = $this->sessao->verificaCurso();
-
-        $cursoInfo = $this->cursosModel->getCurso($curso);
-
-        $data['curso'] = $cursoInfo;
-
         // Carrega dados do usuário
-        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
+        $usuario = $this->usuario;
 
         //set template
         $template = 'painel-temp';
 
         //set page data
+        $data['curso'] = $this->cursoInfo;
         $data['view'] = 'sobre';
-        $data['title'] = 'Sobre | ' . $cursoInfo['nome'];
+        $data['title'] = 'Sobre | ' . $this->cursoInfo['nome'];
         $data['description'] = 'Descrição do curso';
         $data['styles'] = array('painel', 'header');
         $data['scripts_head'] = array('');
@@ -168,21 +161,16 @@ class painelController extends Controller
 
     public function preferencias()
     {
-        $curso = $this->sessao->verificaCurso();
-
-        $cursoInfo = $this->cursosModel->getCurso($curso);
-
-        $data['curso'] = $cursoInfo;
-
         // Carrega dados do usuário
-        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
+        $usuario = $this->usuario;
 
         //set template
         $template = 'painel-temp';
 
         //set page data
+        $data['curso'] = $this->cursoInfo;
         $data['view'] = 'preferencias';
-        $data['title'] = 'Painel Administrativo | ' . $cursoInfo['nome'];
+        $data['title'] = 'Painel Administrativo | ' . $this->cursoInfo['nome'];
         $data['description'] = '';
         $data['styles'] = array('painel', 'header', 'preferencias');
         $data['scripts_head'] = array('abas', 'select');
@@ -195,8 +183,6 @@ class painelController extends Controller
 
     public function edit_geral()
     {
-        $curso = $this->sessao->verificaCurso();
-
         // Verifica se o formulário foi enviado via método POST
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -208,7 +194,7 @@ class painelController extends Controller
 
                 $cursosModel = new Cursos();
 
-                $cursoInfo = $cursosModel->getCurso($curso);
+                $cursoInfo = $cursosModel->getCurso($this->curso);
 
                 // Verifica se há foto de logo fornecida
                 if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK && !empty($_FILES['logo'])) {
@@ -218,9 +204,9 @@ class painelController extends Controller
                     if ($logo) {
 
                         // Obtém caminho antigo da do video
-                        $logoAntiga = $cursosModel->getPathFile($curso, 'logo');
+                        $logoAntiga = $cursosModel->getPathFile($this->curso, 'logo');
 
-                        $result = $cursosModel->updateFile($curso, $logo, $logoAntiga, 'logo');
+                        $result = $cursosModel->updateFile($this->curso, $logo, $logoAntiga, 'logo');
 
                         if ($result) {
 
@@ -250,9 +236,9 @@ class painelController extends Controller
                     if ($favicon) {
 
                         // Obtém caminho antigo da do video
-                        $faviconAntigo = $cursosModel->getPathFile($curso, 'favicon');
+                        $faviconAntigo = $cursosModel->getPathFile($this->curso, 'favicon');
 
-                        $result = $cursosModel->updateFile($curso, $favicon, $faviconAntigo, 'favicon');
+                        $result = $cursosModel->updateFile($this->curso, $favicon, $faviconAntigo, 'favicon');
 
                         if ($result) {
 
@@ -275,7 +261,7 @@ class painelController extends Controller
                 }
 
                 // Salva dados da nova aula no banco de dados
-                $result = $cursosModel->updateCurso($curso, $nomeCurso, $corTexto, $corFundo);
+                $result = $cursosModel->updateCurso($this->curso, $nomeCurso, $corTexto, $corFundo);
 
                 if ($result) {
 
@@ -307,21 +293,16 @@ class painelController extends Controller
 
     public function ajuda()
     {
-        $curso = $this->sessao->verificaCurso();
-
-        $cursoInfo = $this->cursosModel->getCurso($curso);
-
-        $data['curso'] = $cursoInfo;
-
         // Carrega dados do usuário
-        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
+        $usuario = $this->usuario;
 
         //set template
         $template = 'painel-temp';
 
         //set page data
+        $data['curso'] = $this->cursoInfo;
         $data['view'] = 'ajuda';
-        $data['title'] = 'Ajuda | ' . $cursoInfo['nome'];
+        $data['title'] = 'Ajuda | ' . $this->cursoInfo['nome'];
         $data['description'] = '';
         $data['styles'] = array('painel', 'header');
         $data['scripts_head'] = array('');
@@ -334,15 +315,11 @@ class painelController extends Controller
 
     public function logout()
     {
-        $curso = $this->sessao->verificaCurso();
-
-        $cursoInfo = $this->cursosModel->getCurso($curso);
-
         // Limpa os dados da sessão
         session_destroy();
 
         // Redireciona para a página de login ou outra página de sua escolha
-        header('Location: ' . $cursoInfo['url_principal']);
+        header('Location: ' . $this->cursoInfo['url_principal']);
         exit;
     }
 

@@ -12,6 +12,9 @@ Class homeController extends Controller {
 
         $cursoInfo = $cursosModel->getCurso($curso);
 
+        session_name($cursoInfo['dir_name']);
+        session_start();
+
         $data['curso'] = $cursoInfo;
 
         $sessao->verificaLogin($cursoInfo['url_principal']);

@@ -17,6 +17,9 @@ class relatoriosController extends Controller
         $curso = $this->sessao->verificaCurso();
         $this->cursoInfo = $this->cursosModel->getCurso($curso);
 
+        session_name($this->cursoInfo['dir_name']);
+        session_start();
+
         // Carrega dados do usuário no construtor
         $this->usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $this->cursoInfo['url_principal']);
         $this->sessao->autorizaAdm($_SESSION['usuario']['adm'], $this->cursoInfo['url_principal']);

@@ -1,8 +1,5 @@
 <?php 
 
-session_name('ultimatemembers');
-session_start();
-
 //Autoload de Core, Models e Controllers 
 require 'autoload.php';
 

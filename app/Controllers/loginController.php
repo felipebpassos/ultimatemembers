@@ -88,6 +88,9 @@ class loginController extends Controller
             if ($usuario && password_verify($senha, $usuario['senha'])) {
                 // Senha correta, fazer o login
 
+                session_name($cursoInfo['dir_name']);
+                session_start();
+
                 //Coleta dados do usuário e armazena numa variável de sessão
                 $dadosUsuario = $usuarioModel->getUsuario($email, $curso);
                 $_SESSION['usuario'] = $dadosUsuario;

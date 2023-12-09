@@ -7,7 +7,7 @@
     <div class="lista-preferências">
         <ul>
             <li>
-                <button class="aba" onclick="abrirAba(event, 'geral')">Geral</button>
+                <button class="aba" onclick="abrirAba(event, 'curso')">Curso</button>
             </li>
             <li>
                 <button class="aba" onclick="abrirAba(event, 'comunidade')">Comunidade</button>
@@ -21,10 +21,12 @@
         </ul>
     </div>
 
-    <section id="geral" class="content">
+    <section id="curso" class="content">
 
         <form action="<?php echo $curso['url_principal']; ?>painel/edit_geral/" method="post"
             enctype="multipart/form-data">
+
+            <h3>1. Geral</h3>
 
             <div class="container" style="padding:0px; margin:0px; margin-bottom:50px;">
                 <div class="row">
@@ -34,11 +36,6 @@
                             <label for="">Nome do Curso</label>
                             <input class="campo-texto" id="nome_curso" type="text" name="nome_curso"
                                 value="<?php echo $curso['nome']; ?>" required>
-                        </div>
-
-                        <div class="campo">
-                            <label for="">Descrição do Curso</label>
-                            <textarea class="campo-texto" id="descricao_curso" name="descricao_curso"></textarea>
                         </div>
 
                         <div class="campo">
@@ -89,13 +86,36 @@
                         <div class="campo">
                             <label for="fontes">Fonte</label>
                             <select id="fontes" name="fontes">
-                                <option value="jamjuree" selected style="font-family: 'Bai Jamjuree', sans-serif;">Bai Jamjuree, sans-serif</option>
-                                <option value="hindi" style="font-family: 'Hindi', sans-serif;">Hind, sans-serif</option>
-                                <option value="roboto" style="font-family: 'Roboto', sans-serif;">Roboto, sans-serif</option>
-                                <option value="poppins" style="font-family: 'Poppins', sans-serif;">Poppins, sans-serif</option>
-                                <option value="montserrat" style="font-family: 'Montserrat', sans-serif;">Montserrat, sans-serif</option>
+                                <option value="jamjuree" selected style="font-family: 'Bai Jamjuree', sans-serif;">Bai
+                                    Jamjuree, sans-serif</option>
+                                <option value="hindi" style="font-family: 'Hindi', sans-serif;">Hind, sans-serif
+                                </option>
+                                <option value="roboto" style="font-family: 'Roboto', sans-serif;">Roboto, sans-serif
+                                </option>
+                                <option value="poppins" style="font-family: 'Poppins', sans-serif;">Poppins, sans-serif
+                                </option>
+                                <option value="montserrat" style="font-family: 'Montserrat', sans-serif;">Montserrat,
+                                    sans-serif</option>
                             </select>
                         </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <h3>2. Área de Login</h3>
+
+            <div class="container" style="padding:0px; margin:0px; margin-bottom:50px;">
+                <div class="row">
+                    <div class="col-md-7">
+
+                        <div class="campo">
+                            <label for="">Descrição do Curso</label>
+                            <textarea class="campo-texto" id="descricao_curso" name="descricao_curso"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="col-md-5">
 
                     </div>
                 </div>

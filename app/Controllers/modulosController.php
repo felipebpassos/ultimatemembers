@@ -5,11 +5,24 @@ class modulosController extends Controller
 
     private $sessao;
     private $cursosModel;
+    private $curso;
+    private $cursoInfo;
+    private $usuario;
 
     public function __construct()
     {
-        $this->sessao = new Sessao;
+        $this->sessao = new Sessao();
         $this->cursosModel = new Cursos();
+
+        // Obtém informações do curso no construtor para reutilização nos métodos
+        $this->curso = $this->sessao->verificaCurso();
+        $this->cursoInfo = $this->cursosModel->getCurso($this->curso);
+
+        session_name($this->cursoInfo['dir_name']);
+        session_start();
+
+        // Carrega dados do usuário no construtor
+        $this->usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $this->cursoInfo['url_principal']);
     }
 
     public function index()
@@ -21,22 +34,16 @@ class modulosController extends Controller
         // Acesso ao modelo "Aulas"
         $aulasModel = new Aulas();
 
-        $curso = $this->sessao->verificaCurso();
-
-        $cursoInfo = $this->cursosModel->getCurso($curso);
-
-        $data['curso'] = $cursoInfo;
-
         // Carrega dados do usuário
-        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
+        $usuario = $this->usuario;
 
         //Busca no banco de dados pelo módulo
-        $modulos = $modulosModel->getModulos($curso);
+        $modulos = $modulosModel->getModulos($this->curso);
 
-        $aulasPorModulo = $modulosModel->getAulasPorModulo($curso);
+        $aulasPorModulo = $modulosModel->getAulasPorModulo($this->curso);
 
         //Busca aulas concluidas pelo usuário
-        $aulasConcluidas = $aulasModel->getAulasConcluidas($_SESSION['usuario']['id'], $curso);
+        $aulasConcluidas = $aulasModel->getAulasConcluidas($usuario['id'], $this->curso);
 
         //Armazena em variável de sessão
         $data['modulos'] = $modulos;
@@ -47,6 +54,7 @@ class modulosController extends Controller
         $template = 'painel-temp';
 
         //set page data
+        $data['curso'] = $this->cursoInfo;
         $data['view'] = 'modulos';
         $data['title'] = 'Módulos | Reels de Cinema';
         $data['description'] = 'Assista às aulas e estude através do nosso material';
@@ -70,16 +78,10 @@ class modulosController extends Controller
         // Acesso ao modelo "Aulas"
         $aulasModel = new Aulas();
 
-        $curso = $this->sessao->verificaCurso();
-
-        $cursoInfo = $this->cursosModel->getCurso($curso);
-
-        $data['curso'] = $cursoInfo;
-
         // Carrega dados do usuário
-        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
+        $usuario = $this->usuario;
 
-        $this->sessao->checkParametro($id, $cursoInfo['url_principal']);
+        $this->sessao->checkParametro($id, $this->cursoInfo['url_principal']);
 
         //Busca no banco de dados pelo módulo
         $modulo = $modulosModel->getModulo($id);
@@ -88,7 +90,7 @@ class modulosController extends Controller
         $aulas_módulo = $aulasModel->getAulas($id);
 
         //Busca aulas concluidas pelo usuário
-        $aulasConcluidas = $aulasModel->getAulasConcluidas($usuario['id'], $curso);
+        $aulasConcluidas = $aulasModel->getAulasConcluidas($usuario['id'], $this->curso);
 
         //Armazena variáveis de dados
         $data['modulo'] = $modulo;
@@ -99,6 +101,7 @@ class modulosController extends Controller
         $template = 'painel-temp';
 
         //set page data
+        $data['curso'] = $this->cursoInfo;
         $data['view'] = 'modulo';
         $data['title'] = 'Módulo | ' . $modulo['nome'];
         $data['description'] = 'Assista às aulas e estude através do nosso material';
@@ -120,22 +123,16 @@ class modulosController extends Controller
         $aulasModel = new Aulas();
         $modulosModel = new Modulos();
 
-        $curso = $this->sessao->verificaCurso();
-
-        $cursoInfo = $this->cursosModel->getCurso($curso);
-
-        $data['curso'] = $cursoInfo;
-
         // Carrega dados do usuário
-        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
+        $usuario = $this->usuario;
 
-        $this->sessao->checkParametro($id, $cursoInfo['url_principal']);
+        $this->sessao->checkParametro($id, $this->cursoInfo['url_principal']);
 
         //Busca no banco de dados pelas aulas do módulo
         $aula = $aulasModel->getAula($id);
 
         if ($aula === null) {
-            header('Location: ' . $cursoInfo['url_principal'] . 'error/'); // Redireciona para uma página de erro
+            header('Location: ' . $this->cursoInfo['url_principal'] . 'error/'); // Redireciona para uma página de erro
             exit;
         }
 
@@ -143,10 +140,10 @@ class modulosController extends Controller
         $aulas_módulo = $aulasModel->getAulas($aula['id_modulo']);
 
         //Busca no banco de dados pelo módulo
-        $modulos = $modulosModel->getModulos($curso);
+        $modulos = $modulosModel->getModulos($this->curso);
 
         //Busca aulas concluidas pelo usuário
-        $aulasConcluidas = $aulasModel->getAulasConcluidas($usuario['id'], $curso);
+        $aulasConcluidas = $aulasModel->getAulasConcluidas($usuario['id'], $this->curso);
 
         //Busca Comentários da aula
         $comentarios = $aulasModel->getComentariosAula($id, $usuario['id']);
@@ -169,6 +166,7 @@ class modulosController extends Controller
         $template = 'painel-temp';
 
         //set page data
+        $data['curso'] = $this->cursoInfo;
         $data['view'] = 'aula';
         $data['title'] = 'Aula | ' . $aula['nome'];
         $data['description'] = 'Assista às aulas e estude através do nosso material';
@@ -188,8 +186,6 @@ class modulosController extends Controller
 
     public function novo_modulo()
     {
-        $curso = $this->sessao->verificaCurso();
-
         // Verifica se o formulário foi enviado via método POST
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -236,7 +232,7 @@ class modulosController extends Controller
                 }
 
                 // Salva dados da nova aula no banco de dados
-                $result = $modulosModel->setModulo($curso, $nome, $banner, $video, $status, $data_lancamento);
+                $result = $modulosModel->setModulo($this->curso, $nome, $banner, $video, $status, $data_lancamento);
 
                 if ($result) {
 
@@ -264,8 +260,6 @@ class modulosController extends Controller
 
     public function edita_modulo()
     {
-        $this->sessao->verificaCurso();
-
         // Verifica se o formulário foi enviado via método POST
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -383,8 +377,6 @@ class modulosController extends Controller
 
     public function nova_aula()
     {
-        $curso = $this->sessao->verificaCurso();
-
         // Verifica se o formulário foi enviado via método POST
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -414,7 +406,7 @@ class modulosController extends Controller
                     }
 
                     // Salva dados da nova aula no banco de dados
-                    $result = $aulasModel->setAula($id_modulo, $nomeAula, $descricaoAula, $video, $capa, $curso);
+                    $result = $aulasModel->setAula($id_modulo, $nomeAula, $descricaoAula, $video, $capa, $this->curso);
 
                     if ($result) {
 
@@ -448,8 +440,6 @@ class modulosController extends Controller
 
     public function edita_aula()
     {
-        $this->sessao->verificaCurso();
-
         // Verifica se o formulário foi enviado via método POST
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -556,8 +546,6 @@ class modulosController extends Controller
 
     public function deletar_aula()
     {
-        $this->sessao->verificaCurso();
-
         // Verifica se o formulário foi enviado via método POST
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -636,13 +624,6 @@ class modulosController extends Controller
 
     public function comentar()
     {
-        $curso = $this->sessao->verificaCurso();
-
-        $cursoInfo = $this->cursosModel->getCurso($curso);
-
-        // Carrega dados do usuário
-        $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
-
         // Verifique se o formulário de comentários foi submetido
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comentario']) && isset($_POST['aula_id'])) {
             // Recupere os dados do formulário
@@ -668,7 +649,7 @@ class modulosController extends Controller
             if ($resultado) {
                 // Comentário inserido ou editado com sucesso
                 // Redirecione de volta para a página da aula ou para onde você desejar
-                header('Location: ' . $cursoInfo['url_principal'] . 'modulos/aula/' . $aula_id);
+                header('Location: ' . $this->cursoInfo['url_principal'] . 'modulos/aula/' . $aula_id);
                 exit();
             } else {
                 // Ocorreu um erro ao inserir ou editar o comentário
@@ -685,8 +666,6 @@ class modulosController extends Controller
 
     public function likes()
     {
-        $this->sessao->verificaCurso();
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Verifique se as variáveis POST estão definidas
             if (isset($_POST['comentarioId']) && isset($_POST['acao'])) {
@@ -714,20 +693,13 @@ class modulosController extends Controller
 
     public function aulas_modulo()
     {
-        $curso = $this->sessao->verificaCurso();
-
-        $cursoInfo = $this->cursosModel->getCurso($curso);
-
-        // Carrega dados do usuário
-        $usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $cursoInfo['url_principal']);
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Verifique se as variáveis POST estão definidas
             if (isset($_POST['id_modulo'])) {
 
                 $id = $_POST['id_modulo'];
 
-                $this->sessao->checkParametro($id, $cursoInfo['url_principal']);
+                $this->sessao->checkParametro($id, $this->cursoInfo['url_principal']);
 
                 // Acesso ao modelo "Aulas"
                 $aulasModel = new Aulas();
@@ -736,13 +708,13 @@ class modulosController extends Controller
                 $aulas_modulo = $aulasModel->getAulas($id);
 
                 //Busca aulas concluidas pelo usuário
-                $aulasConcluidas = $aulasModel->getAulasConcluidas($usuario['id'], $curso);
+                $aulasConcluidas = $aulasModel->getAulasConcluidas($this->usuario['id'], $this->curso);
 
                 // Adiciona as aulas concluídas ao array
                 foreach ($aulas_modulo as &$aula) {
                     $aula['concluida'] = in_array($aula['id'], $aulasConcluidas);
                     // Se o usuário for um administrador, adicione botões HTML aos dados
-                    if ($usuario['adm']) {
+                    if ($this->usuario['adm']) {
                         // Adicione os botões HTML diretamente aos dados
                         $aula['botoes_html'] = '<button class="editar-aula" id="editar-aula" data-id="' . $aula['id'] . '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar Aula</span></button>' .
                             '<button class="excluir-aula" id="excluir-aula" data-id="' . $aula['id'] . '"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>';
@@ -763,8 +735,6 @@ class modulosController extends Controller
 
     public function avalia_aula()
     {
-        $this->sessao->verificaCurso();
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Verifique se as variáveis POST estão definidas
             if (isset($_POST['idAula']) && isset($_POST['avaliacao']) && isset($_POST['manterAnonimato']) && isset($_POST['aluno'])) {
