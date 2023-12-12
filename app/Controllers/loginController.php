@@ -23,6 +23,9 @@ class loginController extends Controller
 
         $data['curso'] = $cursoInfo;
 
+        session_name($cursoInfo['dir_name']);
+        session_start();
+
         //set template
         $template = 'login-temp';
 
@@ -73,6 +76,10 @@ class loginController extends Controller
         $cursoInfo = $this->cursosModel->getCurso($curso);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            
+            session_name($cursoInfo['dir_name']);
+            session_start();
+
             $email = $_POST['email'];
             $senha = $_POST['senha'];
 
@@ -87,9 +94,6 @@ class loginController extends Controller
             // Verifica se o usuário existe
             if ($usuario && password_verify($senha, $usuario['senha'])) {
                 // Senha correta, fazer o login
-
-                session_name($cursoInfo['dir_name']);
-                session_start();
 
                 //Coleta dados do usuário e armazena numa variável de sessão
                 $dadosUsuario = $usuarioModel->getUsuario($email, $curso);

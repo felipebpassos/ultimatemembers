@@ -78,9 +78,9 @@
         </section>
     </div>
 
-    <!-- Seção de Próximos Passos e Notificações -->
+    <?php if (!$adm) : ?>
     <div id="proximos-passos" class="container slide-left"
-        style="padding: 0px !important; margin-left: 0px !important;">
+        style="padding: 0px !important; margin-left: 0px !important; margin-bottom:100px;">
         <ul>
             <li class="proximos-passos">
                 <div class="seçao">
@@ -95,9 +95,12 @@
                                 alt="Imagem da Aula">
                         </a>
                         <div class="info-aula" style="width: 300px !important">
-                            <div class="nome-aula" style="font-weight: bold;"><p>Aula 01 - Nome da aula</p></div>
-                            <div class="descricao-aula"><p>Descrição: Lorem ipsum dolor sit amet, consectetur adipiscing
-                                elit.</p>
+                            <div class="nome-aula" style="font-weight: bold;">
+                                <p>Aula 01 - Nome da aula</p>
+                            </div>
+                            <div class="descricao-aula">
+                                <p>Descrição: Lorem ipsum dolor sit amet, consectetur adipiscing
+                                    elit.</p>
                             </div>
                         </div>
                     </div>
@@ -117,63 +120,66 @@
         </ul>
     </div>
 
+    <div class="container slide-left" style="margin: 0; margin-bottom:100px;">
+        <div class="row">
+            <div class="col-md-6" style="min-width: 500px;">
+                <div class="seção-titulo" style="margin-bottom: 15px;">
+                    <i class="fa-solid fa-chart-simple"></i>
+                    <h3>Progresso</h3>
+                </div>
+                <div class="lista-preferências">
+                    <ul>
+                        <li>
+                            <button class="aba" onclick="abrirAba(event, 'ativos')">Em Aberto</button>
+                        </li>
+                        <li>
+                            <button class="aba" onclick="abrirAba(event, 'finalizados')">Finalizados</button>
+                        </li>
+                    </ul>
+                </div>
+                <div id="ativos" class="content">
+                    <?php gerarModulosHtml($aulasConcluidas, $modulos, $aulasPorModulo, 'ativos'); ?>
+                </div>
+                <div id="finalizados" class="content">
+                    <?php gerarModulosHtml($aulasConcluidas, $modulos, $aulasPorModulo, 'finalizados'); ?>
+                </div>
+            </div>
 
-    <div class="seçao slide-left">
-        <div class="progresso">
-            <div class="seção-titulo" style="margin-bottom: 15px;">
-                <i class="fa-solid fa-chart-simple"></i>
-                <h3>Progresso</h3>
-            </div>
-            <div class="lista-preferências">
-                <ul>
-                    <li>
-                        <button class="aba" onclick="abrirAba(event, 'ativos')">Em Aberto</button>
-                    </li>
-                    <li>
-                        <button class="aba" onclick="abrirAba(event, 'finalizados')">Finalizados</button>
-                    </li>
-                </ul>
-            </div>
-            <div id="ativos" class="content">
-                <ul>
-                    <li>
-                        <a href="curso.php">
-                            <span>Módulo 1</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="curso.php">
-                            <span>Módulo 2</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="curso.php">
-                            <span>Módulo 3</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div id="finalizados" class="content">
-                <ul>
-                    <li>
-                        <a href="curso.php">
-                            <span>Módulo finalizado 1</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="curso.php">
-                            <span>Módulo finalizado 2</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="curso.php">
-                            <span>Módulo finalizado 2</span>
-                        </a>
-                    </li>
-                </ul>
+            <div class="col-md-6" style="min-width: 500px;">
+                <div class="seção-titulo" style="margin-bottom: 15px;">
+                    <i class="fa-regular fa-square-check"></i>
+                    <h3>Avaliações</h3>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width: 40%;">Prova</th>
+                            <th scope="col" style="width: 25%;">Prazo final</th>
+                            <th scope="col" style="width: 15%;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="align-middle">Avaliação 1</td>
+                            <td class="align-middle">01/01/2024</td>
+                            <td class="align-middle"><button class="btn-3">Iniciar</button></td>
+                        </tr>
+                        <tr>
+                            <td class="align-middle">Avaliação 2</td>
+                            <td class="align-middle">02/01/2024</td>
+                            <td class="align-middle"><button class="btn-3">Iniciar</button></td>
+                        </tr>
+                        <tr>
+                            <td class="align-middle">Avaliação 3</td>
+                            <td class="align-middle">02/01/2024</td>
+                            <td class="align-middle"><button class="btn-3">Iniciar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+    <?php endif; ?>
 
     <div class="banner-box lançamentos fade-in-slide-up">
         <div class="seção-titulo" id="titulo-banner">

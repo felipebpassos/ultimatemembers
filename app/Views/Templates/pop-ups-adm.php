@@ -149,6 +149,7 @@
 
             <script>
                 var modulosData = <?php echo json_encode($modulos); ?>;
+                var modulosArray = Object.values(modulosData);
             </script>
 
         </ul>

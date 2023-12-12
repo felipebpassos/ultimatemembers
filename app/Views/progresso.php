@@ -135,42 +135,10 @@ foreach ($aulasPorModulo as $modulo => $aulas) {
                         </ul>
                     </div>
                     <div id="ativos" class="content">
-                        <ul>
-                            <li>
-                                <a href="curso.php">
-                                    <span>Módulo 1</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="curso.php">
-                                    <span>Módulo 2</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="curso.php">
-                                    <span>Módulo 3</span>
-                                </a>
-                            </li>
-                        </ul>
+                        <?php gerarModulosHtml($aulasConcluidas, $modulos, $aulasPorModulo, 'ativos'); ?>
                     </div>
                     <div id="finalizados" class="content">
-                        <ul>
-                            <li>
-                                <a href="curso.php">
-                                    <span>Módulo finalizado 1</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="curso.php">
-                                    <span>Módulo finalizado 2</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="curso.php">
-                                    <span>Módulo finalizado 2</span>
-                                </a>
-                            </li>
-                        </ul>
+                        <?php gerarModulosHtml($aulasConcluidas, $modulos, $aulasPorModulo, 'finalizados'); ?>
                     </div>
                 </div>
             </div>

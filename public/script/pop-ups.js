@@ -11,7 +11,7 @@ $('#closePopup').click(function() {
 });
 
 // Quando os botões de editar aula forem clicados
-$('.editar-aula').click(function() {
+$('.aulas').on('click', '.editar-aula', function() {
     const aulaId = $(this).data('id'); // Obtém o ID da aula do atributo data-id
 
     $('#idAula').val(aulaId);
@@ -64,7 +64,7 @@ $('.editar-modulo').click(function() {
     $('#idModulo').val(moduloId);
 
     // Encontra módulo correspondente
-    const modulo = encontrarPorId(moduloId, modulosData);
+    const modulo = encontrarPorId(moduloId, modulosArray);
 
     // Verifique se módulo é definido e possui as propriedades 'nome' e 'descricao'
     if (modulo) {
@@ -144,7 +144,7 @@ $('#aulaFormAdd').submit(function(e) {
         success: function(response) {
             // A resposta do servidor foi recebida e processada com sucesso.
             // Você pode adicionar aqui lógica para fechar o popup, atualizar a interface do usuário, etc.
-            fecharFormulario('add');
+            fecharFormulario('add-aula');
             console.log('Resposta do servidor:', response);
         },
         error: function() {

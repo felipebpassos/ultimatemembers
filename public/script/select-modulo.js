@@ -48,6 +48,8 @@ $(document).ready(function () {
                         return;
                     }
 
+                    aulasData = data;
+
                     // Limpa o conteúdo atual das aulas
                     $('.aulas').empty();
 

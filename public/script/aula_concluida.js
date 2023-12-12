@@ -1,6 +1,6 @@
 $(document).ready(function() {
     // Evento de mudança para as caixas de seleção
-    $(".checkbox input[type='checkbox']").change(function() {
+    $(".aulas").on('change', ".checkbox input[type='checkbox']", function() {
         // Pegar ID da aula associado à caixa de seleção clicada
         var aulaId = $(this).closest(".checkbox").data("id");
 

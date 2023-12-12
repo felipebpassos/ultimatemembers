@@ -70,7 +70,7 @@
     box-shadow: inset 4px 4px 6px -1px rgba(255, 255, 255, 0.2), inset -4px -4px 6px -1px rgba(255, 255, 255, 0.3), -0.5px -0.5px 0px rgba(255, 255, 255, 0.3), 0.5px 0.5px 0px rgba(0, 0, 0, 0.15), 0px 12px 10px -10px rgba(0, 0, 0, 0.05);
 }
 
-circle {
+.circular-progress circle {
     fill: none;
     stroke: url(#GradientColor);
     stroke-width: 20px;
@@ -83,3 +83,9 @@ circle {
     left: 0;
     margin: 0;
 }
+
+.lista-preferências ul {
+    width: 95%;
+}
+
+.content ul {max-height: 240px; width: 100%;}

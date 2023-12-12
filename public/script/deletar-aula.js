@@ -1,13 +1,11 @@
 $(document).ready(function () {
-    const excluirButtons = $('.excluir-aula');
-    const confirmacaoPopup = $('#confirmacao');
 
-    excluirButtons.click(function () {
+    $('.aulas').on('click', '.excluir-aula', function() {
         const idAula = $(this).data('id');
         // Define o ID da aula no popup de confirmação.
-        confirmacaoPopup.data('id-aula', idAula);
+        $('#confirmacao').data('id-aula', idAula);
 
-        confirmacaoPopup.show();
+        $('#confirmacao').show();
         $('header, main, footer, .video-intro-container').addClass('blur');
         $('body').css('overflow', 'hidden'); // Impede o scroll da página
     });

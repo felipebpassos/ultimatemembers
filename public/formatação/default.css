@@ -153,6 +153,14 @@ textarea {
     font-weight: bold;
 }
 
+.btn-3 {
+    background-color: var(--cor-primaria);
+    color: var(--cor-secundaria);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+}
+
 body {
     width: 100%;
     color: var(--cor-primaria-dark);

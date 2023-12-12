@@ -64,7 +64,7 @@ class painelController extends Controller
         $data['description'] = 'Assista às aulas e estude através do nosso material';
         $data['styles'] = array('drag-drop-files', 'painel', 'header', 'banners');
         $data['scripts_head'] = array('abas');
-        $data['scripts_body'] = array('slide', 'btn-selected', 'toggleSearch', 'pop-ups', 'enable-input', 'drag-drop-files', 'banner-roller', 'menu-responsivo', 'fade-in-slide-up');
+        $data['scripts_body'] = array('slide', 'btn-selected', 'toggleSearch', 'pop-ups', 'enable-input', 'drag-drop-files', 'banner-roller', 'menu-responsivo', 'fade-in-slide-up', 'progresso-modulos');
 
         // Carrega a view passando $_SESSION['usuario']
         $this->loadTemplates($template, $data, $usuario);
@@ -106,7 +106,7 @@ class painelController extends Controller
         $data['description'] = '';
         $data['styles'] = array('painel', 'header', 'progresso');
         $data['scripts_head'] = array('abas');
-        $data['scripts_body'] = array('btn-selected', 'toggleSearch', 'menu-responsivo', 'progresso-charts');
+        $data['scripts_body'] = array('btn-selected', 'toggleSearch', 'menu-responsivo', 'progresso-charts', 'progresso-modulos');
 
         //load view
         $this->loadTemplates($template, $data, $usuario);

@@ -123,10 +123,6 @@ main {
     width: 60%;
 }
 
-.seçao {
-    margin-bottom: 100px;
-}
-
 .seção-titulo {
     display: flex;
     margin: 0px 0px 15px 5px;
@@ -150,13 +146,8 @@ main {
     left: 10px;
 }
 
-.meus-cursos {
-    width: 600px;
-    margin-right: 50px;
-}
-
 .lista-preferências ul {
-    width: 500px;
+    width: 90%;
     margin-bottom: 0px;
     padding: 0px;
     border-bottom: solid 1px var(--cor-secundaria-light);
@@ -192,11 +183,27 @@ main {
 
 .content ul {
     padding: 0px;
+    width: 95%;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.content ul::-webkit-scrollbar {
+    width: 5px;
+}
+
+.content ul::-webkit-scrollbar-track {
+    background-color: var(--cor-secundaria-light);
+}
+
+.content ul::-webkit-scrollbar-thumb {
+    background-color: var(--cor-secundaria-lighter);
+    border-radius: 0;
 }
 
 .content ul li {
     list-style-type: none;
-    width: 500px;
+    width: 95%;
     height: 60px;
     border-bottom: solid 1px var(--cor-secundaria-light);
 }
@@ -206,14 +213,63 @@ main {
     text-decoration: none;
     display: flex;
     align-items: center;
-    width: 500px;
+    justify-content: space-between;
+    width: 100%;
     height: 60px;
-    padding: 0px 10px 0px 10px;
+    padding: 0;
+    position: relative;
+}
+
+.progress-container {
+    position: relative;
+    width: fit-content;
+    margin-right: 10px;
+}
+
+.progress-ring {
+    transform: rotate(-90deg);
+    position: relative;
+}
+
+.progress-ring__circle {
+    transition: stroke-dashoffset 0.35s;
+    transform-origin: 50% 50%;
+    stroke-dasharray: 0 351.858;
+}
+
+.progress-ring__circle-full {
+    stroke-dasharray: 113.097; /* Circunferência do círculo completo (2 * π * raio) */
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.35s;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-30%, -50%);
+    font-size: 12px;
 }
 
 .content ul li a:hover {
     transition: 0.15s;
     background-color: var(--cor-secundaria-light);
+}
+
+.table {
+    --bs-table-bg: var(--cor-secundaria-light) !important;
+    --bs-table-border-color: transparent !important;
+}
+
+.table thead {
+    --bs-table-accent-bg: var(--cor-secundaria-lighter);
+    --bs-table-color: var(--cor-primaria-light);
+}
+
+.table tbody {
+    --bs-table-color: var(--cor-primaria);
+    overflow-y: auto;
+    height: 100px;
 }
 
 .seção-container {
@@ -300,18 +356,6 @@ main {
 @media (min-width: 1020px) {
     .proximos-passos {
         margin-right: 30px;
-    }
-}
-
-@media (min-width: 992px) {
-    .content ul li {
-        width: 700px;
-    }
-    .content ul li a {
-        width: 700px;
-    }
-    .lista-preferências ul {
-        width: 700px;
     }
 }
 

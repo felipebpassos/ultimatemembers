@@ -49,7 +49,13 @@ class Modulos
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        return $data;
+        // Transforma o array sequencial em um array associativo usando os IDs como chaves
+        $modulosAssociativos = array();
+        foreach ($data as $modulo) {
+            $modulosAssociativos[$modulo['id']] = $modulo;
+        }
+
+        return $modulosAssociativos;
     }
 
 
