@@ -17,258 +17,39 @@ function criarListas($numQuestoes)
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulado - Online e Gratuito - Sala de Estudos</title>
-    <meta property="og:title" content="Simulado - Online e Gratuito - Sala de Estudos">
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+    <!-- ... meta tags, título e icone ... -->
+    <?php echo isset($description) && !empty($description) ? '<meta name="description" content="' . $description . '">' : ''; ?>
+    <title>
+        <?php echo $title; ?>
+    </title>
+
+    <?php $favicon = !empty($curso['url_favicon']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_favicon']) : "http://localhost/ultimatemembers/public/img/logo-default.png"; ?>
+    <link rel="icon" href="<?php echo $favicon; ?>">
+
+    <!-- ... estilos ... -->
+    <?php
+    foreach ($styles as $style) {
+        echo '<link rel="stylesheet" href="http://localhost/ultimatemembers/public/formatação/' . $style . '.css">' . PHP_EOL;
+    }
+    ?>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Muli&display=swap');
-
-        body {
-            font-family: 'Muli', sans-serif;
-            margin: 0;
-            padding: 0;
-            margin: auto;
-        }
-
-        header {
-            height: 100px;
-            display: flex;
-            width: 90%;
-            align-items: center;
-            justify-content: space-between;
-            margin: auto;
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        .temporizador {
-            width: 160px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgb(166, 166, 166);
-            font-weight: bolder;
-        }
-
-        .container1 {
-            position: absolute;
-            right: 40px;
-            display: flex;
-        }
-
-        .btn-finalizar {
-            height: 40px;
-            width: 160px;
-            background-color: rgb(135, 94, 199);
-            cursor: pointer;
-            color: white;
-            font-weight: bolder;
-            border: none;
-            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-finalizar:hover {
-            opacity: 0.8;
-            transition: 0.3s;
-        }
-
-        main {
-            width: 90%;
-            margin: auto;
-        }
-
-        ul {
-            padding: 0px;
-            margin: 0px;
-        }
-
-        .selecao-simples {
-            display: inline-block;
-            margin-right: 30px;
-            margin-bottom: 30px;
-        }
-
-        label {
-            display: none;
-        }
-
-        .container-questao {
-            position: relative;
-        }
-
-        .container-questoes {
-            padding-top: 10px;
-            padding-bottom: 10px;
-            border-radius: 8px;
-            box-shadow: -1px 2px 8px rgb(218, 218, 218);
-        }
-
-        .container-questoes ul {
-            padding: 10px 20px;
-            justify-content: space-between;
-        }
-
-        .container-questoes ul li {
-            display: inline-block;
-            margin: 8px 9px;
-        }
-
-        .container-questoes ul li button {
-            width: 35px;
-            height: 30px;
-            cursor: pointer;
-            border: none;
-        }
-
-        .container-questoes ul li button:hover {
-            box-shadow: -1px 2px 12px rgba(0, 0, 0, 0.25);
-            transition: 0.15s;
-        }
-
-        .question {
-            margin-bottom: 50px;
-        }
-
-        .question .enunciado {
-            min-height: 30px;
-        }
-
-        .question .alternativas {
-            padding-top: 30px;
-            padding-bottom: 30px;
-        }
-
-        .question .alternativas label {
-            width: auto;
-            display: inline-block;
-            margin-bottom: 10px;
-            position: relative;
-            padding-left: 30px;
-            cursor: pointer;
-        }
-
-        .question .alternativas input[type="radio"] {
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .question .checkmark {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 24px;
-            width: 24px;
-            border-radius: 50%;
-            border: 2px solid #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-
-        .question .alternativas label:hover .checkmark {
-            background-color: #cccccc5b;
-        }
-
-        .question .alternativas input[type="radio"]:checked+.checkmark {
-            background-color: #000;
-            color: #fff;
-        }
-
-        .question .alternativas .option-label {
-            margin-left: 10px;
-            line-height: 24px;
-        }
-
-        .responder-button {
-            width: 160px;
-            height: 40px;
-            cursor: pointer;
-            background-color: rgb(88, 175, 233);
-            color: white;
-            font-weight: bolder;
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .responder-button:hover {
-            opacity: 0.8;
-            transition: 0.3s;
-        }
-
-        .responder-button.disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-
-        .next-prev {
-            width: fit-content;
-            display: flex;
-            margin-bottom: 40px;
-        }
-
-        .btn-next-prev {
-            cursor: pointer;
-            height: 40px;
-            width: 160px;
-            margin-right: 40px;
-            border: none;
-        }
-
-        .btn-next-prev:hover {
-            box-shadow: -1px 2px 12px rgba(0, 0, 0, 0.25);
-            transition: 0.15s;
-        }
-    </style>
-
-    <script>
-        // Função para o temporizador com horas e minutos informados
-        function startTimer(hours, minutes, display) {
-            var totalSeconds = (hours * 3600) + (minutes * 60);
-            var timer = totalSeconds,
-                remainingHours, remainingMinutes, seconds;
-            setInterval(function () {
-                remainingHours = parseInt(timer / 3600, 10);
-                remainingMinutes = parseInt((timer % 3600) / 60, 10);
-                seconds = parseInt(timer % 60, 10);
-
-                remainingHours = remainingHours < 10 ? "0" + remainingHours : remainingHours;
-                remainingMinutes = remainingMinutes < 10 ? "0" + remainingMinutes : remainingMinutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                display.textContent = remainingHours + ":" + remainingMinutes + ":" + seconds;
-
-                if (--timer < 0) {
-                    // Aqui você pode adicionar a lógica quando o tempo acabar
-                    // Por exemplo, finalizar a prova automaticamente
-                } else if (remainingHours == 0 && remainingMinutes <= 29) {
-                    display.style.color = "red"; // Altera a cor para vermelho
-                }
-            }, 1000);
-        }
-
-        // Quando a página carrega, inicia o temporizador com horas e minutos informados
-        window.onload = function () {
-            var hours = 0; // Quantidade de horas
-            var minutes = 31; // Quantidade de minutos
-            var display = document.querySelector('.temporizador');
-            startTimer(hours, minutes, display);
-        };
-    </script>
+    <!-- Scripts (head) -->
+    <?php
+    foreach ($scripts_head as $script) {
+        echo '<script src="http://localhost/ultimatemembers/public/script/' . $script . '.js"></script>';
+    }
+    ?>
 </head>
 
 <body>
@@ -303,6 +84,13 @@ function criarListas($numQuestoes)
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- js files (body) -->
+    <?php
+    foreach ($scripts_body as $script) {
+        echo '<script src="http://localhost/ultimatemembers/public/script/' . $script . '.js"></script>';
+    }
+    ?>
 
     <script>
         // Dados das questões

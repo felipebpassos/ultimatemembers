@@ -125,7 +125,7 @@ foreach ($aulasPorModulo as $modulo => $aulas) {
             <div class="seçao mb-4" style="height: 280px;">
                 <div class="progresso">
                     <div class="lista-preferências">
-                        <ul>
+                        <ul class="barra">
                             <li>
                                 <button class="aba" onclick="abrirAba(event, 'ativos')">Em Aberto</button>
                             </li>

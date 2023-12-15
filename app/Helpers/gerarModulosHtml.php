@@ -16,10 +16,10 @@ function porcentagemModulos($aulasConcluidas, $aulasNoModulo)
 // Função para gerar o HTML dos módulos
 function gerarModulosHtml($aulasConcluidas, $modulos, $aulasPorModulo, $estado)
 {
-    echo '<ul>';
+    echo '<ul class="modulos-ul">';
     foreach ($aulasPorModulo as $modulo => $aulasNoModulo) {
         $porcentagemConcluida = porcentagemModulos($aulasConcluidas, $aulasNoModulo);
-        $estadoModulo = ($porcentagemConcluida == 100) ? 'finalizado' : 'ativos';
+        $estadoModulo = ($porcentagemConcluida == 100) ? 'finalizados' : 'ativos';
 
         if ($estadoModulo === $estado && isset($modulos[$modulo])) {
             $nomeModulo = $modulos[$modulo]['nome'];

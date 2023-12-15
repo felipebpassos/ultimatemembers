@@ -5,3 +5,4 @@ for (var i = 0; i < abas.length; i++) {
     abas[i].className = abas[i].className.replace('aba-ativa', '');
 }
 abas[0].className += ' aba-ativa';
+

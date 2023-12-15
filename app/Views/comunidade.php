@@ -40,7 +40,10 @@
                                                 alt="Foto de Perfil" /></div>
                                         <div class="box">
                                             <span style="font-size: 22px; font-weight: bold; display: flex;">
-                                                <?php echo $title; ?>
+                                                <a
+                                                    href="<?php echo $curso['url_principal'] . 'comunidade/discussao/' . $discussaoid; ?>">
+                                                    <?php echo $title; ?>
+                                                </a>
                                                 <div class="botoes" style="position: unset;">
                                                     <?php if ($autor_id == $id): ?>
                                                         <!-- Mostra os botões de excluir se o autor_id for igual a $id -->
@@ -105,16 +108,17 @@
                                     <div class="bottom-options">
                                         <?php if ($replies == 0): ?>
                                             <a
-                                                href="<?php echo $curso['url_principal'] . 'comunidade/discussao/' . $discussaoid; ?>">Sem
-                                                resposta ainda</a>
+                                                href="<?php echo $curso['url_principal'] . 'comunidade/discussao/' . $discussaoid; ?>">
+                                                <?php echo $replies; ?> respostas
+                                            </a>
                                         <?php elseif ($replies == 1): ?>
                                             <a
-                                                href="<?php echo $curso['url_principal'] . 'comunidade/discussao/' . $discussaoid; ?>">Ver
-                                                resposta</a>
+                                                href="<?php echo $curso['url_principal'] . 'comunidade/discussao/' . $discussaoid; ?>">
+                                                <?php echo $replies; ?> resposta
+                                            </a>
                                         <?php else: ?>
                                             <a
                                                 href="<?php echo $curso['url_principal'] . 'comunidade/discussao/' . $discussaoid; ?>">
-                                                Ver as
                                                 <?php echo $replies; ?> respostas
                                             </a>
                                         <?php endif; ?>

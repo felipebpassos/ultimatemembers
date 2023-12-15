@@ -128,7 +128,7 @@
                     <h3>Progresso</h3>
                 </div>
                 <div class="lista-preferências">
-                    <ul>
+                    <ul class="barra">
                         <li>
                             <button class="aba" onclick="abrirAba(event, 'ativos')">Em Aberto</button>
                         </li>
@@ -153,8 +153,8 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col" style="width: 40%;">Prova</th>
-                            <th scope="col" style="width: 25%;">Prazo final</th>
+                            <th scope="col" style="width: 45%;">Prova</th>
+                            <th scope="col" style="width: 20%;">Prazo final</th>
                             <th scope="col" style="width: 15%;"></th>
                         </tr>
                     </thead>
@@ -162,7 +162,7 @@
                         <tr>
                             <td class="align-middle">Avaliação 1</td>
                             <td class="align-middle">01/01/2024</td>
-                            <td class="align-middle"><button class="btn-3">Iniciar</button></td>
+                            <td class="align-middle"><a href="<?= $curso['url_principal'] ?>questionario"><button class="btn-3">Iniciar</button></a></td>
                         </tr>
                         <tr>
                             <td class="align-middle">Avaliação 2</td>

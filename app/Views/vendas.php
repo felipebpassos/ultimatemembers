@@ -5,7 +5,7 @@
     </div>
 
     <div class="lista-preferências">
-        <ul>
+        <ul class="barra">
             <li>
                 <button class="aba" onclick="abrirAba(event, 'tabela')">Vendas</button>
             </li>

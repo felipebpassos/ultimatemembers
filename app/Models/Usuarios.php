@@ -200,4 +200,20 @@ class Usuarios
         return $data;
     }
 
+    public function getUsuarios($id_curso)
+    {
+        $data = array();
+        $query = 'SELECT id, nome, email, whatsapp, nascimento, data_matricula, ultima_visita, foto_caminho, adm, instrutor FROM usuarios
+              WHERE id_curso = :id_curso';
+
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':id_curso', $id_curso);
+
+        if ($stmt->execute()) {
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        return $data;
+    }
+
 }

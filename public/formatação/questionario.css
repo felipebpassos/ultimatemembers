@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Muli&display=swap');
+
+body {
+    font-family: 'Muli', sans-serif;
+    margin: 0;
+    padding: 0;
+    margin: auto;
+}
+
+header {
+    height: 100px;
+    display: flex;
+    width: 90%;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.temporizador {
+    width: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(166, 166, 166);
+    font-weight: bolder;
+}
+
+.container1 {
+    position: absolute;
+    right: 40px;
+    display: flex;
+}
+
+.btn-finalizar {
+    height: 40px;
+    width: 160px;
+    background-color: rgb(135, 94, 199);
+    cursor: pointer;
+    color: white;
+    font-weight: bolder;
+    border: none;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-finalizar:hover {
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
+main {
+    width: 90%;
+    margin: auto;
+}
+
+ul {
+    padding: 0px;
+    margin: 0px;
+}
+
+.selecao-simples {
+    display: inline-block;
+    margin-right: 30px;
+    margin-bottom: 30px;
+}
+
+label {
+    display: none;
+}
+
+.container-questao {
+    position: relative;
+}
+
+.container-questoes {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: -1px 2px 8px rgb(218, 218, 218);
+}
+
+.container-questoes ul {
+    padding: 10px 20px;
+    justify-content: space-between;
+}
+
+.container-questoes ul li {
+    display: inline-block;
+    margin: 8px 9px;
+}
+
+.container-questoes ul li button {
+    width: 35px;
+    height: 30px;
+    cursor: pointer;
+    border: none;
+}
+
+.container-questoes ul li button:hover {
+    box-shadow: -1px 2px 12px rgba(0, 0, 0, 0.25);
+    transition: 0.15s;
+}
+
+.question {
+    margin-bottom: 50px;
+}
+
+.question .enunciado {
+    min-height: 30px;
+}
+
+.question .alternativas {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.question .alternativas label {
+    width: auto;
+    display: inline-block;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+}
+
+.question .alternativas input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.question .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.question .alternativas label:hover .checkmark {
+    background-color: #cccccc5b;
+}
+
+.question .alternativas input[type="radio"]:checked+.checkmark {
+    background-color: #000;
+    color: #fff;
+}
+
+.question .alternativas .option-label {
+    margin-left: 10px;
+    line-height: 24px;
+}
+
+.responder-button {
+    width: 160px;
+    height: 40px;
+    cursor: pointer;
+    background-color: rgb(88, 175, 233);
+    color: white;
+    font-weight: bolder;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.responder-button:hover {
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
+.responder-button.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.next-prev {
+    width: fit-content;
+    display: flex;
+    margin-bottom: 40px;
+}
+
+.btn-next-prev {
+    cursor: pointer;
+    height: 40px;
+    width: 160px;
+    margin-right: 40px;
+    border: none;
+}
+
+.btn-next-prev:hover {
+    box-shadow: -1px 2px 12px rgba(0, 0, 0, 0.25);
+    transition: 0.15s;
+}

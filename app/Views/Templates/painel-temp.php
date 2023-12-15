@@ -15,15 +15,6 @@
     <?php $favicon = !empty($curso['url_favicon']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_favicon']) : "http://localhost/ultimatemembers/public/img/logo-default.png"; ?>
     <link rel="icon" href="<?php echo $favicon; ?>">
 
-    <!-- ... estilos ... -->
-    <link rel="stylesheet" href="http://localhost/ultimatemembers/public/formatação/default.css">
-    <link rel="stylesheet" href="http://localhost/ultimatemembers/public/formatação/footer.css">
-    <?php
-    foreach ($styles as $style) {
-        echo '<link rel="stylesheet" href="http://localhost/ultimatemembers/public/formatação/' . $style . '.css">' . PHP_EOL;
-    }
-    ?>
-
     <!-- Pickr -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css" />
     <!-- Bootstrap CSS -->
@@ -33,6 +24,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- ... estilos ... -->
+    <link rel="stylesheet" href="http://localhost/ultimatemembers/public/formatação/default.css">
+    <link rel="stylesheet" href="http://localhost/ultimatemembers/public/formatação/footer.css">
+    <?php
+    foreach ($styles as $style) {
+        echo '<link rel="stylesheet" href="http://localhost/ultimatemembers/public/formatação/' . $style . '.css">' . PHP_EOL;
+    }
+    ?>
 
     <!-- Scripts (head) -->
     <?php

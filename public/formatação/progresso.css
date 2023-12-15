@@ -84,8 +84,8 @@
     margin: 0;
 }
 
-.lista-preferências ul {
+.lista-preferências .barra {
     width: 95%;
 }
 
-.content ul {max-height: 240px; width: 100%;}
+.content .modulos-ul {max-height: 240px; width: 100%;}

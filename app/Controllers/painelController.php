@@ -164,6 +164,8 @@ class painelController extends Controller
         // Carrega dados do usuário
         $usuario = $this->usuario;
 
+        $this->sessao->autorizaAdm($usuario['adm'], $this->cursoInfo['url_principal']);
+
         //set template
         $template = 'painel-temp';
 
@@ -172,12 +174,29 @@ class painelController extends Controller
         $data['view'] = 'preferencias';
         $data['title'] = 'Painel Administrativo | ' . $this->cursoInfo['nome'];
         $data['description'] = '';
-        $data['styles'] = array('painel', 'header', 'preferencias');
+        $data['styles'] = array('painel', 'header', 'search-bar', 'relatorios', 'preferencias');
         $data['scripts_head'] = array('abas', 'select');
-        $data['scripts_body'] = array('btn-selected', 'toggleSearch', 'menu-responsivo', 'simple_select');
+        $data['scripts_body'] = array('btn-selected', 'toggleSearch', 'menu-responsivo', 'simple_select', 'dropdown', 'busca-usuarios');
 
         // Carrega a view passando $_SESSION['usuario']
         $this->loadTemplates($template, $data, $usuario);
+
+    }
+
+    public function get_users()
+    {
+        // Carrega dados do usuário
+        $usuario = $this->usuario;
+
+        $this->sessao->autorizaAdm($usuario['adm'], $this->cursoInfo['url_principal']);
+
+        // Acesso ao modelo "Aulas"
+        $usuariosModel = new Usuarios();
+
+        $users = $usuariosModel->getUsuarios($this->curso);
+
+        header('Content-Type: application/json');
+        echo json_encode($users);
 
     }
 
