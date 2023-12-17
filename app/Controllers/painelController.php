@@ -176,7 +176,7 @@ class painelController extends Controller
         $data['description'] = '';
         $data['styles'] = array('painel', 'header', 'search-bar', 'relatorios', 'preferencias');
         $data['scripts_head'] = array('abas', 'select');
-        $data['scripts_body'] = array('btn-selected', 'toggleSearch', 'menu-responsivo', 'simple_select', 'dropdown', 'busca-usuarios');
+        $data['scripts_body'] = array('btn-selected', 'toggleSearch', 'menu-responsivo', 'simple_select', 'dropdown', 'usuarios-table', 'pop-ups');
 
         // Carrega a view passando $_SESSION['usuario']
         $this->loadTemplates($template, $data, $usuario);
@@ -197,6 +197,23 @@ class painelController extends Controller
 
         header('Content-Type: application/json');
         echo json_encode($users);
+
+    }
+
+    public function add_user()
+    {
+        // Carrega dados do usuário
+        $usuario = $this->usuario;
+
+        $this->sessao->autorizaAdm($usuario['adm'], $this->cursoInfo['url_principal']);
+
+        // Acesso ao modelo "Aulas"
+        $usuariosModel = new Usuarios();
+
+        $user = $usuariosModel->getUsuarios($this->curso);
+
+        header('Content-Type: application/json');
+        echo json_encode($user);
 
     }
 

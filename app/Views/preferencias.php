@@ -152,7 +152,7 @@
             <div class="filter-container">
 
                 <div class="new-user">
-                    <button class="btn-2" style="margin-right: 20px;">+ Novo</button>
+                    <button class="btn-2" id="add-user" style="margin-right: 20px;">+ Novo</button>
                 </div>
 
                 <div class="pesquisar">

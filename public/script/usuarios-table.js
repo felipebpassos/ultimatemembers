@@ -14,8 +14,6 @@ function buscarUsuarios() {
             // Limpar a tabela antes de adicionar novas linhas
             $(".tabela .linha").remove();
 
-            console.log(data);
-
             // Adicionar linhas com base nos dados obtidos
             data.forEach(function (usuario) {
                 const linha = $("<div class='linha'></div>");
@@ -32,7 +30,7 @@ function buscarUsuarios() {
                 // Definir permissão com base nos dados do usuário
                 let permissao = '';
                 if (usuario.adm === "1" && usuario.instrutor === "0") {
-                    permissao = 'ADM';
+                    permissao = 'Adm';
                 } else if (usuario.adm === "1" && usuario.instrutor === "1") {
                     permissao = 'Instrutor';
                 } else {
@@ -50,13 +48,42 @@ function buscarUsuarios() {
                                 <button><i class='fa-solid fa-trash-can'></i></button>
                             </div>`);
 
+                // Criar e preencher a informação adicional
+                const infoAdicional = $("<div class='info-adicional'></div>");
+                infoAdicional.append(`<ul>
+                                        <li>Nome: ${usuario.nome}</li>
+                                        <li>Permissão: ${permissao}</li>
+                                        <li>Status: ${status}</li>
+                                        <li>Email: ${usuario.email}</li>
+                                        <li>WhatsApp: ${usuario.whatsapp}</li>
+                                        <li>Data de Cadastro: ${usuario.data_matricula}</li>
+                                        <li>Último Acesso: ${usuario.ultima_visita}</li>
+                                    </ul>`);
+
                 // Adicionar linha à tabela
-                $(".tabela").append(linha);
+                $(".tabela").append(linha.append(infoAdicional));
             });
-        }
-        ,
+        },
         error: function (xhr, status, error) {
             console.error('Erro ao buscar usuários:', status, error);
         }
     });
 }
+
+// Event listener para o checkbox do cabeçalho
+$(".cabecalho .checkbox input").on("change", function () {
+    // Obtém o estado do checkbox do cabeçalho
+    const isChecked = $(this).prop("checked");
+
+    // Seleciona todos os checkboxes das linhas
+    $(".tabela .linha .checkbox input").prop("checked", isChecked);
+});
+
+// Event listener para os checkboxes das linhas
+$(".tabela .linha .checkbox input").on("change", function () {
+    // Verifica se todos os checkboxes das linhas estão selecionados
+    const allChecked = $(".tabela .linha .checkbox input:checked").length === $(".tabela .linha .checkbox input").length;
+
+    // Atualiza o estado do checkbox do cabeçalho com base nos checkboxes das linhas
+    $(".cabecalho .checkbox input").prop("checked", allChecked);
+});

@@ -171,7 +171,7 @@ class Usuarios
     {
         $data = array();
         $query = 'SELECT id, nome, email, whatsapp, data_matricula, foto_caminho FROM usuarios
-              WHERE adm = 1 AND id_curso = :id_curso';
+              WHERE instrutor = 1 AND id_curso = :id_curso';
 
         $stmt = $this->con->prepare($query);
         $stmt->bindValue(':id_curso', $id_curso);

@@ -345,7 +345,9 @@ h6 {
     transition: 0.3s;
 }
 
-#img-aula:hover {transform: scale(1.1);}
+#img-aula:hover {
+    transform: scale(1.1);
+}
 
 #img-aula:hover,
 #img-aula-2:hover,
@@ -554,7 +556,12 @@ h6 {
     }
 }
 
-.pickr button {margin-left: 20px; border: 3px solid rgb(187, 187, 187) !important; width: 40px !important; height: 40px !important;}
+.pickr button {
+    margin-left: 20px;
+    border: 3px solid rgb(187, 187, 187) !important;
+    width: 40px !important;
+    height: 40px !important;
+}
 
 
 /* Pop Ups */
@@ -562,17 +569,14 @@ h6 {
 .popup {
     display: none;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 620px;
-    height: 500px;
-    border-radius: 8px;
-    background-color: var(--popup);
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--cor-secundaria-transparent);
     color: var(--cor-primaria);
     padding: 20px 30px;
     padding-bottom: 30px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     z-index: 9999;
 }
 
@@ -580,8 +584,7 @@ h6 {
 #aulaFormEdit,
 #moduloFormAdd,
 #moduloFormEdit {
-    margin-top: 30px;
-    height: 360px;
+    margin: 30px 0;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -694,6 +697,14 @@ h6 {
 
 .op-modulo button i {
     font-size: 16px !important;
+}
+
+.checkbox-box {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid var(--cor-secundaria-light);
+    border-radius: 5px;
+    padding: 10px 20px;
 }
 
 .blur {

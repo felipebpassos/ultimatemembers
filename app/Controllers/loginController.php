@@ -26,6 +26,8 @@ class loginController extends Controller
         session_name($cursoInfo['dir_name']);
         session_start();
 
+        $this->sessao->verificaLogin($cursoInfo['url_principal']);
+
         //set template
         $template = 'login-temp';
 

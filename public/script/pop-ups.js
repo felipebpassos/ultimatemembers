@@ -1,4 +1,4 @@
-//Aulas
+//AULAS
 
 // Quando o botão de adicionar aula for clicado
 $('#add-aula').click(function() {
@@ -36,7 +36,7 @@ $('#closePopupEdit').click(function() {
     fecharFormulario('edit-aula');
 });
 
-//Módulos
+//MÓDULOS
 
 $('#editar-modulos').click(function() {
     exibirFormulario('modulos'); // Função para exibir o formulário
@@ -49,12 +49,14 @@ $('#closePopupModulos').click(function() {
 
 // Quando o botão de adicionar modulo for clicado
 $('#add-modulo').click(function() {
+    $('#modulos-list').hide();
     $('#add-modulo-form').show(); // Exibir o formulário
 });
 
 // Quando o botão de fechar for clicado
 $('#closePopupModulo').click(function() {
     $('#add-modulo-form').hide();
+    $('#modulos-list').show();
 });
 
 // Quando os botões de editar modulo for clicado
@@ -74,12 +76,26 @@ $('.editar-modulo').click(function() {
         console.error('Módulo não encontrado ou propriedades ausentes.');
     }
 
+    $('#modulos-list').hide();
     $('#edit-modulo-form').show(); 
 });
 
 // Quando o botão de fechar for clicado
 $('#closePopupModuloEdit').click(function() {
     $('#edit-modulo-form').hide();
+    $('#modulos-list').show();
+});
+
+//USUÁRIOS
+
+// Quando o botão de adicionar aula for clicado
+$('#add-user').click(function() {
+    exibirFormulario('add-user'); // Função para exibir o formulário
+});
+
+// Quando o botão de fechar for clicado
+$('#closePopupUsuario').click(function() {
+    fecharFormulario('add-user');
 });
 
 // Função para encontrar aula por ID
@@ -103,9 +119,12 @@ function exibirFormulario(option) {
         $('#edit').show();
     } else if (option === 'modulos') {
         $('#modulos-list').show();
+    } else if (option === 'add-user') {
+        $('#add-usuario').show();
     }
     $('header').addClass('hidden');
     $('.main-banner').addClass('blur');
+    $('.dots').addClass('blur');
     $('main').addClass('blur');
     $('footer').addClass('blur');
     $('.video-intro-container').addClass('blur');
@@ -120,9 +139,12 @@ function fecharFormulario(option) {
         $('#edit').hide();
     } else if (option === 'modulos') {
         $('#modulos-list').hide();
+    } else if (option === 'add-user') {
+        $('#add-usuario').hide();
     }
     $('header').removeClass('hidden');
     $('.main-banner').removeClass('blur');
+    $('.dots').removeClass('blur');
     $('main').removeClass('blur');
     $('footer').removeClass('blur');
     $('.video-intro-container').removeClass('blur');

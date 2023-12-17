@@ -39,6 +39,7 @@ const corWhatsapp = calcularCorMaisEscura(corTextoObj, 100);
 // Calcula as variações das cores secundárias com base na cor de fundo
 const corFundoObj = hexToRgb(corFundo);
 const corSecundaria = calcularCorMaisEscura(corFundoObj, 0);
+const corSecundariaTransparent = calcularCorTransparente(corFundoObj, 0.7);
 const corSecundariaLight = calcularCorMaisEscura(corFundoObj, -10);
 const corSecundariaLighter = calcularCorMaisEscura(corFundoObj, -20); //valor negativo para fazer a cor mais clara
 
@@ -58,5 +59,6 @@ dinamicroot.style.setProperty("--cor-primaria-light", corPrimariaLight);
 dinamicroot.style.setProperty("--cor-primaria-lighter", corPrimariaLighter);
 dinamicroot.style.setProperty("--whatsapp", corWhatsapp);
 dinamicroot.style.setProperty("--cor-secundaria", corSecundaria);
+dinamicroot.style.setProperty("--cor-secundaria-transparent", corSecundariaTransparent);
 dinamicroot.style.setProperty("--cor-secundaria-light", corSecundariaLight);
 dinamicroot.style.setProperty("--cor-secundaria-lighter", corSecundariaLighter);
