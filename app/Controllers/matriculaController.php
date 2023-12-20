@@ -163,6 +163,9 @@ class matriculaController extends Controller
                 $dadosTemporarios['senha'],
                 $dadosTemporarios['whatsapp'],
                 $dadosTemporarios['nascimento'],
+                1,
+                false,
+                false,
                 $curso
             );
 

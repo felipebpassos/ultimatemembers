@@ -302,7 +302,7 @@
     </div>
 </div>
 
-<!-- Formulário para adicionar módulo -->
+<!-- Formulário para adicionar usuário -->
 <div id="add-usuario" class="popup">
     <div class="popup-content" style="max-width:600px; margin: auto;">
 
@@ -315,22 +315,22 @@
                 enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="nome" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="nome" placeholder="Digite o nome" required>
+                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Digite o email" required>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Digite o email" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="whatsapp" class="form-label">WhatsApp (opcional)</label>
-                    <input type="tel" class="form-control" id="whatsapp" placeholder="Digite o número de WhatsApp (opcional)">
+                    <input type="tel" class="form-control" id="whatsapp" name="whatsapp" placeholder="Digite o número de WhatsApp (opcional)">
                 </div>
 
                 <div class="mb-3">
                     <label for="nascimento" class="form-label">Nascimento (opcional)</label>
-                    <input type="date" class="form-control" id="nascimento">
+                    <input type="date" class="form-control" id="nascimento" name="nascimento">
                 </div>
 
                 <label>Permissão</label>
@@ -351,7 +351,7 @@
                 </div>
 
                 <div class="mb-3 form-check" style="margin: 10px 0 0 5px;">
-                    <input type="checkbox" class="form-check-input" id="status">
+                    <input type="checkbox" class="form-check-input" id="status" name="status" checked>
                     <label class="form-check-label" for="status">Status: Ativo</label>
                 </div>
 

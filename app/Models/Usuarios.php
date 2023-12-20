@@ -15,10 +15,10 @@ class Usuarios
     }
 
     // Método para criar novo usuário
-    public function setUsuario($nome, $email, $senha, $whatsapp, $nascimento, $id_curso)
+    public function setUsuario($nome, $email, $senha, $whatsapp, $nascimento, $plano, $adm, $instrutor, $id_curso)
     {
-        $query = 'INSERT INTO usuarios (nome, email, senha, whatsapp, nascimento, id_curso) 
-              VALUES (:nome, :email, :senha, :whatsapp, :nascimento, :id_curso)';
+        $query = 'INSERT INTO usuarios (nome, email, senha, whatsapp, nascimento, plano, adm, instrutor, id_curso) 
+              VALUES (:nome, :email, :senha, :whatsapp, :nascimento, :plano, :adm, :instrutor, :id_curso)';
 
         $senhaHash = password_hash($senha, PASSWORD_DEFAULT); // Gera o hash da senha
 
@@ -29,6 +29,9 @@ class Usuarios
         $stmt->bindValue(':senha', $senhaHash); // Armazena o hash no banco de dados
         $stmt->bindValue(':whatsapp', $whatsapp);
         $stmt->bindValue(':nascimento', $nascimento);
+        $stmt->bindValue(':plano', $plano);
+        $stmt->bindValue(':adm', $adm);
+        $stmt->bindValue(':instrutor', $instrutor);
         $stmt->bindValue(':id_curso', $id_curso);
 
         return $stmt->execute();
@@ -203,7 +206,7 @@ class Usuarios
     public function getUsuarios($id_curso)
     {
         $data = array();
-        $query = 'SELECT id, nome, email, whatsapp, nascimento, data_matricula, ultima_visita, foto_caminho, adm, instrutor FROM usuarios
+        $query = 'SELECT id, nome, email, whatsapp, nascimento, data_matricula, ultima_visita, foto_caminho, plano, adm, instrutor FROM usuarios
               WHERE id_curso = :id_curso';
 
         $stmt = $this->con->prepare($query);

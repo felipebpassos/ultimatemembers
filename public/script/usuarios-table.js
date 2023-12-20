@@ -39,13 +39,14 @@ function buscarUsuarios() {
                 linha.append(`<div class='celula' id='permissao'>${permissao}</div>`);
 
                 // Definir status com base nos dados do usuário
-                const status = usuario.plano !== 0 ? 'Ativo' : 'Inativo';
+                const status = usuario.plano !== "0" ? 'Ativo' : 'Inativo';
+                console.log(usuario.plano);
                 linha.append(`<div class='celula' id='status'>${status}</div>`);
 
                 linha.append(`<div class='celula' id='cadastro'>${usuario.data_matricula}</div>`);
                 linha.append(`<div class='celula' id='opcoes'>
-                                <button><i class='fa-solid fa-pen-to-square'></i></button>
-                                <button><i class='fa-solid fa-trash-can'></i></button>
+                                <button class="editar-user"><i class='fa-solid fa-pen-to-square'></i></button>
+                                <button class="delete-user"><i class='fa-solid fa-trash-can'></i></button>
                             </div>`);
 
                 // Criar e preencher a informação adicional

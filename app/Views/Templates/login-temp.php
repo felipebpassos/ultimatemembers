@@ -40,7 +40,7 @@
 
         <div class="banner-curso">
 
-            <div class="pelicula-transparente"></div>
+            <img src="http://localhost/ultimatemembers/public/img/fundo.png" alt="Banner do <?= $curso['nome'] ?>">
 
         </div>
 

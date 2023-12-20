@@ -6,26 +6,17 @@ main {
 }
 
 .banner-curso {
-    background-image: url('../img/fundo.png');
-    background-size: cover;
-    /* Ajusta o tamanho da imagem para cobrir todo o fundo */
-    background-repeat: no-repeat;
-    /* Evita repetição da imagem */
-    background-attachment: fixed;
-    /* Mantém a imagem fixa enquanto a página rola */
     flex: 1;
     height: 100vh;
     min-height: 600px;
+    position: relative;
 }
 
-.pelicula-transparente {
-    background-color: rgba(0, 0, 0, 0.92);
+.banner-curso img {
+    position: absolute;
     width: 100%;
     height: 100%;
-    opacity: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    object-fit: cover;
 }
 
 .login-box {

@@ -45,7 +45,6 @@
                 <div class="submeter">
                     <button class="btn-2" type="submit"><i class="fa-regular fa-floppy-disk"></i>Salvar</button>
                 </div>
-                <h3>1. Geral</h3>
                 <div class="row">
                     <div class="col-md-6">
 
@@ -68,7 +67,7 @@
                             </div>
                         </div>
 
-                        <div class="campo">
+                        <div class="campo" style="margin-bottom: 30px;">
                             <div style="display:flex; align-items:center;">
                                 <div class="preview">
                                     <img src="<?= !empty($curso['url_favicon']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_favicon']) : "http://localhost/ultimatemembers/public/img/favicon-default.png" ?>"
@@ -81,7 +80,7 @@
                             </div>
                         </div>
 
-                        <div class="campo">
+                        <div class="campo" style="margin-bottom: 30px;">
                             <label for="fontes">Fonte</label>
                             <select id="fontes" name="fontes">
                                 <option value="jamjuree" selected style="font-family: 'Bai Jamjuree', sans-serif;">Bai
@@ -102,8 +101,20 @@
                     <div class="col-md-6">
 
                         <div class="campo">
-                            <label for="">Descrição do Curso</label>
-                            <textarea class="campo-texto" id="descricao_curso" name="descricao_curso"></textarea>
+                            <label for="login-area">Área de login</label>
+                            <div class="login-area">
+                                <div class="banner-curso">
+                                    <img src="http://localhost/ultimatemembers/public/img/fundo.png" alt="Banner do <?= $curso['nome'] ?>">
+                                </div>
+                                <div class="login-box">
+                                    <div style="width: 60%; height: 100px; margin: auto;">
+                                        <div class="inputs"></div>
+                                        <div class="inputs"></div>
+                                        <div class="inputs"></div>
+                                    </div>
+                                    <div class="btn-login"></div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
