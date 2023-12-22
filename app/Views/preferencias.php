@@ -42,7 +42,8 @@
             enctype="multipart/form-data">
 
             <div class="container">
-                <div class="submeter">
+                <div class="botoes-opcao">
+                    <button class="btn-2" type="button"><i class="fa-solid fa-arrow-rotate-left"></i>Reset</button>
                     <button class="btn-2" type="submit"><i class="fa-regular fa-floppy-disk"></i>Salvar</button>
                 </div>
                 <div class="row">
@@ -106,11 +107,14 @@
                             <label for="login-area">Área de login</label>
                             <div class="login-area">
                                 <div class="login-img-form">
-                                    <label for="login-img-form">Banner de Login (Formatos aceitos: .png ou .jpeg):</label>
-                                    <input type="file" id="login-img-form" name="login-img-form" accept=".jpg, .png, .jpeg">
+                                    <label for="login-img-form">Banner de Login (Formatos aceitos: .png ou
+                                        .jpeg):</label>
+                                    <input type="file" id="login-img-form" name="login-img-form"
+                                        accept=".jpg, .png, .jpeg">
                                 </div>
                                 <div class="banner-curso">
-                                    <img id="img-login" src="<?= !empty($curso['banner_login']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['banner_login']) : "http://localhost/ultimatemembers/public/img/default_img.png" ?>"
+                                    <img id="img-login"
+                                        src="<?= !empty($curso['banner_login']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['banner_login']) : "http://localhost/ultimatemembers/public/img/default_img.png" ?>"
                                         alt="Banner do <?= $curso['nome'] ?>">
                                 </div>
                                 <div class="login-box">

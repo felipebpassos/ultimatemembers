@@ -15,7 +15,7 @@ main {
 
 .content {
     width: 82%;
-    margin: 80px auto;
+    margin: 100px auto;
     margin-bottom: 150px;
 }
 
@@ -78,7 +78,7 @@ main {
 #fontes {
     padding: 5px;
     display: block;
-    height: 40px;
+    height: 50px;
     background-color: transparent;
     width: 80%;
     color: var(--cor-primaria-dark);
@@ -139,19 +139,21 @@ main {
     margin: 30px auto;
 }
 
-.submeter {
+.botoes-opcao {
     width: fit-content;
     position: absolute;
     right: 0;
-    top: -50px;
+    top: -70px;
+    display: flex;
 }
 
-.submeter button,
+.botoes-opcao button,
 .new-user button {
     height: fit-content;
     min-width: 0;
     min-height: 0;
     padding: 10px 20px;
+    margin-left: 30px;
 }
 
 .opcoes {
