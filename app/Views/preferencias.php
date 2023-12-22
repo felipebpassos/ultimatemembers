@@ -57,7 +57,8 @@
                         <div class="campo">
                             <div style="display:flex; align-items:center;">
                                 <div class="preview">
-                                    <img src="<?= !empty($curso['url_logo']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_logo']) : "http://localhost/ultimatemembers/public/img/logo-default.png" ?>"
+                                    <img id="img-logo"
+                                        src="<?= !empty($curso['url_logo']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_logo']) : "http://localhost/ultimatemembers/public/img/logo-default.png" ?>"
                                         alt="logo">
                                 </div>
                                 <div>
@@ -70,7 +71,8 @@
                         <div class="campo" style="margin-bottom: 30px;">
                             <div style="display:flex; align-items:center;">
                                 <div class="preview">
-                                    <img src="<?= !empty($curso['url_favicon']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_favicon']) : "http://localhost/ultimatemembers/public/img/favicon-default.png" ?>"
+                                    <img id="img-favicon"
+                                        src="<?= !empty($curso['url_favicon']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_favicon']) : "http://localhost/ultimatemembers/public/img/favicon-default.png" ?>"
                                         alt="favicon">
                                 </div>
                                 <div>
@@ -103,8 +105,13 @@
                         <div class="campo">
                             <label for="login-area">Área de login</label>
                             <div class="login-area">
+                                <div class="login-img-form">
+                                    <label for="login-img-form">Banner de Login (Formatos aceitos: .png ou .jpeg):</label>
+                                    <input type="file" id="login-img-form" name="login-img-form" accept=".jpg, .png, .jpeg">
+                                </div>
                                 <div class="banner-curso">
-                                    <img src="http://localhost/ultimatemembers/public/img/fundo.png" alt="Banner do <?= $curso['nome'] ?>">
+                                    <img id="img-login" src="<?= !empty($curso['banner_login']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['banner_login']) : "http://localhost/ultimatemembers/public/img/default_img.png" ?>"
+                                        alt="Banner do <?= $curso['nome'] ?>">
                                 </div>
                                 <div class="login-box">
                                     <div style="width: 60%; height: 100px; margin: auto;">

@@ -11,7 +11,7 @@
     <title>
         <?php echo $title; ?>
     </title>
-    
+
     <?php $favicon = !empty($curso['url_favicon']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_favicon']) : "http://localhost/ultimatemembers/public/img/logo-default.png"; ?>
     <link rel="icon" href="<?php echo $favicon; ?>">
 
@@ -40,7 +40,8 @@
 
         <div class="banner-curso">
 
-            <img src="http://localhost/ultimatemembers/public/img/fundo.png" alt="Banner do <?= $curso['nome'] ?>">
+            <img src="<?= !empty($curso['banner_login']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['banner_login']) : "http://localhost/ultimatemembers/public/img/default_img.png" ?>"
+                alt="Banner do <?= $curso['nome'] ?>">
 
         </div>
 

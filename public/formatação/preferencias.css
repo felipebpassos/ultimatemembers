@@ -93,6 +93,14 @@ main {
     height: 320px;
     overflow: hidden;
     display: flex;
+    position: relative;
+}
+
+.login-area .login-img-form {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 2;
 }
 
 .banner-curso {

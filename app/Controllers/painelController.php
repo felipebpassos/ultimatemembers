@@ -176,7 +176,7 @@ class painelController extends Controller
         $data['description'] = '';
         $data['styles'] = array('painel', 'header', 'search-bar', 'relatorios', 'preferencias');
         $data['scripts_head'] = array('abas', 'select');
-        $data['scripts_body'] = array('btn-selected', 'toggleSearch', 'menu-responsivo', 'simple_select', 'dropdown', 'usuarios-table', 'pop-ups');
+        $data['scripts_body'] = array('btn-selected', 'toggleSearch', 'menu-responsivo', 'simple_select', 'dropdown', 'usuarios-table', 'pop-ups', 'troca_img');
 
         // Carrega a view passando $_SESSION['usuario']
         $this->loadTemplates($template, $data, $usuario);
@@ -321,6 +321,38 @@ class painelController extends Controller
                         } else {
 
                             print_r('Erro ao editar favicon');
+                            exit;
+
+                        }
+
+                    } else {
+
+                        print_r('Erro no upload');
+                        exit;
+
+                    }
+
+                }
+
+                // Verifica se há banner de login fornecido
+                if (isset($_FILES['login-img-form']) && $_FILES['login-img-form']['error'] === UPLOAD_ERR_OK && !empty($_FILES['login-img-form'])) {
+
+                    $banner = $cursosModel->uploadFile($_FILES['login-img-form'], $cursoInfo['dir_name']);
+
+                    if ($banner) {
+
+                        // Obtém caminho antigo da do video
+                        $bannerAntigo = $cursosModel->getPathFile($this->curso, 'banner_login');
+
+                        $result = $cursosModel->updateFile($this->curso, $banner, $bannerAntigo, 'banner_login');
+
+                        if ($result) {
+
+                            print_r('Sucesso no upload');
+
+                        } else {
+
+                            print_r('Erro ao editar banner de login');
                             exit;
 
                         }

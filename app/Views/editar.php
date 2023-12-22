@@ -20,7 +20,7 @@
                             <div style="margin-top: 15px;">
                                 <p style="margin: 0px;">Alterar Foto</p><i class="fa-solid fa-camera"></i>
                             </div>
-                            <input name="imagem" class="btn-upload-img" type="file" id="img-upload-form"
+                            <input name="imagem" class="btn-upload-img" type="file" id="perfil-upload-form"
                                 accept=".jpg, .jpeg, .png" />
                         </div>
                     </div>
