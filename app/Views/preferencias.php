@@ -44,7 +44,8 @@
             <div class="container">
                 <div class="botoes-opcao">
                     <button class="btn-2" type="button"><i class="fa-solid fa-arrow-rotate-left"></i>Reset</button>
-                    <button class="btn-2" type="submit" style="margin-left: 30px;"><i class="fa-regular fa-floppy-disk"></i>Salvar</button>
+                    <button class="btn-2" type="submit" style="margin-left: 30px;"><i
+                            class="fa-regular fa-floppy-disk"></i>Salvar</button>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
@@ -116,7 +117,8 @@
                                     <input type="file" id="login-img-form" name="login-img-form"
                                         accept=".jpg, .png, .jpeg">
                                     <button type="button" class="btn-file"
-                                        onclick="document.getElementById('login-img-form').click()">Escolher Arquivo</button>
+                                        onclick="document.getElementById('login-img-form').click()">Escolher
+                                        Arquivo</button>
                                 </div>
                                 <div class="banner-curso">
                                     <img id="img-login"
@@ -219,7 +221,52 @@
 
     </section>
 
-    <section id="integracoes" class="content"></section>
+    <section id="integracoes" class="content">
+        <h4>Disponíveis</h4>
+
+        <div class="row">
+            <div class="integracao col-md-3 col-lg-3">
+                <div class="integracao-logo">
+                    <img src="http://localhost/ultimatemembers/public/img/youtube.png" alt="Youtube (Logo)">
+                </div>
+                <div class="integracao-info">
+                    <h5>Youtube</h5>
+                    <p>Plataforma de vídeo</p>
+                </div>
+            </div>
+
+            <div class="integracao col-md-3 col-lg-3">
+                <div class="integracao-logo">
+                    <img src="http://localhost/ultimatemembers/public/img/vimeo.png" alt="Vimeo (Logo)">
+                </div>
+                <div class="integracao-info">
+                    <h5>Vimeo</h5>
+                    <p>Plataforma de vídeo</p>
+                </div>
+            </div>
+
+            <div class="integracao col-md-3 col-lg-3">
+                <div class="integracao-logo">
+                    <img src="http://localhost/ultimatemembers/public/img/panda.png" alt="Panda (Logo)">
+                </div>
+                <div class="integracao-info">
+                    <h5>Panda Video</h5>
+                    <p>Plataforma de vídeo</p>
+                </div>
+            </div>
+
+            <div class="integracao col-md-3 col-lg-3">
+                <div class="integracao-logo">
+                    <img src="http://localhost/ultimatemembers/public/img/pagseguro_logo.png" alt="PagSeguro (Logo)">
+                </div>
+                <div class="integracao-info">
+                    <h5>PagSeguro</h5>
+                    <p>Meio de pagamento</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <section id="comunidade" class="content"></section>
 

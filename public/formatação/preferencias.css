@@ -280,3 +280,37 @@ main {
 .linha:hover {
     background-color: var(--cor-secundaria-light);
 }
+
+.integracao {
+    max-width: 280px;
+    min-width: 280px;
+    margin: 30px;
+    margin-left: 0;
+    padding: 0;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px var(--sombra);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+}
+
+.integracao:hover {
+    transform: translateY(-8px);
+}
+
+.integracao-logo {
+    width: 100%;
+    height: 280px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.integracao-logo img {
+    width: 120px;
+}
+
+.integracao-info {padding: 10px 20px; background-color: var(--cor-secundaria-light);}
+
+.integracao-info p {margin: 0;}
