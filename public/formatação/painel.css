@@ -182,9 +182,11 @@ main {
     display: none;
     position: absolute;
     background-color: var(--cor-secundaria);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 12px var(--sombra);
     z-index: 1;
-    width: 100%;
+    width: fit-content;
+    padding: 10px 20px;
+    left: -20px;
 }
 
 .lista-preferências .dropdown:hover .dropdown-content {
@@ -193,6 +195,10 @@ main {
 
 .lista-preferências .dropdown:hover #outrosButton {
     color: var(--cor-primaria-lighter);
+}
+
+.lista-preferências .dropdown-content .aba {
+    margin: 0;
 }
 
 .dropdown svg {margin: 0; padding-left: 5px; margin-top: 3px;}
@@ -349,7 +355,7 @@ main {
     justify-content: center;
     width: 30px;
     height: 30px;
-    border: solid 2px var(--cor-primaria-darkest);
+    border: solid 2px var(--cor-primaria-darker);
     border-radius: 50%;
     margin-right: 20px;
 }

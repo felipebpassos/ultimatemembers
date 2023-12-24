@@ -10,7 +10,7 @@
 .pesquisar input {
     height: 50px;
     padding: 8px 15px;
-    background-color: black;
+    background-color: var(--cor-secundaria);
     color: var(--cor-primaria);
     border-radius: 15px;
     border: none;

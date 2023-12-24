@@ -265,7 +265,7 @@ class Comunidade
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getTopDiscussoes($usuario_id)
+    public function getTopDiscussoes($usuario_id, $id_curso)
     {
         $query = 'SELECT
         d.id,
@@ -283,6 +283,7 @@ class Comunidade
       INNER JOIN usuarios u ON d.user_id = u.id
       LEFT JOIN discussoes_likes dl ON d.id = dl.item_id AND dl.item_type = "d"
       LEFT JOIN discussoes_respostas r ON d.id = r.discussion_id
+      WHERE d.id_curso = :id_curso
       GROUP BY
         d.id, d.title, d.content, u.nome, u.foto_caminho
       ORDER BY
@@ -291,6 +292,7 @@ class Comunidade
 
         $stmt = $this->con->prepare($query);
         $stmt->bindParam(':usuario_id', $usuario_id, PDO::PARAM_INT);
+        $stmt->bindParam(':id_curso', $id_curso, PDO::PARAM_INT);
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

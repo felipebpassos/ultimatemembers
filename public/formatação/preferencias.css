@@ -56,8 +56,8 @@ main {
 }
 
 .preview {
-    min-width: 60px;
-    height: 60px;
+    min-width: 70px;
+    height: 70px;
     border-radius: 5px;
     border: 1px solid var(--cor-primaria-transparent-3);
     margin-right: 30px;
@@ -67,7 +67,20 @@ main {
 }
 
 .preview img {
-    height: 20px;
+    height: 30px;
+}
+
+#logo, #favicon, #login-img-form {
+    display: none;
+}
+
+.btn-file {
+    display: block;
+    background-color: var(--cor-primaria-transparent-3);
+    color: var(--cor-secundaria);
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
 }
 
 #cor_texto,
@@ -153,7 +166,6 @@ main {
     min-width: 0;
     min-height: 0;
     padding: 10px 20px;
-    margin-left: 30px;
 }
 
 .opcoes {

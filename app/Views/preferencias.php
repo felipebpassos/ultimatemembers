@@ -44,7 +44,7 @@
             <div class="container">
                 <div class="botoes-opcao">
                     <button class="btn-2" type="button"><i class="fa-solid fa-arrow-rotate-left"></i>Reset</button>
-                    <button class="btn-2" type="submit"><i class="fa-regular fa-floppy-disk"></i>Salvar</button>
+                    <button class="btn-2" type="submit" style="margin-left: 30px;"><i class="fa-regular fa-floppy-disk"></i>Salvar</button>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
@@ -63,8 +63,10 @@
                                         alt="logo">
                                 </div>
                                 <div>
-                                    <label for="logo">Logo do Curso (Formatos aceitos: .png ou .jpeg):</label>
+                                    <label for="logo">Logo (Formatos aceitos: .png ou .jpeg):</label>
                                     <input type="file" id="logo" name="logo" accept=".ico, .png">
+                                    <button type="button" class="btn-file"
+                                        onclick="document.getElementById('logo').click()">Escolher Arquivo</button>
                                 </div>
                             </div>
                         </div>
@@ -77,8 +79,10 @@
                                         alt="favicon">
                                 </div>
                                 <div>
-                                    <label for="favicon">Favicon do Curso (Formato aceito: .ico):</label>
+                                    <label for="favicon">Favicon (Formato aceito: .ico):</label>
                                     <input type="file" id="favicon" name="favicon" accept=".ico, .png">
+                                    <button type="button" class="btn-file"
+                                        onclick="document.getElementById('favicon').click()">Escolher Arquivo</button>
                                 </div>
                             </div>
                         </div>
@@ -111,6 +115,8 @@
                                         .jpeg):</label>
                                     <input type="file" id="login-img-form" name="login-img-form"
                                         accept=".jpg, .png, .jpeg">
+                                    <button type="button" class="btn-file"
+                                        onclick="document.getElementById('login-img-form').click()">Escolher Arquivo</button>
                                 </div>
                                 <div class="banner-curso">
                                     <img id="img-login"

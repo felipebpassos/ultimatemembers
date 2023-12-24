@@ -146,8 +146,9 @@ main {
     width: fit-content;
 }
 
-.opcoes-comunidade button p {
+.opcoes-comunidade .nova-publicacao p {
     margin: 0 10px;
+    color: var(--cor-secundaria);
 }
 
 .lista-discussoes {

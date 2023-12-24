@@ -12,9 +12,9 @@ function hexToRgb(hex) {
     return { r, g, b };
 }
 
-// Função para calcular uma cor mais escura (por exemplo, 20 unidades a menos)
-function calcularCorMaisEscura(cor, diff) {
-    return `rgb(${Math.max(cor.r - diff, 0)}, ${Math.max(cor.g - diff, 0)}, ${Math.max(cor.b - diff, 0)})`;
+// Função para calcular uma cor mais escura ou mais clara
+function calcularCor(cor, diff, multiplicador) {
+    return `rgb(${Math.max(cor.r + multiplicador * diff, 0)}, ${Math.max(cor.g + multiplicador * diff, 0)}, ${Math.max(cor.b + multiplicador * diff, 0)})`;
 }
 
 // Função para calcular uma cor mais transparente (por exemplo, 0.7 de opacidade)
@@ -22,29 +22,42 @@ function calcularCorTransparente(cor, opacidade) {
     return `rgba(${cor.r}, ${cor.g}, ${cor.b}, ${opacidade})`;
 }
 
+// Função para calcular a luminância de uma cor
+function calcularLuminancia(cor) {
+    const r = cor.r / 255;
+    const g = cor.g / 255;
+    const b = cor.b / 255;
+
+    const luminancia = 0.2126 * Math.pow(r, 2.2) +
+        0.7152 * Math.pow(g, 2.2) +
+        0.0722 * Math.pow(b, 2.2);
+
+    return luminancia;
+}
+
+// Calcule a luminância da cor secundária
+const corFundoObj = hexToRgb(corFundo);
+const luminanciaCorSecundaria = calcularLuminancia(corFundoObj);
+const multiplicador = luminanciaCorSecundaria > 0.5 ? 1 : -1;
+
 // Calcula as variações das cores com base na cor de texto
 const corTextoObj = hexToRgb(corTexto);
-const corPrimaria = calcularCorMaisEscura(corTextoObj, 0);
+const corPrimaria = calcularCor(corTextoObj, 0, multiplicador);
 const corPrimariaTransparent = calcularCorTransparente(corTextoObj, 0.5);
 const corPrimariaTransparent2 = calcularCorTransparente(corTextoObj, 0.7);
 const corPrimariaTransparent3 = calcularCorTransparente(corTextoObj, 0.2);
 const corPrimariaTransparent4 = calcularCorTransparente(corTextoObj, 0.1);
-const corPrimariaDark = calcularCorMaisEscura(corTextoObj, 30);
-const corPrimariaDarker = calcularCorMaisEscura(corTextoObj, 60);
-const corPrimariaDarkest = calcularCorMaisEscura(corTextoObj, 90);
-const corPrimariaLight = calcularCorMaisEscura(corTextoObj, -30);
-const corPrimariaLighter = calcularCorMaisEscura(corTextoObj, -60);
-const corWhatsapp = calcularCorMaisEscura(corTextoObj, 100);
+const corPrimariaDark = calcularCor(corTextoObj, 20, multiplicador);
+const corPrimariaDarker = calcularCor(corTextoObj, 40, multiplicador);
+const corPrimariaLight = calcularCor(corTextoObj, -20, multiplicador);
+const corPrimariaLighter = calcularCor(corTextoObj, -40, multiplicador);
+const corWhatsapp = calcularCor(corTextoObj, 100, multiplicador);
 
 // Calcula as variações das cores secundárias com base na cor de fundo
-const corFundoObj = hexToRgb(corFundo);
-const corSecundaria = calcularCorMaisEscura(corFundoObj, 0);
+const corSecundaria = calcularCor(corFundoObj, 0, multiplicador);
 const corSecundariaTransparent = calcularCorTransparente(corFundoObj, 0.7);
-const corSecundariaLight = calcularCorMaisEscura(corFundoObj, -10);
-const corSecundariaLighter = calcularCorMaisEscura(corFundoObj, -20); //valor negativo para fazer a cor mais clara
-
-// Selecione o elemento CSS personalizado onde você deseja aplicar as variáveis
-var dinamicroot = document.querySelector(":root");
+const corSecundariaLight = calcularCor(corFundoObj, -20, multiplicador);
+const corSecundariaLighter = calcularCor(corFundoObj, -40, multiplicador);
 
 // Defina as variáveis CSS dinâmicas com os valores calculados
 dinamicroot.style.setProperty("--cor-primaria", corPrimaria);
@@ -54,7 +67,6 @@ dinamicroot.style.setProperty("--cor-primaria-transparent-3", corPrimariaTranspa
 dinamicroot.style.setProperty("--cor-primaria-transparent-4", corPrimariaTransparent4);
 dinamicroot.style.setProperty("--cor-primaria-dark", corPrimariaDark);
 dinamicroot.style.setProperty("--cor-primaria-darker", corPrimariaDarker);
-dinamicroot.style.setProperty("--cor-primaria-darkest", corPrimariaDarkest);
 dinamicroot.style.setProperty("--cor-primaria-light", corPrimariaLight);
 dinamicroot.style.setProperty("--cor-primaria-lighter", corPrimariaLighter);
 dinamicroot.style.setProperty("--whatsapp", corWhatsapp);

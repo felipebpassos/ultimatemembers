@@ -263,16 +263,18 @@
     </a>
 
     <!-- js files (body) -->
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+    <script src="http://localhost/ultimatemembers/public/script/dinamic-color.js"></script>
     <?php
     foreach ($scripts_body as $script) {
         echo '<script src="http://localhost/ultimatemembers/public/script/' . $script . '.js"></script>';
     }
     ?>
-    <script src="http://localhost/ultimatemembers/public/script/dinamic-color.js"></script>
     <script src="http://localhost/ultimatemembers/public/script/loading.js"></script>
     <script src="http://localhost/ultimatemembers/public/script/slide-element-left.js"></script>
     <script src="http://localhost/ultimatemembers/public/script/menu-perfil-toggle.js"></script>
     <script src="http://localhost/ultimatemembers/public/script/notifications.js"></script>
+
     <script>
 
         if (<?php echo $_SESSION['notificacoes'] ? 'true' : 'false' ?>) {
@@ -280,83 +282,6 @@
         } else {
             notificationAlert.addClass('hidden');
         }
-
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
-
-    <script>
-        // Simple example, see optional options for more configuration.
-        const pickrPrimario = Pickr.create({
-            el: '.picker-primario',
-            theme: 'nano', // or 'monolith', or 'nano'
-
-            swatches: null,
-
-            default: corPrimaria,
-
-            defaultRepresentation: 'HEX',
-
-            components: {
-
-                // Main components
-                preview: true,
-                opacity: true,
-                hue: true,
-
-                // Input / output Options
-                interaction: {
-                    hex: true,
-                    rgba: true,
-                    input: true,
-                    clear: true,
-                    save: true
-                }
-            }
-        });
-
-        const pickrSecundario = Pickr.create({
-            el: '.picker-secundario',
-            theme: 'nano', // or 'monolith', or 'nano'
-
-            swatches: null,
-
-            default: corSecundaria,
-
-            defaultRepresentation: 'HEX',
-
-            components: {
-
-                // Main components
-                preview: true,
-                opacity: true,
-                hue: true,
-
-                // Input / output Options
-                interaction: {
-                    hex: true,
-                    rgba: true,
-                    input: true,
-                    clear: true,
-                    save: true
-                }
-            }
-        });
-
-        pickrPrimario.on('save', (color, instance) => {
-            // Obtenha o valor no formato desejado
-            var novaCor = color.toHEXA().toString('t');
-
-            // Atualize o valor do input #cor_texto
-            $('#cor_texto').val(novaCor);
-        });
-
-        pickrSecundario.on('save', (color, instance) => {
-            // Obtenha o valor no formato desejado
-            var novaCor = color.toHEXA().toString('t');
-
-            // Atualize o valor do input #cor_fundo
-            $('#cor_fundo').val(novaCor);
-        });
 
     </script>
 

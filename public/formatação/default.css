@@ -138,13 +138,13 @@ textarea {
     border: none;
     border-radius: 8px;
     padding: 0 10px;
-    color: var(--cor-primaria-lighter);
-    background-color: var(--cor-primaria-darkest);
+    color: var(--cor-secundaria);
+    background-color: var(--cor-primaria-darker);
     box-shadow: 0px 3px 10px var(--cor-primaria-transparent);
 }
 
 .btn-2:hover {
-    background-color: var(--cor-primaria-darker);
+    background-color: var(--cor-primaria-dark);
     box-shadow: 0px 3px 12px var(--cor-primaria-transparent-2);
 }
 
