@@ -255,6 +255,61 @@ class painelController extends Controller
         echo json_encode($user);
     }
 
+    public function edit_user()
+    {
+        // Verifica se o método enviado é POST
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            // Se não for POST, encerre a execução ou redirecione conforme necessário
+            die('Acesso não autorizado');
+        }
+
+        // Verifica se as variáveis obrigatórias estão definidas
+        $required_fields = ['nome', 'email']; // Adicione outros campos obrigatórios conforme necessário
+
+        foreach ($required_fields as $field) {
+            if (!isset($_POST[$field])) {
+                // Se algum campo obrigatório não estiver definido, encerre a execução ou redirecione conforme necessário
+                die("Campo obrigatório '$field' não está definido");
+            }
+        }
+
+        // Carrega dados do usuário
+        $usuario = $this->usuario;
+
+        $this->sessao->autorizaAdm($usuario['adm'], $this->cursoInfo['url_principal']);
+
+        // Acesso ao modelo "Aulas"
+        $usuariosModel = new Usuarios();
+
+        // Captura os dados do formulário
+        $id = $_POST['idUser'];
+        $nome = $_POST['nome'];
+        $email = $_POST['email'];
+        $whatsapp = $_POST['whatsapp'];
+        $nascimento = $_POST['nascimento'];
+
+        // Verifica se a opção está marcada e atribui os valores apropriados
+        $plano = isset($_POST['status']) ? 1 : 0;
+        $adm = 0;
+        $instrutor = 0;
+
+        $permissao = $_POST['permissao'];
+
+        if ($permissao == 'administrador') {
+            $adm = 1;
+        } elseif ($permissao == 'instrutor') {
+            $adm = 1;
+            $instrutor = 1;
+        }
+
+        // Chama a função para adicionar o usuário
+        $user = $usuariosModel->editUsuario($id, $nome, $email, $whatsapp, $nascimento, $plano, $adm, $instrutor, $this->curso);
+
+        // Retorna a resposta em formato JSON
+        header('Content-Type: application/json');
+        echo json_encode($user);
+    }
+
     public function edit_geral()
     {
         // Verifica se o formulário foi enviado via método POST

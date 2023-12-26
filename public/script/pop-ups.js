@@ -98,6 +98,46 @@ $('#closePopupUsuario').click(function() {
     fecharFormulario('add-user');
 });
 
+// Quando os botões de editar usuário for clicado
+$('#usuarios').on('click', '.editar-user', function() {
+    const userId = $(this).data('id'); // Obtém o ID do usuário do atributo data-id
+
+    $('#idUser').val(userId);
+
+    // Encontra usuário correspondente
+    const user = encontrarPorId(userId, users);
+
+    // Verifique se usuário é definido e possui as propriedades
+    if (user) {
+        // Preenche os campos do popup com os valores do usuário
+        $('#nomeEdit').val(user['nome']);
+        $('#emailEdit').val(user['email']);
+        $('#whatsappEdit').val(user['whatsapp']);
+        $('#nascimentoEdit').val(user['nascimento']);
+        if (user['adm'] === "1" && user['instrutor'] === "0") {
+            $('#administradorEdit').prop('checked', true);
+        } else if (user['adm'] === "1" && user['instrutor'] === "1") {
+            $('#instrutorEdit').prop('checked', true);
+        } else {
+            $('#alunoEdit').prop('checked', true);
+        }
+        if (user['plano'] === "0") {
+            $('#statusEdit').prop('checked', false);
+        } else {
+            $('#statusEdit').prop('checked', true);
+        }
+    } else {
+        console.error('Usuário não encontrada ou propriedades ausentes.');
+    }
+
+    exibirFormulario('edit-user');
+});
+
+// Quando o botão de fechar for clicado
+$('#closePopupUsuarioEdit').click(function() {
+    fecharFormulario('edit-user');
+});
+
 // Função para encontrar aula por ID
 function encontrarPorId(id, data) {
     // Obtém as aulas da variável JavaScript aulasData
@@ -121,6 +161,8 @@ function exibirFormulario(option) {
         $('#modulos-list').show();
     } else if (option === 'add-user') {
         $('#add-usuario').show();
+    } else if (option === 'edit-user') {
+        $('#edit-usuario').show();
     }
     $('header').addClass('hidden');
     $('.main-banner').addClass('blur');
@@ -142,6 +184,8 @@ function fecharFormulario(option) {
         $('#modulos-list').hide();
     } else if (option === 'add-user') {
         $('#add-usuario').hide();
+    } else if (option === 'edit-user') {
+        $('#edit-usuario').hide();
     }
     $('header').removeClass('hidden');
     $('.main-banner').removeClass('blur');

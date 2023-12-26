@@ -36,7 +36,7 @@
         </ul>
     </div>
 
-    <section id="curso" class="content">
+    <section id="curso" class="content" style="margin-top: 100px;">
 
         <form action="<?php echo $curso['url_principal']; ?>painel/edit_geral/" method="post"
             enctype="multipart/form-data">

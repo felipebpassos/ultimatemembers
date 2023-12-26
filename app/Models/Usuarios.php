@@ -37,6 +37,34 @@ class Usuarios
         return $stmt->execute();
     }
 
+    // Método para editar usuário
+    public function editUsuario($id, $nome, $email, $whatsapp, $nascimento, $plano, $adm, $instrutor, $id_curso)
+    {
+        $query = 'UPDATE usuarios SET nome = :nome, 
+                                  email = :email, 
+                                  whatsapp = :whatsapp, 
+                                  nascimento = :nascimento, 
+                                  plano = :plano, 
+                                  adm = :adm, 
+                                  instrutor = :instrutor, 
+                                  id_curso = :id_curso 
+                                  WHERE id = :id';
+
+        $stmt = $this->con->prepare($query);
+
+        $stmt->bindValue(':id', $id);
+        $stmt->bindValue(':nome', $nome);
+        $stmt->bindValue(':email', $email);
+        $stmt->bindValue(':whatsapp', $whatsapp);
+        $stmt->bindValue(':nascimento', $nascimento);
+        $stmt->bindValue(':plano', $plano);
+        $stmt->bindValue(':adm', $adm);
+        $stmt->bindValue(':instrutor', $instrutor);
+        $stmt->bindValue(':id_curso', $id_curso);
+
+        return $stmt->execute();
+    }
+
     // Método para pegar usuário e senha para a autenticação do login
     public function loginUsuario($email, $id_curso)
     {

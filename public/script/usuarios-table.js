@@ -1,3 +1,5 @@
+let users = [];
+
 const userButton = $("#usuarios-btn");
 
 userButton.on("click", function (e) {
@@ -13,6 +15,8 @@ function buscarUsuarios() {
         success: function (data) {
             // Limpar a tabela antes de adicionar novas linhas
             $(".tabela .linha").remove();
+
+            users = data;
 
             // Adicionar linhas com base nos dados obtidos
             data.forEach(function (usuario) {
@@ -40,13 +44,13 @@ function buscarUsuarios() {
 
                 // Definir status com base nos dados do usuário
                 const status = usuario.plano !== "0" ? 'Ativo' : 'Inativo';
-                console.log(usuario.plano);
+
                 linha.append(`<div class='celula' id='status'>${status}</div>`);
 
                 linha.append(`<div class='celula' id='cadastro'>${usuario.data_matricula}</div>`);
                 linha.append(`<div class='celula' id='opcoes'>
-                                <button class="editar-user"><i class='fa-solid fa-pen-to-square'></i></button>
-                                <button class="delete-user"><i class='fa-solid fa-trash-can'></i></button>
+                                <button class="editar-user" data-id="${usuario.id}"><i class='fa-solid fa-pen-to-square'></i></button>
+                                <button class="delete-user" data-id="${usuario.id}"><i class='fa-solid fa-trash-can'></i></button>
                             </div>`);
 
                 // Criar e preencher a informação adicional

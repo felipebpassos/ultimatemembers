@@ -9,6 +9,7 @@
     justify-content: center;
     align-items: center;
     background-color: var(--cor-primaria-light);
+    color: var(--cor-secundaria);
 }
 
 .relatorio:hover {

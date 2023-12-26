@@ -40,6 +40,9 @@ const corFundoObj = hexToRgb(corFundo);
 const luminanciaCorSecundaria = calcularLuminancia(corFundoObj);
 const multiplicador = luminanciaCorSecundaria > 0.5 ? 1 : -1;
 
+// Calcula a sombra com base na luminância da cor de fundo
+const corSombra = luminanciaCorSecundaria > 0.5 ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.15)";
+
 // Calcula as variações das cores com base na cor de texto
 const corTextoObj = hexToRgb(corTexto);
 const corPrimaria = calcularCor(corTextoObj, 0, multiplicador);
@@ -74,3 +77,5 @@ dinamicroot.style.setProperty("--cor-secundaria", corSecundaria);
 dinamicroot.style.setProperty("--cor-secundaria-transparent", corSecundariaTransparent);
 dinamicroot.style.setProperty("--cor-secundaria-light", corSecundariaLight);
 dinamicroot.style.setProperty("--cor-secundaria-lighter", corSecundariaLighter);
+// Defina a variável de sombra CSS dinâmica com o valor calculado
+dinamicroot.style.setProperty("--sombra", corSombra);

@@ -360,3 +360,63 @@
         </div>
     </div>
 </div>
+
+<!-- Formulário para adicionar usuário -->
+<div id="edit-usuario" class="popup">
+    <div class="popup-content" style="max-width:600px; margin: auto;">
+
+        <span class="close" id="closePopupUsuarioEdit">&times;</span>
+
+        <h2 style="margin: auto; font-weight: bold; width:fit-content;">Editar Usuário</h2>
+
+        <div class="container-md mt-5">
+            <form id="usuarioFormEdit" action="<?php echo $curso['url_principal']; ?>painel/edit_user/" method="POST"
+                enctype="multipart/form-data">
+                <input type="hidden" id="idUser" name="idUser">
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nomeEdit" name="nome" placeholder="Digite o nome" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="emailEdit" name="email" placeholder="Digite o email" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="whatsapp" class="form-label">WhatsApp (opcional)</label>
+                    <input type="tel" class="form-control" id="whatsappEdit" name="whatsapp" placeholder="Digite o número de WhatsApp (opcional)">
+                </div>
+
+                <div class="mb-3">
+                    <label for="nascimento" class="form-label">Nascimento (opcional)</label>
+                    <input type="date" class="form-control" id="nascimentoEdit" name="nascimento">
+                </div>
+
+                <label>Permissão</label>
+                <div class="mb-3 checkbox-box">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="permissao" value="administrador"
+                            id="administradorEdit">
+                        <label class="form-check-label" for="administrador">Administrador</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="permissao" value="instrutor" id="instrutorEdit">
+                        <label class="form-check-label" for="instrutor">Instrutor</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="permissao" value="aluno" id="alunoEdit" checked>
+                        <label class="form-check-label" for="aluno">Aluno</label>
+                    </div>
+                </div>
+
+                <div class="mb-3 form-check" style="margin: 10px 0 0 5px;">
+                    <input type="checkbox" class="form-check-input" id="statusEdit" name="status" checked>
+                    <label class="form-check-label" for="status">Status: Ativo</label>
+                </div>
+
+                <button class="btn-2" type="submit" style="margin: auto; margin-top: 40px;">Salvar Alterações</button>
+            </form>
+        </div>
+    </div>
+</div>

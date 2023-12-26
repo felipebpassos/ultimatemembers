@@ -15,7 +15,7 @@ main {
 
 .content {
     width: 82%;
-    margin: 100px auto;
+    margin: 30px auto;
     margin-bottom: 150px;
 }
 
@@ -43,7 +43,7 @@ main {
     border-radius: 8px;
     padding: 8px 10px;
     color: var(--cor-primaria);
-    background-color: black;
+    background-color: var(--cor-secundaria);
     width: 80%;
     height: 40px;
     box-sizing: border-box;
@@ -76,7 +76,7 @@ main {
 
 .btn-file {
     display: block;
-    background-color: var(--cor-primaria-transparent-3);
+    background-color: rgb(35, 35, 35);
     color: var(--cor-secundaria);
     padding: 8px 12px;
     border: none;
@@ -192,7 +192,7 @@ main {
 }
 
 .cabecalho {
-    background-color: var(--cor-secundaria-lighter);
+    background-color: var(--cor-secundaria-light);
     display: flex;
 }
 
