@@ -274,6 +274,7 @@
     <script src="http://localhost/ultimatemembers/public/script/slide-element-left.js"></script>
     <script src="http://localhost/ultimatemembers/public/script/menu-perfil-toggle.js"></script>
     <script src="http://localhost/ultimatemembers/public/script/notifications.js"></script>
+    <script src="http://localhost/ultimatemembers/public/script/animated-circle.js"></script>
 
     <script>
 

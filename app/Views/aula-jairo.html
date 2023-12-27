@@ -1,200 +1,68 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html,
         body {
-            height: 100vh;
-            width: 100%;
+            background-color: rgb(17, 17, 17);
         }
 
-        .container {
-            height: 250px;
-            width: 600px;
-            background-color: rgb(238, 238, 238);
+        .close {
             position: relative;
-        }
-
-        .slides {
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 250px;
-            z-index: 1;
-        }
-
-        .dots {
-            display: flex;
-            align-items: center;
-            position: absolute;
-            bottom: 0;
-            left: 50%;
             width: fit-content;
-            transform: translateX(-50%);
-            z-index: 11;
-        }
-
-        .dot {
-            height: 6px;
-            width: 6px;
-            margin: 0 5px;
-            /* Aumente o espaçamento entre os botões */
-            background-color: rgb(80, 80, 80);
-            border-radius: 50%;
-            display: none;
-            transition: background-color 0.6s ease;
+            margin-right: 10px;
             cursor: pointer;
         }
 
-        .neighbor {
-            height: 8px;
-            /* Tamanho para dots vizinhos */
-            width: 8px;
-            /* Tamanho para dots vizinhos */
+        .close-ring {
+            transform: rotate(-90deg);
+            position: relative;
         }
 
-        .atual {
-            height: 10px;
-            width: 10px;
-            background-color: rgb(120, 120, 120);
-            /* Tamanho maior para o botão ativo */
+        .close-ring__circle {
+            stroke-dasharray: 188.496;
+            /* Circunferência do círculo completo (2 * π * raio) */
+            stroke-dashoffset: 188.496;
+            transition: stroke-dashoffset 0.6s;
+            /* Ajuste o tempo da animação para 5 segundos */
         }
 
-        .botoes {z-index: 11;}
-
-        .botoes button {cursor: pointer;}
+        .x {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
     </style>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css" />
 </head>
 
 <body>
-    <section class="container">
-        <div class="slides">
-            <p>Slide1</p>
-        </div>
-
-        <div class="slides">
-            <p>Slide2</p>
-        </div>
-
-        <div class="slides">
-            <p>Slide3</p>
-        </div>
-
-        <div class="slides">
-            <p>Slide4</p>
-        </div>
-
-        <div class="dots">
-            <span class="dot" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
-            <span class="dot" onclick="currentSlide(4)"></span>
-            <span class="dot" onclick="currentSlide(5)"></span>
-            <!-- Adicione mais pontos aqui conforme necessário -->
-        </div>
-
-
-        <div class="botoes"
-            style="position: absolute; right: 0; top: 0; display: flex; justify-content: center;">
-            <button class="prev" onclick="plusSlides(-1)"
-                style="margin-right: 5px; background-color: transparent; border: none;"><img src="http://localhost/ultimatemembers/public/img/preview.png"
-                    width="40px" alt="anterior"></button>
-            <button class="next" onclick="plusSlides(1)"
-                style="background-color: transparent; border: none;"><img src="http://localhost/ultimatemembers/public/img/next.png"
-                    width="40px" alt="próximo"></button>
-        </div>
-    </section>
-
-
+    <div class="close" id="closePopupUsuarioEdit" onmouseover="startAnimation()" onmouseout="resetAnimation()">
+        <svg class="close-ring" width="52" height="52">
+            <circle class="close-ring__circle" id="closeCircle" stroke="red" stroke-width="2"
+                fill="transparent" r="23" cx="25" cy="25" />
+            <circle class="close-ring__circle-full" stroke="rgba(255, 255, 255, 0.2)"
+                stroke-width="2" fill="transparent" r="23" cx="25" cy="25" />
+        </svg>
+        <svg class="x" viewBox="0 0 12 12" style="height: 12px; width: 12px;">
+            <path stroke="rgb(180, 180, 180)" fill="rgb(180, 180, 180)"
+                d="M4.674 6L.344 1.05A.5.5 0 0 1 1.05.343L6 4.674l4.95-4.33a.5.5 0 0 1 .707.706L7.326 6l4.33 4.95a.5.5 0 0 1-.706.707L6 7.326l-4.95 4.33a.5.5 0 0 1-.707-.706L4.674 6z">
+            </path>
+        </svg>
+    </div>
 
     <script>
-        let slideIndex = 1;
-        let slideTimer;
+        let closeCircle = document.getElementById('closeCircle');
 
-        showSlides(slideIndex);
-
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
+        function startAnimation() {
+            closeCircle.style.strokeDashoffset = 0;
         }
 
-        function currentSlide(n) {
-            showSlides(slideIndex = n);
-        }
-
-        function showSlides(n) {
-            let i;
-            let slides = document.getElementsByClassName("slides");
-            let dots = document.getElementsByClassName("dot");
-
-            // Cancela o temporizador anterior, se existir
-            if (slideTimer) {
-                clearTimeout(slideTimer);
-            }
-
-            if (n > slides.length) {
-                slideIndex = 1;
-            }
-
-            if (n < 1) {
-                slideIndex = slides.length;
-            }
-
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.opacity = 0;
-                slides[i].style.zIndex = 1;
-            }
-
-            // Remove a classe "neighbor" de todos os dots
-            for (i = 0; i < dots.length; i++) {
-                dots[i].classList.remove("neighbor");
-                dots[i].className = dots[i].className.replace("atual", "");
-                dots[i].style.display = "none"; // Oculta todos os dots
-            }
-
-
-            slides[slideIndex - 1].style.opacity = 1;
-            slides[slideIndex - 1].style.zIndex = 10;
-            dots[slideIndex - 1].className += " atual";
-            dots[slideIndex - 1].style.display = "inline-block"; // Mostra o dot ativo
-
-            if (slides.length <= 3) {
-                for (i = 0; i < dots.length; i++) {
-                    dots[i].style.display = "inline-block";
-
-                    // Adicione a classe "neighbor" aos dots vizinhos do ativo
-                    if (i === slideIndex - 2 || i === slideIndex) {
-                        dots[i].classList.add("neighbor");
-                    }
-                }
-            } else {
-                const startIndex = Math.max(0, slideIndex - 3); // Índice mínimo a ser mostrado
-                const endIndex = Math.min(slides.length, slideIndex + 2); // Índice máximo a ser mostrado
-
-                for (i = startIndex; i < endIndex; i++) {
-                    dots[i].style.display = "inline-block";
-
-                    // Adicione a classe "neighbor" aos dots vizinhos do ativo
-                    if (i === slideIndex - 2 || i === slideIndex) {
-                        dots[i].classList.add("neighbor");
-                    }
-                }
-            }
+        function resetAnimation() {
+            closeCircle.style.strokeDashoffset = '188.496';
         }
     </script>
 </body>

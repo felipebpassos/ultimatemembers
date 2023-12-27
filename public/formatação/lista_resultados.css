@@ -49,5 +49,5 @@
 
 .resultado a:hover {
     transition: 0.15s;
-    background-color: var(--cor-secundaria-light);
+    background-color: var(--cor-primaria-transparent-4);
 }

@@ -278,7 +278,7 @@ main {
 }
 
 .linha:hover {
-    background-color: var(--cor-secundaria-light);
+    background-color: var(--cor-primaria-transparent-4);
 }
 
 .integracao {

@@ -185,7 +185,7 @@ header .right {
     align-items: center;
 }
 
-svg {
+.perfil-menu-toggle svg {
     margin-left: 9px;
     fill: rgb(50, 50, 50);
     transition: transform 1s ease-in;

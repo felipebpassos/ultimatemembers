@@ -2,7 +2,21 @@
 <div id="add" class="popup">
     <div class="popup-content">
 
-        <span class="close" id="closePopup">&times;</span>
+        <div class="close-container">
+            <div class="close" id="closePopup" onmouseover="startAnimation()" onmouseout="resetAnimation()">
+                <svg class="close-ring" width="51" height="51">
+                    <circle class="close-ring__circle" stroke="var(--cor-primaria-light)"
+                        stroke-width="2" fill="transparent" r="23" cx="25" cy="25" />
+                    <circle class="close-ring__circle-full" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2"
+                        fill="transparent" r="23" cx="25" cy="25" />
+                </svg>
+                <svg class="x" viewBox="0 0 12 12" style="height: 12px; width: 12px;">
+                    <path stroke="rgb(180, 180, 180)" fill="rgb(180, 180, 180)"
+                        d="M4.674 6L.344 1.05A.5.5 0 0 1 1.05.343L6 4.674l4.95-4.33a.5.5 0 0 1 .707.706L7.326 6l4.33 4.95a.5.5 0 0 1-.706.707L6 7.326l-4.95 4.33a.5.5 0 0 1-.707-.706L4.674 6z">
+                    </path>
+                </svg>
+            </div>
+        </div>
 
         <h2 style="margin: auto; font-weight: bold; width:fit-content;">Nova aula</h2>
 
@@ -53,7 +67,21 @@
 <div id="edit" class="popup">
     <div class="popup-content">
 
-        <span class="close" id="closePopupEdit">&times;</span>
+        <div class="close-container">
+            <div class="close" id="closePopupEdit" onmouseover="startAnimation()" onmouseout="resetAnimation()">
+                <svg class="close-ring" width="51" height="51">
+                    <circle class="close-ring__circle" id="closeCircle" stroke="var(--cor-primaria-light)"
+                        stroke-width="2" fill="transparent" r="23" cx="25" cy="25" />
+                    <circle class="close-ring__circle-full" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2"
+                        fill="transparent" r="23" cx="25" cy="25" />
+                </svg>
+                <svg class="x" viewBox="0 0 12 12" style="height: 12px; width: 12px;">
+                    <path stroke="rgb(180, 180, 180)" fill="rgb(180, 180, 180)"
+                        d="M4.674 6L.344 1.05A.5.5 0 0 1 1.05.343L6 4.674l4.95-4.33a.5.5 0 0 1 .707.706L7.326 6l4.33 4.95a.5.5 0 0 1-.706.707L6 7.326l-4.95 4.33a.5.5 0 0 1-.707-.706L4.674 6z">
+                    </path>
+                </svg>
+            </div>
+        </div>
 
         <h2 style="margin: auto; font-weight: bold; width:fit-content;">Editar aula</h2>
 
@@ -105,7 +133,21 @@
 
 <!-- Formulário para confirmação para deletar -->
 <div id="confirmacao" class="popup">
-    <span class="close" id="closeDelPopup">&times;</span>
+    <div class="close-container">
+        <div class="close" id="closeDelPopup" onmouseover="startAnimation()" onmouseout="resetAnimation()">
+            <svg class="close-ring" width="51" height="51">
+                <circle class="close-ring__circle" id="closeCircle" stroke="var(--cor-primaria-light)" stroke-width="2"
+                    fill="transparent" r="23" cx="25" cy="25" />
+                <circle class="close-ring__circle-full" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2"
+                    fill="transparent" r="23" cx="25" cy="25" />
+            </svg>
+            <svg class="x" viewBox="0 0 12 12" style="height: 12px; width: 12px;">
+                <path stroke="rgb(180, 180, 180)" fill="rgb(180, 180, 180)"
+                    d="M4.674 6L.344 1.05A.5.5 0 0 1 1.05.343L6 4.674l4.95-4.33a.5.5 0 0 1 .707.706L7.326 6l4.33 4.95a.5.5 0 0 1-.706.707L6 7.326l-4.95 4.33a.5.5 0 0 1-.707-.706L4.674 6z">
+                </path>
+            </svg>
+        </div>
+    </div>
     <h3>Tem certeza que deseja excluir a aula?</h3>
     <div class="btn-box">
         <button class="btn-2" id="btn-deletar">Deletar</button>
@@ -117,7 +159,21 @@
 <div id="modulos-list" class="popup">
     <div class="popup-content">
 
-        <span class="close" id="closePopupModulos">&times;</span>
+        <div class="close-container">
+            <div class="close" id="closePopupModulos" onmouseover="startAnimation()" onmouseout="resetAnimation()">
+                <svg class="close-ring" width="51" height="51">
+                    <circle class="close-ring__circle" id="closeCircle" stroke="var(--cor-primaria-light)"
+                        stroke-width="2" fill="transparent" r="23" cx="25" cy="25" />
+                    <circle class="close-ring__circle-full" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2"
+                        fill="transparent" r="23" cx="25" cy="25" />
+                </svg>
+                <svg class="x" viewBox="0 0 12 12" style="height: 12px; width: 12px;">
+                    <path stroke="rgb(180, 180, 180)" fill="rgb(180, 180, 180)"
+                        d="M4.674 6L.344 1.05A.5.5 0 0 1 1.05.343L6 4.674l4.95-4.33a.5.5 0 0 1 .707.706L7.326 6l4.33 4.95a.5.5 0 0 1-.706.707L6 7.326l-4.95 4.33a.5.5 0 0 1-.707-.706L4.674 6z">
+                    </path>
+                </svg>
+            </div>
+        </div>
 
         <h2 style="margin: auto; font-weight: bold; width:fit-content;">Módulos</h2>
 
@@ -164,7 +220,21 @@
 <div id="add-modulo-form" class="popup">
     <div class="popup-content">
 
-        <span class="close" id="closePopupModulo">&times;</span>
+        <div class="close-container">
+            <div class="close" id="closePopupModulo" onmouseover="startAnimation()" onmouseout="resetAnimation()">
+                <svg class="close-ring" width="51" height="51">
+                    <circle class="close-ring__circle" id="closeCircle" stroke="var(--cor-primaria-light)"
+                        stroke-width="2" fill="transparent" r="23" cx="25" cy="25" />
+                    <circle class="close-ring__circle-full" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2"
+                        fill="transparent" r="23" cx="25" cy="25" />
+                </svg>
+                <svg class="x" viewBox="0 0 12 12" style="height: 12px; width: 12px;">
+                    <path stroke="rgb(180, 180, 180)" fill="rgb(180, 180, 180)"
+                        d="M4.674 6L.344 1.05A.5.5 0 0 1 1.05.343L6 4.674l4.95-4.33a.5.5 0 0 1 .707.706L7.326 6l4.33 4.95a.5.5 0 0 1-.706.707L6 7.326l-4.95 4.33a.5.5 0 0 1-.707-.706L4.674 6z">
+                    </path>
+                </svg>
+            </div>
+        </div>
 
         <h2 style="margin: auto; font-weight: bold; width:fit-content;">Novo Módulo</h2>
 
@@ -234,7 +304,21 @@
 <div id="edit-modulo-form" class="popup">
     <div class="popup-content">
 
-        <span class="close" id="closePopupModuloEdit">&times;</span>
+        <div class="close-container">
+            <div class="close" id="closePopupModuloEdit" onmouseover="startAnimation()" onmouseout="resetAnimation()">
+                <svg class="close-ring" width="51" height="51">
+                    <circle class="close-ring__circle" id="closeCircle" stroke="var(--cor-primaria-light)"
+                        stroke-width="2" fill="transparent" r="23" cx="25" cy="25" />
+                    <circle class="close-ring__circle-full" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2"
+                        fill="transparent" r="23" cx="25" cy="25" />
+                </svg>
+                <svg class="x" viewBox="0 0 12 12" style="height: 12px; width: 12px;">
+                    <path stroke="rgb(180, 180, 180)" fill="rgb(180, 180, 180)"
+                        d="M4.674 6L.344 1.05A.5.5 0 0 1 1.05.343L6 4.674l4.95-4.33a.5.5 0 0 1 .707.706L7.326 6l4.33 4.95a.5.5 0 0 1-.706.707L6 7.326l-4.95 4.33a.5.5 0 0 1-.707-.706L4.674 6z">
+                    </path>
+                </svg>
+            </div>
+        </div>
 
         <h2 style="margin: auto; font-weight: bold; width:fit-content;">Editar Módulo</h2>
 
@@ -306,7 +390,21 @@
 <div id="add-usuario" class="popup">
     <div class="popup-content" style="max-width:600px; margin: auto;">
 
-        <span class="close" id="closePopupUsuario">&times;</span>
+        <div class="close-container">
+            <div class="close" id="closePopupUsuario" onmouseover="startAnimation()" onmouseout="resetAnimation()">
+                <svg class="close-ring" width="51" height="51">
+                    <circle class="close-ring__circle" id="closeCircle" stroke="var(--cor-primaria-light)"
+                        stroke-width="2" fill="transparent" r="23" cx="25" cy="25" />
+                    <circle class="close-ring__circle-full" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2"
+                        fill="transparent" r="23" cx="25" cy="25" />
+                </svg>
+                <svg class="x" viewBox="0 0 12 12" style="height: 12px; width: 12px;">
+                    <path stroke="rgb(180, 180, 180)" fill="rgb(180, 180, 180)"
+                        d="M4.674 6L.344 1.05A.5.5 0 0 1 1.05.343L6 4.674l4.95-4.33a.5.5 0 0 1 .707.706L7.326 6l4.33 4.95a.5.5 0 0 1-.706.707L6 7.326l-4.95 4.33a.5.5 0 0 1-.707-.706L4.674 6z">
+                    </path>
+                </svg>
+            </div>
+        </div>
 
         <h2 style="margin: auto; font-weight: bold; width:fit-content;">Novo Usuário</h2>
 
@@ -320,12 +418,14 @@
 
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Digite o email" required>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Digite o email"
+                        required>
                 </div>
 
                 <div class="mb-3">
                     <label for="whatsapp" class="form-label">WhatsApp (opcional)</label>
-                    <input type="tel" class="form-control" id="whatsapp" name="whatsapp" placeholder="Digite o número de WhatsApp (opcional)">
+                    <input type="tel" class="form-control" id="whatsapp" name="whatsapp"
+                        placeholder="Digite o número de WhatsApp (opcional)">
                 </div>
 
                 <div class="mb-3">
@@ -365,7 +465,21 @@
 <div id="edit-usuario" class="popup">
     <div class="popup-content" style="max-width:600px; margin: auto;">
 
-        <span class="close" id="closePopupUsuarioEdit">&times;</span>
+        <div class="close-container">
+            <div class="close" id="closePopupUsuarioEdit" onmouseover="startAnimation()" onmouseout="resetAnimation()">
+                <svg class="close-ring" width="51" height="51">
+                    <circle class="close-ring__circle" id="closeCircle" stroke="var(--cor-primaria-light)"
+                        stroke-width="2" fill="transparent" r="23" cx="25" cy="25" />
+                    <circle class="close-ring__circle-full" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2"
+                        fill="transparent" r="23" cx="25" cy="25" />
+                </svg>
+                <svg class="x" viewBox="0 0 12 12" style="height: 12px; width: 12px;">
+                    <path stroke="rgb(180, 180, 180)" fill="rgb(180, 180, 180)"
+                        d="M4.674 6L.344 1.05A.5.5 0 0 1 1.05.343L6 4.674l4.95-4.33a.5.5 0 0 1 .707.706L7.326 6l4.33 4.95a.5.5 0 0 1-.706.707L6 7.326l-4.95 4.33a.5.5 0 0 1-.707-.706L4.674 6z">
+                    </path>
+                </svg>
+            </div>
+        </div>
 
         <h2 style="margin: auto; font-weight: bold; width:fit-content;">Editar Usuário</h2>
 
@@ -375,17 +489,20 @@
                 <input type="hidden" id="idUser" name="idUser">
                 <div class="mb-3">
                     <label for="nome" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="nomeEdit" name="nome" placeholder="Digite o nome" required>
+                    <input type="text" class="form-control" id="nomeEdit" name="nome" placeholder="Digite o nome"
+                        required>
                 </div>
 
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="emailEdit" name="email" placeholder="Digite o email" required>
+                    <input type="email" class="form-control" id="emailEdit" name="email" placeholder="Digite o email"
+                        required>
                 </div>
 
                 <div class="mb-3">
                     <label for="whatsapp" class="form-label">WhatsApp (opcional)</label>
-                    <input type="tel" class="form-control" id="whatsappEdit" name="whatsapp" placeholder="Digite o número de WhatsApp (opcional)">
+                    <input type="tel" class="form-control" id="whatsappEdit" name="whatsapp"
+                        placeholder="Digite o número de WhatsApp (opcional)">
                 </div>
 
                 <div class="mb-3">
@@ -401,11 +518,13 @@
                         <label class="form-check-label" for="administrador">Administrador</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="permissao" value="instrutor" id="instrutorEdit">
+                        <input class="form-check-input" type="radio" name="permissao" value="instrutor"
+                            id="instrutorEdit">
                         <label class="form-check-label" for="instrutor">Instrutor</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="permissao" value="aluno" id="alunoEdit" checked>
+                        <input class="form-check-input" type="radio" name="permissao" value="aluno" id="alunoEdit"
+                            checked>
                         <label class="form-check-label" for="aluno">Aluno</label>
                     </div>
                 </div>
