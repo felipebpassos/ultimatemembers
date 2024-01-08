@@ -5,8 +5,8 @@
         <div class="close-container">
             <div class="close" id="closePopup" onmouseover="startAnimation()" onmouseout="resetAnimation()">
                 <svg class="close-ring" width="51" height="51">
-                    <circle class="close-ring__circle" stroke="var(--cor-primaria-light)"
-                        stroke-width="2" fill="transparent" r="23" cx="25" cy="25" />
+                    <circle class="close-ring__circle" stroke="var(--cor-primaria-light)" stroke-width="2"
+                        fill="transparent" r="23" cx="25" cy="25" />
                     <circle class="close-ring__circle-full" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2"
                         fill="transparent" r="23" cx="25" cy="25" />
                 </svg>
@@ -536,6 +536,49 @@
 
                 <button class="btn-2" type="submit" style="margin: auto; margin-top: 40px;">Salvar Alterações</button>
             </form>
+        </div>
+    </div>
+</div>
+
+<div id="oauth-integracao" class="popup">
+
+    <div class="popup-content">
+
+        <div class="close-container">
+            <div class="close" id="closePopupIntAuth" onmouseover="startAnimation()" onmouseout="resetAnimation()">
+                <svg class="close-ring" width="51" height="51">
+                    <circle class="close-ring__circle" id="closeCircle" stroke="var(--cor-primaria-light)"
+                        stroke-width="2" fill="transparent" r="23" cx="25" cy="25" />
+                    <circle class="close-ring__circle-full" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2"
+                        fill="transparent" r="23" cx="25" cy="25" />
+                </svg>
+                <svg class="x" viewBox="0 0 12 12" style="height: 12px; width: 12px;">
+                    <path stroke="rgb(180, 180, 180)" fill="rgb(180, 180, 180)"
+                        d="M4.674 6L.344 1.05A.5.5 0 0 1 1.05.343L6 4.674l4.95-4.33a.5.5 0 0 1 .707.706L7.326 6l4.33 4.95a.5.5 0 0 1-.706.707L6 7.326l-4.95 4.33a.5.5 0 0 1-.707-.706L4.674 6z">
+                    </path>
+                </svg>
+            </div>
+        </div>
+
+        <h2 style="margin: auto; font-weight: bold; width:fit-content;">Integração</h2>
+
+        <div class="container" style="margin: 100px auto;">
+            <div class="row">
+                <div class="col-md-4" style="height:300px;">
+                    <div class="integracao-logo" style="margin-bottom: 15px; height: 180px;">
+                        <img>
+                    </div>
+                    <button><i class="fa-regular fa-circle-play"></i><span>Entenda como funciona</span></button>
+                    <form action="<?php echo $curso['url_principal']; ?>auth/" method="POST">
+                        <input type="hidden" id="plataforma_oauth" name="plataforma">
+                        <button class="auth-btn" id="auth-btn"></button>
+                    </form>
+                </div>
+                <div class="col-md-8 int-info" style="height:300px;">
+                    <h5 id="int-titulo" style="font-weight:bold;"></h5>
+                    <p id="int-texto"></p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

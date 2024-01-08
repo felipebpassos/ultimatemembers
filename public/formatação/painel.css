@@ -201,7 +201,7 @@ main {
     margin: 0;
 }
 
-.dropdown svg {margin: 0; padding-left: 5px; margin-top: 3px;}
+.dropdown svg {margin: 0; padding-left: 5px; margin-top: 3px; fill: var(--cor-primaria-dark);}
 
 .dropdown svg:hover {cursor: pointer;}
 

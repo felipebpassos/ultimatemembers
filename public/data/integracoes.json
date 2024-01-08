@@ -1,0 +1,34 @@
+{
+    "youtube": {
+        "nome": "Youtube",
+        "img": "http://localhost/ultimatemembers/public/img/youtube.png",
+        "tipo": "Plataforma de vídeo",
+        "botao": "Autorizar conta do Youtube",
+        "titulo": "Conecte sua conta do Youtube de forma simples, com apenas um clique",
+        "texto": "Conectar sua conta do YouTube é simples. Clique no botão 'Autorizar conta do Youtube' e desfrute de uma experiência de aprendizado mais integrada e eficiente. Estamos comprometidos em proporcionar a você o melhor ambiente educacional possível."
+    },
+    "vimeo": {
+        "nome": "Vimeo",
+        "img": "http://localhost/ultimatemembers/public/img/vimeo.png",
+        "tipo": "Plataforma de vídeo",
+        "botao": "Autorizar conta do Vimeo",
+        "titulo": "Conecte sua conta do Vimeo de forma simples, com apenas um clique",
+        "texto": "Plataforma de vídeo"
+    },
+    "panda": {
+        "nome": "Panda Video",
+        "img": "http://localhost/ultimatemembers/public/img/panda.png",
+        "tipo": "Plataforma de vídeo",
+        "botao": "Autorizar conta do Panda Video",
+        "titulo": "Conecte sua conta do Panda Video de forma simples, com apenas um clique",
+        "texto": "Plataforma de vídeo"
+    },
+    "pagseguro": {
+        "nome": "PagSeguro",
+        "img": "http://localhost/ultimatemembers/public/img/pagseguro_logo.png",
+        "tipo": "Meio de pagamento",
+        "botao": "Integrar conta do Pagseguro",
+        "titulo": "Integre seu checkout na conta do Pagseguro",
+        "texto": "Meio de pagamento"
+    }
+}

@@ -42,11 +42,13 @@
             enctype="multipart/form-data">
 
             <div class="container">
+
                 <div class="botoes-opcao">
                     <button class="btn-2" type="button"><i class="fa-solid fa-arrow-rotate-left"></i>Reset</button>
                     <button class="btn-2" type="submit" style="margin-left: 30px;"><i
                             class="fa-regular fa-floppy-disk"></i>Salvar</button>
                 </div>
+
                 <div class="row">
                     <div class="col-md-6">
 
@@ -74,17 +76,20 @@
 
                         <div class="campo" style="margin-bottom: 30px;">
                             <div style="display:flex; align-items:center;">
+
                                 <div class="preview">
                                     <img id="img-favicon"
                                         src="<?= !empty($curso['url_favicon']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_favicon']) : "http://localhost/ultimatemembers/public/img/favicon-default.png" ?>"
                                         alt="favicon">
                                 </div>
+
                                 <div>
                                     <label for="favicon">Favicon (Formato aceito: .ico):</label>
                                     <input type="file" id="favicon" name="favicon" accept=".ico, .png">
                                     <button type="button" class="btn-file"
                                         onclick="document.getElementById('favicon').click()">Escolher Arquivo</button>
                                 </div>
+
                             </div>
                         </div>
 
@@ -222,49 +227,48 @@
     </section>
 
     <section id="integracoes" class="content">
-        <h4>Disponíveis</h4>
 
-        <div class="row">
-            <div class="integracao col-md-3 col-lg-3">
-                <div class="integracao-logo">
-                    <img src="http://localhost/ultimatemembers/public/img/youtube.png" alt="Youtube (Logo)">
-                </div>
-                <div class="integracao-info">
-                    <h5>Youtube</h5>
-                    <p>Plataforma de vídeo</p>
-                </div>
-            </div>
+        <script>
+            var integracoes;
+            $.getJSON('http://localhost/ultimatemembers/public/data/integracoes.json', function (data) {
+                integracoes = data;
 
-            <div class="integracao col-md-3 col-lg-3">
-                <div class="integracao-logo">
-                    <img src="http://localhost/ultimatemembers/public/img/vimeo.png" alt="Vimeo (Logo)">
-                </div>
-                <div class="integracao-info">
-                    <h5>Vimeo</h5>
-                    <p>Plataforma de vídeo</p>
-                </div>
-            </div>
+                var rowDiv = $('<div class="row"></div>');
 
-            <div class="integracao col-md-3 col-lg-3">
-                <div class="integracao-logo">
-                    <img src="http://localhost/ultimatemembers/public/img/panda.png" alt="Panda (Logo)">
-                </div>
-                <div class="integracao-info">
-                    <h5>Panda Video</h5>
-                    <p>Plataforma de vídeo</p>
-                </div>
-            </div>
+                // Iterando sobre as chaves do objeto JSON
+                Object.keys(integracoes).forEach(function (key) {
+                    var integracao = integracoes[key];
 
-            <div class="integracao col-md-3 col-lg-3">
-                <div class="integracao-logo">
-                    <img src="http://localhost/ultimatemembers/public/img/pagseguro_logo.png" alt="PagSeguro (Logo)">
+                    // Criando o HTML dinamicamente apenas para as integrações disponíveis
+                    var integracaoHTML = `
+                <div class="integracao col-md-3 col-lg-3" data-id="${key}">
+                    <div class="integracao-logo">
+                        <img src="${integracao.img}" alt="${integracao.nome}">
+                    </div>
+                    <div class="integracao-info">
+                        <h5>${integracao.nome}</h5>
+                        <p>${integracao.tipo}</p>
+                    </div>
                 </div>
-                <div class="integracao-info">
-                    <h5>PagSeguro</h5>
-                    <p>Meio de pagamento</p>
-                </div>
-            </div>
+            `;
+
+                    // Adicionando o HTML gerado à div com a classe 'row'
+                    rowDiv.append(integracaoHTML);
+                });
+
+                // Adicionando a div com a classe 'row' ao contêiner de integrações disponíveis
+                $('.container-disponiveis').append(rowDiv);
+            });
+        </script>
+
+        <h4>Instaladas</h4>
+        <div class="container container-instaladas">
+
         </div>
+
+        <h4>Disponíveis</h4>
+        <div class="container container-disponiveis">
+
     </section>
 
 

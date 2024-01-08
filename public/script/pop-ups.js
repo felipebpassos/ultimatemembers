@@ -1,17 +1,17 @@
 //AULAS
 
 // Quando o botão de adicionar aula for clicado
-$('#add-aula').click(function() {
+$('#add-aula').click(function () {
     exibirFormulario('add-aula'); // Função para exibir o formulário
 });
 
 // Quando o botão de fechar for clicado
-$('#closePopup').click(function() {
+$('#closePopup').click(function () {
     fecharFormulario('add-aula');
 });
 
 // Quando os botões de editar aula forem clicados
-$('.aulas').on('click', '.editar-aula', function() {
+$('.aulas').on('click', '.editar-aula', function () {
     const aulaId = $(this).data('id'); // Obtém o ID da aula do atributo data-id
 
     $('#idAula').val(aulaId);
@@ -32,35 +32,35 @@ $('.aulas').on('click', '.editar-aula', function() {
 });
 
 // Quando o botão de fechar for clicado
-$('#closePopupEdit').click(function() {
+$('#closePopupEdit').click(function () {
     fecharFormulario('edit-aula');
 });
 
 //MÓDULOS
 
-$('#editar-modulos').click(function() {
+$('#editar-modulos').click(function () {
     exibirFormulario('modulos'); // Função para exibir o formulário
 });
 
 // Quando o botão de fechar for clicado
-$('#closePopupModulos').click(function() {
+$('#closePopupModulos').click(function () {
     fecharFormulario('modulos');
 });
 
 // Quando o botão de adicionar modulo for clicado
-$('#add-modulo').click(function() {
+$('#add-modulo').click(function () {
     $('#modulos-list').hide();
     $('#add-modulo-form').show(); // Exibir o formulário
 });
 
 // Quando o botão de fechar for clicado
-$('#closePopupModulo').click(function() {
+$('#closePopupModulo').click(function () {
     $('#add-modulo-form').hide();
     $('#modulos-list').show();
 });
 
 // Quando os botões de editar modulo for clicado
-$('.editar-modulo').click(function() {
+$('.editar-modulo').click(function () {
     const moduloId = $(this).data('id'); // Obtém o ID da módulo do atributo data-id
 
     $('#idModulo').val(moduloId);
@@ -77,11 +77,11 @@ $('.editar-modulo').click(function() {
     }
 
     $('#modulos-list').hide();
-    $('#edit-modulo-form').show(); 
+    $('#edit-modulo-form').show();
 });
 
 // Quando o botão de fechar for clicado
-$('#closePopupModuloEdit').click(function() {
+$('#closePopupModuloEdit').click(function () {
     $('#edit-modulo-form').hide();
     $('#modulos-list').show();
 });
@@ -89,17 +89,17 @@ $('#closePopupModuloEdit').click(function() {
 //USUÁRIOS
 
 // Quando o botão de adicionar aula for clicado
-$('#add-user').click(function() {
+$('#add-user').click(function () {
     exibirFormulario('add-user'); // Função para exibir o formulário
 });
 
 // Quando o botão de fechar for clicado
-$('#closePopupUsuario').click(function() {
+$('#closePopupUsuario').click(function () {
     fecharFormulario('add-user');
 });
 
 // Quando os botões de editar usuário for clicado
-$('#usuarios').on('click', '.editar-user', function() {
+$('#usuarios').on('click', '.editar-user', function () {
     const userId = $(this).data('id'); // Obtém o ID do usuário do atributo data-id
 
     $('#idUser').val(userId);
@@ -134,8 +134,35 @@ $('#usuarios').on('click', '.editar-user', function() {
 });
 
 // Quando o botão de fechar for clicado
-$('#closePopupUsuarioEdit').click(function() {
+$('#closePopupUsuarioEdit').click(function () {
     fecharFormulario('edit-user');
+});
+
+//INTEGRAÇÃO OAUTH
+
+// Quando o botão da integracao for clicado
+$('#integracoes').on('click', '.integracao', function () {
+
+    const integracao = $(this).data('id');
+    $('#plataforma_oauth').val(integracao);
+    const integracaoData = integracoes[integracao];
+
+    const popup = $('#oauth-integracao');
+    const popupContent = popup.find('.popup-content');
+
+    // Substitui os dados da integração no HTML do popup
+    popupContent.find('.integracao-logo img').attr('src', integracaoData.img);
+    popupContent.find('.integracao-logo img').attr('alt', integracaoData.nome);
+    popupContent.find('.int-info h5').text(integracaoData.titulo);
+    popupContent.find('.int-info p').text(integracaoData.texto);
+    popupContent.find('.auth-btn').text(integracaoData.botao);
+
+    exibirFormulario('oauth-int'); // Função para exibir o formulário
+});
+
+// Quando o botão de fechar for clicado
+$('#closePopupIntAuth').click(function () {
+    fecharFormulario('oauth-int');
 });
 
 // Função para encontrar aula por ID
@@ -144,7 +171,7 @@ function encontrarPorId(id, data) {
     const objetos = data;
 
     // Encontra a aula correspondente com base no ID
-    const objeto = objetos.find(function(objeto) {
+    const objeto = objetos.find(function (objeto) {
         return objeto.id == id;
     });
 
@@ -163,6 +190,8 @@ function exibirFormulario(option) {
         $('#add-usuario').show();
     } else if (option === 'edit-user') {
         $('#edit-usuario').show();
+    } else if (option === 'oauth-int') {
+        $('#oauth-integracao').show();
     }
     $('header').addClass('hidden');
     $('.main-banner').addClass('blur');
@@ -186,6 +215,8 @@ function fecharFormulario(option) {
         $('#add-usuario').hide();
     } else if (option === 'edit-user') {
         $('#edit-usuario').hide();
+    } else if (option === 'oauth-int') {
+        $('#oauth-integracao').hide();
     }
     $('header').removeClass('hidden');
     $('.main-banner').removeClass('blur');
@@ -198,7 +229,7 @@ function fecharFormulario(option) {
 }
 
 // Evento de envio do formulário
-$('#aulaFormAdd').submit(function(e) {
+$('#aulaFormAdd').submit(function (e) {
     e.preventDefault(); // Impede o envio padrão do formulário
 
     const formData = new FormData(this); // Crie um objeto FormData com os dados do formulário
@@ -209,13 +240,13 @@ $('#aulaFormAdd').submit(function(e) {
         data: formData, // Dados do formulário
         processData: false,
         contentType: false,
-        success: function(response) {
+        success: function (response) {
             // A resposta do servidor foi recebida e processada com sucesso.
             // Você pode adicionar aqui lógica para fechar o popup, atualizar a interface do usuário, etc.
             fecharFormulario('add-aula');
             console.log('Resposta do servidor:', response);
         },
-        error: function() {
+        error: function () {
             // Lida com erros de solicitação
             console.error('Erro na solicitação AJAX');
         }
@@ -223,7 +254,7 @@ $('#aulaFormAdd').submit(function(e) {
 });
 
 // Evento de envio do formulário
-$('#aulaFormEdit').submit(function(e) {
+$('#aulaFormEdit').submit(function (e) {
     e.preventDefault(); // Impede o envio padrão do formulário
 
     const formData = new FormData(this); // Crie um objeto FormData com os dados do formulário
@@ -234,13 +265,13 @@ $('#aulaFormEdit').submit(function(e) {
         data: formData, // Dados do formulário
         processData: false,
         contentType: false,
-        success: function(response) {
+        success: function (response) {
             // A resposta do servidor foi recebida e processada com sucesso.
             // Você pode adicionar aqui lógica para fechar o popup, atualizar a interface do usuário, etc.
             fecharFormulario('edit-aula');
             console.log('Resposta do servidor:', response);
         },
-        error: function() {
+        error: function () {
             // Lida com erros de solicitação
             console.error('Erro na solicitação AJAX');
         }
@@ -248,7 +279,7 @@ $('#aulaFormEdit').submit(function(e) {
 });
 
 // Evento de envio do formulário
-$('#moduloFormAdd').submit(function(e) {
+$('#moduloFormAdd').submit(function (e) {
     e.preventDefault(); // Impede o envio padrão do formulário
 
     const formData = new FormData(this); // Crie um objeto FormData com os dados do formulário
@@ -259,13 +290,13 @@ $('#moduloFormAdd').submit(function(e) {
         data: formData, // Dados do formulário
         processData: false,
         contentType: false,
-        success: function(response) {
+        success: function (response) {
             // A resposta do servidor foi recebida e processada com sucesso.
             // Você pode adicionar aqui lógica para fechar o popup, atualizar a interface do usuário, etc.
             $('#add-modulo-form').hide();
             console.log('Resposta do servidor:', response);
         },
-        error: function() {
+        error: function () {
             // Lida com erros de solicitação
             console.error('Erro na solicitação AJAX');
         }
@@ -273,7 +304,7 @@ $('#moduloFormAdd').submit(function(e) {
 });
 
 // Evento de envio do formulário
-$('#moduloFormEdit').submit(function(e) {
+$('#moduloFormEdit').submit(function (e) {
     e.preventDefault(); // Impede o envio padrão do formulário
 
     const formData = new FormData(this); // Crie um objeto FormData com os dados do formulário
@@ -284,13 +315,13 @@ $('#moduloFormEdit').submit(function(e) {
         data: formData, // Dados do formulário
         processData: false,
         contentType: false,
-        success: function(response) {
+        success: function (response) {
             // A resposta do servidor foi recebida e processada com sucesso.
             // Você pode adicionar aqui lógica para fechar o popup, atualizar a interface do usuário, etc.
             $('#edit-modulo-form').hide();
             console.log('Resposta do servidor:', response);
         },
-        error: function() {
+        error: function () {
             // Lida com erros de solicitação
             console.error('Erro na solicitação AJAX');
         }

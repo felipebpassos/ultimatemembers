@@ -563,7 +563,6 @@ h6 {
     height: 40px !important;
 }
 
-
 /* Pop Ups */
 
 .popup {
@@ -573,6 +572,7 @@ h6 {
     left: 0;
     width: 100vw;
     height: 100vh;
+    overflow-y: scroll;
     background-color: var(--cor-secundaria-transparent);
     color: var(--cor-primaria);
     padding: 20px 30px;
@@ -722,6 +722,20 @@ h6 {
 
 .op-modulo button i {
     font-size: 16px !important;
+}
+
+#oauth-integracao {
+    background-color: var(--cor-secundaria);
+}
+
+#oauth-integracao button {
+    width: 100%;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 0;
+    margin-bottom: 8px;
 }
 
 .checkbox-box {

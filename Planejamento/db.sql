@@ -31,7 +31,7 @@ INSERT INTO cursos (nome, url_logo, url_principal, fonte_id, infoprodutor_id)
 VALUES ('Reels de Cinema', '/uploads/cursos/logos/logo.png', 'http://localhost/reelsdecinema/', 1, 1);
 
 ALTER TABLE cursos
-ADD COLUMN url_favicon VARCHAR(255);
+ADD COLUMN banner_login VARCHAR(255);
 
 SET SQL_SAFE_UPDATES = 1;
 
@@ -246,5 +246,15 @@ CREATE TABLE avaliacoes (
     FOREIGN KEY (aula_id) REFERENCES aulas (id)
 ) CHARSET=utf8;
 
+CREATE TABLE integracoes_api (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tipo TINYINT NOT NULL, -- 1 -> video | 2 -> pagamento
+    plataforma VARCHAR(20) NOT NULL,
+    nome VARCHAR(20) NOT NULL,
+    token_acesso VARCHAR(255) NOT NULL,
+    refresh_token VARCHAR(255), -- Campo para armazenar o refresh token
+    curso_id INT NOT NULL,
+    FOREIGN KEY (curso_id) REFERENCES cursos(id) 
+) CHARSET=utf8;
 
 
