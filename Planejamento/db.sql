@@ -1,6 +1,6 @@
 use reelsdecinema;
 
-drop table discussoes_tags;
+drop table integracoes_api;
 
 ALTER TABLE usuarios
 ADD COLUMN instagram VARCHAR(255),
@@ -251,6 +251,7 @@ CREATE TABLE integracoes_api (
     tipo TINYINT NOT NULL, -- 1 -> video | 2 -> pagamento
     plataforma VARCHAR(20) NOT NULL,
     nome VARCHAR(20) NOT NULL,
+    conta VARCHAR(150) NOT NULL,
     token_acesso VARCHAR(255) NOT NULL,
     refresh_token VARCHAR(255), -- Campo para armazenar o refresh token
     curso_id INT NOT NULL,
