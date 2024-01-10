@@ -14,13 +14,13 @@ function buscarUsuarios() {
         dataType: 'json',
         success: function (data) {
             // Limpar a tabela antes de adicionar novas linhas
-            $(".tabela .linha").remove();
+            $(".tabela .usuario").remove();
 
             users = data;
 
             // Adicionar linhas com base nos dados obtidos
             data.forEach(function (usuario) {
-                const linha = $("<div class='linha'></div>");
+                const linha = $("<div class='usuario linha'></div>");
 
                 // Adicionar células à linha
                 linha.append(`<div class='celula checkbox'>
@@ -66,7 +66,7 @@ function buscarUsuarios() {
                                     </ul>`);
 
                 // Adicionar linha à tabela
-                $(".tabela").append(linha.append(infoAdicional));
+                $(".usuarios.tabela").append(linha.append(infoAdicional));
             });
         },
         error: function (xhr, status, error) {

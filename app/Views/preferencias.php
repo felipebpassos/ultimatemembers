@@ -208,7 +208,7 @@
 
         </div>
 
-        <div class="tabela">
+        <div class="usuarios tabela">
             <div class="cabecalho">
                 <div class="celula checkbox">
                     <label class="checkbox">
@@ -249,8 +249,7 @@
                         <h5>${integracao.nome}</h5>
                         <p>${integracao.tipo}</p>
                     </div>
-                </div>
-            `;
+                </div>`;
 
                     // Adicionando o HTML gerado à div com a classe 'row'
                     rowDiv.append(integracaoHTML);
@@ -258,15 +257,57 @@
 
                 // Adicionando a div com a classe 'row' ao contêiner de integrações disponíveis
                 $('.container-disponiveis').append(rowDiv);
+
+                // Atualizando o número de integrações disponíveis
+                $('#num-disponiveis').text(Object.keys(integracoes).length);
             });
         </script>
 
-        <h4>Instaladas</h4>
+        <div class="titulo">
+            <h4>Instaladas</h4><span class="num-integracoes" id="num-instaladas">
+                <?= count($integracoes) ?>
+            </span>
+        </div>
         <div class="container container-instaladas">
+            <?php if (empty($integracoes)): ?>
+                <div class="integracao-instalada">Nenhuma integração instalada.</div>
+            <?php else: ?>
+                <div class="integracoes-tabela tabela">
+                    <div class="cabecalho">
+                        <div class="celula" style="flex: 0.4;">Plataforma</div>
+                        <div class="celula">Nome</div>
+                        <div class="celula">Conta</div>
+                        <div class="celula">Tipo</div>
+                    </div>
 
+                    <?php
+                    $plataformas = json_decode(file_get_contents('http://localhost/ultimatemembers/public/data/integracoes.json'), true);
+                    ?>
+
+                    <?php foreach ($integracoes as $integracao): ?>
+                        <div class="integracao-instalada linha">
+                            <div class="celula" style="flex: 0.4;">
+                                <img height="25" src="<?= $plataformas[$integracao['plataforma']]['img-mini'] ?>" alt="<?= $integracao['plataforma'] ?>">
+                            </div>
+                            <div class="celula">
+                                <?= $integracao['nome'] ?>
+                            </div>
+                            <div class="celula">
+                                <?= $integracao['conta'] ?>
+                            </div>
+                            <div class="celula">
+                                <?= ($integracao['tipo'] == 1 ? 'Vídeo' : 'Pagamento') ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+
+                </div>
+            <?php endif; ?>
         </div>
 
-        <h4>Disponíveis</h4>
+        <div class="titulo">
+            <h4>Disponíveis</h4><span class="num-integracoes" id="num-disponiveis"></span>
+        </div>
         <div class="container container-disponiveis">
 
     </section>

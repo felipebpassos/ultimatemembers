@@ -655,16 +655,6 @@ h6 {
     width: fit-content;
 }
 
-.popup .txt-input input,
-.popup textarea {
-    background-color: var(--cor-secundaria);
-    color: var(--cor-primaria);
-    padding: 10px;
-    margin-right: 20px;
-    border-radius: 5px;
-    border: none;
-}
-
 .popup .txt-input input {
     height: 40px;
     margin-bottom: 25px;
@@ -687,8 +677,24 @@ h6 {
     width: 70px;
 }
 
-#nomeAula {
-    width: 400px;
+.videos-box {
+    height: fit-content;
+    margin: 30px auto;
+    width: 90%;
+    border-radius: 5px;
+    border: 1px solid var(--cor-secundaria-lighter);
+    background-color: var(--cor-secundaria-light);
+}
+
+.videos-box-header {
+    height: 80px;
+    border-bottom: 1px solid var(--cor-secundaria-lighter);
+}
+
+.videos {
+    height: 270px;
+    padding: 20px;
+    overflow: auto;
 }
 
 .modulos-list {

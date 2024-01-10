@@ -116,6 +116,141 @@ class Auth
         return $data;
     }
 
+    public function refreshTokenYoutube($dados)
+    {
+        $refreshToken = $dados['refresh_token'];
+        // URL para solicitar um novo access token usando o refresh token
+        $tokenUrl = 'https://oauth2.googleapis.com/token';
+
+        $credenciais = json_decode(file_get_contents('http://localhost/ultimatemembers/credenciais/youtube.json'), true)['web'];
+        $client_id = $credenciais['client_id'];
+        $client_secret = $credenciais['client_secret'];
+
+        // Parâmetros da solicitação
+        $params = array(
+            'grant_type' => 'refresh_token',
+            'refresh_token' => $refreshToken,
+            'client_id' => $client_id,
+            'client_secret' => $client_secret,
+        );
+
+        // Inicia o cURL para a solicitação
+        $ch = curl_init($tokenUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+
+        // Executa a solicitação cURL
+        $response = curl_exec($ch);
+
+        // Decodifica a resposta JSON
+        $data = json_decode($response, true);
+
+        // Fecha a sessão cURL
+        curl_close($ch);
+
+        // Verifica se há um novo access token na resposta
+        if (isset($data['access_token'])) {
+
+            $novoAccessToken = $data['access_token'];
+            $idIntegracao = $dados['id'];
+
+            $sql = "UPDATE integracoes_api SET token_acesso = :token_acesso WHERE id = :id";
+            $params = array(':token_acesso' => $novoAccessToken, ':id' => $idIntegracao);
+
+            $stmt = $this->con->prepare($sql);
+            $stmt->execute($params);
+
+            // Retorna o novo access token
+            return $novoAccessToken;
+        }
+
+        // Lidar com erros ou falta de um novo access token
+        return null;
+    }
+
+    public function getYoutubeVideos($dados)
+    {
+        $accessToken = $dados['token_acesso'];
+
+        // URL da API do YouTube para listar vídeos usando a consulta 'search'
+        $searchApiUrl = 'https://www.googleapis.com/youtube/v3/search';
+
+        // Parâmetros da solicitação para listar vídeos do usuário autenticado
+        $searchParams = array(
+            'part' => 'snippet',
+            'type' => 'video',
+            'forMine' => true,
+            'maxResults' => 10,
+        );
+
+        // Construa a URL da solicitação
+        $searchRequestUrl = $searchApiUrl . '?' . http_build_query($searchParams);
+
+        // Inicia o cURL para a solicitação à API do YouTube para listar vídeos usando a consulta 'search'
+        $searchCh = curl_init($searchRequestUrl);
+        curl_setopt($searchCh, CURLOPT_RETURNTRANSFER, true);
+
+        // Configura o cabeçalho da solicitação com o token de acesso
+        $searchHeaders = array(
+            'Authorization: Bearer ' . $accessToken,
+        );
+        curl_setopt($searchCh, CURLOPT_HTTPHEADER, $searchHeaders);
+
+        // Executa a solicitação cURL
+        $searchResponse = curl_exec($searchCh);
+
+        // Decodifica a resposta JSON dos vídeos
+        $searchData = json_decode($searchResponse, true);
+
+        // Fecha a sessão cURL
+        curl_close($searchCh);
+
+        // Verifica se há itens de vídeo na resposta
+        if (isset($searchData['items'])) {
+            // Inicializa um array para armazenar os vídeos
+            $videos = array();
+
+            // Itera sobre os itens de vídeo na resposta
+            foreach ($searchData['items'] as $item) {
+                // Obtém o ID do vídeo
+                $videoId = $item['id']['videoId'];
+
+                // Obtém o título do vídeo
+                $title = $item['snippet']['title'];
+
+                // Obtém a URL da thumbnail padrão do vídeo
+                $thumbnailUrl = $item['snippet']['thumbnails']['default']['url'];
+
+                // Adiciona os detalhes do vídeo ao array
+                $videos[] = array(
+                    'videoId' => $videoId,
+                    'title' => $title,
+                    'thumbnailUrl' => $thumbnailUrl,
+                );
+            }
+
+            // Retorna o array de vídeos
+            return $videos;
+        } else {
+            // Verifica se o erro é devido a credenciais inválidas
+            if (isset($searchData['error']['errors'][0]['reason']) && $searchData['error']['errors'][0]['reason'] === 'authError') {
+                // Tenta renovar o token
+                $novoAccessToken = $this->refreshTokenYoutube($dados);
+
+                if ($novoAccessToken) {
+                    // Tenta a solicitação novamente com o novo token
+                    return $this->getYoutubeVideos(array_merge($dados, ['token_acesso' => $novoAccessToken]));
+                } else {
+                    // Lida com falha ao renovar o token
+                    return array('erro' => 'Falha ao renovar o token de acesso.');
+                }
+            } else {
+                // Lida com outros tipos de erros
+                return array('erro' => 'Erro ao solicitar vídeos do YouTube.');
+            }
+        }
+    }
+
     // Método para definir a integração na tabela
     public function setIntegracao($plataforma, $data, $curso)
     {
@@ -166,4 +301,26 @@ class Auth
 
         return $nomeAleatorio;
     }
+
+    // Método para obter as integrações da tabela integracoes_api
+    public function getIntegracoesAPI($curso)
+    {
+        // Query para selecionar todas as integrações
+        $query = 'SELECT * FROM integracoes_api WHERE curso_id = :curso';
+
+        // Prepara a consulta
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':curso', $curso);
+
+        // Executa a consulta
+        if ($stmt->execute()) {
+            // Retorna os resultados como um array associativo
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            // Se houver um erro, você pode tratar ou simplesmente retornar um array vazio
+            echo "Erro ao obter integrações da API: " . $stmt->errorInfo()[2];
+            return [];
+        }
+    }
+
 }

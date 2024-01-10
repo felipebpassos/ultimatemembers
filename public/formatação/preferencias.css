@@ -70,7 +70,9 @@ main {
     height: 30px;
 }
 
-#logo, #favicon, #login-img-form {
+#logo,
+#favicon,
+#login-img-form {
     display: none;
 }
 
@@ -281,11 +283,34 @@ main {
     background-color: var(--cor-primaria-transparent-4);
 }
 
+.content .titulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    margin-bottom: 40px;
+}
+
+.content .titulo h4 {
+    margin: 0;
+    margin-right: 10px;
+}
+
+.content .titulo .num-integracoes {
+    display: flex;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: var(--cor-secundaria-lighter);
+    color: var(--cor-primaria);
+}
+
 .integracao {
     max-width: 280px;
     min-width: 280px;
-    margin: 30px;
-    margin-left: 0;
+    margin: 0 30px 30px 0;
     padding: 0;
     border-radius: 8px;
     box-shadow: 0px 0px 10px var(--sombra);
@@ -311,6 +336,11 @@ main {
     width: 120px;
 }
 
-.integracao-info {padding: 10px 20px; background-color: var(--cor-secundaria-light);}
+.integracao-info {
+    padding: 10px 20px;
+    background-color: var(--cor-secundaria-light);
+}
 
-.integracao-info p {margin: 0;}
+.integracao-info p {
+    margin: 0;
+}

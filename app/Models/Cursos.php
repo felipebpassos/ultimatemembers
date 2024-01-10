@@ -127,17 +127,17 @@ class Cursos
             if ($file_type == 'logo') {
 
                 $sql = "UPDATE cursos SET url_logo = :fileNovo WHERE id = :cursoId";
-    
+
             } elseif ($file_type == 'favicon') {
-    
+
                 $sql = "UPDATE cursos SET url_favicon = :fileNovo WHERE id = :cursoId";
-    
+
             } elseif ($file_type == 'banner_login') {
 
                 $sql = "UPDATE cursos SET banner_login = :fileNovo WHERE id = :cursoId";
 
             }
-            
+
             $stmt = $this->con->prepare($sql);
             $stmt->bindValue(':fileNovo', $fileNovo);
             $stmt->bindValue(':cursoId', $id_curso);
@@ -163,5 +163,26 @@ class Cursos
         }
     }
 
+    public function getIntegracoesVideo($curso)
+    {
+        $query = 'SELECT id, plataforma, token_acesso, refresh_token FROM integracoes_api WHERE curso_id = :curso AND tipo = 1';
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':curso', $curso);
+        $stmt->execute();
+
+        // Retorna as integrações encontradas em um array associativo
+        $integracoes = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $integracoes[] = array(
+                'id' => $row['id'],
+                'plataforma' => $row['plataforma'],
+                'token_acesso' => $row['token_acesso'],
+                'refresh_token' => $row['refresh_token']
+            );
+        }
+
+        return $integracoes;
+    }
 
 }

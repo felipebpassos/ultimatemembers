@@ -166,6 +166,12 @@ class painelController extends Controller
 
         $this->sessao->autorizaAdm($usuario['adm'], $this->cursoInfo['url_principal']);
 
+        $auth = new Auth();
+
+        $integracoes = $auth->getIntegracoesAPI($this->curso);
+
+        $data['integracoes'] = $integracoes;
+
         //set template
         $template = 'painel-temp';
 

@@ -15,7 +15,7 @@ class authController extends Controller
         $this->sessao = new Sessao();
         $this->cursosModel = new Cursos();
         $this->auth = new Auth();
-        
+
         // Obtém informações do curso no construtor para reutilização nos métodos
         $this->curso = $this->sessao->verificaCurso();
         $this->cursoInfo = $this->cursosModel->getCurso($this->curso);
@@ -37,11 +37,11 @@ class authController extends Controller
             $_SESSION['plataforma'] = $plataforma;
 
             $this->auth->{$plataforma . 'Auth'}($this->cursoInfo['dir_name']);
-            
+
         } else {
             // ERRO
             exit;
-        } 
+        }
     }
 
     public function callback()
@@ -55,10 +55,37 @@ class authController extends Controller
             $data = $this->auth->{$plataforma . 'Callback'}($code);
 
             $this->auth->setIntegracao($plataforma, $data, $this->curso);
-            
+
         } else {
             // ERRO
             exit;
-        } 
+        }
+    }
+
+    public function videos()
+    {
+        // Verifica se o curso atual tem integrações de plataforma de vídeo (tipo 1)
+        $integracoesVideo = $this->cursosModel->getIntegracoesVideo($this->curso);
+
+        // Inicializa a variável $allVideos antes do loop
+        $allVideos = array();
+
+        foreach ($integracoesVideo as $integracao) {
+            // Constrói o nome do método dinamicamente
+            $metodo = 'get' . ucfirst($integracao['plataforma']) . 'Videos';
+
+            // Verifica se o método existe antes de chamar
+            if (method_exists($this->auth, $metodo)) {
+
+                // Chama o método dinâmico
+                $videos = $this->auth->$metodo($integracao);
+
+                // Adiciona os vídeos ao array acumulado
+                $allVideos = array_merge($allVideos, $videos);
+            }
+        }
+
+        echo json_encode($allVideos);
+        exit();
     }
 }

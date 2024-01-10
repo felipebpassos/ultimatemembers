@@ -3,6 +3,19 @@
 // Quando o botão de adicionar aula for clicado
 $('#add-aula').click(function () {
     exibirFormulario('add-aula'); // Função para exibir o formulário
+    // Aqui fazemos a requisição AJAX para buscar videos das plataformas integradas
+    $.ajax({
+        url: url_principal + 'auth/videos', 
+        type: 'POST',
+        dataType: 'json',
+        success: function (data) {
+            // Manipule os dados recebidos (um JSON associativo) aqui
+            console.log(data);
+        },
+        error: function (error) {
+            console.error('Erro na requisição AJAX:', error);
+        }
+    });
 });
 
 // Quando o botão de fechar for clicado
