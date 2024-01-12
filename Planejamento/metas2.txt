@@ -1,15 +1,20 @@
-fazer adicionar novas aulas e novos módulos no banco de dados
-Fazer lista de módulos em lista de aulas em aula.php
-Fazer discussao.php
-fazer logica de publicar discussao no forum
-fazer turma.php
-fazer estatisticas.php
-Salvar módulos numa variável de sessão
-fazer comentários funcionar
-terminar checkout
-Tratar todos os formularios (segurança)
-fazer vendas.php
-Verificar sistema de autenticação
-fazer menu responsivo
-Ver responsividade de todas as páginas
+-Usuários
+
+terminar lógica de editar e deletar usuário (necessita de senha de adm)
+deletar todos usuários
+
+-Integrações
+
+fazer integração com outras plataformas
+deletar integração
+
+-Fazer funcionar pesquisas
+-Fazer paginação onde necessitar
+-Fazer funcionar simple e multiple selects onde tiver
+-Fazer sistema de salvar aulas e publicações
+-Fazer gameficação
+-Fazer sistema de avaliações (questionários)
+-Revisar segurança
+-Responsividade de todas as páginas
+
 

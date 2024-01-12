@@ -1,14 +1,6 @@
-const dropVideo = document.getElementById('dropVideo');
-const videoInfo = document.getElementById('videoInfo');
-const videoAula = document.getElementById('videoAula');
-
 const dropImg = document.getElementById('dropImg');
 const imgInfo = document.getElementById('imgInfo');
 const capaAula = document.getElementById('capaAula');
-
-const dropVideoEdit = document.getElementById('dropVideoEdit');
-const videoInfoEdit = document.getElementById('videoInfoEdit');
-const videoAulaEdit = document.getElementById('videoAulaEdit');
 
 const dropImgEdit = document.getElementById('dropImgEdit');
 const imgInfoEdit = document.getElementById('imgInfoEdit');
@@ -31,36 +23,6 @@ const imgInfoModuloEdit = document.getElementById('imgInfoModuloEdit');
 const capaModuloEdit = document.getElementById('capaModuloEdit');
 
 // Impedir o comportamento padrão de arrastar e soltar para dropVideo
-dropVideo.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    dropVideo.classList.add('active');
-});
-
-dropVideo.addEventListener('dragleave', () => {
-    dropVideo.classList.remove('active');
-});
-
-dropVideo.addEventListener('drop', (e) => {
-    e.preventDefault();
-    dropVideo.classList.remove('active');
-    handleVideoFile(videoInfo, e.dataTransfer.files[0]);
-});
-
-dropVideoEdit.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    dropVideoEdit.classList.add('active');
-});
-
-dropVideoEdit.addEventListener('dragleave', () => {
-    dropVideoEdit.classList.remove('active');
-});
-
-dropVideoEdit.addEventListener('drop', (e) => {
-    e.preventDefault();
-    dropVideoEdit.classList.remove('active');
-    handleVideoFile(videoInfoEdit, e.dataTransfer.files[0]);
-});
-
 dropVideoModulo.addEventListener('dragover', (e) => {
     e.preventDefault();
     dropVideoModulo.classList.add('active');
@@ -153,22 +115,6 @@ dropImgModuloEdit.addEventListener('drop', (e) => {
 });
 
 // Lidar com o clique para selecionar um arquivo de vídeo
-dropVideo.addEventListener('click', () => {
-    videoAula.click();
-});
-
-videoAula.addEventListener('change', () => {
-    handleVideoFile(videoInfo, videoAula.files[0]);
-});
-
-dropVideoEdit.addEventListener('click', () => {
-    videoAulaEdit.click();
-});
-
-videoAulaEdit.addEventListener('change', () => {
-    handleVideoFile(videoInfoEdit, videoAulaEdit.files[0]);
-});
-
 dropVideoModulo.addEventListener('click', () => {
     videoModulo.click();
 });

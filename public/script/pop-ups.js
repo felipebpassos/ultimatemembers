@@ -5,12 +5,46 @@ $('#add-aula').click(function () {
     exibirFormulario('add-aula'); // Função para exibir o formulário
     // Aqui fazemos a requisição AJAX para buscar videos das plataformas integradas
     $.ajax({
-        url: url_principal + 'auth/videos', 
+        url: url_principal + 'auth/videos',
         type: 'POST',
         dataType: 'json',
         success: function (data) {
-            // Manipule os dados recebidos (um JSON associativo) aqui
+            // Seleciona a div.videos
             console.log(data);
+            var videosContainer = $('.videos .row');
+
+            videosContainer.empty();
+
+            // Itera sobre os vídeos e cria as divs conforme necessário
+            for (var i = 0; i < data.length; i++) {
+                // Cria a div.video
+                var videoDiv = $('<div class="video col-md-3 col-lg-3"></div>');
+
+                // Cria a imagem com o src definido pela thumbnailUrl
+                var thumbnailImg = $('<img src="' + data[i].thumbnailUrl + '" alt="Thumbnail">');
+
+                // Cria o título
+                var title = $('<p>' + data[i].title + '</p>');
+
+                // Adiciona o data-id ao elemento
+                videoDiv.attr('data-id', data[i].videoId);
+
+                // Adiciona o data-nome ao elemento
+                videoDiv.attr('data-nome', data[i].title);
+
+                // Adiciona o data-plataforma ao elemento
+                videoDiv.attr('data-plataforma', data[i].plataforma);
+
+                // Adiciona o data-integracao ao elemento
+                videoDiv.attr('data-integracao', data[i].integracao);
+
+                // Adiciona a imagem e o título à div.video
+                videoDiv.append(thumbnailImg);
+                videoDiv.append(title);
+
+                // Adiciona a div.video à div.videos
+                videosContainer.append(videoDiv);
+            }
         },
         error: function (error) {
             console.error('Erro na requisição AJAX:', error);

@@ -28,15 +28,17 @@
 
                     <div style="width: 90%; margin: auto;">
                         <div class="mb-3">
-                            <label class="form-label" for="nomeAula">Nome da Aula</label>
-                            <input class="form-control" type="text" id="nomeAula" name="nomeAula" required>
+                            <label class="form-label" for="nomeAula">Título da Aula</label>
+                            <input class="form-control" type="text" id="nomeAula" name="nomeAula"
+                                placeholder="Digite o título da aula" required>
                         </div>
 
                         <input type="hidden" name="id_modulo" value="<?php echo $modulo['id']; ?>">
 
                         <div class="mb-3">
                             <label class="form-label" for="descricaoAula">Descrição da Aula (Opcional)</label>
-                            <textarea class="form-control" id="descricaoAula" name="descricaoAula"></textarea>
+                            <textarea class="form-control" id="descricaoAula" name="descricaoAula"
+                                placeholder="Faça uma descrição ou resumo da aula (Opcional)"></textarea>
                         </div>
 
                         <div class="mb-3">
@@ -48,13 +50,42 @@
                                     accept="img/*">
                             </div>
                         </div>
+
+                        <input type="hidden" id="videoId" name="videoId">
+                        <input type="hidden" id="videoPlataforma" name="plataforma">
+                        <input type="hidden" id="videoIntegracao" name="integracao">
                     </div>
 
                 </div>
                 <div class="col-md-6">
-                    <div class="videos-box">
-                        <div class="videos-box-header"></div>
-                        <div class="videos"></div>
+                    <div style="margin: 30px auto; margin-top: 0; width: 90%;">
+                        <label class="form-label" for="videos-box">Vídeo da aula</label>
+                        <div class="videos-box" id="videos-box">
+                            <div class="videos-box-header">
+                                <div class="pesquisar-2">
+                                    <i class="fa fa-search"></i>
+                                    <input type="text" id="campoPesquisa" name="pesquisa" placeholder="Pesquisar vídeo">
+                                </div>
+                                <div class="botoes">
+                                    <button class="btn-2" id="atualiza-videos" type="button">
+                                        <p>Atualizar</p>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="videos">
+                                <div class="row"></div>
+                            </div>
+                            <div class="video-selected">
+                                <div>
+                                    <span>Vídeo selecionado:</span>
+                                    <span id="nome-video-selecionado"></span>
+                                </div>
+                                <div>
+                                    <span>Plataforma:</span>
+                                    <span id="plataforma-video-selecionado"></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -89,42 +120,46 @@
         <form id="aulaFormEdit" action="<?php echo $curso['url_principal']; ?>modulos/edita_aula/" method="POST"
             enctype="multipart/form-data">
 
-            <div class="txt-input">
+            <div class="row">
+                <div class="col-md-6">
 
-                <div>
-                    <label for="indiceEdit">Índice</label>
-                    <input type="text" id="indiceEdit" name="indice">
+                    <div style="width: 90%; margin: auto;">
+                        <div class="mb-3">
+                            <label class="form-label" for="nomeAulaEdit">Nome da Aula</label>
+                            <input class="form-control" type="text" id="nomeAulaEdit" name="nomeAula" required>
+                        </div>
+
+                        <input type="hidden" name="id_modulo" value="<?php echo $modulo['id']; ?>">
+
+                        <input type="hidden" id="idAula" name="idAula">
+
+                        <div class="mb-3">
+                            <label class="form-label" for="descricaoAulaEdit">Descrição da Aula (Opcional)</label>
+                            <textarea class="form-control" id="descricaoAulaEdit" name="descricaoAula"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Imagem de capa da aula (Opcional)</label>
+                            <div class="drop-area" id="dropImgEdit">
+                                Arraste e solte uma imagem aqui ou clique para fazer upload.
+                                <span id="imgInfoEdit"></span>
+                                <input type="file" id="capaAulaEdit" style="width: 0; height:0; margin:0;"
+                                    name="capaAula" accept="img/*">
+                            </div>
+                        </div>
+
+                        <input type="hidden" id="videoIdEdit" name="videoId">
+                    </div>
+
                 </div>
-
-                <div style="flex:1;">
-                    <label for="nomeAulaEdit">Nome da Aula</label>
-                    <input type="text" id="nomeAulaEdit" name="nomeAula" required>
+                <div class="col-md-6">
+                    <div class="videos-box">
+                        <div class="videos-box-header"></div>
+                        <div class="videos">
+                            <div class="row"></div>
+                        </div>
+                    </div>
                 </div>
-
-                <input type="hidden" name="id_modulo" value="<?php echo $modulo['id']; ?>">
-
-                <input type="hidden" id="idAula" name="idAula">
-            </div>
-
-            <div style="position: relative; margin: 0 40px 25px 20px;">
-                <label for="descricaoAulaEdit">Descrição da Aula (Opcional)</label>
-                <textarea id="descricaoAulaEdit" name="descricaoAula"></textarea>
-            </div>
-
-            <p style="margin: 10px 20px; font-weight: bold;">Imagem de capa da aula (Opcional)</p>
-            <div class="drop-area" id="dropImgEdit">
-                Arraste e solte uma imagem aqui ou clique para fazer upload.
-                <span id="imgInfoEdit"></span>
-                <input type="file" id="capaAulaEdit" style="width: 0; height:0; margin:0;" name="capaAula"
-                    accept="img/*">
-            </div>
-
-            <p style="margin: 10px 20px; font-weight: bold;">Vídeo da aula</p>
-            <div class="drop-area" id="dropVideoEdit">
-                Arraste e solte um vídeo aqui ou clique para fazer upload.
-                <span id="videoInfoEdit"></span>
-                <input type="file" id="videoAulaEdit" style="width: 0; height:0; margin:0;" name="videoAula"
-                    accept="video/*">
             </div>
 
             <button class="btn-2" type="submit" style="margin: auto; margin-top: 40px;">Editar Aula</button>

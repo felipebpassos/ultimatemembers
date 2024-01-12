@@ -171,6 +171,8 @@ class Auth
     public function getYoutubeVideos($dados)
     {
         $accessToken = $dados['token_acesso'];
+        $plataforma = $dados['plataforma'];
+        $integracao = $dados['id'];
 
         // URL da API do YouTube para listar vídeos usando a consulta 'search'
         $searchApiUrl = 'https://www.googleapis.com/youtube/v3/search';
@@ -223,6 +225,8 @@ class Auth
 
                 // Adiciona os detalhes do vídeo ao array
                 $videos[] = array(
+                    'plataforma' => $plataforma,
+                    'integracao' => $integracao,
                     'videoId' => $videoId,
                     'title' => $title,
                     'thumbnailUrl' => $thumbnailUrl,

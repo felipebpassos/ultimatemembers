@@ -64,28 +64,36 @@ class authController extends Controller
 
     public function videos()
     {
-        // Verifica se o curso atual tem integrações de plataforma de vídeo (tipo 1)
-        $integracoesVideo = $this->cursosModel->getIntegracoesVideo($this->curso);
+        // Identificador único para o curso
+        $cursoId = $this->curso;
 
-        // Inicializa a variável $allVideos antes do loop
-        $allVideos = array();
+        // Nome do arquivo de cache específico para o curso
+        $cacheFile = 'videos_cache_' . $cursoId . '.json';
 
-        foreach ($integracoesVideo as $integracao) {
-            // Constrói o nome do método dinamicamente
-            $metodo = 'get' . ucfirst($integracao['plataforma']) . 'Videos';
+        // Verifica se o cache está disponível e não expirou
+        if (file_exists($cacheFile) && (time() - filemtime($cacheFile)) < 3600) {
+            // Se o cache existir e não estiver expirado, carregue os dados do cache
+            $allVideos = json_decode(file_get_contents($cacheFile), true);
+        } else {
+            // Se o cache não estiver disponível ou expirou, faça a solicitação API
+            $integracoesVideo = $this->cursosModel->getIntegracoesVideo($cursoId);
+            $allVideos = array();
 
-            // Verifica se o método existe antes de chamar
-            if (method_exists($this->auth, $metodo)) {
-
-                // Chama o método dinâmico
-                $videos = $this->auth->$metodo($integracao);
-
-                // Adiciona os vídeos ao array acumulado
-                $allVideos = array_merge($allVideos, $videos);
+            foreach ($integracoesVideo as $integracao) {
+                $metodo = 'get' . ucfirst($integracao['plataforma']) . 'Videos';
+                if (method_exists($this->auth, $metodo)) {
+                    $videos = $this->auth->$metodo($integracao);
+                    $allVideos = array_merge($allVideos, $videos);
+                }
             }
+
+            // Salva os dados no arquivo de cache específico para o curso
+            file_put_contents($cacheFile, json_encode($allVideos));
         }
 
+        // Retorna os dados
         echo json_encode($allVideos);
         exit();
     }
+
 }

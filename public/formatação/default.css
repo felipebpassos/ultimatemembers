@@ -1,6 +1,5 @@
 /* Importar a fonte Quincy CF */
 
-@import url(https://db.onlinewebfonts.com/c/d162a260eb6b9b288f54503ee22aa9ff?family=Quincy+CF+Regular);
 @import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,500&display=swap');
 @import 'http://localhost/ultimatemembers/public/formatação/variables.css';
 @import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap');
@@ -140,12 +139,12 @@ textarea {
     padding: 0 10px;
     color: var(--cor-secundaria);
     background-color: var(--cor-primaria-darker);
-    box-shadow: 0px 3px 10px var(--cor-primaria-transparent);
+    box-shadow: 0px 0px 10px var(--cor-primaria-transparent);
 }
 
 .btn-2:hover {
     background-color: var(--cor-primaria-dark);
-    box-shadow: 0px 3px 12px var(--cor-primaria-transparent-2);
+    box-shadow: 0px 0px 15px var(--cor-primaria-transparent-2);
 }
 
 .btn-2 p {
@@ -585,6 +584,7 @@ h6 {
 #moduloFormAdd,
 #moduloFormEdit {
     margin: 30px 0;
+    margin-top: 50px;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -679,22 +679,71 @@ h6 {
 
 .videos-box {
     height: fit-content;
-    margin: 30px auto;
-    width: 90%;
     border-radius: 5px;
     border: 1px solid var(--cor-secundaria-lighter);
     background-color: var(--cor-secundaria-light);
 }
 
 .videos-box-header {
-    height: 80px;
+    height: 60px;
     border-bottom: 1px solid var(--cor-secundaria-lighter);
+    display: flex;
+    align-items: center;
+    padding: 5px 20px;
+}
+
+.videos-box-header .btn-2 {
+    min-height: 40px;
+    min-width: 100px;
 }
 
 .videos {
     height: 270px;
-    padding: 20px;
+    padding: 20px 30px;
     overflow: auto;
+}
+
+.videos::-webkit-scrollbar {
+    width: 5px;
+}
+
+.videos::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.videos::-webkit-scrollbar-thumb {
+    background-color: var(--cor-primaria-darker);
+    border-radius: 0;
+}
+
+.video {
+    padding: 10px;
+    padding-bottom: 5px;
+    background-color: var(--cor-secundaria-lighter);
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    margin-right: 10px;
+}
+
+.video img {
+    width: 100%;
+}
+
+.video p {
+    width: fit-content;
+    margin-bottom: 0;
+}
+
+.video.selected {
+    background-color: var(--cor-secundaria);
+}
+
+.video-selected {
+    padding: 10px 20px;
+    border-top: 1px solid var(--cor-secundaria-lighter);
+    display: flex;
+    justify-content: space-between;
 }
 
 .modulos-list {

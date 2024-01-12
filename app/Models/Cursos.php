@@ -165,7 +165,7 @@ class Cursos
 
     public function getIntegracoesVideo($curso)
     {
-        $query = 'SELECT id, plataforma, token_acesso, refresh_token FROM integracoes_api WHERE curso_id = :curso AND tipo = 1';
+        $query = 'SELECT id, nome, plataforma, token_acesso, refresh_token FROM integracoes_api WHERE curso_id = :curso AND tipo = 1';
         $stmt = $this->con->prepare($query);
         $stmt->bindValue(':curso', $curso);
         $stmt->execute();
@@ -176,6 +176,7 @@ class Cursos
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $integracoes[] = array(
                 'id' => $row['id'],
+                'nome' => $row['nome'],
                 'plataforma' => $row['plataforma'],
                 'token_acesso' => $row['token_acesso'],
                 'refresh_token' => $row['refresh_token']

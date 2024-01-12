@@ -105,9 +105,9 @@ class modulosController extends Controller
         $data['view'] = 'modulo';
         $data['title'] = 'Módulo | ' . $modulo['nome'];
         $data['description'] = 'Assista às aulas e estude através do nosso material';
-        $data['styles'] = array('painel', 'header', 'drag-drop-files', 'modulo');
+        $data['styles'] = array('painel', 'header', 'drag-drop-files', 'search-bar', 'modulo');
         $data['scripts_head'] = array('abas', 'select');
-        $data['scripts_body'] = array('btn-selected', 'toggleSearch', 'menu-responsivo', 'simple_select', 'pop-ups', 'drag-drop-files', 'video-intro', 'scroll-to-section', 'encolher-elemento', 'deletar-aula', 'aula_concluida');
+        $data['scripts_body'] = array('btn-selected', 'toggleSearch', 'menu-responsivo', 'simple_select', 'pop-ups', 'drag-drop-files', 'video-intro', 'scroll-to-section', 'encolher-elemento', 'deletar-aula', 'aula_concluida', 'select-videoaula');
 
         //load view
         $this->loadTemplates($template, $data, $usuario);
@@ -170,9 +170,9 @@ class modulosController extends Controller
         $data['view'] = 'aula';
         $data['title'] = 'Aula | ' . $aula['nome'];
         $data['description'] = 'Assista às aulas e estude através do nosso material';
-        $data['styles'] = array('painel', 'header', 'drag-drop-files', 'video-player', 'aula');
+        $data['styles'] = array('painel', 'header', 'drag-drop-files', 'video-player', 'search-bar', 'aula');
         $data['scripts_head'] = array('select');
-        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'pop-ups', 'deletar-aula', 'simple_select', 'drag-drop-files', 'comment-box', 'comment-btns', 'aula_concluida', 'like_dislike', 'dropdown', 'select-modulo');
+        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'pop-ups', 'deletar-aula', 'simple_select', 'drag-drop-files', 'comment-box', 'comment-btns', 'aula_concluida', 'like_dislike', 'dropdown', 'select-modulo', 'select-videoaula');
         if (!$usuario['adm']) {
             $data['scripts_body'][] = 'avaliação';
         }
