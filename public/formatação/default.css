@@ -25,7 +25,7 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-    background-color: transparent;
+    background-color: inherit;
     /* Cor de fundo da área de rastreamento da barra de rolagem */
 }
 
@@ -698,7 +698,7 @@ h6 {
 }
 
 .videos {
-    height: 270px;
+    height: 410px;
     padding: 20px 30px;
     overflow: auto;
 }
@@ -708,7 +708,7 @@ h6 {
 }
 
 .videos::-webkit-scrollbar-track {
-    background-color: transparent;
+    background-color: inherit;
 }
 
 .videos::-webkit-scrollbar-thumb {
@@ -720,7 +720,7 @@ h6 {
     padding: 10px;
     padding-bottom: 5px;
     background-color: var(--cor-secundaria-lighter);
-    border-radius: 8px;
+    border-radius: 5px;
     cursor: pointer;
     margin-bottom: 20px;
     margin-right: 10px;

@@ -278,6 +278,7 @@
                         <div class="celula">Nome</div>
                         <div class="celula">Conta</div>
                         <div class="celula">Tipo</div>
+                        <div class="celula" style="flex: 0.4;"></div>
                     </div>
 
                     <?php
@@ -297,6 +298,10 @@
                             </div>
                             <div class="celula">
                                 <?= ($integracao['tipo'] == 1 ? 'Vídeo' : 'Pagamento') ?>
+                            </div>
+                            <div class="celula" style="flex: 0.4;">
+                                <button class="editar-integracao" data-id="<?= $integracao['id'] ?>"><i class='fa-solid fa-pen-to-square'></i></button>
+                                <button class="delete-integracao" data-id="<?= $integracao['id'] ?>"><i class='fa-solid fa-trash-can'></i></button>
                             </div>
                         </div>
                     <?php endforeach; ?>

@@ -8,6 +8,9 @@
         <h1>
             <?php
             $video = str_replace("./", "http://localhost/ultimatemembers/", $aula['video']);
+            $videoId = $aula['videoId'];
+            $plataforma = $aula['plataforma'];
+            $integracao = $aula['integracao_id'];
             $descricao = isset($aula["descricao"]) ? $aula["descricao"] : "Sem descrição.";
             // Verifica se a aula está marcada como concluída
             $checkbox = in_array($aula['id'], $aulasConcluidas);
@@ -32,10 +35,17 @@
 
                 <!-- Vídeo da Aula -->
                 <div class="video-container">
-                    <video controls controlsList="nodownload">
-                        <source src="<?php echo $video ?>" type="video/mp4">
-                        Seu navegador não suporta o elemento de vídeo.
-                    </video>
+                    <?php if ($plataforma == 'youtube'): ?>
+                        <!-- Se for YouTube, exibir vídeo do YouTube com o ID fornecido -->
+                        <iframe width="100%" height="500" src="https://www.youtube.com/embed/<?php echo $videoId; ?>"
+                            frameborder="0" allowfullscreen></iframe>
+                    <?php else: ?>
+                        <!-- Se não for YouTube, exibir vídeo local -->
+                        <video controls controlsList="nodownload">
+                            <source src="<?php echo $video; ?>" type="video/mp4">
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                    <?php endif; ?>
                 </div>
 
                 <!-- Botões de opções da Aula -->
@@ -95,10 +105,8 @@
                     </div>
 
                     <div class="opções-aula">
-                        <button class="op-aula"><i class="fa-regular fa-file-pdf"></i><span
-                                class="legenda">Apostila</span></button>
-                        <button class="op-aula"><i class="fa-solid fa-pen"></i><span
-                                class="legenda">Exercício</span></button>
+                        <button class="op-aula" id="apostila-btn"><i class="fa-regular fa-file-pdf"></i><span
+                                class="legenda">Baixar material da aula</span></button>
                         <button class="op-aula"><i class="fa-regular fa-bookmark"></i><span class="legenda">Salvar
                                 Aula</span></button>
                     </div>
@@ -158,7 +166,9 @@
                     ?>
 
                     <form class="comentarios-header">
-                        <p style="margin: 0px;"><?php echo $num_de_comentarios;?></p>
+                        <p style="margin: 0px;">
+                            <?php echo $num_de_comentarios; ?>
+                        </p>
                         <select name="sort" class="sort_by">
                             <option value="" disabled selected>Ordenar por</option>
                             <option value="relevancia">Relevância</option>
@@ -343,7 +353,6 @@
                                 foreach ($aulas as $aula) {
                                     $nome_aula = $aula['nome'];
                                     $id_aula = $aula['id'];
-                                    $duracao = obterDuracaoDoVideo(str_replace("./", "C:/xampp/htdocs/ultimatemembers/", $aula['video']));
                                     $capa = !empty($aula['capa']) ? str_replace("./", "http://localhost/ultimatemembers/", $aula['capa']) : "http://localhost/ultimatemembers/public/img/video-default.png";
 
                                     // Verifica se a aula está marcada como concluída
@@ -371,7 +380,6 @@
 <section>
 <div class="info-aula">
     <div class="nome-aula" style="font-weight: bold;">Aula ' . $formattedId . ' - ' . $nome_aula . '</div>
-    <div class="duracao-aula">' . $duracao . '</div>
 </div>
 </section>
 </div>';

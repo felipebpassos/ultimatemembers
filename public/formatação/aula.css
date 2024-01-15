@@ -347,6 +347,7 @@ label {
     padding-top: 10px;
     max-height: 390px;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .aula {
@@ -358,12 +359,16 @@ label {
 }
 
 .aulas::-webkit-scrollbar {
-    width: 0;
-    height: 0;
+    width: 5px;
+}
+
+.aulas::-webkit-scrollbar-track {
+    background-color: inherit;
 }
 
 .aulas::-webkit-scrollbar-thumb {
-    background-color: transparent;
+    background-color: var(--cor-primaria-darker);
+    border-radius: 0;
 }
 
 .nome-aula {
@@ -439,6 +444,10 @@ label {
     display: block;
     bottom: -25px;
     left: 50%;
+}
+
+#apostila-btn:hover .legenda {
+    bottom: -40px;
 }
 
 .checkbox {

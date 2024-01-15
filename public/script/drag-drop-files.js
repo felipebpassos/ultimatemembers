@@ -6,6 +6,10 @@ const dropImgEdit = document.getElementById('dropImgEdit');
 const imgInfoEdit = document.getElementById('imgInfoEdit');
 const capaAulaEdit = document.getElementById('capaAulaEdit');
 
+const dropApostila = document.getElementById('dropApostila');
+const apostilaInfo = document.getElementById('apostilaInfo');
+const apostila = document.getElementById('apostila');
+
 const dropVideoModulo = document.getElementById('dropVideoModulo');
 const videoInfoModulo = document.getElementById('videoInfoModulo');
 const videoModulo = document.getElementById('videoModulo');
@@ -84,6 +88,21 @@ dropImgEdit.addEventListener('drop', (e) => {
     handleImageFile(imgInfoEdit, e.dataTransfer.files[0]);
 });
 
+dropApostila.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropApostila.classList.add('active');
+});
+
+dropApostila.addEventListener('dragleave', () => {
+    dropApostila.classList.remove('active');
+});
+
+dropApostila.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropApostila.classList.remove('active');
+    handleTextFile(apostilaInfo, e.dataTransfer.files[0]);
+});
+
 dropImgModulo.addEventListener('dragover', (e) => {
     e.preventDefault();
     dropImgModulo.classList.add('active');
@@ -148,6 +167,14 @@ capaAulaEdit.addEventListener('change', () => {
     handleImageFile(imgInfoEdit, capaAulaEdit.files[0]);
 });
 
+dropApostila.addEventListener('click', () => {
+    apostila.click();
+});
+
+dropApostila.addEventListener('change', () => {
+    handleTextFile(apostilaInfo, apostila.files[0]);
+});
+
 dropImgModulo.addEventListener('click', () => {
     capaModulo.click();
 });
@@ -179,5 +206,14 @@ function handleImageFile(elemento, file) {
 
     if (file) {
         elemento.textContent = `Arquivo de imagem selecionado: ${file.name}`;
+    }
+}
+
+// Função para lidar com o arquivo de apostila selecionado ou arrastado
+function handleTextFile(elemento, file) {
+    elemento.textContent = '';
+
+    if (file) {
+        elemento.textContent = `Arquivo selecionado: ${file.name}`;
     }
 }

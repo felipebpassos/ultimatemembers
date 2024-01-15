@@ -51,6 +51,16 @@
                             </div>
                         </div>
 
+                        <div class="mb-3">
+                            <label class="form-label">Apostila (Opcional)</label>
+                            <div class="drop-area" id="dropApostila">
+                                Arraste e solte um arquivo aqui ou clique para fazer upload.
+                                <span id="apostilaInfo"></span>
+                                <input type="file" id="apostila" style="width: 0; height:0; margin:0;" name="apostila"
+                                    accept=".pdf, .doc, application/x-rar-compressed">
+                            </div>
+                        </div>
+
                         <input type="hidden" id="videoId" name="videoId">
                         <input type="hidden" id="videoPlataforma" name="plataforma">
                         <input type="hidden" id="videoIntegracao" name="integracao">
@@ -148,15 +158,50 @@
                             </div>
                         </div>
 
+                        <div class="mb-3">
+                            <label class="form-label">Apostila (Opcional)</label>
+                            <div class="drop-area" id="dropApostilaEdit">
+                                Arraste e solte um arquivo aqui ou clique para fazer upload.
+                                <span id="apostilaInfoEdit"></span>
+                                <input type="file" id="apostilaEdit" style="width: 0; height:0; margin:0;" name="apostila"
+                                    accept=".pdf, .doc, application/x-rar-compressed">
+                            </div>
+                        </div>
+
                         <input type="hidden" id="videoIdEdit" name="videoId">
+                        <input type="hidden" id="videoPlataformaEdit" name="plataforma">
+                        <input type="hidden" id="videoIntegracaoEdit" name="integracao">
                     </div>
 
                 </div>
                 <div class="col-md-6">
-                    <div class="videos-box">
-                        <div class="videos-box-header"></div>
-                        <div class="videos">
-                            <div class="row"></div>
+                    <div style="margin: 30px auto; margin-top: 0; width: 90%;">
+                        <label class="form-label" for="videos-box">Vídeo da aula</label>
+                        <div class="videos-box" id="videos-box">
+                            <div class="videos-box-header">
+                                <div class="pesquisar-2">
+                                    <i class="fa fa-search"></i>
+                                    <input type="text" id="campoPesquisaEdit" name="pesquisa" placeholder="Pesquisar vídeo">
+                                </div>
+                                <div class="botoes">
+                                    <button class="btn-2" id="atualiza-videos-Edit" type="button">
+                                        <p>Atualizar</p>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="videos">
+                                <div class="row"></div>
+                            </div>
+                            <div class="video-selected">
+                                <div>
+                                    <span>Vídeo selecionado:</span>
+                                    <span id="nome-video-selecionado-edit"></span>
+                                </div>
+                                <div>
+                                    <span>Plataforma:</span>
+                                    <span id="plataforma-video-selecionado-edit"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

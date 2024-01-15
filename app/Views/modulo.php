@@ -107,7 +107,6 @@ $video = !empty($modulo['video']) ? str_replace("./", "http://localhost/ultimate
                     foreach ($aulas as $aula) {
                         $id_aula = $aula['id'];
                         $nome_aula = $aula['nome'];
-                        $duracao = obterDuracaoDoVideo(str_replace("./", "C:/xampp/htdocs/ultimatemembers/", $aula['video']));
                         $descricao = isset($aula["descricao"]) ? $aula["descricao"] : "Sem descrição.";
                         $capa = !empty($aula['capa']) ? str_replace("./", "http://localhost/ultimatemembers/", $aula['capa']) : "http://localhost/ultimatemembers/public/img/video-default.png";
 
@@ -140,7 +139,6 @@ $video = !empty($modulo['video']) ? str_replace("./", "http://localhost/ultimate
                 <div class="aula-left-box">
                     <a href="' . $curso['url_principal'] . 'modulos/aula/' . $formattedId . '" id="img-aula">
                         <img class="imagem-aula" src="' . $capa . '" alt="Imagem da Aula">
-                        <div class="duracao-aula">' . $duracao . '</div>
                     </a>
                     <section>
                         <div class="info-aula">

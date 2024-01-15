@@ -18,7 +18,7 @@ class Aulas
     public function getAulas($id_modulo)
     {
         $data = array();
-        $query = 'SELECT id, nome, video, descricao, capa FROM aulas WHERE id_modulo = :id_modulo';
+        $query = 'SELECT id, nome, descricao, capa FROM aulas WHERE id_modulo = :id_modulo';
 
         $stmt = $this->con->prepare($query);
         $stmt->bindValue(':id_modulo', $id_modulo);
@@ -33,7 +33,7 @@ class Aulas
     // Método para pegar dados de uma aula específica
     public function getAula($id)
     {
-        $query = 'SELECT a.id, a.id_modulo, a.nome, a.video, a.descricao, a.capa, m.nome AS nome_modulo
+        $query = 'SELECT a.id, a.id_modulo, a.nome, a.video, a.videoId, a.plataforma, a.integracao_id, a.descricao, a.capa, m.nome AS nome_modulo
               FROM aulas a
               JOIN modulos m ON a.id_modulo = m.id
               WHERE a.id = :id LIMIT 1';
@@ -186,10 +186,10 @@ class Aulas
     }
 
     // Método para criar nova aula
-    public function setAula($id_modulo, $nome, $descricao, $video, $capa, $id_curso)
+    public function setAula($id_modulo, $nome, $descricao, $videoId, $plataforma, $integracao, $capa, $id_curso)
     {
-        $query = 'INSERT INTO aulas (id_modulo, id_curso, nome, descricao, video, capa) 
-              VALUES (:id_modulo, :id_curso, :nome, :descricao, :video, :capa)';
+        $query = 'INSERT INTO aulas (id_modulo, id_curso, nome, descricao, videoId, plataforma, integracao_id, capa) 
+              VALUES (:id_modulo, :id_curso, :nome, :descricao, :videoId, :plataforma, :integracao, :capa)';
 
         $stmt = $this->con->prepare($query);
 
@@ -197,7 +197,9 @@ class Aulas
         $stmt->bindValue(':id_curso', $id_curso);
         $stmt->bindValue(':nome', $nome);
         $stmt->bindValue(':descricao', $descricao);
-        $stmt->bindValue(':video', $video);
+        $stmt->bindValue(':videoId', $videoId);
+        $stmt->bindValue(':plataforma', $plataforma);
+        $stmt->bindValue(':integracao', $integracao);
         $stmt->bindValue(':capa', $capa);
 
         return $stmt->execute();

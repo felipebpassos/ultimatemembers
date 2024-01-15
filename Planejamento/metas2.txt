@@ -8,13 +8,16 @@ deletar todos usuários
 fazer integração com outras plataformas
 deletar integração
 
+-Fazer editor de texto funcionar
 -Fazer funcionar pesquisas
 -Fazer paginação onde necessitar
 -Fazer funcionar simple e multiple selects onde tiver
 -Fazer sistema de salvar aulas e publicações
+-Deletar e reportar comentários
 -Fazer gameficação
 -Fazer sistema de avaliações (questionários)
 -Revisar segurança
 -Responsividade de todas as páginas
+
 
 

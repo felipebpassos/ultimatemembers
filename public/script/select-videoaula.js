@@ -15,12 +15,15 @@ $('.videos').on('click', '.video', function () {
     // Obtém o data-id do vídeo clicado
     var videoPlataforma = $(this).data('plataforma');
 
+    // Capitaliza a primeira letra da plataforma
+    var plataformaCapitalizada = videoPlataforma.charAt(0).toUpperCase() + videoPlataforma.slice(1);
+
     // Obtém o data-id do vídeo clicado
     var videoIntegracao = $(this).data('integracao');
 
     // Atualiza os spans no HTML
     $('#nome-video-selecionado').text(videoNome);
-    $('#plataforma-video-selecionado').text(videoPlataforma);
+    $('#plataforma-video-selecionado').text(plataformaCapitalizada);
 
     // Atualiza o valor do campo de entrada oculto no formulário
     $('#videoId').val(videoId);

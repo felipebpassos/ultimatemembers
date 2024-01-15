@@ -380,47 +380,40 @@ class modulosController extends Controller
         // Verifica se o formulário foi enviado via método POST
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-            if (isset($_FILES['videoAula']) && $_FILES['videoAula']['error'] === UPLOAD_ERR_OK && isset($_POST["id_modulo"]) && isset($_POST["nomeAula"])) {
+            if (isset($_POST["id_modulo"]) && isset($_POST["nomeAula"]) && isset($_POST["videoId"]) && isset($_POST["plataforma"]) && isset($_POST["integracao"])) {
 
                 $aulasModel = new Aulas();
 
-                $video = $aulasModel->uploadVideoAula($_FILES['videoAula']);
+                $id_modulo = $_POST["id_modulo"];
+                $nomeAula = $_POST["nomeAula"];
+                $videoId = $_POST["videoId"];
+                $plataforma = $_POST["plataforma"];
+                $integracao = $_POST["integracao"];
 
-                if ($video) {
+                // Verifica se há descrição fornecida
+                $descricaoAula = (isset($_POST["descricaoAula"]) && !empty($_POST["descricaoAula"])) ? $_POST["descricaoAula"] : null;
 
-                    $id_modulo = $_POST["id_modulo"];
-                    $nomeAula = $_POST["nomeAula"];
+                // Verifica se há foto de capa fornecida
+                if (isset($_FILES['capaAula']) && $_FILES['capaAula']['error'] === UPLOAD_ERR_OK && !empty($_FILES['capaAula'])) {
 
-                    // Verifica se há descrição fornecida
-                    $descricaoAula = (isset($_POST["descricaoAula"]) && !empty($_POST["descricaoAula"])) ? $_POST["descricaoAula"] : null;
-
-                    // Verifica se há foto de capa fornecida
-                    if (isset($_FILES['capaAula']) && $_FILES['capaAula']['error'] === UPLOAD_ERR_OK && !empty($_FILES['capaAula'])) {
-
-                        $capa = $aulasModel->uploadCapaAula($_FILES['capaAula']);
-
-                    } else {
-
-                        $capa = null;
-
-                    }
-
-                    // Salva dados da nova aula no banco de dados
-                    $result = $aulasModel->setAula($id_modulo, $nomeAula, $descricaoAula, $video, $capa, $this->curso);
-
-                    if ($result) {
-
-                        print_r('Aula adicionada com sucesso');
-
-                    } else {
-
-                        print_r('Erro ao criar Nova Aula');
-
-                    }
+                    $capa = $aulasModel->uploadCapaAula($_FILES['capaAula']);
 
                 } else {
 
-                    print_r('Erro no upload');
+                    $capa = null;
+
+                }
+
+                // Salva dados da nova aula no banco de dados
+                $result = $aulasModel->setAula($id_modulo, $nomeAula, $descricaoAula, $videoId, $plataforma, $integracao, $capa, $this->curso);
+
+                if ($result) {
+
+                    print_r('Aula adicionada com sucesso');
+
+                } else {
+
+                    print_r('Erro ao criar Nova Aula');
 
                 }
 

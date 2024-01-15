@@ -2,6 +2,13 @@ use reelsdecinema;
 
 drop table integracoes_api;
 
+-- Adiciona as colunas à tabela aulas
+ALTER TABLE aulas
+ADD COLUMN videoId VARCHAR(255) NOT NULL,
+ADD COLUMN integracao_id INT NOT NULL,
+ADD COLUMN plataforma VARCHAR(255) NOT NULL,
+ADD FOREIGN KEY (integracao_id) REFERENCES integracoes_api(id);
+
 ALTER TABLE usuarios
 ADD COLUMN instagram VARCHAR(255),
 ADD COLUMN facebook VARCHAR(255),
@@ -41,9 +48,9 @@ ALTER TABLE tags_forum
 ADD CONSTRAINT fk_tags_forum_curso
 FOREIGN KEY (id_curso) REFERENCES cursos(id);
 
-select * from  cursos;
+select * from aulas;
 
-select * from usuarios;
+select * from integracoes_api;
 
 INSERT INTO lancamentos (nome, capa, link_url)
 VALUES ('Reels de Cinema', './uploads/lançamentos/banners/lançamento01.png', 'http://localhost/reelsdecinema/');
