@@ -255,13 +255,92 @@ class Auth
         }
     }
 
+    // Método para enviar autorização para o Vimeo
+    public function vimeoAuth($curso)
+    {
+        // Lê as credenciais do arquivo JSON (substitua pelo caminho correto do seu arquivo)
+        $credenciais = json_decode(file_get_contents('http://localhost/ultimatemembers/credenciais/vimeo.json'), true)['web'];
+
+        // Configurações do OAuth e da API do Vimeo
+        $client_id = $credenciais['client_id'];
+        $redirect_uri = $credenciais['redirect_uris'][0];
+
+        // URL de autorização
+        $auth_url = 'https://api.vimeo.com/oauth/authorize';
+
+        // Parâmetros de autorização
+        $params = array(
+            'response_type' => 'code',
+            'client_id' => $client_id,
+            'redirect_uri' => $redirect_uri,
+            'state' => $curso,  // Adiciona o identificador do curso como parâmetro de estado
+            'scope' => 'public private', // Adapte o escopo conforme necessário
+        );
+
+        // Adiciona os parâmetros à URL de autorização
+        $auth_url .= '?' . http_build_query($params);
+
+        // Redireciona o usuário para a URL de autorização
+        header('Location: ' . $auth_url);
+        exit;
+    }
+
+    // Método de callback do Vimeo
+    public function vimeoCallback($code)
+    {
+        // Lê as credenciais do arquivo JSON
+        $credenciais = json_decode(file_get_contents('http://localhost/ultimatemembers/credenciais/vimeo.json'), true)['web'];
+        $client_id = $credenciais['client_id'];
+        $client_secret = $credenciais['client_secret'];
+        $redirect_uri = $credenciais['redirect_uris'][0];
+
+        // URL de token de acesso do Vimeo
+        $token_url = 'https://api.vimeo.com/oauth/access_token';
+
+        // Parâmetros do token de acesso
+        $params = array(
+            'grant_type' => 'authorization_code',
+            'code' => $code,
+            'redirect_uri' => $redirect_uri,
+        );
+
+        // Inicia o cURL para obter o token de acesso
+        $ch = curl_init($token_url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization: basic ' . base64_encode($client_id . ':' . $client_secret),
+            'Content-Type: application/x-www-form-urlencoded',
+            'Accept: application/vnd.vimeo.*+json;version=3.4'
+        )
+        );
+
+        // Executa a solicitação cURL
+        $response = curl_exec($ch);
+
+        // Verifica se houve algum erro
+        if (curl_errno($ch)) {
+            echo 'Erro cURL: ' . curl_error($ch);
+        }
+
+        // Fecha a sessão cURL
+        curl_close($ch);
+
+        // Decodifica a resposta JSON
+        $data = json_decode($response, true);
+
+        // Retorne os dados, você pode ajustar isso conforme necessário para o seu caso
+        return $data;
+    }
+
     // Método para definir a integração na tabela
     public function setIntegracao($plataforma, $data, $curso)
     {
         // Extrai os dados necessários do array $data
         $accessToken = $data['access_token'] ?? null;
         $refreshToken = $data['refresh_token'] ?? null;
-        $email = $data['email'] ?? null;
+        $conta = $data['email'] ?? null;
 
         // Gera um nome aleatório de 8 dígitos mesclando letras maiúsculas, minúsculas e números
         $nomeAleatorio = $this->gerarNomeAleatorio(8);
@@ -277,7 +356,7 @@ class Auth
         $stmt->bindValue(':plataforma', $plataforma);
         $stmt->bindValue(':token_acesso', $accessToken);
         $stmt->bindValue(':refresh_token', $refreshToken);
-        $stmt->bindValue(':conta', $email);
+        $stmt->bindValue(':conta', $conta);
         $stmt->bindValue(':nome', $nomeAleatorio);
         $stmt->bindValue(':curso_id', $curso);
 

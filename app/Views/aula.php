@@ -7,10 +7,10 @@
     <div class="titulo-pagina">
         <h1>
             <?php
-            $video = str_replace("./", "http://localhost/ultimatemembers/", $aula['video']);
             $videoId = $aula['videoId'];
             $plataforma = $aula['plataforma'];
             $integracao = $aula['integracao_id'];
+            $apostila = !empty($aula['apostila']) ? str_replace("./", "http://localhost/ultimatemembers/", $aula['apostila']) : null;
             $descricao = isset($aula["descricao"]) ? $aula["descricao"] : "Sem descrição.";
             // Verifica se a aula está marcada como concluída
             $checkbox = in_array($aula['id'], $aulasConcluidas);
@@ -105,8 +105,17 @@
                     </div>
 
                     <div class="opções-aula">
-                        <button class="op-aula" id="apostila-btn"><i class="fa-regular fa-file-pdf"></i><span
-                                class="legenda">Baixar material da aula</span></button>
+                        <?php if (!empty($apostila)): ?>
+                            <a href="<?= $apostila ?>" download><button class="op-aula" id="apostila-btn">
+                                <i class="fa-regular fa-file-pdf"></i>
+                                <span class="legenda">Baixar material da aula</span>
+                            </button></a>
+                        <?php else: ?>
+                            <button class="op-aula" id="apostila-div">
+                                <i class="fa-regular fa-file-pdf"></i>
+                                <span class="legenda">Sem material nesta aula</span>
+                            </button>
+                        <?php endif; ?>
                         <button class="op-aula"><i class="fa-regular fa-bookmark"></i><span class="legenda">Salvar
                                 Aula</span></button>
                     </div>

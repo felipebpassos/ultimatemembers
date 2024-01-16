@@ -33,7 +33,7 @@ class Aulas
     // Método para pegar dados de uma aula específica
     public function getAula($id)
     {
-        $query = 'SELECT a.id, a.id_modulo, a.nome, a.video, a.videoId, a.plataforma, a.integracao_id, a.descricao, a.capa, m.nome AS nome_modulo
+        $query = 'SELECT a.id, a.id_modulo, a.nome, a.videoId, a.plataforma, a.integracao_id, a.descricao, a.capa, a.apostila, m.nome AS nome_modulo
               FROM aulas a
               JOIN modulos m ON a.id_modulo = m.id
               WHERE a.id = :id LIMIT 1';
@@ -53,77 +53,15 @@ class Aulas
         return null;
     }
 
-
-    //Método para subir arquivo de video da aula para servidor
-    public function uploadVideoAula($file)
+    public function uploadCapaAula($file, $dir_curso)
     {
-        $diretorio_upload = "./uploads/modulos/aulas/videos/"; // Diretório correspondente
-        $nome_arquivo = basename($file['name']);
-        $extensao_arquivo = strtolower(pathinfo($nome_arquivo, PATHINFO_EXTENSION)); // Obtém a extensão do arquivo em letras minúsculas
-        $novo_nome_arquivo = uniqid() . '.' . $extensao_arquivo; // Gera um novo nome único para o arquivo de perfil
-        $caminho_arquivo = $diretorio_upload . $novo_nome_arquivo; // Concatena o nome do arquivo ao caminho
+        $diretorio_upload = "./uploads/" . $dir_curso . "/banners/"; // Diretório correspondente
 
-        if (move_uploaded_file($file['tmp_name'], $caminho_arquivo)) {
-            return $caminho_arquivo; // Retorna o caminho do arquivo em caso de sucesso
-        } else {
-            return false; // Retorna false em caso de erro no upload
+        // Verifica se o diretório de destino existe, e cria se não existir
+        if (!file_exists($diretorio_upload)) {
+            mkdir($diretorio_upload, 0777, true);
         }
-    }
 
-    //Método para pegar url do video no servidor
-    public function getCaminhoVideo($id_aula)
-    {
-        $query = 'SELECT video FROM aulas WHERE id = :aulaId LIMIT 1';
-
-        $stmt = $this->con->prepare($query);
-        $stmt->bindValue(':aulaId', $id_aula);
-        $stmt->execute();
-
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($result) {
-            return $result['video'];
-        } else {
-            return null;
-        }
-    }
-
-    //Método para atualizar no banco de dados a url do video da aula
-    public function updateVideoAula($id_aula, $videoNovo, $videoAntigo)
-    {
-        // Inicie uma transação para garantir consistência nos dados
-        $this->con->beginTransaction();
-
-        try {
-            // Atualiza o campo 'video' na tabela 'aulas' com o novo caminho
-            $sql = "UPDATE aulas SET video = :videoNovo WHERE id = :aulaId";
-            $stmt = $this->con->prepare($sql);
-            $stmt->bindValue(':videoNovo', $videoNovo);
-            $stmt->bindValue(':aulaId', $id_aula);
-            $stmt->execute();
-
-            // Se a atualização ocorreu com sucesso, exclua o video antigo
-            if ($stmt->rowCount() > 0 && !empty($videoAntigo)) {
-                unlink($videoAntigo);
-            }
-
-            // Confirme a transação
-            $this->con->commit();
-
-            return true; // Sucesso
-        } catch (PDOException $e) {
-            // Em caso de erro, reverta a transação
-            $this->con->rollback();
-
-            // Você pode adicionar um log de erro aqui se necessário
-            // Exemplo: error_log("Erro ao atualizar video: " . $e->getMessage());
-
-            return false; // Erro
-        }
-    }
-
-    public function uploadCapaAula($file)
-    {
-        $diretorio_upload = "./uploads/modulos/aulas/capas/"; // Diretório correspondente
         $nome_arquivo = basename($file['name']);
         $extensao_arquivo = strtolower(pathinfo($nome_arquivo, PATHINFO_EXTENSION)); // Obtém a extensão do arquivo em letras minúsculas
         $novo_nome_arquivo = uniqid() . '.' . $extensao_arquivo; // Gera um novo nome único para o arquivo de perfil
@@ -185,11 +123,81 @@ class Aulas
         }
     }
 
-    // Método para criar nova aula
-    public function setAula($id_modulo, $nome, $descricao, $videoId, $plataforma, $integracao, $capa, $id_curso)
+    public function uploadApostilaAula($file, $dir_curso)
     {
-        $query = 'INSERT INTO aulas (id_modulo, id_curso, nome, descricao, videoId, plataforma, integracao_id, capa) 
-              VALUES (:id_modulo, :id_curso, :nome, :descricao, :videoId, :plataforma, :integracao, :capa)';
+        $diretorio_upload = "./uploads/" . $dir_curso . "/apostilas/";
+
+        // Verifica se o diretório de destino existe, e cria se não existir
+        if (!file_exists($diretorio_upload)) {
+            mkdir($diretorio_upload, 0777, true);
+        }
+
+        $nome_arquivo = basename($file['name']);
+        $extensao_arquivo = strtolower(pathinfo($nome_arquivo, PATHINFO_EXTENSION));
+        $novo_nome_arquivo = uniqid() . '.' . $extensao_arquivo;
+        $caminho_arquivo = $diretorio_upload . $novo_nome_arquivo;
+
+        if (move_uploaded_file($file['tmp_name'], $caminho_arquivo)) {
+            return $caminho_arquivo;
+        } else {
+            return false;
+        }
+    }
+
+    public function getCaminhoApostila($id_aula)
+    {
+        $query = 'SELECT apostila FROM aulas WHERE id = :aulaId LIMIT 1';
+
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':aulaId', $id_aula);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($result) {
+            return $result['apostila'];
+        } else {
+            return null;
+        }
+    }
+
+    public function updateApostilaAula($id_aula, $apostilaNova, $apostilaAntiga)
+    {
+        // Inicie uma transação para garantir consistência nos dados
+        $this->con->beginTransaction();
+
+        try {
+            // Atualiza o campo 'capa' na tabela 'aulas' com o novo caminho
+            $sql = "UPDATE aulas SET apostila = :apostilaNova WHERE id = :aulaId";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindValue(':apostilaNova', $apostilaNova);
+            $stmt->bindValue(':aulaId', $id_aula);
+            $stmt->execute();
+
+            // Se a atualização ocorreu com sucesso, exclua a capa antiga
+            if ($stmt->rowCount() > 0 && !empty($apostilaAntiga)) {
+                unlink($apostilaAntiga);
+            }
+
+            // Confirme a transação
+            $this->con->commit();
+
+            return true; // Sucesso
+        } catch (PDOException $e) {
+            // Em caso de erro, reverta a transação
+            $this->con->rollback();
+
+            // Você pode adicionar um log de erro aqui se necessário
+            // Exemplo: error_log("Erro ao atualizar capa: " . $e->getMessage());
+
+            return false; // Erro
+        }
+    }
+
+    // Método para criar nova aula
+    public function setAula($id_modulo, $nome, $descricao, $videoId, $plataforma, $integracao, $capa, $apostila, $id_curso)
+    {
+        $query = 'INSERT INTO aulas (id_modulo, id_curso, nome, descricao, videoId, plataforma, integracao_id, capa, apostila) 
+              VALUES (:id_modulo, :id_curso, :nome, :descricao, :videoId, :plataforma, :integracao, :capa, :apostila)';
 
         $stmt = $this->con->prepare($query);
 
@@ -201,6 +209,7 @@ class Aulas
         $stmt->bindValue(':plataforma', $plataforma);
         $stmt->bindValue(':integracao', $integracao);
         $stmt->bindValue(':capa', $capa);
+        $stmt->bindValue(':apostila', $apostila);
 
         return $stmt->execute();
     }
@@ -224,7 +233,7 @@ class Aulas
     public function deleteAula($id_aula)
     {
         // Primeiro, obtenha o nome do vídeo e da capa associados a essa aula
-        $query = 'SELECT video, capa FROM aulas WHERE id = :id_aula';
+        $query = 'SELECT capa FROM aulas WHERE id = :id_aula';
 
         $stmt = $this->con->prepare($query);
 
@@ -235,41 +244,52 @@ class Aulas
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($result) {
-            // Encontrou o vídeo e a capa associados à aula
-            $video = $result['video'];
+
             $capa = $result['capa'];
 
-            // Exclua o vídeo do servidor
-            if (unlink($video)) {
-                // Se o vídeo foi excluído com sucesso, agora podemos excluir a aula
+            // Excluir os dados associados à aula
 
-                // Excluir os dados associados à aula
+            $this->deleteAulasConcluidas($id_aula);
 
-                $this->deleteAulasConcluidas($id_aula);
+            $this->deleteComentariosDaAula($id_aula);
 
-                $this->deleteComentariosDaAula($id_aula);
+            $this->deleteAvaliacoesDaAula($id_aula);
 
-                // Agora podemos excluir a aula
-                $query = 'DELETE FROM aulas WHERE id = :id_aula';
+            // Agora podemos excluir a aula
+            $query = 'DELETE FROM aulas WHERE id = :id_aula';
 
-                $stmt = $this->con->prepare($query);
+            $stmt = $this->con->prepare($query);
 
-                $stmt->bindValue(':id_aula', $id_aula, PDO::PARAM_INT);
+            $stmt->bindValue(':id_aula', $id_aula, PDO::PARAM_INT);
 
-                $deletedAula = $stmt->execute();
+            $deletedAula = $stmt->execute();
 
-                if ($deletedAula) {
-                    // Se a aula foi excluída com sucesso, agora podemos excluir a capa (se existir)
-                    if (!empty($capa) && file_exists($capa)) {
-                        unlink($capa);
-                    }
-
-                    return true;
+            if ($deletedAula) {
+                // Se a aula foi excluída com sucesso, agora podemos excluir a capa (se existir)
+                if (!empty($capa) && file_exists($capa)) {
+                    unlink($capa);
                 }
+
+                return true;
             }
+
         }
 
         return false;
+    }
+
+    public function deleteAvaliacoesDaAula($id_aula)
+    {
+        // Query para excluir registros da tabela aulas_concluidas onde aula_id seja igual a $id_aula
+        $query = 'DELETE FROM avaliacoes WHERE aula_id = :id_aula';
+
+        $stmt = $this->con->prepare($query);
+
+        $stmt->bindValue(':id_aula', $id_aula, PDO::PARAM_INT);
+
+        $deleted = $stmt->execute();
+
+        return $deleted;
     }
 
     public function deleteAulasConcluidas($id_aula)

@@ -51,7 +51,8 @@ main {
 }
 
 .avaliacao-estrelas label:hover {
-    color: darkgray; /* Cor mais escura ao passar o mouse */
+    color: darkgray;
+    /* Cor mais escura ao passar o mouse */
 }
 
 #proxima {
@@ -185,7 +186,11 @@ main {
     background-color: var(--cor-secundaria-light);
 }
 
-.op-comentario .acao-btn {display: flex; padding: 5px; border-radius: 3px;}
+.op-comentario .acao-btn {
+    display: flex;
+    padding: 5px;
+    border-radius: 3px;
+}
 
 .like,
 .dislike {
@@ -411,7 +416,9 @@ label {
     z-index: 1;
 }
 
-.op-aula i {margin: 0;}
+.op-aula i {
+    margin: 0;
+}
 
 .op-aula,
 .editar-aula,
@@ -436,6 +443,15 @@ label {
     /* Aumenta o tamanho do botão em 10% ao passar o mouse */
 }
 
+#apostila-div {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#apostila-div:hover {
+    transform: none;
+}
+
 .add-aula:hover .legenda,
 .op-aula:hover .legenda,
 .editar-aula:hover .legenda,
@@ -446,7 +462,8 @@ label {
     left: 50%;
 }
 
-#apostila-btn:hover .legenda {
+#apostila-btn:hover .legenda,
+#apostila-div:hover .legenda {
     bottom: -40px;
 }
 
@@ -475,7 +492,7 @@ label {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background-color: var(--cor-secundaria);
+    background-color: var(--cor-secundaria-light);
     border: 2px solid var(--cor-primaria-darker);
     transition: background-color 0.3s, opacity 0.3s;
 }
@@ -486,7 +503,7 @@ label {
 }
 
 .checkbox:hover .checkmark {
-    background-color: rgb(20, 20, 20) !important;
+    background-color: var(--cor-secundaria-lighter) !important;
 }
 
 .checkbox input[type="checkbox"]:checked~.checkmark {

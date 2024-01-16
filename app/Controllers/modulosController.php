@@ -396,7 +396,7 @@ class modulosController extends Controller
                 // Verifica se há foto de capa fornecida
                 if (isset($_FILES['capaAula']) && $_FILES['capaAula']['error'] === UPLOAD_ERR_OK && !empty($_FILES['capaAula'])) {
 
-                    $capa = $aulasModel->uploadCapaAula($_FILES['capaAula']);
+                    $capa = $aulasModel->uploadCapaAula($_FILES['capaAula'], $this->cursoInfo['dir_name']);
 
                 } else {
 
@@ -404,8 +404,19 @@ class modulosController extends Controller
 
                 }
 
+                // Verifica se há foto de capa fornecida
+                if (isset($_FILES['apostila']) && $_FILES['apostila']['error'] === UPLOAD_ERR_OK && !empty($_FILES['apostila'])) {
+
+                    $apostila = $aulasModel->uploadApostilaAula($_FILES['apostila'], $this->cursoInfo['dir_name']);
+
+                } else {
+
+                    $apostila = null;
+
+                }
+
                 // Salva dados da nova aula no banco de dados
-                $result = $aulasModel->setAula($id_modulo, $nomeAula, $descricaoAula, $videoId, $plataforma, $integracao, $capa, $this->curso);
+                $result = $aulasModel->setAula($id_modulo, $nomeAula, $descricaoAula, $videoId, $plataforma, $integracao, $capa, $apostila, $this->curso);
 
                 if ($result) {
 
@@ -444,42 +455,10 @@ class modulosController extends Controller
                 $nomeAula = $_POST["nomeAula"];
                 $descricaoAula = (isset($_POST["descricaoAula"]) && !empty($_POST["descricaoAula"])) ? $_POST["descricaoAula"] : null;
 
-                // Verifica se há video fornecido
-                if (isset($_FILES['videoAula']) && $_FILES['videoAula']['error'] === UPLOAD_ERR_OK) {
-
-                    $video = $aulasModel->uploadVideoAula($_FILES['videoAula']);
-
-                    if ($video) {
-
-                        // Obtém caminho antigo da do video
-                        $videoAntigo = $aulasModel->getCaminhoVideo($idAula);
-
-                        $result = $aulasModel->updateVideoAula($idAula, $video, $videoAntigo);
-
-                        if ($result) {
-
-                            print_r('Sucesso no upload');
-
-                        } else {
-
-                            print_r('Erro ao editar Aula');
-                            exit;
-
-                        }
-
-                    } else {
-
-                        print_r('Erro no upload');
-                        exit;
-
-                    }
-
-                }
-
                 // Verifica se há foto de capa fornecida
                 if (isset($_FILES['capaAula']) && $_FILES['capaAula']['error'] === UPLOAD_ERR_OK && !empty($_FILES['capaAula'])) {
 
-                    $capa = $aulasModel->uploadCapaAula($_FILES['capaAula']);
+                    $capa = $aulasModel->uploadCapaAula($_FILES['capaAula'], $this->cursoInfo['dir_name']);
 
                     if ($capa) {
 

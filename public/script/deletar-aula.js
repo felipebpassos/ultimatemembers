@@ -11,7 +11,7 @@ $(document).ready(function () {
     });
 
     $('#btn-deletar').click(function () {
-        const idAula = confirmacaoPopup.data('id-aula');
+        const idAula = $('#confirmacao').data('id-aula');
 
         // Cria uma solicitação AJAX com jQuery.
         $.ajax({
@@ -21,9 +21,11 @@ $(document).ready(function () {
             success: function (response) {
                 // A resposta do servidor foi recebida e processada com sucesso.
                 // Você pode adicionar aqui lógica para fechar o popup, atualizar a interface do usuário, etc.
-                confirmacaoPopup.hide();
+                $('#confirmacao').hide();
                 $('header, main, footer, .video-intro-container').removeClass('blur');
                 $('body').css('overflow', 'auto'); // Restaura o scroll da página
+
+                console.log(response);
             },
             error: function () {
                 // Lida com erros de solicitação
@@ -34,7 +36,7 @@ $(document).ready(function () {
 
     $('#btn-cancelar').click(function () {
         // Fecha o popup de confirmação.
-        confirmacaoPopup.hide();
+        $('#confirmacao').hide();
         $('header, main, footer, .video-intro-container').removeClass('blur');
         $('body').css('overflow', 'auto'); // Restaura o scroll da página
     });
