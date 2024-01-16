@@ -165,7 +165,7 @@ class Cursos
 
     public function getIntegracoesVideo($curso)
     {
-        $query = 'SELECT id, nome, plataforma, token_acesso, refresh_token FROM integracoes_api WHERE curso_id = :curso AND tipo = 1';
+        $query = 'SELECT id, nome, plataforma, token_acesso, refresh_token, user_uri FROM integracoes_api WHERE curso_id = :curso AND tipo = 1';
         $stmt = $this->con->prepare($query);
         $stmt->bindValue(':curso', $curso);
         $stmt->execute();
@@ -179,7 +179,8 @@ class Cursos
                 'nome' => $row['nome'],
                 'plataforma' => $row['plataforma'],
                 'token_acesso' => $row['token_acesso'],
-                'refresh_token' => $row['refresh_token']
+                'refresh_token' => $row['refresh_token'],
+                'user_uri' => $row['user_uri']
             );
         }
 

@@ -87,8 +87,8 @@ ADD COLUMN mod_status TINYINT DEFAULT 1 NOT NULL;
 ALTER TABLE modulos
 ADD COLUMN data_lancamento DATE;
 
-ALTER TABLE modulos
-DROP COLUMN status;
+ALTER TABLE aulas
+DROP COLUMN atividade;
 
 CREATE TABLE cursos (
     id INT AUTO_INCREMENT PRIMARY KEY,

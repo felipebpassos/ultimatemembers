@@ -309,11 +309,14 @@ class Auth
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Authorization: basic ' . base64_encode($client_id . ':' . $client_secret),
-            'Content-Type: application/x-www-form-urlencoded',
-            'Accept: application/vnd.vimeo.*+json;version=3.4'
-        )
+        curl_setopt(
+            $ch,
+            CURLOPT_HTTPHEADER,
+            array(
+                'Authorization: basic ' . base64_encode($client_id . ':' . $client_secret),
+                'Content-Type: application/x-www-form-urlencoded',
+                'Accept: application/vnd.vimeo.*+json;version=3.4'
+            )
         );
 
         // Executa a solicitação cURL
@@ -334,13 +337,77 @@ class Auth
         return $data;
     }
 
+    public function getVimeoVideos($dados)
+    {
+        $access_token = $dados['token_acesso'];
+        $user_uri = $dados['user_uri'];
+        $plataforma = $dados['plataforma'];
+        $integracao = $dados['id'];
+
+        // URL da API para obter vídeos de um usuário específico
+        $videos_url = 'https://api.vimeo.com' . $user_uri . '/videos';
+
+        // Inicia o cURL para obter os vídeos
+        $ch = curl_init($videos_url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt(
+            $ch,
+            CURLOPT_HTTPHEADER,
+            array(
+                'Authorization: bearer ' . $access_token,
+                'Accept: application/vnd.vimeo.*+json;version=3.4'
+            )
+        );
+
+        // Executa a solicitação cURL
+        $response = curl_exec($ch);
+
+        // Verifica se houve algum erro
+        if (curl_errno($ch)) {
+            echo 'Erro cURL: ' . curl_error($ch);
+        }
+
+        // Fecha a sessão cURL
+        curl_close($ch);
+
+        // Decodifica a resposta JSON
+        $videos_data = json_decode($response, true);
+
+        // Inicializa o array de vídeos
+        $videos = array();
+
+        // Itera sobre os vídeos e adiciona ao array
+        foreach ($videos_data['data'] as $video) {
+            $videoId = $video['uri'];
+            $title = $video['name'];
+            $thumbnailUrl = $video['pictures']['sizes'][0]['link'];
+
+            // Adiciona os dados do vídeo ao array
+            $videos[] = array(
+                'plataforma' => $plataforma,
+                'integracao' => $integracao,
+                'videoId' => $videoId,
+                'title' => $title,
+                'thumbnailUrl' => $thumbnailUrl,
+            );
+        }
+
+        return $videos;
+    }
+
     // Método para definir a integração na tabela
     public function setIntegracao($plataforma, $data, $curso)
     {
         // Extrai os dados necessários do array $data
         $accessToken = $data['access_token'] ?? null;
         $refreshToken = $data['refresh_token'] ?? null;
-        $conta = $data['email'] ?? null;
+        $userUri = null;
+        if ($plataforma == 'youtube') {
+            $conta = $data['email'] ?? null;
+        } elseif ($plataforma == 'vimeo') {
+            $conta = $data['user']['name'] ?? null;
+            $userUri = $data['user']['uri'] ?? null;
+        }
 
         // Gera um nome aleatório de 8 dígitos mesclando letras maiúsculas, minúsculas e números
         $nomeAleatorio = $this->gerarNomeAleatorio(8);
@@ -349,7 +416,7 @@ class Auth
         $tipo = ($plataforma == 'youtube' || $plataforma == 'vimeo' || $plataforma == 'panda') ? 1 : 2;
 
         // Use os dados para inserir na tabela integracoes_api
-        $query = 'INSERT INTO integracoes_api (tipo, plataforma, token_acesso, refresh_token, conta, nome, curso_id) VALUES (:tipo, :plataforma, :token_acesso, :refresh_token, :conta, :nome, :curso_id)';
+        $query = 'INSERT INTO integracoes_api (tipo, plataforma, token_acesso, refresh_token, conta, nome, user_uri, curso_id) VALUES (:tipo, :plataforma, :token_acesso, :refresh_token, :conta, :nome, :user_uri, :curso_id)';
 
         $stmt = $this->con->prepare($query);
         $stmt->bindValue(':tipo', $tipo);
@@ -358,6 +425,7 @@ class Auth
         $stmt->bindValue(':refresh_token', $refreshToken);
         $stmt->bindValue(':conta', $conta);
         $stmt->bindValue(':nome', $nomeAleatorio);
+        $stmt->bindValue(':user_uri', $userUri);
         $stmt->bindValue(':curso_id', $curso);
 
         try {
