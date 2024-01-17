@@ -1,12 +1,12 @@
 function isElementInViewport(el) {
     var rect = el.getBoundingClientRect();
-    var windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    var containerHeight = document.querySelector('.scrollbar-container').offsetHeight;
 
     // Verifique se a parte inferior do elemento está acima do topo da viewport
     // e se a parte superior do elemento está abaixo do fundo da viewport
     return (
         rect.bottom > 0 &&
-        rect.top < windowHeight
+        rect.top < containerHeight
     );
 }
 
@@ -21,5 +21,5 @@ function handleScrollAnimations() {
     });
 }
 
-window.addEventListener('scroll', handleScrollAnimations);
-window.addEventListener('load', handleScrollAnimations);
+document.querySelector('.scrollbar-container').addEventListener('scroll', handleScrollAnimations);
+document.querySelector('.scrollbar-container').addEventListener('load', handleScrollAnimations);

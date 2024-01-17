@@ -9,8 +9,8 @@ $('#add-aula').click(function () {
         type: 'POST',
         dataType: 'json',
         success: function (data) {
+
             // Seleciona a div.videos
-            console.log(data);
             var videosContainer = $('.videos .row');
 
             videosContainer.empty();
@@ -22,6 +22,10 @@ $('#add-aula').click(function () {
 
                 // Cria a imagem com o src definido pela thumbnailUrl
                 var thumbnailImg = $('<img src="' + data[i].thumbnailUrl + '" alt="Thumbnail">');
+
+                // Cria a imagem da integração
+                let plataforma = integracoes[data[i].plataforma];
+                var plataformaImg = $('<img class="plataforma-img" src="' + plataforma['img-mini'] + '" alt="Thumbnail">');
 
                 // Cria o título
                 var title = $('<p>' + data[i].title + '</p>');
@@ -40,6 +44,7 @@ $('#add-aula').click(function () {
 
                 // Adiciona a imagem e o título à div.video
                 videoDiv.append(thumbnailImg);
+                videoDiv.append(plataformaImg);
                 videoDiv.append(title);
 
                 // Adiciona a div.video à div.videos
@@ -240,6 +245,7 @@ function exibirFormulario(option) {
     } else if (option === 'oauth-int') {
         $('#oauth-integracao').show();
     }
+    $('.scrollbar-container').addClass('blur');
     $('header').addClass('hidden');
     $('.main-banner').addClass('blur');
     $('.dots').addClass('blur');
@@ -265,6 +271,7 @@ function fecharFormulario(option) {
     } else if (option === 'oauth-int') {
         $('#oauth-integracao').hide();
     }
+    $('.scrollbar-container').removeClass('blur');
     $('header').removeClass('hidden');
     $('.main-banner').removeClass('blur');
     $('.dots').removeClass('blur');

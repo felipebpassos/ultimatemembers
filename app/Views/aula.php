@@ -436,3 +436,17 @@
 
 
 </main>
+
+<?php
+
+if ($adm) {
+    ?>
+    <script>
+        var integracoes;
+        $.getJSON('http://localhost/ultimatemembers/public/data/integracoes.json', function (data) {
+            integracoes = data;
+        });
+    </script>
+    <?php
+}
+?>

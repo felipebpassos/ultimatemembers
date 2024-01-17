@@ -6,12 +6,11 @@ main {
 /* comunidade.php */
 
 .publicacoes-relevantes {
-    border-radius: 3px;
+    border-radius: 8px;
     height: 300px;
     margin-bottom: 30px;
     position: relative;
     background-color: var(--cor-secundaria-light);
-    box-shadow: 0px 0px 12px var(--sombra);
 }
 
 .publicacoes-relevantes .conteudo-pergunta {
@@ -284,9 +283,8 @@ main {
 .campo {
     background-color: var(--cor-secundaria-light);
     padding: 10px 20px 20px 20px;
-    margin: 25px 0;
-    border-radius: 3px;
-    box-shadow: 0px 0px 12px var(--sombra);
+    margin: 10px 0;
+    border-radius: 5px;
 }
 
 .campo label {

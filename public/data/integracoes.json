@@ -11,7 +11,7 @@
     "vimeo": {
         "nome": "Vimeo",
         "img": "http://localhost/ultimatemembers/public/img/vimeo.png",
-        "img-mini": "http://localhost/ultimatemembers/public/img/vimeo.png",
+        "img-mini": "http://localhost/ultimatemembers/public/img/vimeo_mini.png",
         "tipo": "Plataforma de vídeo",
         "botao": "Autorizar conta do Vimeo",
         "titulo": "Conecte sua conta do Vimeo de forma simples, com apenas um clique",

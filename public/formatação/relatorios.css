@@ -256,7 +256,7 @@
 .grafico,
 .dado {
     width: 100%;
-    background-color: var(--cor-secundaria-lighter);
+    background-color: var(--cor-secundaria-light);
     margin-bottom: 20px;
     border-radius: 6px;
     padding: 25px;

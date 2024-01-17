@@ -61,6 +61,7 @@ const corSecundaria = calcularCor(corFundoObj, 0, multiplicador);
 const corSecundariaTransparent = calcularCorTransparente(corFundoObj, 0.7);
 const corSecundariaLight = calcularCor(corFundoObj, -20, multiplicador);
 const corSecundariaLighter = calcularCor(corFundoObj, -40, multiplicador);
+const corSecundariaLightest = calcularCor(corFundoObj, -60, multiplicador);
 
 // Defina as variáveis CSS dinâmicas com os valores calculados
 dinamicroot.style.setProperty("--cor-primaria", corPrimaria);
@@ -77,5 +78,6 @@ dinamicroot.style.setProperty("--cor-secundaria", corSecundaria);
 dinamicroot.style.setProperty("--cor-secundaria-transparent", corSecundariaTransparent);
 dinamicroot.style.setProperty("--cor-secundaria-light", corSecundariaLight);
 dinamicroot.style.setProperty("--cor-secundaria-lighter", corSecundariaLighter);
+dinamicroot.style.setProperty("--cor-secundaria-lightest", corSecundariaLightest);
 // Defina a variável de sombra CSS dinâmica com o valor calculado
 dinamicroot.style.setProperty("--sombra", corSombra);
