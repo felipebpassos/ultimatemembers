@@ -163,8 +163,8 @@
                             <div class="drop-area" id="dropApostilaEdit">
                                 Arraste e solte um arquivo aqui ou clique para fazer upload.
                                 <span id="apostilaInfoEdit"></span>
-                                <input type="file" id="apostilaEdit" style="width: 0; height:0; margin:0;" name="apostila"
-                                    accept=".pdf, .doc, application/x-rar-compressed">
+                                <input type="file" id="apostilaEdit" style="width: 0; height:0; margin:0;"
+                                    name="apostila" accept=".pdf, .doc, application/x-rar-compressed">
                             </div>
                         </div>
 
@@ -181,7 +181,8 @@
                             <div class="videos-box-header">
                                 <div class="pesquisar-2">
                                     <i class="fa fa-search"></i>
-                                    <input type="text" id="campoPesquisaEdit" name="pesquisa" placeholder="Pesquisar vídeo">
+                                    <input type="text" id="campoPesquisaEdit" name="pesquisa"
+                                        placeholder="Pesquisar vídeo">
                                 </div>
                                 <div class="botoes">
                                     <button class="btn-2" id="atualiza-videos-Edit" type="button">
@@ -229,10 +230,12 @@
             </svg>
         </div>
     </div>
-    <h3>Tem certeza que deseja excluir a aula?</h3>
-    <div class="btn-box">
-        <button class="btn-2" id="btn-deletar">Deletar</button>
-        <button class="btn-2" id="btn-cancelar">Cancelar</button>
+    <h3></h3>
+    <div id="confirmacao-form">
+        <div class="btn-box">
+            <button class="btn-2" id="btn-deletar">Deletar</button>
+            <button class="btn-2" id="btn-cancelar">Cancelar</button>
+        </div>
     </div>
 </div>
 

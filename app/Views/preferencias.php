@@ -58,38 +58,63 @@
                                 value="<?= $curso['nome'] ?>" required>
                         </div>
 
-                        <div class="campo">
-                            <div style="display:flex; align-items:center;">
-                                <div class="preview">
-                                    <img id="img-logo"
-                                        src="<?= !empty($curso['url_logo']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_logo']) : "http://localhost/ultimatemembers/public/img/logo-default.png" ?>"
-                                        alt="logo">
-                                </div>
-                                <div>
-                                    <label for="logo">Logo (Formatos aceitos: .png ou .jpeg):</label>
-                                    <input type="file" id="logo" name="logo" accept=".ico, .png">
-                                    <button type="button" class="btn-file"
-                                        onclick="document.getElementById('logo').click()">Escolher Arquivo</button>
-                                </div>
-                            </div>
+                        <!-- Checkbox "Permitir número para contato" -->
+                        <div class="mb-3 form-check" style="margin-bottom: 10px;">
+                            <input class="form-check-input" type="checkbox" id="permitir_contato"
+                                name="permitir_contato" onchange="mostrarNumeroContato()">
+                            <label class="form-check-label" for="permitir_contato">Permitir número para contato</label>
                         </div>
 
+                        <!-- Campo para número de contato -->
+                        <div class="campo" id="campo_numero_contato" style="margin-bottom: 30px;">
+                            <input class="campo-texto" type="text" id="numero_contato" name="numero_contato" placeholder="Número para contato (Whatsapp)" disabled>
+                        </div>
+
+                        <script>
+                            function mostrarNumeroContato() {
+                                var checkbox = document.getElementById('permitir_contato');
+                                var inputNumeroContato = document.getElementById('numero_contato');
+
+                                if (checkbox.checked) {
+                                    inputNumeroContato.required = true;
+                                    inputNumeroContato.disabled = false;
+                                } else {
+                                    inputNumeroContato.required = false;
+                                    inputNumeroContato.disabled = true;
+                                    inputNumeroContato.value = ''; // Limpa o valor quando oculta
+                                }
+                            }
+                        </script>
+
                         <div class="campo" style="margin-bottom: 30px;">
-                            <div style="display:flex; align-items:center;">
-
-                                <div class="preview">
-                                    <img id="img-favicon"
-                                        src="<?= !empty($curso['url_favicon']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_favicon']) : "http://localhost/ultimatemembers/public/img/favicon-default.png" ?>"
-                                        alt="favicon">
+                            <div style="display: flex;">
+                                <div style="margin-right: 20px;">
+                                    <label for="preview-logo" style="display:flex;">Logo <span class="info-span"
+                                            id="info-logo"><i class="fa-solid fa-info"></i>
+                                            <span class="legenda" style="width: 230px;">Formatos aceitos: .png ou
+                                                .jpeg</span></span></label>
+                                    <div class="preview" id="preview-logo">
+                                        <img id="img-logo"
+                                            src="<?= !empty($curso['url_logo']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_logo']) : "http://localhost/ultimatemembers/public/img/logo-default.png" ?>"
+                                            alt="logo">
+                                        <input type="file" id="logo" name="logo" accept=".ico, .png">
+                                        <button type="button" class="btn-file-1"
+                                            onclick="document.getElementById('logo').click()">+</button>
+                                    </div>
                                 </div>
-
                                 <div>
-                                    <label for="favicon">Favicon (Formato aceito: .ico):</label>
-                                    <input type="file" id="favicon" name="favicon" accept=".ico, .png">
-                                    <button type="button" class="btn-file"
-                                        onclick="document.getElementById('favicon').click()">Escolher Arquivo</button>
+                                    <label for="preview-favicon" style="display:flex;">Favicon <span class="info-span"
+                                            id="info-favicon"><i class="fa-solid fa-info"></i>
+                                            <span class="legenda" style="width: 160px;">Formato aceito: .ico</span></span></label>
+                                    <div class="preview" id="preview-favicon">
+                                        <img id="img-favicon"
+                                            src="<?= !empty($curso['url_favicon']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_favicon']) : "http://localhost/ultimatemembers/public/img/favicon-default.png" ?>"
+                                            alt="favicon">
+                                        <input type="file" id="favicon" name="favicon" accept=".ico, .png">
+                                        <button type="button" class="btn-file-1"
+                                            onclick="document.getElementById('favicon').click()">+</button>
+                                    </div>
                                 </div>
-
                             </div>
                         </div>
 
@@ -121,7 +146,7 @@
                                         .jpeg):</label>
                                     <input type="file" id="login-img-form" name="login-img-form"
                                         accept=".jpg, .png, .jpeg">
-                                    <button type="button" class="btn-file"
+                                    <button type="button" class="btn-file-2"
                                         onclick="document.getElementById('login-img-form').click()">Escolher
                                         Arquivo</button>
                                 </div>
@@ -288,7 +313,8 @@
                     <?php foreach ($integracoes as $integracao): ?>
                         <div class="integracao-instalada linha">
                             <div class="celula" style="flex: 0.4;">
-                                <img height="25" src="<?= $plataformas[$integracao['plataforma']]['img-mini'] ?>" alt="<?= $integracao['plataforma'] ?>">
+                                <img height="25" src="<?= $plataformas[$integracao['plataforma']]['img-mini'] ?>"
+                                    alt="<?= $integracao['plataforma'] ?>">
                             </div>
                             <div class="celula">
                                 <?= $integracao['nome'] ?>
@@ -300,8 +326,10 @@
                                 <?= ($integracao['tipo'] == 1 ? 'Vídeo' : 'Pagamento') ?>
                             </div>
                             <div class="celula" style="flex: 0.4;">
-                                <button class="editar-integracao" data-id="<?= $integracao['id'] ?>"><i class='fa-solid fa-pen-to-square'></i></button>
-                                <button class="delete-integracao" data-id="<?= $integracao['id'] ?>"><i class='fa-solid fa-trash-can'></i></button>
+                                <button class="editar-integracao" data-id="<?= $integracao['id'] ?>"><i
+                                        class='fa-solid fa-pen-to-square'></i></button>
+                                <button class="delete-integracao" data-id="<?= $integracao['id'] ?>"><i
+                                        class='fa-solid fa-trash-can'></i></button>
                             </div>
                         </div>
                     <?php endforeach; ?>

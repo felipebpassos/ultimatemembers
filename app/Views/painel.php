@@ -78,107 +78,116 @@
         </section>
     </div>
 
-    <?php if (!$adm) : ?>
-    <div id="proximos-passos" class="container slide-left"
-        style="padding: 0px !important; margin-left: 0px !important; margin-bottom:100px;">
-        <ul>
-            <li class="proximos-passos">
-                <div class="seçao">
-                    <div>
-                        <div class="seção-titulo">
-                            <i class="fa-solid fa-arrow-trend-up"></i>
-                            <h3 style="margin: 0px;">Próxima Aula</h3>
-                        </div>
-                        <a href="<?php echo $curso['url_principal']; ?>modulos/aula/01" class="seção-container"
-                            id="img-aula-2">
-                            <img class="imagem-aula" src="http://localhost/ultimatemembers/public/img/aula2.png"
-                                alt="Imagem da Aula">
-                        </a>
-                        <div class="info-aula" style="width: 300px !important">
-                            <div class="nome-aula" style="font-weight: bold;">
-                                <p>Aula 01 - Nome da aula</p>
-                            </div>
-                            <div class="descricao-aula">
-                                <p>Descrição: Lorem ipsum dolor sit amet, consectetur adipiscing
-                                    elit.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="quiz">
-                <div class="seçao">
-                    <div>
-                        <div class="seção-titulo">
-                            <i class="fa-solid fa-circle-question"></i>
-                            <h3 style="margin: 0px;">Quiz</h3>
-                        </div>
-                        <div class="seção-container" id="news"><span>Quiz</span></div>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </div>
-
-    <div class="container slide-left" style="margin: 0; margin-bottom:100px;">
-        <div class="row">
-            <div class="col-md-6" style="min-width: 500px;">
-                <div class="seção-titulo" style="margin-bottom: 15px;">
-                    <i class="fa-solid fa-chart-simple"></i>
-                    <h3>Progresso</h3>
-                </div>
-                <div class="lista-preferências">
-                    <ul class="barra">
-                        <li>
-                            <button class="aba" onclick="abrirAba(event, 'ativos')">Em Aberto</button>
-                        </li>
-                        <li>
-                            <button class="aba" onclick="abrirAba(event, 'finalizados')">Finalizados</button>
-                        </li>
-                    </ul>
-                </div>
-                <div id="ativos" class="content">
-                    <?php gerarModulosHtml($aulasConcluidas, $modulos, $aulasPorModulo, 'ativos'); ?>
-                </div>
-                <div id="finalizados" class="content">
-                    <?php gerarModulosHtml($aulasConcluidas, $modulos, $aulasPorModulo, 'finalizados'); ?>
-                </div>
-            </div>
-
-            <div class="col-md-6" style="min-width: 500px;">
-                <div class="seção-titulo" style="margin-bottom: 15px;">
-                    <i class="fa-regular fa-square-check"></i>
-                    <h3>Avaliações</h3>
-                </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col" style="width: 45%;">Prova</th>
-                            <th scope="col" style="width: 20%;">Prazo final</th>
-                            <th scope="col" style="width: 15%;"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="align-middle">Avaliação 1</td>
-                            <td class="align-middle">01/01/2024</td>
-                            <td class="align-middle"><a href="<?= $curso['url_principal'] ?>questionario"><button class="btn-3">Iniciar</button></a></td>
-                        </tr>
-                        <tr>
-                            <td class="align-middle">Avaliação 2</td>
-                            <td class="align-middle">02/01/2024</td>
-                            <td class="align-middle"><button class="btn-3">Iniciar</button></td>
-                        </tr>
-                        <tr>
-                            <td class="align-middle">Avaliação 3</td>
-                            <td class="align-middle">02/01/2024</td>
-                            <td class="align-middle"><button class="btn-3">Iniciar</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+    <!-- Seção de trilhas -->
+    <div class="banner-box">
+        <div class="seção-titulo slide-left" id="titulo-banner">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <h3 style="margin: 0px;">Trilhas</h3>
         </div>
     </div>
+
+    <?php if (!$adm): ?>
+        <div id="proximos-passos" class="container slide-left"
+            style="padding: 0px !important; margin-left: 0px !important; margin-bottom:100px;">
+            <ul>
+                <li class="proximos-passos">
+                    <div class="seçao">
+                        <div>
+                            <div class="seção-titulo">
+                                <i class="fa-solid fa-arrow-trend-up"></i>
+                                <h3 style="margin: 0px;">Próxima Aula</h3>
+                            </div>
+                            <a href="<?php echo $curso['url_principal']; ?>modulos/aula/01" class="seção-container"
+                                id="img-aula-2">
+                                <img class="imagem-aula" src="http://localhost/ultimatemembers/public/img/aula2.png"
+                                    alt="Imagem da Aula">
+                            </a>
+                            <div class="info-aula" style="width: 300px !important">
+                                <div class="nome-aula" style="font-weight: bold;">
+                                    <p>Aula 01 - Nome da aula</p>
+                                </div>
+                                <div class="descricao-aula">
+                                    <p>Descrição: Lorem ipsum dolor sit amet, consectetur adipiscing
+                                        elit.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="quiz">
+                    <div class="seçao">
+                        <div>
+                            <div class="seção-titulo">
+                                <i class="fa-solid fa-circle-question"></i>
+                                <h3 style="margin: 0px;">Quiz</h3>
+                            </div>
+                            <div class="seção-container" id="news"><span>Quiz</span></div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="container slide-left" style="margin: 0; margin-bottom:100px;">
+            <div class="row">
+                <div class="col-md-6" style="min-width: 500px;">
+                    <div class="seção-titulo" style="margin-bottom: 15px;">
+                        <i class="fa-solid fa-chart-simple"></i>
+                        <h3>Progresso</h3>
+                    </div>
+                    <div class="lista-preferências">
+                        <ul class="barra" style="border-bottom: solid 1px var(--cor-secundaria-lighter);">
+                            <li>
+                                <button class="aba" onclick="abrirAba(event, 'ativos')">Em Aberto</button>
+                            </li>
+                            <li>
+                                <button class="aba" onclick="abrirAba(event, 'finalizados')">Finalizados</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="ativos" class="content">
+                        <?php gerarModulosHtml($aulasConcluidas, $modulos, $aulasPorModulo, 'ativos'); ?>
+                    </div>
+                    <div id="finalizados" class="content">
+                        <?php gerarModulosHtml($aulasConcluidas, $modulos, $aulasPorModulo, 'finalizados'); ?>
+                    </div>
+                </div>
+
+                <div class="col-md-6" style="min-width: 500px;">
+                    <div class="seção-titulo" style="margin-bottom: 15px;">
+                        <i class="fa-regular fa-square-check"></i>
+                        <h3>Avaliações</h3>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="width: 45%;">Prova</th>
+                                <th scope="col" style="width: 20%;">Prazo final</th>
+                                <th scope="col" style="width: 15%;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="align-middle">Avaliação 1</td>
+                                <td class="align-middle">01/01/2024</td>
+                                <td class="align-middle"><a href="<?= $curso['url_principal'] ?>questionario"><button
+                                            class="btn-3">Iniciar</button></a></td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle">Avaliação 2</td>
+                                <td class="align-middle">02/01/2024</td>
+                                <td class="align-middle"><button class="btn-3">Iniciar</button></td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle">Avaliação 3</td>
+                                <td class="align-middle">02/01/2024</td>
+                                <td class="align-middle"><button class="btn-3">Iniciar</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     <?php endif; ?>
 
     <div class="banner-box lançamentos fade-in-slide-up">

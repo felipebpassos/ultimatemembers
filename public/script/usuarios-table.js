@@ -53,9 +53,12 @@ function buscarUsuarios() {
                                 <button class="delete-user" data-id="${usuario.id}"><i class='fa-solid fa-trash-can'></i></button>
                             </div>`);
 
+                const fotoPerfil = usuario.foto_caminho ? `http://localhost/ultimatemembers${usuario.foto_caminho}` : "http://localhost/ultimatemembers/public/img/default.png";
+
                 // Criar e preencher a informação adicional
                 const infoAdicional = $("<div class='info-adicional'></div>");
-                infoAdicional.append(`<ul>
+                infoAdicional.append(`<div class="foto-perfil-mini" style="margin: 10px auto; max-width: 70px; min-width: 70px; height: 70px;"><img class="perfil-img" src="${fotoPerfil}" alt="Foto de Perfil"></div>
+                                    <ul style="padding:0;">
                                         <li>Nome: ${usuario.nome}</li>
                                         <li>Permissão: ${permissao}</li>
                                         <li>Status: ${status}</li>

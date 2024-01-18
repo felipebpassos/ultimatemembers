@@ -1,6 +1,12 @@
 use reelsdecinema;
 
-drop table integracoes_api;
+drop table aulas_nao_finalizadas;
+
+select * from discussoes_likes;
+
+ALTER TABLE discussoes
+DROP FOREIGN KEY discussoes_ibfk_1,
+ADD FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE CASCADE;
 
 -- Adiciona as colunas à tabela aulas
 ALTER TABLE aulas
@@ -37,8 +43,8 @@ VALUES ('Instagram Empreendedor', '/uploads/cursos/logos/logo.png', 'http://loca
 INSERT INTO cursos (nome, url_logo, url_principal, fonte_id, infoprodutor_id)
 VALUES ('Reels de Cinema', '/uploads/cursos/logos/logo.png', 'http://localhost/reelsdecinema/', 1, 1);
 
-ALTER TABLE cursos
-ADD COLUMN banner_login VARCHAR(255);
+ALTER TABLE integracoes_api
+ADD COLUMN user_uri VARCHAR(100);
 
 SET SQL_SAFE_UPDATES = 1;
 
@@ -48,9 +54,11 @@ ALTER TABLE tags_forum
 ADD CONSTRAINT fk_tags_forum_curso
 FOREIGN KEY (id_curso) REFERENCES cursos(id);
 
-select * from aulas;
+select * from usuarios;
 
 select * from integracoes_api;
+
+DELETE FROM integracoes_api WHERE id = 5;
 
 INSERT INTO lancamentos (nome, capa, link_url)
 VALUES ('Reels de Cinema', './uploads/lançamentos/banners/lançamento01.png', 'http://localhost/reelsdecinema/');

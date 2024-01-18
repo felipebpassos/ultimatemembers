@@ -182,7 +182,7 @@ class painelController extends Controller
         $data['description'] = '';
         $data['styles'] = array('painel', 'header', 'search-bar', 'relatorios', 'preferencias');
         $data['scripts_head'] = array('abas', 'select');
-        $data['scripts_body'] = array('btn-selected', 'toggleSearch', 'menu-responsivo', 'simple_select', 'dropdown', 'usuarios-table', 'pop-ups', 'troca_img', 'colorPickr');
+        $data['scripts_body'] = array('btn-selected', 'toggleSearch', 'menu-responsivo', 'simple_select', 'dropdown', 'usuarios-table', 'pop-ups', 'troca_img', 'colorPickr', 'deletar-btn');
 
         // Carrega a view passando $_SESSION['usuario']
         $this->loadTemplates($template, $data, $usuario);

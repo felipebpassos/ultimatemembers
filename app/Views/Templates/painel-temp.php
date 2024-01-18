@@ -201,6 +201,7 @@
         ?>
 
     <!-- js files (body) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
     <script src="http://localhost/ultimatemembers/public/script/dinamic-color.js"></script>
     <?php
@@ -213,6 +214,7 @@
     <script src="http://localhost/ultimatemembers/public/script/menu-perfil-toggle.js"></script>
     <script src="http://localhost/ultimatemembers/public/script/notifications.js"></script>
     <script src="http://localhost/ultimatemembers/public/script/animated-circle.js"></script>
+    <script src="http://localhost/ultimatemembers/public/script/efeitos-sonoros.js"></script>
 
     <script>
 

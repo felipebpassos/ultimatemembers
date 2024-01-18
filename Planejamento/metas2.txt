@@ -8,6 +8,8 @@ deletar todos usuários
 fazer integração com outras plataformas
 deletar integração
 
+-Fazer trilhas
+-Banners e lançamentos dinâmicos
 -Fazer editor de texto funcionar
 -Fazer funcionar pesquisas
 -Fazer paginação onde necessitar
