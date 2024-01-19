@@ -39,14 +39,23 @@
                         <!-- Se for YouTube, exibir vídeo do YouTube com o ID fornecido -->
                         <iframe width="100%" height="500" src="https://www.youtube.com/embed/<?php echo $videoId; ?>"
                             frameborder="0" allowfullscreen></iframe>
+                    <?php elseif ($plataforma == 'vimeo'): ?>
+                        <?php
+                        // Remove "/videos/" da URL do Vimeo
+                        $vimeoVideoId = str_replace('/videos/', '', $videoId);
+                        ?>
+                        <!-- Se for Vimeo, exibir vídeo do Vimeo com o ID fornecido -->
+                        <iframe src="https://player.vimeo.com/video/<?php echo $vimeoVideoId; ?>" width="100%" height="500"
+                            frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
                     <?php else: ?>
-                        <!-- Se não for YouTube, exibir vídeo local -->
+                        <!-- Se não for YouTube nem Vimeo, exibir vídeo local -->
                         <video controls controlsList="nodownload">
                             <source src="<?php echo $video; ?>" type="video/mp4">
                             Seu navegador não suporta o elemento de vídeo.
                         </video>
                     <?php endif; ?>
                 </div>
+
 
                 <!-- Botões de opções da Aula -->
                 <div class="video-options">
@@ -107,9 +116,9 @@
                     <div class="opções-aula">
                         <?php if (!empty($apostila)): ?>
                             <a href="<?= $apostila ?>" download><button class="op-aula" id="apostila-btn">
-                                <i class="fa-regular fa-file-pdf"></i>
-                                <span class="legenda">Baixar material da aula</span>
-                            </button></a>
+                                    <i class="fa-regular fa-file-pdf"></i>
+                                    <span class="legenda">Baixar material da aula</span>
+                                </button></a>
                         <?php else: ?>
                             <button class="op-aula" id="apostila-div">
                                 <i class="fa-regular fa-file-pdf"></i>

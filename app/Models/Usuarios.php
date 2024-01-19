@@ -78,11 +78,31 @@ class Usuarios
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function verificarCredenciaisInstrutor($email, $senha, $id_curso)
+    {
+        // Acesso ao modelo "Usuarios"
+        $usuariosModel = new Usuarios();
+
+        // Obtém as credenciais do usuário
+        $credenciais = $usuariosModel->loginUsuario($email, $id_curso);
+
+        if ($credenciais) {
+            // Verifica se a senha fornecida corresponde à senha no banco de dados
+            if (password_verify($senha, $credenciais['senha'])) {
+                // Verifica se o usuário é um administrador e não é um instrutor
+                $usuarioInfo = $usuariosModel->getUsuario($email, $id_curso);
+                return $usuarioInfo['adm'] == 1 && $usuarioInfo['instrutor'] == 0;
+            }
+        }
+
+        return false; // Credenciais inválidas ou não é um administrador
+    }
+
     // Método para pegar dados do usuário para preparar para o login
     public function getUsuario($email, $id_curso)
     {
         $data = array();
-        $query = 'SELECT id, nome, email, whatsapp, nascimento, adm, data_matricula, ultima_visita, foto_caminho FROM usuarios WHERE email = :email AND id_curso = :id_curso LIMIT 1';
+        $query = 'SELECT id, nome, email, whatsapp, nascimento, adm, instrutor, data_matricula, ultima_visita, foto_caminho FROM usuarios WHERE email = :email AND id_curso = :id_curso LIMIT 1';
 
         $stmt = $this->con->prepare($query);
         $stmt->bindValue(':email', $email);
@@ -110,6 +130,41 @@ class Usuarios
         $stmt->bindValue(':nascimento', $nascimento);
 
         return $stmt->execute();
+    }
+
+    public function deletarUsuario($idUsuario)
+    {
+        // Inicie uma transação para garantir consistência nos dados
+        $this->con->beginTransaction();
+
+        try {
+            // Obtém o caminho da foto do perfil do usuário antes de excluir o registro
+            $caminhoFotoPerfil = $this->getCaminhoFotoPerfil($idUsuario);
+
+            // Exclui o usuário da tabela
+            $query = 'DELETE FROM usuarios WHERE id = :idUsuario';
+            $stmt = $this->con->prepare($query);
+            $stmt->bindValue(':idUsuario', $idUsuario);
+            $stmt->execute();
+
+            // Se o usuário foi excluído com sucesso, exclua também a foto do perfil
+            if ($stmt->rowCount() > 0) {
+                $this->excluirFotoPerfil($caminhoFotoPerfil);
+            }
+
+            // Confirme a transação
+            $this->con->commit();
+
+            return true; // Sucesso
+        } catch (PDOException $e) {
+            // Em caso de erro, reverta a transação
+            $this->con->rollback();
+
+            // Você pode adicionar um log de erro aqui se necessário
+            // Exemplo: error_log("Erro ao excluir usuário: " . $e->getMessage());
+
+            return false; // Erro
+        }
     }
 
     public function uploadFotoPerfil($file)

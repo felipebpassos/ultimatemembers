@@ -29,16 +29,20 @@
                     <div style="width: 90%; margin: auto;">
                         <div class="mb-3">
                             <label class="form-label" for="nomeAula">Título da Aula</label>
-                            <input class="form-control" type="text" id="nomeAula" name="nomeAula"
-                                placeholder="Digite o título da aula" required>
+                            <div class="campo-popup" style="width: 100%;">
+                                <input type="text" id="nomeAula" name="nomeAula" class="campo-input"
+                                    placeholder="Digite o título da aula" required>
+                            </div>
                         </div>
 
                         <input type="hidden" name="id_modulo" value="<?php echo $modulo['id']; ?>">
 
                         <div class="mb-3">
                             <label class="form-label" for="descricaoAula">Descrição da Aula (Opcional)</label>
-                            <textarea class="form-control" id="descricaoAula" name="descricaoAula"
-                                placeholder="Faça uma descrição ou resumo da aula (Opcional)"></textarea>
+                            <div class="campo-popup" style="width: 100%; min-height: 100px;">
+                                <textarea class="campo-input" id="descricaoAula" name="descricaoAula"
+                                    placeholder="Faça uma descrição ou resumo da aula (Opcional)"></textarea>
+                            </div>
                         </div>
 
                         <div class="mb-3">
@@ -233,7 +237,7 @@
     <h3></h3>
     <div id="confirmacao-form">
         <div class="btn-box">
-            <button class="btn-2" id="btn-deletar">Deletar</button>
+            <button class="btn-2 btn-deletar" id="btn-deletar">Deletar</button>
             <button class="btn-2" id="btn-cancelar">Cancelar</button>
         </div>
     </div>

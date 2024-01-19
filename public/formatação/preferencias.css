@@ -52,7 +52,7 @@ main {
 }
 
 .campo-texto::placeholder {
-    color: var(--cor-primaria-transparent); /* Substitua pelo código de cor desejado */
+    color: var(--cor-primaria-transparent);
 }
 
 #descricao_curso {
@@ -197,6 +197,7 @@ main {
 .tabela {
     display: flex;
     flex-direction: column;
+    margin-bottom: 30px;
 }
 
 .linha {
@@ -236,14 +237,15 @@ main {
     justify-content: end;
 }
 
-.celula button {
+.editar-selected-users, .celula button {
     margin-right: 20px;
     border: none;
     background-color: transparent;
     transition: all 1s ease;
+    color: var(--cor-primaria-dark);
 }
 
-.celula button i {
+.editar-selected-users i, .celula button i {
     color: var(--cor-primaria-dark);
 }
 

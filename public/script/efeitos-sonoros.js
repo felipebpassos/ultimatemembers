@@ -2,19 +2,19 @@ $(document).ready(function () {
     // Certifique-se de incluir este script após a inclusão da biblioteca Howler.js
 
     // Carregue o som
-    const hoverLineSound = new Howl({
+    const hoverQuiet = new Howl({
         src: ['http://localhost/ultimatemembers/public/sound/switch_click.mp3'], // Use o caminho absoluto para o arquivo de áudio
         volume: 0.02,
     });
 
     // Carregue o som
-    const hoverVideoSound = new Howl({
+    const hoverStrong = new Howl({
         src: ['http://localhost/ultimatemembers/public/sound/switch_click.mp3'], // Use o caminho absoluto para o arquivo de áudio
         volume: 0.1,
     });
 
     // Carregue o som
-    const selectVideoSound = new Howl({
+    const click = new Howl({
         src: ['http://localhost/ultimatemembers/public/sound/switch_click.mp3'], // Use o caminho absoluto para o arquivo de áudio
         volume: 1,
     });
@@ -23,7 +23,7 @@ $(document).ready(function () {
     $(document).on({
         mouseenter: function () {
             // Executa quando o mouse entra na div (hover)
-            hoverLineSound.play();
+            hoverQuiet.play();
         },
         mouseleave: function () {
             // Executa quando o mouse sai da div
@@ -35,7 +35,31 @@ $(document).ready(function () {
     $(document).on({
         mouseenter: function () {
             // Executa quando o mouse entra na div (hover)
-            hoverVideoSound.play();
+            hoverStrong.play();
+        },
+        mouseleave: function () {
+            // Executa quando o mouse sai da div
+            // Adicione lógica adicional se necessário
+        }
+    }, '.perfil-menu a');
+
+    // Use a delegação de eventos para lidar com o hover em elementos dinâmicos
+    $(document).on({
+        mouseenter: function () {
+            // Executa quando o mouse entra na div (hover)
+            hoverStrong.play();
+        },
+        mouseleave: function () {
+            // Executa quando o mouse sai da div
+            // Adicione lógica adicional se necessário
+        }
+    }, '.relatorio');
+
+    // Use a delegação de eventos para lidar com o hover em elementos dinâmicos
+    $(document).on({
+        mouseenter: function () {
+            // Executa quando o mouse entra na div (hover)
+            hoverStrong.play();
         },
         mouseleave: function () {
             // Executa quando o mouse sai da div
@@ -47,7 +71,7 @@ $(document).ready(function () {
     $(document).on({
         click: function () {
             // Executa quando o mouse entra na div (hover)
-            selectVideoSound.play();
+            click.play();
         },
     }, '.video');
 });

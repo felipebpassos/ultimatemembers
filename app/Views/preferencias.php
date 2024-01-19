@@ -67,7 +67,8 @@
 
                         <!-- Campo para número de contato -->
                         <div class="campo" id="campo_numero_contato" style="margin-bottom: 30px;">
-                            <input class="campo-texto" type="text" id="numero_contato" name="numero_contato" placeholder="Número para contato (Whatsapp)" disabled>
+                            <input class="campo-texto" type="text" id="numero_contato" name="numero_contato"
+                                placeholder="Número para contato (Whatsapp)" disabled>
                         </div>
 
                         <script>
@@ -105,7 +106,8 @@
                                 <div>
                                     <label for="preview-favicon" style="display:flex;">Favicon <span class="info-span"
                                             id="info-favicon"><i class="fa-solid fa-info"></i>
-                                            <span class="legenda" style="width: 160px;">Formato aceito: .ico</span></span></label>
+                                            <span class="legenda" style="width: 160px;">Formato aceito:
+                                                .ico</span></span></label>
                                     <div class="preview" id="preview-favicon">
                                         <img id="img-favicon"
                                             src="<?= !empty($curso['url_favicon']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_favicon']) : "http://localhost/ultimatemembers/public/img/favicon-default.png" ?>"
@@ -248,6 +250,9 @@
                 <div class="celula" id="opcoes"></div>
             </div>
         </div>
+
+        <div><button class="editar-selected-users" style="margin: 0;"><i
+                    class='fa-solid fa-trash-can'></i>Deletar selecionados</button></div>
 
     </section>
 

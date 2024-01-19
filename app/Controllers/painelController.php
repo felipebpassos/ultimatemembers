@@ -316,6 +316,45 @@ class painelController extends Controller
         echo json_encode($user);
     }
 
+    public function deletar_user()
+    {
+        // Verifica se o método enviado é POST
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['adminEmail']) || !isset($_POST['adminPassword'])) {
+            // Se não for POST, encerre a execução ou redirecione conforme necessário
+            die('Acesso não autorizado');
+        }
+
+        // Verifica se a variável obrigatória está definida
+        if (!isset($_POST['idUser'])) {
+            // Se o campo obrigatório não estiver definido, encerre a execução ou redirecione conforme necessário
+            die("ID do usuário não está definido");
+        }
+
+        // Carrega dados do usuário
+        $usuario = $this->usuario;
+
+        $this->sessao->autorizaAdm($usuario['adm'], $this->cursoInfo['url_principal']);
+
+        // Acesso ao modelo "Aulas"
+        $usuariosModel = new Usuarios();
+
+        // Captura o ID do usuário a ser excluído
+        $idUsuario = $_POST['idUser'];
+
+        // Chama a função para verificar credenciais do instrutor
+        if ($usuariosModel->verificarCredenciaisInstrutor($usuario['email'], $usuario['senha'], $this->curso)) {
+            // Se as credenciais do instrutor forem válidas, então proceda com a exclusão
+            $resultado = $usuariosModel->deletarUsuario($idUsuario);
+
+            // Retorna a resposta em formato JSON
+            header('Content-Type: application/json');
+            echo json_encode($resultado);
+        } else {
+            // Credenciais do instrutor inválidas
+            die('Credenciais do instrutor inválidas');
+        }
+    }
+
     public function edit_geral()
     {
         // Verifica se o formulário foi enviado via método POST

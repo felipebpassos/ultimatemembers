@@ -5,9 +5,11 @@ $(document).ready(function () {
         // Define o ID da aula no popup de confirmação.
         $('#confirmacao').data('id-aula', idAula);
 
+        $('#confirmacao-form').attr('action', url_principal + 'modulos/deletar_aula/');
+
         $('#confirmacao').show();
         $('#confirmacao h3').text('Tem certeza que deseja excluir a aula?');
-        $('header, main, footer, .video-intro-container').addClass('blur');
+        $('.scrollbar-container, header, main, footer, .video-intro-container').addClass('blur');
         $('body').css('overflow', 'hidden'); // Impede o scroll da página
     });
 
@@ -21,45 +23,62 @@ $(document).ready(function () {
 
         // Adiciona dinamicamente os campos de email e senha
         const emailField = $('<div class="campo-popup"> \
-                            <label for="adminEmail">E-mail de Administrador:</label> \
-                            <input type="email" id="adminEmail" class="campo-input" required> \
+                            <input type="email" id="adminEmail" name="adminEmail" class="campo-input" placeholder="E-mail de administrador" required> \
                         </div>');
 
         const passwordField = $('<div class="campo-popup"> \
-                                <label for="adminPassword">Senha de Administrador:</label> \
-                                <div class="input-group"> \
-                                    <input type="password" id="adminPassword" class="campo-input" required> \
-                                    <span class="olho" onclick="togglePasswordVisibility(\'adminPassword\', \'togglePassword\')"> \
-                                        <i class="fa-solid fa-eye-slash" id="togglePassword"></i> \
-                                    </span> \
-                                </div> \
+                                <input type="password" id="adminPassword" name="adminPassword" class="campo-input" placeholder="Senha" required> \
+                                <span class="olho" onclick="togglePasswordVisibility(\'adminPassword\', \'togglePassword\')"> \
+                                    <i class="fa-solid fa-eye-slash" id="togglePassword"></i> \
+                                </span> \
                             </div>');
 
-        const confirmButton = $('<button type="submit" class="btn-2">Confirmar Remoção</button>');
+        const confirmButton = $('<button type="submit" class="btn-2 btn-deletar">Deletar</button>');
         const cancelButton = $('<button type="button" class="btn-2" id="btn-cancelar">Cancelar</button>');
 
         // Adiciona os campos ao formulário
         $('#confirmacao-form').append(emailField, passwordField, confirmButton, cancelButton);
+        $('#confirmacao-form').attr('action', url_principal + 'painel/deletar_user/');
 
         $('#confirmacao').show();
         $('#confirmacao h3').text('Tem certeza que deseja remover usuário?');
-        $('header, main, footer, .video-intro-container').addClass('blur');
+        $('.scrollbar-container, header, main, footer, .video-intro-container').addClass('blur');
         $('body').css('overflow', 'hidden'); // Impede o scroll da página
     });
 
-    $('#btn-deletar').click(function () {
-        const idAula = $('#confirmacao').data('id-aula');
+    $('.popup').on('click', '.btn-deletar', function () {
+        const action = $('#confirmacao-form').attr('action'); // Obtém a ação do formulário
+        const formData = {};
+
+        // Obtem os campos do formulário
+        const emailField = $('#adminEmail');
+        const passwordField = $('#adminPassword');
+
+        // Verifica se os campos obrigatórios estão preenchidos
+        if (!emailField.val() || !passwordField.val()) {
+            // Campos obrigatórios não preenchidos, exibe uma mensagem de erro ou toma a ação apropriada
+            alert('É necessário a permissão de administrador. Por favor, forneça um email e senha.');
+            return; // Impede o envio do formulário
+        }
+
+        // Adiciona os dados do formulário ao objeto formData
+        $('#confirmacao-form input').each(function () {
+            formData[$(this).attr('id')] = $(this).val();
+        });
+
+        formData['idUser'] = $('#confirmacao').data('id-user');
+        formData['idAula'] = $('#confirmacao').data('id-aula');
 
         // Cria uma solicitação AJAX com jQuery.
         $.ajax({
             type: 'POST',
-            url: url_principal + 'modulos/deletar_aula/',
-            data: { idAula: idAula },
+            url: action,
+            data: formData,
             success: function (response) {
                 // A resposta do servidor foi recebida e processada com sucesso.
                 // Você pode adicionar aqui lógica para fechar o popup, atualizar a interface do usuário, etc.
                 $('#confirmacao').hide();
-                $('header, main, footer, .video-intro-container').removeClass('blur');
+                $('.scrollbar-container, header, main, footer, .video-intro-container').removeClass('blur');
                 $('body').css('overflow', 'auto'); // Restaura o scroll da página
 
                 console.log(response);
@@ -74,7 +93,14 @@ $(document).ready(function () {
     $('.popup').on('click', '#btn-cancelar', function () {
         // Fecha o popup de confirmação.
         $('#confirmacao').hide();
-        $('header, main, footer, .video-intro-container').removeClass('blur');
+        $('.scrollbar-container, header, main, footer, .video-intro-container').removeClass('blur');
+        $('body').css('overflow', 'auto'); // Restaura o scroll da página
+    });
+
+    $('.popup').on('click', '#closeDelPopup', function () {
+        // Fecha o popup de confirmação.
+        $('#confirmacao').hide();
+        $('.scrollbar-container, header, main, footer, .video-intro-container').removeClass('blur');
         $('body').css('overflow', 'auto'); // Restaura o scroll da página
     });
 });

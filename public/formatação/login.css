@@ -113,7 +113,7 @@ button {
 .campo input:focus {
     border: 1px solid var(--cor-secundaria-lighter);
     transition: outline 0.3s ease-in-out;
-    outline: 4px solid var(--cor-primaria-transparent-3);
+    outline: 4px solid var(--cor-primaria-transparent-3)
 }
 
 .olho {

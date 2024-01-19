@@ -1,6 +1,6 @@
 .drop-area {
     font-size: 16px;
-    border: 3px dashed var(--cor-primaria);
+    border: 3px dashed var(--cor-secundaria-light);
     padding: 40px 20px;
     margin-bottom: 30px;
     cursor: pointer;
