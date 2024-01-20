@@ -303,7 +303,6 @@
     </div>
 </div>
 
-
 <!-- Formulário para adicionar módulo -->
 <div id="add-modulo-form" class="popup">
     <div class="popup-content">
@@ -383,7 +382,7 @@
                     accept="video/*">
             </div>
 
-            <button class="btn-2" type="submit" style="margin: auto; margin-top: 40px;">Adicionar Módulo</button>
+            <button class="btn-2" type="submit" style="margin: auto; margin-top: 40px;">Criar Módulo</button>
         </form>
     </div>
 </div>
@@ -470,6 +469,146 @@
             </div>
 
             <button class="btn-2" type="submit" style="margin: auto; margin-top: 40px;">Editar Módulo</button>
+        </form>
+    </div>
+</div>
+
+<!-- Formulário para editar trilhas -->
+<div id="trilhas-list" class="popup">
+    <div class="popup-content">
+
+        <div class="close-container">
+            <div class="close" id="closePopupTrilhas" onmouseover="startAnimation()" onmouseout="resetAnimation()">
+                <svg class="close-ring" width="51" height="51">
+                    <circle class="close-ring__circle" id="closeCircle" stroke="var(--cor-primaria-light)"
+                        stroke-width="2" fill="transparent" r="23" cx="25" cy="25" />
+                    <circle class="close-ring__circle-full" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2"
+                        fill="transparent" r="23" cx="25" cy="25" />
+                </svg>
+                <svg class="x" viewBox="0 0 12 12" style="height: 12px; width: 12px;">
+                    <path stroke="rgb(180, 180, 180)" fill="rgb(180, 180, 180)"
+                        d="M4.674 6L.344 1.05A.5.5 0 0 1 1.05.343L6 4.674l4.95-4.33a.5.5 0 0 1 .707.706L7.326 6l4.33 4.95a.5.5 0 0 1-.706.707L6 7.326l-4.95 4.33a.5.5 0 0 1-.707-.706L4.674 6z">
+                    </path>
+                </svg>
+            </div>
+        </div>
+
+        <h2 style="margin: auto; font-weight: bold; width:fit-content;">Trilhas</h2>
+
+        <ul class="trilhas-list">
+
+            <?php
+            if (isset($trilhas) && !empty($trilhas)) {
+
+                foreach ($trilhas as $trilha) {
+                    $id = $trilha['id'];
+
+                    if ($id >= 0 && $id <= 9) {
+                        $formattedId = sprintf("0%d", $id); // Formata o ID para 0X (sendo X o ID)
+                    } else {
+                        $formattedId = $id; // Mantém o ID como está se não estiver entre 0 e 9
+                    }
+                    echo '<li><span>' . $formattedId . ' - ' . $trilha['nome'] . '</span>
+                    <div class="op-modulo">
+                        <button class="editar-trilha" id="editar-trilha" data-id="' . $id . '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
+                        <button class="delete-trilha" id="delete-trilha" data-id="' . $id . '"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>
+                    </div> 
+                    </li>';
+                }
+            } else {
+                // Caso a variável de sessão 'modulos' não exista ou esteja vazia
+                echo 'Nenhuma trilha criada.';
+            }
+            ?>
+
+        </ul>
+
+        <button class="btn-2" id="add-trilha" style="margin:auto;">Nova Trilha</button>
+
+    </div>
+</div>
+
+<!-- Formulário para adicionar trilha -->
+<div id="add-trilha-form" class="popup">
+    <div class="popup-content">
+
+        <div class="close-container">
+            <div class="close" id="closePopupTrilha" onmouseover="startAnimation()" onmouseout="resetAnimation()">
+                <svg class="close-ring" width="51" height="51">
+                    <circle class="close-ring__circle" id="closeCircle" stroke="var(--cor-primaria-light)"
+                        stroke-width="2" fill="transparent" r="23" cx="25" cy="25" />
+                    <circle class="close-ring__circle-full" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2"
+                        fill="transparent" r="23" cx="25" cy="25" />
+                </svg>
+                <svg class="x" viewBox="0 0 12 12" style="height: 12px; width: 12px;">
+                    <path stroke="rgb(180, 180, 180)" fill="rgb(180, 180, 180)"
+                        d="M4.674 6L.344 1.05A.5.5 0 0 1 1.05.343L6 4.674l4.95-4.33a.5.5 0 0 1 .707.706L7.326 6l4.33 4.95a.5.5 0 0 1-.706.707L6 7.326l-4.95 4.33a.5.5 0 0 1-.707-.706L4.674 6z">
+                    </path>
+                </svg>
+            </div>
+        </div>
+
+        <h2 style="margin: auto; font-weight: bold; width:fit-content;">Nova Trilha</h2>
+
+        <form id="trilhaFormAdd" action="<?php echo $curso['url_principal']; ?>modulos/nova_trilha/" method="POST">
+
+            <div style="width: 600px; margin: auto;">
+
+                <div class="mb-3">
+                    <label class="form-label" for="nomeTrilha">Nome da Trilha</label>
+                    <div class="campo-popup" style="width: 100%;">
+                        <input type="text" id="nomeTrilha" name="nomeTrilha" class="campo-input"
+                            placeholder="Digite o nome da trilha" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="descricaoTrilha">Descrição da Trilha (Opcional)</label>
+                    <div class="campo-popup" style="width: 100%; min-height: 100px;">
+                        <textarea class="campo-input" id="descricaoTrilha" name="descricaoTrilha"
+                            placeholder="Faça uma breve descrição sobre a trilha (Opcional)"></textarea>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div style="margin: 30px auto; margin-top: 0; width: 100%;">
+                        <label class="form-label" for="videos-box">Selecione os módulos</label>
+                        <div class="trilha-modulos-box">
+                            <ul class="trilha-modulos">
+                                <?php
+                                if (isset($modulos) && !empty($modulos)) {
+
+                                    foreach ($modulos as $modulo) {
+                                        $id = $modulo['id'];
+
+                                        if ($id >= 0 && $id <= 9) {
+                                            $formattedId = sprintf("0%d", $id); // Formata o ID para 0X (sendo X o ID)
+                                        } else {
+                                            $formattedId = $id; // Mantém o ID como está se não estiver entre 0 e 9
+                                        }
+                                        echo '<li><a href="' . $curso['url_principal'] . 'modulos/modulo/' . $formattedId . '" target="_blank">' . $modulo['nome'] . '</a>
+                                                    <div class="op-modulo">
+                                                        <label class="checkbox" style="margin-right:10px;" data-id="' . $id . '">
+                                                            <input type="checkbox" name="modulos_selecionados[]" value="' . $id . '">
+                                                            <div class="checkmark"><i class="fa-solid fa-check"></i></div>
+                                                        </label>
+                                                    </div> 
+                                        </li>';
+                                    }
+                                } else {
+                                    // Caso a variável de sessão 'modulos' não exista ou esteja vazia
+                                    echo 'Nenhum módulo criado.';
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button class="btn-2" type="submit" style="margin: auto; margin-top: 40px;">Criar Trilha</button>
         </form>
     </div>
 </div>

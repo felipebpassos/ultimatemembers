@@ -40,7 +40,6 @@
         echo '<script src="http://localhost/ultimatemembers/public/script/' . $script . '.js"></script>';
     }
     ?>
-    <script src="http://localhost/ultimatemembers/public/script/header-effect.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
@@ -209,6 +208,7 @@
         echo '<script src="http://localhost/ultimatemembers/public/script/' . $script . '.js"></script>';
     }
     ?>
+    <script src="http://localhost/ultimatemembers/public/script/header-effect.js"></script>
     <script src="http://localhost/ultimatemembers/public/script/loading.js"></script>
     <script src="http://localhost/ultimatemembers/public/script/slide-element-left.js"></script>
     <script src="http://localhost/ultimatemembers/public/script/menu-perfil-toggle.js"></script>

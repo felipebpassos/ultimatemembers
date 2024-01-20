@@ -2,7 +2,7 @@ use reelsdecinema;
 
 drop table aulas_nao_finalizadas;
 
-select * from discussoes_likes;
+select * from trilhas_modulos;
 
 ALTER TABLE discussoes
 DROP FOREIGN KEY discussoes_ibfk_1,
@@ -272,5 +272,23 @@ CREATE TABLE integracoes_api (
     curso_id INT NOT NULL,
     FOREIGN KEY (curso_id) REFERENCES cursos(id) 
 ) CHARSET=utf8;
+
+CREATE TABLE trilhas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome_trilha VARCHAR(50) NOT NULL,
+    descricao_trilha TEXT,
+    id_curso INT NOT NULL,
+    FOREIGN KEY (id_curso) REFERENCES cursos(id) ON DELETE CASCADE
+) CHARSET=utf8;
+
+CREATE TABLE trilhas_modulos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_trilha INT,
+    id_modulo INT,
+    FOREIGN KEY (id_trilha) REFERENCES trilhas(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_modulo) REFERENCES modulos(id) ON DELETE CASCADE
+) CHARSET=utf8;
+
+
 
 

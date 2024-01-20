@@ -358,18 +358,21 @@ class modulosController extends Controller
                 } else {
 
                     print_r('Erro ao editar Módulo');
+                    exit;
 
                 }
 
             } else {
 
                 print_r('Dados do Módulo não enviados');
+                exit;
 
             }
 
         } else {
 
             print_r('Dados do Módulo não enviados');
+            exit;
 
         }
 
@@ -504,6 +507,7 @@ class modulosController extends Controller
             } else {
 
                 print_r('Dados da Nova Aula não enviados');
+                exit;
 
             }
 
@@ -536,18 +540,21 @@ class modulosController extends Controller
                 } else {
 
                     print_r('Erro ao deletar Aula');
+                    exit;
 
                 }
 
             } else {
 
                 print_r('ID da aula não foi enviado');
+                exit;
 
             }
 
         } else {
 
             print_r('Dados não foram enviados');
+            exit;
 
         }
 
@@ -725,5 +732,42 @@ class modulosController extends Controller
         }
     }
 
+    public function nova_trilha()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+            if (isset($_POST["nomeTrilha"]) && isset($_POST["descricaoTrilha"]) && isset($_POST["modulos_selecionados"])) {
+
+                $nome_trilha = $_POST["nomeTrilha"];
+                $descricao_trilha = $_POST["descricaoTrilha"];
+                $modulos_selecionados = $_POST["modulos_selecionados"]; // array com os IDs dos módulos selecionados
+
+                // Acesso ao modelo "Trilhas"
+                $trilhasModel = new Trilhas();
+
+                $result = $trilhasModel->setTrilha($nome_trilha, $descricao_trilha, $modulos_selecionados, $this->curso);
+
+                if ($result) {
+
+                    print_r('Trilha criada com sucesso.');
+                    header("Location: " . $this->cursoInfo['url_principal'] . "painel/");
+                    exit(); // Certifica-se de que o script seja encerrado após o redirecionamento
+
+                } else {
+
+                    print_r('Erro ao criar Trilha');
+                    exit;
+
+                }
+
+            } else {
+
+                print_r('Dados da Trilha não enviados');
+                exit;
+
+            }
+
+        }
+    }
 
 }

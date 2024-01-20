@@ -138,6 +138,29 @@ $('#closePopupModuloEdit').click(function () {
     $('#modulos-list').show();
 });
 
+//TRILHAS
+
+$('#editar-trilhas').click(function () {
+    exibirFormulario('trilhas'); // Função para exibir o formulário
+});
+
+// Quando o botão de fechar for clicado
+$('#closePopupTrilhas').click(function () {
+    fecharFormulario('trilhas');
+});
+
+// Quando o botão de adicionar trilha for clicado
+$('#add-trilha').click(function () {
+    $('#trilhas-list').hide();
+    $('#add-trilha-form').show(); // Exibir o formulário
+});
+
+// Quando o botão de fechar for clicado
+$('#closePopupTrilha').click(function () {
+    $('#add-trilha-form').hide();
+    $('#trilhas-list').show();
+});
+
 //USUÁRIOS
 
 // Quando o botão de adicionar aula for clicado
@@ -238,6 +261,8 @@ function exibirFormulario(option) {
         $('#edit').show();
     } else if (option === 'modulos') {
         $('#modulos-list').show();
+    } else if (option === 'trilhas') {
+        $('#trilhas-list').show();
     } else if (option === 'add-user') {
         $('#add-usuario').show();
     } else if (option === 'edit-user') {
@@ -264,6 +289,8 @@ function fecharFormulario(option) {
         $('#edit').hide();
     } else if (option === 'modulos') {
         $('#modulos-list').hide();
+    } else if (option === 'trilhas') {
+        $('#trilhas-list').hide();
     } else if (option === 'add-user') {
         $('#add-usuario').hide();
     } else if (option === 'edit-user') {

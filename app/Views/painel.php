@@ -83,6 +83,11 @@
         <div class="seção-titulo slide-left" id="titulo-banner">
             <i class="fa-solid fa-graduation-cap"></i>
             <h3 style="margin: 0px;">Trilhas</h3>
+            <?php
+            if ($adm == 1) {
+                echo '<button class="editar" id="editar-trilhas"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>';
+            }
+            ?>
         </div>
     </div>
 
