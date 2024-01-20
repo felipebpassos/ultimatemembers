@@ -13,13 +13,12 @@ function isElementInViewport(el) {
 function handleScrollAnimations() {
     var elements = document.querySelectorAll('.fade-in-slide-up');
     elements.forEach(function(element) {
-        if (isElementInViewport(element)) {
+        if (!element.classList.contains('ativo') && isElementInViewport(element)) {
+            // Adicione a classe 'ativo' apenas se ela ainda não estiver presente
             element.classList.add('ativo');
-        } else {
-            element.classList.remove('ativo');
         }
     });
 }
 
 document.querySelector('.scrollbar-container').addEventListener('scroll', handleScrollAnimations);
-document.querySelector('.scrollbar-container').addEventListener('load', handleScrollAnimations);
+document.addEventListener('DOMContentLoaded', handleScrollAnimations);

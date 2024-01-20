@@ -28,36 +28,46 @@ class painelController extends Controller
 
     public function index()
     {
-
         // Acesso ao modelo "Modulos"
         $modulosModel = new Modulos();
 
         // Acesso ao modelo "Aulas"
         $aulasModel = new Aulas();
 
+        // Acesso ao modelo "Trilhas"
+        $trilhasModel = new Trilhas();
+
         // Carrega dados do usuário
         $usuario = $this->usuario;
 
-        //Busca no banco de dados pelo módulo
+        // Busca no banco de dados pelos módulos
         $modulos = $modulosModel->getModulos($this->curso);
+
+        // Busca por trilhas e seus módulos associados
+        $trilhas = $trilhasModel->getTrilhas($this->curso);
+
+        foreach ($trilhas as &$trilha) {
+            $trilha['modulos'] = $trilhasModel->getModulosDaTrilha($trilha['id']);
+        }
 
         $aulasPorModulo = $modulosModel->getAulasPorModulo($this->curso);
 
         $lancamentos = $this->cursosModel->getLancamentos();
 
-        //Busca aulas concluidas pelo usuário
+        // Busca aulas concluídas pelo usuário
         $aulasConcluidas = $aulasModel->getAulasConcluidas($usuario['id'], $this->curso);
 
-        //Armazena em variável de sessão
+        // Armazena em variável de sessão
         $data['modulos'] = $modulos;
+        $data['trilhas'] = $trilhas;
         $data['aulasPorModulo'] = $aulasPorModulo;
         $data['aulasConcluidas'] = $aulasConcluidas;
         $data['lancamentos'] = $lancamentos;
 
-        //set template
+        // set template
         $template = 'painel-temp';
 
-        //set page data
+        // set page data
         $data['curso'] = $this->cursoInfo;
         $data['view'] = 'painel';
         $data['title'] = $this->cursoInfo['nome'] . ' | Painel';
@@ -68,7 +78,6 @@ class painelController extends Controller
 
         // Carrega a view passando $_SESSION['usuario']
         $this->loadTemplates($template, $data, $usuario);
-
     }
 
     public function progresso()

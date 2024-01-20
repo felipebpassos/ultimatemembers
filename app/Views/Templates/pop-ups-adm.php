@@ -508,7 +508,7 @@
                     } else {
                         $formattedId = $id; // Mantém o ID como está se não estiver entre 0 e 9
                     }
-                    echo '<li><span>' . $formattedId . ' - ' . $trilha['nome'] . '</span>
+                    echo '<li><span>' . $formattedId . ' - ' . $trilha['nome_trilha'] . '</span>
                     <div class="op-modulo">
                         <button class="editar-trilha" id="editar-trilha" data-id="' . $id . '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
                         <button class="delete-trilha" id="delete-trilha" data-id="' . $id . '"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>

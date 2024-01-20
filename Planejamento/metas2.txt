@@ -13,12 +13,12 @@ deletar integração
 -Fazer funcionar pesquisas
 -Fazer paginação onde necessitar
 -Fazer sistema de avaliações (questionários)
-
-
--Fazer funcionar simple e multiple selects onde tiver
 -Fazer sistema de salvar aulas e publicações
 -Deletar e reportar comentários
 -Fazer gameficação
+
+-Fazer funcionar simple e multiple selects onde tiver
+
 
 -Revisar segurança
 -Responsividade de todas as páginas

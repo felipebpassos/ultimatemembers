@@ -79,8 +79,8 @@
     </div>
 
     <!-- Seção de trilhas -->
-    <div class="banner-box">
-        <div class="seção-titulo slide-left" id="titulo-banner">
+    <div class="banner-box" style="padding-top: 60px; margin-bottom: 70px;">
+        <div class="seção-titulo fade-in-slide-up" id="titulo-banner">
             <i class="fa-solid fa-graduation-cap"></i>
             <h3 style="margin: 0px;">Trilhas</h3>
             <?php
@@ -89,6 +89,39 @@
             }
             ?>
         </div>
+        <?php
+        if (isset($trilhas) && !empty($trilhas)) {
+            foreach ($trilhas as $trilha) {
+                echo '<h4 class="fade-in-slide-up" style="margin: 0px; margin-bottom: 8px;">' . $trilha['nome_trilha'] . '</h4>';
+                echo '<p class="fade-in-slide-up" style="margin-bottom: 50px;">' . $trilha['descricao_trilha'] . '</p>';
+
+                // Agora, para cada trilha, exiba um carrossel de banners de módulos associados
+                echo '<div class="banner-container fade-in-slide-up">';
+                echo '<div class="banners">';
+
+                // Exibir banners dos módulos associados à trilha
+                foreach ($trilha['modulos'] as $modulo) {
+                    $id = $modulo['id'];
+                    $banner = !empty($modulo['banner']) ? str_replace("./", "http://localhost/ultimatemembers/", $modulo['banner']) : "http://localhost/ultimatemembers/public/img/video-default.png";
+
+                    if ($id >= 0 && $id <= 9) {
+                        $formattedId = sprintf("0%d", $id); // Formata o ID para 0X (sendo X o ID)
+                    } else {
+                        $formattedId = $id; // Mantém o ID como está se não estiver entre 0 e 9
+                    }
+
+                    echo '<a class="banner" id="modulos" href="' . $curso['url_principal'] . 'modulos/modulo/' . $formattedId . '"><img
+                    src="' . $banner . '" alt="Módulo ' . $formattedId . '"></a>';
+                }
+
+                echo '</div>';
+                echo '</div>';
+            }
+        } else {
+            // Caso a variável de sessão 'trilhas' não exista ou esteja vazia
+            echo 'Nenhuma trilha disponível.';
+        }
+        ?>
     </div>
 
     <?php if (!$adm): ?>
