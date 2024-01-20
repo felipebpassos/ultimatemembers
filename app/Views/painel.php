@@ -92,11 +92,12 @@
         <?php
         if (isset($trilhas) && !empty($trilhas)) {
             foreach ($trilhas as $trilha) {
-                echo '<h4 class="fade-in-slide-up" style="margin: 0px; margin-bottom: 8px;">' . $trilha['nome_trilha'] . '</h4>';
-                echo '<p class="fade-in-slide-up" style="margin-bottom: 50px;">' . $trilha['descricao_trilha'] . '</p>';
+                echo '<h4 class="fade-in-slide-up" style="margin: 8px 10px; margin-top: 0;">' . $trilha['nome_trilha'] . '</h4>';
+                echo '<p class="fade-in-slide-up" style="margin-bottom: 50px; margin-left:10px;">' . $trilha['descricao_trilha'] . '</p>';
 
                 // Agora, para cada trilha, exiba um carrossel de banners de módulos associados
-                echo '<div class="banner-container fade-in-slide-up">';
+                echo '<section class="banner-section fade-in-slide-up">';
+                echo '<div class="banner-container">';
                 echo '<div class="banners">';
 
                 // Exibir banners dos módulos associados à trilha
@@ -116,6 +117,7 @@
 
                 echo '</div>';
                 echo '</div>';
+                echo '</section>';
             }
         } else {
             // Caso a variável de sessão 'trilhas' não exista ou esteja vazia
