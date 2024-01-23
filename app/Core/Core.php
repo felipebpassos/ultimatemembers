@@ -14,7 +14,12 @@ class Core
     {
         // Controlador e o método padrão
         // Default controller and method
-        $controller = 'homeController';
+        if (!isset($_GET['curso'])) {
+            $controller = 'homeController';
+        } else {
+            $controller = 'loginController';
+        }
+        
         $method = 'index';
         $parameters = array();
 

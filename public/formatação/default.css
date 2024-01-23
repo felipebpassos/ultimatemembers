@@ -241,18 +241,6 @@ body {
     color: var(--cor-primaria-dark);
 }
 
-label,
-span,
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    color: var(--cor-primaria-dark);
-}
-
 .logo {
     margin-right: 50px;
     margin-top: -3px;
@@ -557,7 +545,8 @@ h6 {
 }
 
 #info-logo:hover .legenda,
-#info-favicon:hover .legenda {
+#info-favicon:hover .legenda,
+#info-contato:hover .legenda {
     display: block;
     top: 0;
     left: 200%;

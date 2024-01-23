@@ -2,29 +2,14 @@
 
 Class homeController extends Controller {
 
-    public function index() {
-
-        $sessao = new Sessao();
-
-        $cursosModel = new Cursos();
-
-        $curso = $sessao->verificaCurso();
-
-        $cursoInfo = $cursosModel->getCurso($curso);
-
-        session_name($cursoInfo['dir_name']);
-        session_start();
-
-        $data['curso'] = $cursoInfo;
-
-        $sessao->verificaLogin($cursoInfo['url_principal']);
+    public function index() {        
 
         //set template
         $template = 'home';
 
         //set page data
         $data['view'] = '';
-        $data['title'] = $cursoInfo['nome'];
+        $data['title'] = 'Ultimate Members | Plataforma de membros mais completa e moderna do Brasil';
         $data['description'] = 'Descrição do curso';
         $data['styles'] = array('footer', 'styles');
         $data['scripts_head'] = array('accordion-pre-set');

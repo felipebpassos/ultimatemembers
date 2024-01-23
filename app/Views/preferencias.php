@@ -103,7 +103,7 @@
                                             onclick="document.getElementById('logo').click()">+</button>
                                     </div>
                                 </div>
-                                <div>
+                                <div style="margin-right: 20px;">
                                     <label for="preview-favicon" style="display:flex;">Favicon <span class="info-span"
                                             id="info-favicon"><i class="fa-solid fa-info"></i>
                                             <span class="legenda" style="width: 160px;">Formato aceito:
@@ -115,6 +115,20 @@
                                         <input type="file" id="favicon" name="favicon" accept=".ico, .png">
                                         <button type="button" class="btn-file-1"
                                             onclick="document.getElementById('favicon').click()">+</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="preview-contato" style="display:flex;">Contato <span class="info-span"
+                                            id="info-contato"><i class="fa-solid fa-info"></i>
+                                            <span class="legenda" style="width: 160px;">Formatos aceitos: .png ou
+                                                .jpeg</span></span></label>
+                                    <div class="preview" id="preview-contato">
+                                        <img id="img-contato"
+                                            src="<?= !empty($curso['url_favicon']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_favicon']) : "http://localhost/ultimatemembers/public/img/favicon-default.png" ?>"
+                                            alt="contato ícone">
+                                        <input type="file" id="contato" name="contato" accept=".ico, .png">
+                                        <button type="button" class="btn-file-1"
+                                            onclick="document.getElementById('contato').click()">+</button>
                                     </div>
                                 </div>
                             </div>

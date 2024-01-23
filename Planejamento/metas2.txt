@@ -7,7 +7,7 @@ deletar todos usuários
 fazer integração com outras plataformas
 deletar integração
 
--Fazer trilhas
+-Editar trilhas
 -Banners e lançamentos dinâmicos
 -Fazer editor de texto funcionar
 -Fazer funcionar pesquisas

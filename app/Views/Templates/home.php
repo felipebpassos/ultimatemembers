@@ -12,9 +12,8 @@
     <title>
         <?php echo $title; ?>
     </title>
-    
-    <?php $favicon = !empty($curso['url_favicon']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_favicon']) : "http://localhost/ultimatemembers/public/img/logo-default.png"; ?>
-    <link rel="icon" href="<?php echo $favicon; ?>">
+
+    <link rel="icon" href="http://localhost/ultimatemembers/public/img/logo-default.png">
 
     <!-- ... estilos ... -->
     <link rel="stylesheet" href="http://localhost/ultimatemembers/public/formatação/default.css">
@@ -33,12 +32,6 @@
     <link href="https://db.onlinewebfonts.com/c/d162a260eb6b9b288f54503ee22aa9ff?family=Quincy+CF+Regular"
         rel="stylesheet">
 
-    <script>
-        var url_principal = "<?php echo $curso['url_principal']; ?>";
-        var corTexto = "<?php echo $curso['cor_texto']; ?>";
-        var corFundo = "<?php echo $curso['cor_fundo']; ?>";
-    </script>
-
 </head>
 
 <body>
@@ -48,12 +41,23 @@
 
         <!-- Logo -->
         <div class="logo">
-            <a href="<?php echo $curso['url_principal']; ?>"></a>
+            <a href="http://localhost/ultimatemembers/">
+                <img src="http://localhost/ultimatemembers/public/img/ultimate-logo.png" alt="Ultimate Members logo">
+            </a>
         </div>
 
-        <!-- Botão para login -->
-        <a href="<?php echo $curso['url_principal']; ?>login/"><button class="btn-1"><i
-                    class="fa-solid fa-right-from-bracket"></i>Já sou aluno</button></a>
+        <nav>
+            <ul>
+                <li>Vantagens</li>
+                <li>Integrações</li>
+                <li>Planos</li>
+                <li>Blog</li>
+                <li>Ajuda</li>
+            </ul>
+        </nav>
+
+        <!-- Botão para compra -->
+        <a href="#"><button class="btn-3">Comece agora</button></a>
 
     </header>
 
@@ -61,39 +65,29 @@
     <main>
 
         <!-- Apresentação Principal -->
-        <div class="apresentação-principal">
-            <div class="container mt-5">
+        <section class="apresentação-principal">
+            <div class="container">
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="descrição">
-                            <h1>Descubra o Curso Online Perfeito Para Você</h1>
-                            <h3 style="margin-bottom: 30px;">Aprenda de forma prática e eficaz com nosso curso
-                                exclusivo. Adquira conhecimentos
-                                valiosos e conquiste seus objetivos. Inscreva-se agora e comece sua jornada de
-                                aprendizado.</h3>
-                            <a href="">Conheça todos os nossos planos</a>
-                        </div>
+                    <div class="col-md-6 mt-4">
+                        <h1>A <span style="color: var(--grey-lighter);">PLATAFORMA DE MEMBROS</span> MAIS MODERNA E
+                            COMPLETA DO MERCADO</h1>
+                        <p style="margin-bottom: 30px;">Impressione seus alunos com um ecossistema de aprendizado de alto padrão, altamente
+                            customizável, organizado e
+                            intuitivo, agregando valor ao seu infoproduto e aumentando suas vendas.</p>
+                        <p style="display: none;">Tudo isso com
+                            ferramentas que
+                            permitem gerir, avaliar e monitorar o desempenho e atividade dos seus alunos.</p>
+                        <!-- Botão para compra -->
+                        <a href="#"><button class="btn-3" style="padding: 15px 20px;">Conheça nossos planos</button></a>
                     </div>
-                    <div class="col-md-6" style="display:flex; justify-content:center;">
-                        <div class="matricula-box">
-                            <div class="matricula-title">Premium Plus+</div>
-                            <div class="box-txt-center-block" style="margin-top:-30px;">
-                                <h5>Tudo isso por apenas</h5>
-                                <div class="box-flex-full" style="color: #a52d2d; font-weight: bold;">
-                                    <p style="margin: 28px 10px 0px 0px;">12X</p>
-                                    <h1 style="font-family: 'Quincy CF Regular'; font-weight:bolder; font-size: 50px;">
-                                        R$ 19,78</h1>
-                                </div>
-                                <h7>OU À VISTA POR R$ 197,00</h7>
-                            </div>
-                            <a href="<?php echo $curso['url_principal']; ?>matricula/" class="btn-box"><button
-                                    class="btn-1" id="btn-matricula">Matricule-se</button></a>
-                            <p style="position: absolute; bottom: 20px;">Experimente por 7 dias</p>
-                        </div>
+                    <div class="col-md-6">
+                        <img width="100%" height="auto"
+                            src="http://localhost/ultimatemembers/public/img/notebook-layout.png"
+                            alt="Layout de área de membros moderno - Ultimate Members">
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Seção de Conteúdo -->
         <section class="container mt-5 fade-in-element" style="margin-bottom: 80px;">
@@ -365,7 +359,6 @@
     </footer>
 
     <!-- Bootstrap and Scripts -->
-    <script src="http://localhost/ultimatemembers/public/script/dinamic-color.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="http://localhost/ultimatemembers/public/script/accordion.js"></script>
     <script src="http://localhost/ultimatemembers/public/script/fade_in_element.js"></script>

@@ -79,7 +79,7 @@
     </div>
 
     <!-- Seção de trilhas -->
-    <div class="banner-box" style="padding-top: 60px; margin-bottom: 70px;">
+    <div class="banner-box" style="padding-top: 80px; margin-bottom: 80px;">
         <div class="seção-titulo fade-in-slide-up" id="titulo-banner">
             <i class="fa-solid fa-graduation-cap"></i>
             <h3 style="margin: 0px;">Trilhas</h3>
