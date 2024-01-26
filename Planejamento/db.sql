@@ -58,7 +58,7 @@ select * from usuarios;
 
 select * from integracoes_api;
 
-DELETE FROM integracoes_api WHERE id = 5;
+DELETE FROM integracoes_api WHERE id = 4;
 
 INSERT INTO lancamentos (nome, capa, link_url)
 VALUES ('Reels de Cinema', './uploads/lançamentos/banners/lançamento01.png', 'http://localhost/reelsdecinema/');

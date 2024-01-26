@@ -13,13 +13,13 @@
         <?php echo $title; ?>
     </title>
 
-    <link rel="icon" href="http://localhost/ultimatemembers/public/img/logo-default.png">
+    <link rel="icon" href="http://localhost/ultimatemembers/public/img/ultimate-logo-mini.ico">
 
     <!-- ... estilos ... -->
-    <link rel="stylesheet" href="http://localhost/ultimatemembers/public/formatação/default.css">
+    <link rel="stylesheet" href="http://localhost/ultimatemembers/public/styles/default.css">
     <?php
     foreach ($styles as $style) {
-        echo '<link rel="stylesheet" href="http://localhost/ultimatemembers/public/formatação/' . $style . '.css">' . PHP_EOL;
+        echo '<link rel="stylesheet" href="http://localhost/ultimatemembers/public/styles/' . $style . '.css">' . PHP_EOL;
     }
     ?>
 
@@ -34,7 +34,7 @@
 
 </head>
 
-<body>
+<body style="background-color: var(--cor-secundaria);">
 
     <!-- Cabeçalho -->
     <header>
@@ -68,17 +68,19 @@
         <section class="apresentação-principal">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6 mt-4">
-                        <h1>A <span style="color: var(--grey-lighter);">PLATAFORMA DE MEMBROS</span> MAIS MODERNA E
-                            COMPLETA DO MERCADO</h1>
-                        <p style="margin-bottom: 30px;">Impressione seus alunos com um ecossistema de aprendizado de alto padrão, altamente
-                            customizável, organizado e
+                    <div class="col-md-6 fade-in-element" style="margin-top:70px;">
+                        <h1>A <span style="color: var(--grey-lighter);">Plataforma de Membros</span> mais moderna e completa do mercado</h1>
+                        <p>Impressione seus alunos com um ecossistema de aprendizado de
+                            alto padrão, altamente
+                            personalizável, organizado e
                             intuitivo, agregando valor ao seu infoproduto e aumentando suas vendas.</p>
                         <p style="display: none;">Tudo isso com
                             ferramentas que
                             permitem gerir, avaliar e monitorar o desempenho e atividade dos seus alunos.</p>
                         <!-- Botão para compra -->
-                        <a href="#"><button class="btn-3" style="padding: 15px 20px;">Conheça nossos planos</button></a>
+                        <a href="#" style="display: block; width: fit-content;"><button class="btn-3" style="padding: 12px 22px;">Conheça nossos planos<i
+                                    class="fa-solid fa-arrow-right"
+                                    style="margin: 0px; margin-left: 10px;"></i></button></a>
                     </div>
                     <div class="col-md-6">
                         <img width="100%" height="auto"
@@ -94,8 +96,8 @@
             <div class="box-flex-full">
                 <div class="sessao-titulo">Conteúdo</div>
             </div>
-            <h2 class="text-center" style="margin-bottom: 80px;">O que você terá no
-                <span style="color: rgb(120, 1, 175); font-weight: bold;">Curso</span>?
+            <h2 class="text-center" style="margin-bottom: 80px; color: var(--grey-dark);">O que você terá no
+                <span style="color: var(--grey-light); font-weight: bold;">Curso</span>?
             </h2>
             <div class="row">
                 <div class="col-md-6" id="f1">
@@ -165,8 +167,8 @@
                 <div class="box-flex-full">
                     <div class="sessao-titulo">Vantagens</div>
                 </div>
-                <h2 class="text-center" style="margin-bottom: 60px;">Vantagens do
-                    <span style="color: rgb(120, 1, 175); font-weight: bold;">Curso</span>
+                <h2 class="text-center" style="margin-bottom: 60px; color: var(--grey-dark);">Vantagens do
+                    <span style="color: var(--grey-light); font-weight: bold;">Curso</span>
                 </h2>
 
                 <ul class="lista-vantagens">
@@ -210,8 +212,8 @@
                 <div class="box-flex-full">
                     <div class="sessao-titulo">Perguntas Frequentes</div>
                 </div>
-                <h2 style="width: 100%; text-align:center; margin-bottom: 50px;">Ficou alguma <span
-                        style="color: rgb(120, 1, 175); font-weight: bold;">dúvida</span>?</h2>
+                <h2 style="width: 100%; text-align:center; margin-bottom: 50px; color: var(--grey-dark);">Ficou alguma <span
+                        style="color: var(--grey-light); font-weight: bold;">dúvida</span>?</h2>
 
                 <ul id="lista-perguntas" class="accordion-1">
                     <div class="pergunta">
@@ -350,7 +352,7 @@
         <div class="bottom">
 
             <div class="copyright">
-                &copy; 2023, Pai do Rec | Desenvolvido por <a href="http://localhost/simplifyweb.com.br">Simplify
+                &copy; 2023, SimplifyWeb | Desenvolvido por <a href="http://localhost/simplifyweb.com.br">Simplify
                     Web</a>
             </div>
 

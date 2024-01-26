@@ -25,10 +25,10 @@ header("Cache-Control: no-cache, must-revalidate");
     <link rel="icon" href="<?php echo $favicon; ?>">
 
     <!-- ... estilos ... -->
-    <link rel="stylesheet" href="http://localhost/ultimatemembers/public/formatação/default.css">
+    <link rel="stylesheet" href="http://localhost/ultimatemembers/public/styles/default.css">
     <?php
     foreach ($styles as $style) {
-        echo '<link rel="stylesheet" href="http://localhost/ultimatemembers/public/formatação/' . $style . '.css">' . PHP_EOL;
+        echo '<link rel="stylesheet" href="http://localhost/ultimatemembers/public/styles/' . $style . '.css">' . PHP_EOL;
     }
     ?>
 

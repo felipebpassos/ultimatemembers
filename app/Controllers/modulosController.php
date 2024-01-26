@@ -490,6 +490,38 @@ class modulosController extends Controller
 
                 }
 
+                // Verifica se há foto de apostila fornecida
+                if (isset($_FILES['apostila']) && $_FILES['apostila']['error'] === UPLOAD_ERR_OK && !empty($_FILES['apostila'])) {
+
+                    $apostila = $aulasModel->uploadApostilaAula($_FILES['apostila'], $this->cursoInfo['dir_name']);
+
+                    if ($apostila) {
+
+                        // Obtém caminho antigo da apostila
+                        $apostilaAntiga = $aulasModel->getCaminhoApostila($idAula);
+
+                        $result = $aulasModel->updateApostilaAula($idAula, $apostila, $apostilaAntiga);
+
+                        if ($result) {
+
+                            print_r('Sucesso no upload');
+
+                        } else {
+
+                            print_r('Erro ao editar Aula');
+                            exit;
+
+                        }
+
+                    } else {
+
+                        print_r('Erro no upload');
+                        exit;
+
+                    }
+
+                }
+
                 // Salva dados da nova aula no banco de dados
                 $result = $aulasModel->updateAula($idAula, $nomeAula, $descricaoAula);
 

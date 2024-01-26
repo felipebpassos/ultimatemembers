@@ -1,10 +1,11 @@
 /* Importar a fonte Quincy CF */
 
 @import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,500&display=swap');
-@import 'http://localhost/ultimatemembers/public/formatação/variables.css';
+@import 'http://localhost/ultimatemembers/public/styles/variables.css';
 @import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 html {
     scroll-behavior: smooth;
@@ -501,11 +502,13 @@ body {
 
 .fade-in-element {
     opacity: 0;
-    transition: opacity 2.5s ease-in-out;
+    transition: all 2.5s ease-in-out;
+    transform: translateY(40px);
 }
 
 .fade-in {
     opacity: 1 !important;
+    transform: translateY(0);
 }
 
 #fundo-loader {
@@ -553,9 +556,26 @@ body {
     padding: 8px 15px;
 }
 
+.up-list,
+.down-list {
+    padding: 3px 8px;
+    border: none;
+    background-color: var(--cor-secundaria-lightest);
+    margin-right: 8px;
+    border-radius: 3px;
+}
+
+.up-list i,
+.down-list i {
+    margin: 0;
+    color: var(--cor-primaria-dark);
+}
+
 .editar,
 .editar-modulo,
-.delete-modulo {
+.editar-trilha,
+.delete-modulo,
+.delete-trilha {
     position: absolute;
     padding: 5px 10px;
     right: 20px;
@@ -567,14 +587,18 @@ body {
 
 .editar i,
 .editar-modulo i,
-.delete-modulo i {
+.editar-trilha i,
+.delete-modulo i,
+.delete-trilha i {
     margin-right: 0 !important;
     font-size: 22px !important;
 }
 
 .editar:hover,
 .editar-modulo:hover,
-.delete-modulo:hover {
+.editar-trilha:hover,
+.delete-modulo:hover,
+.delete-trilha:hover {
     box-shadow: none;
     transform: scale(1.1);
     /* Aumenta o tamanho do botão em 10% ao passar o mouse */
@@ -582,7 +606,9 @@ body {
 
 .editar:hover .legenda,
 .editar-modulo:hover .legenda,
-.delete-modulo:hover .legenda {
+.editar-trilha:hover .legenda,
+.delete-modulo:hover .legenda,
+.delete-trilha:hover .legenda {
     display: block;
     left: -130px;
     top: 25%;
@@ -925,24 +951,55 @@ body {
     font-weight: bold;
 }
 
+.list-header {
+    background-color: var(--cor-secundaria-light);
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    padding: 10px 20px;
+    padding-left: 0;
+    margin: 30px 50px;
+    margin-bottom: 0;
+    border-bottom: 2px solid var(--cor-secundaria);
+    font-weight: bold;
+    display: flex;
+}
+
 .modulos-list,
 .trilhas-list {
-    height: 70vh;
+    height: 65vh;
     overflow-y: auto;
-    border: 2px solid var(--cor-secundaria);
-    border-left-color: var(--cor-secundaria-lighter);
-    border-top-color: var(--cor-secundaria-lighter);
+    background-color: var(--cor-secundaria-light);
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
     padding: 0 10px;
-    margin: 30px 0;
+    padding-left: 0;
+    margin: 30px 50px;
+    margin-top: 0;
+}
+
+.modulos-list::-webkit-scrollbar,
+.trilhas-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modulos-list::-webkit-scrollbar-track,
+.trilhas-list::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.modulos-list::-webkit-scrollbar-thumb,
+.trilhas-list::-webkit-scrollbar-thumb {
+    background-color: var(--cor-secundaria-lightest);
+    border-radius: 0;
 }
 
 .modulos-list li,
 .trilhas-list li,
 .trilha-modulos li {
     padding: 20px 10px;
+    padding-left: 0;
     width: 100%;
     display: flex;
-    justify-content: space-between;
 }
 
 .modulos-list li a,
@@ -955,11 +1012,16 @@ body {
     color: var(--cor-primaria-light);
 }
 
-.op-modulo button {
+.indice-modulo, .indice-trilha {flex: 0.15; min-width: 50px; text-align: center;}
+.nome-modulo, .nome-trilha {flex: 1;}
+
+.op-modulo, .op-trilha {min-width: 160px;}
+
+.op-modulo button, .op-trilha button {
     position: unset;
 }
 
-.op-modulo button i {
+.op-modulo button i, .op-trilha button i {
     font-size: 16px !important;
 }
 

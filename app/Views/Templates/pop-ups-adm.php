@@ -139,8 +139,11 @@
 
                     <div style="width: 90%; margin: auto;">
                         <div class="mb-3">
-                            <label class="form-label" for="nomeAulaEdit">Nome da Aula</label>
-                            <input class="form-control" type="text" id="nomeAulaEdit" name="nomeAula" required>
+                            <label class="form-label" for="nomeAulaEdit">Título da Aula</label>
+                            <div class="campo-popup" style="width: 100%;">
+                                <input type="text" id="nomeAulaEdit" name="nomeAula" class="campo-input"
+                                    placeholder="Digite o título da aula" required>
+                            </div>
                         </div>
 
                         <input type="hidden" name="id_modulo" value="<?php echo $modulo['id']; ?>">
@@ -149,7 +152,10 @@
 
                         <div class="mb-3">
                             <label class="form-label" for="descricaoAulaEdit">Descrição da Aula (Opcional)</label>
-                            <textarea class="form-control" id="descricaoAulaEdit" name="descricaoAula"></textarea>
+                            <div class="campo-popup" style="width: 100%; min-height: 100px;">
+                                <textarea class="campo-input" id="descricaoAulaEdit" name="descricaoAula"
+                                    placeholder="Faça uma descrição ou resumo da aula (Opcional)"></textarea>
+                            </div>
                         </div>
 
                         <div class="mb-3">
@@ -265,6 +271,12 @@
 
         <h2 style="margin: auto; font-weight: bold; width:fit-content;">Módulos</h2>
 
+        <div class="list-header">
+            <span class="indice-modulo">Índice</span>
+            <span class="nome-modulo">Título</span>
+            <span class="op-modulo">Opções</span>
+        </div>
+
         <ul class="modulos-list">
 
             <?php
@@ -278,8 +290,10 @@
                     } else {
                         $formattedId = $id; // Mantém o ID como está se não estiver entre 0 e 9
                     }
-                    echo '<li><a href="' . $curso['url_principal'] . 'modulos/modulo/' . $formattedId . '">' . $formattedId . ' - ' . $modulo['nome'] . '</a>
+                    echo '<li><span class="indice-modulo">' . $formattedId . '</span><a class="nome-modulo" href="' . $curso['url_principal'] . 'modulos/modulo/' . $formattedId . '">' . $modulo['nome'] . '</a>
                     <div class="op-modulo">
+                        <button class="up-list" id="up-list" data-id="' . $id . '"><i class="fa-solid fa-caret-up"></i><span class="legenda">Subir</span></button>
+                        <button class="down-list" id="down-list" data-id="' . $id . '"><i class="fa-solid fa-caret-down"></i><span class="legenda">Descer</span></button>
                         <button class="editar-modulo" id="editar-modulo" data-id="' . $id . '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
                         <button class="delete-modulo" id="delete-modulo" data-id="' . $id . '"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>
                     </div> 
@@ -495,6 +509,12 @@
 
         <h2 style="margin: auto; font-weight: bold; width:fit-content;">Trilhas</h2>
 
+        <div class="list-header">
+            <span class="indice-trilha">Índice</span>
+            <span class="nome-trilha">Título</span>
+            <span class="op-trilha">Opções</span>
+        </div>
+
         <ul class="trilhas-list">
 
             <?php
@@ -508,8 +528,10 @@
                     } else {
                         $formattedId = $id; // Mantém o ID como está se não estiver entre 0 e 9
                     }
-                    echo '<li><span>' . $formattedId . ' - ' . $trilha['nome_trilha'] . '</span>
-                    <div class="op-modulo">
+                    echo '<li><span class="indice-trilha">' . $formattedId . '</span><span class="nome-trilha">' . $trilha['nome_trilha'] . '</span>
+                    <div class="op-trilha">
+                        <button class="up-list" id="up-list" data-id="' . $id . '"><i class="fa-solid fa-caret-up"></i><span class="legenda">Subir</span></button>
+                        <button class="down-list" id="down-list" data-id="' . $id . '"><i class="fa-solid fa-caret-down"></i><span class="legenda">Descer</span></button>
                         <button class="editar-trilha" id="editar-trilha" data-id="' . $id . '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
                         <button class="delete-trilha" id="delete-trilha" data-id="' . $id . '"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>
                     </div> 
