@@ -439,6 +439,33 @@ class Auth
         }
     }
 
+    public function deleteIntegracao($idIntegracao)
+    {
+        // Inicie uma transação para garantir consistência nos dados
+        $this->con->beginTransaction();
+
+        try {
+            // Consulta para excluir a integração
+            $sql = "DELETE FROM integracoes_api WHERE id = :idIntegracao";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindValue(':idIntegracao', $idIntegracao);
+            $stmt->execute();
+
+            // Confirme a transação
+            $this->con->commit();
+
+            return true; // Sucesso
+        } catch (PDOException $e) {
+            // Em caso de erro, reverta a transação
+            $this->con->rollback();
+
+            // Você pode adicionar um log de erro aqui se necessário
+            // Exemplo: error_log("Erro ao excluir integração: " . $e->getMessage());
+
+            return false; // Erro
+        }
+    }
+
     // Método para gerar um nome aleatório
     private function gerarNomeAleatorio($tamanho)
     {

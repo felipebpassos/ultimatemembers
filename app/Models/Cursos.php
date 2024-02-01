@@ -14,7 +14,7 @@ class Cursos
     public function getCurso($curso)
     {
         try {
-            $sql = "SELECT nome, dir_name, url_principal, cor_texto, cor_fundo, fonte_id, infoprodutor_id, url_logo, url_favicon, banner_login FROM cursos WHERE id = :curso";
+            $sql = "SELECT nome, dir_name, url_principal, cor_texto, cor_fundo, fonte_id, infoprodutor_id, url_logo, url_favicon, contato_ico, banner_login FROM cursos WHERE id = :curso";
             $stmt = $this->con->prepare($sql);
             $stmt->bindParam(':curso', $curso, PDO::PARAM_STR);
             $stmt->execute();
@@ -98,6 +98,10 @@ class Cursos
 
             $query = 'SELECT url_favicon FROM cursos WHERE id = :cursoId LIMIT 1';
 
+        } elseif ($file_type == 'contato_ico') {
+
+            $query = 'SELECT contato_ico FROM cursos WHERE id = :cursoId LIMIT 1';
+
         } elseif ($file_type == 'banner_login') {
 
             $query = 'SELECT banner_login FROM cursos WHERE id = :cursoId LIMIT 1';
@@ -131,6 +135,10 @@ class Cursos
             } elseif ($file_type == 'favicon') {
 
                 $sql = "UPDATE cursos SET url_favicon = :fileNovo WHERE id = :cursoId";
+
+            } elseif ($file_type == 'contato_ico') {
+
+                $sql = "UPDATE cursos SET contato_ico = :fileNovo WHERE id = :cursoId";
 
             } elseif ($file_type == 'banner_login') {
 

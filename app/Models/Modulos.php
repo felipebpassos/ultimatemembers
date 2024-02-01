@@ -255,4 +255,34 @@ class Modulos
         }
     }
 
+    public function deleteModulo($id_modulo)
+    {
+        // Primeiro, obtenha o banner associado a esse módulo
+        $banner = $this->getCaminhoBanner($id_modulo);
+
+        $aulasModel = new Aulas();
+
+        // Exclua todas as aulas associadas a esse módulo
+        $aulasPorModulo = $this->getAulasPorModulo($id_modulo);
+        foreach ($aulasPorModulo[$id_modulo] as $id_aula) {
+            $aulasModel->deleteAula($id_aula);
+        }
+
+        // Agora podemos excluir o módulo
+        $query = 'DELETE FROM modulos WHERE id = :id_modulo';
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':id_modulo', $id_modulo, PDO::PARAM_INT);
+        $deletedModulo = $stmt->execute();
+
+        if ($deletedModulo) {
+            // Se o módulo foi excluído com sucesso, agora podemos excluir o banner (se existir)
+            if (!empty($banner) && file_exists($banner)) {
+                unlink($banner);
+            }
+            return true;
+        }
+
+        return false;
+    }
+
 }

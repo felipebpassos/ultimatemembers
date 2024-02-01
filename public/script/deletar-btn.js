@@ -9,7 +9,52 @@ $(document).ready(function () {
 
         $('#confirmacao').show();
         $('#confirmacao h3').text('Tem certeza que deseja excluir a aula?');
-        $('.scrollbar-container, header, main, footer, .video-intro-container').addClass('blur');
+        $('.scrollbar-container, .whatsapp-button').addClass('blur');
+        $('body').css('overflow', 'hidden'); // Impede o scroll da página
+    });
+
+    // Lidar com a exclusão de um módulo
+    $('.modulos-list').on('click', '.delete-modulo', function () {
+        const idModulo = $(this).data('id');
+        // Define o ID do módulo no popup de confirmação.
+        $('#confirmacao').data('id-modulo', idModulo);
+
+        // Limpa os campos existentes antes de adicionar dinamicamente
+        $('#confirmacao-form').empty();
+
+        const confirmButton = $('<button type="submit" class="btn-2 btn-deletar">Deletar</button>');
+        const cancelButton = $('<button type="button" class="btn-2" id="btn-cancelar">Cancelar</button>');
+
+        // Adiciona os botões ao formulário
+        $('#confirmacao-form').append(confirmButton, cancelButton);
+        $('#confirmacao-form').attr('action', url_principal + 'modulos/deletar_modulo/');
+
+        $('#modulos-list').hide();
+        $('#confirmacao').show();
+        $('#confirmacao h3').text('Tem certeza que deseja excluir o módulo?');
+        $('.scrollbar-container, .whatsapp-button').addClass('blur');
+        $('body').css('overflow', 'hidden'); // Impede o scroll da página
+    });
+
+    // Lidar com a exclusão de uma integracao
+    $('.integracao-instalada').on('click', '.delete-integracao', function () {
+        const idIntegracao = $(this).data('id');
+        // Define o ID do módulo no popup de confirmação.
+        $('#confirmacao').data('id-integracao', idIntegracao);
+
+        // Limpa os campos existentes antes de adicionar dinamicamente
+        $('#confirmacao-form').empty();
+
+        const confirmButton = $('<button type="submit" class="btn-2 btn-deletar">Deletar</button>');
+        const cancelButton = $('<button type="button" class="btn-2" id="btn-cancelar">Cancelar</button>');
+
+        // Adiciona os botões ao formulário
+        $('#confirmacao-form').append(confirmButton, cancelButton);
+        $('#confirmacao-form').attr('action', url_principal + 'auth/deletar_integracao/');
+
+        $('#confirmacao').show();
+        $('#confirmacao h3').text('Tem certeza que deseja excluir integração?');
+        $('.scrollbar-container, .whatsapp-button').addClass('blur');
         $('body').css('overflow', 'hidden'); // Impede o scroll da página
     });
 
@@ -42,7 +87,7 @@ $(document).ready(function () {
 
         $('#confirmacao').show();
         $('#confirmacao h3').text('Tem certeza que deseja remover usuário?');
-        $('.scrollbar-container, header, main, footer, .video-intro-container').addClass('blur');
+        $('.scrollbar-container, .whatsapp-button').addClass('blur');
         $('body').css('overflow', 'hidden'); // Impede o scroll da página
     });
 
@@ -55,9 +100,9 @@ $(document).ready(function () {
         const passwordField = $('#adminPassword');
 
         // Verifica se os campos obrigatórios estão preenchidos
-        if (!emailField.val() || !passwordField.val()) {
+        if (action.includes('deletar_user') && (!emailField.val() || !passwordField.val())) {
             // Campos obrigatórios não preenchidos, exibe uma mensagem de erro ou toma a ação apropriada
-            alert('É necessário a permissão de administrador. Por favor, forneça um email e senha.');
+            alert('Para excluir um usuário, é necessário fornecer o email e a senha de administrador.');
             return; // Impede o envio do formulário
         }
 
@@ -68,6 +113,8 @@ $(document).ready(function () {
 
         formData['idUser'] = $('#confirmacao').data('id-user');
         formData['idAula'] = $('#confirmacao').data('id-aula');
+        formData['idModulo'] = $('#confirmacao').data('id-modulo');
+        formData['idIntegracao'] = $('#confirmacao').data('id-integracao');
 
         // Cria uma solicitação AJAX com jQuery.
         $.ajax({
@@ -78,7 +125,7 @@ $(document).ready(function () {
                 // A resposta do servidor foi recebida e processada com sucesso.
                 // Você pode adicionar aqui lógica para fechar o popup, atualizar a interface do usuário, etc.
                 $('#confirmacao').hide();
-                $('.scrollbar-container, header, main, footer, .video-intro-container').removeClass('blur');
+                $('.scrollbar-container, .whatsapp-button').removeClass('blur');
                 $('body').css('overflow', 'auto'); // Restaura o scroll da página
 
                 console.log(response);
@@ -93,14 +140,14 @@ $(document).ready(function () {
     $('.popup').on('click', '#btn-cancelar', function () {
         // Fecha o popup de confirmação.
         $('#confirmacao').hide();
-        $('.scrollbar-container, header, main, footer, .video-intro-container').removeClass('blur');
+        $('.scrollbar-container, .whatsapp-button').removeClass('blur');
         $('body').css('overflow', 'auto'); // Restaura o scroll da página
     });
 
     $('.popup').on('click', '#closeDelPopup', function () {
         // Fecha o popup de confirmação.
         $('#confirmacao').hide();
-        $('.scrollbar-container, header, main, footer, .video-intro-container').removeClass('blur');
+        $('.scrollbar-container, .whatsapp-button').removeClass('blur');
         $('body').css('overflow', 'auto'); // Restaura o scroll da página
     });
 });

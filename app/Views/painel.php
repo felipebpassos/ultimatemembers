@@ -79,8 +79,8 @@
     </div>
 
     <!-- Seção de trilhas -->
-    <div class="banner-box" style="padding-top: 80px; margin-bottom: 80px;">
-        <div class="seção-titulo fade-in-slide-up" id="titulo-banner">
+    <div class="banner-box fade-in-slide-up" style="padding-top: 80px; margin-bottom: 50px; padding-bottom: 30px;">
+        <div class="seção-titulo" id="titulo-banner">
             <i class="fa-solid fa-graduation-cap"></i>
             <h3 style="margin: 0px;">Trilhas</h3>
             <?php
@@ -92,11 +92,11 @@
         <?php
         if (isset($trilhas) && !empty($trilhas)) {
             foreach ($trilhas as $trilha) {
-                echo '<h4 class="fade-in-slide-up" style="margin: 8px 10px; margin-top: 0;">' . $trilha['nome_trilha'] . '</h4>';
-                echo '<p class="fade-in-slide-up" style="margin-bottom: 50px; margin-left:10px;">' . $trilha['descricao_trilha'] . '</p>';
+                echo '<h4 style="margin: 8px 10px; margin-top: 0;">' . $trilha['nome_trilha'] . '</h4>';
+                echo '<p style="margin-bottom: 50px; margin-left:10px;">' . $trilha['descricao_trilha'] . '</p>';
 
                 // Agora, para cada trilha, exiba um carrossel de banners de módulos associados
-                echo '<section class="banner-section fade-in-slide-up">';
+                echo '<section class="banner-section">';
                 echo '<div class="banner-container">';
                 echo '<div class="banners">';
 

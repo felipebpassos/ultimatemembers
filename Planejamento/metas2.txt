@@ -1,11 +1,11 @@
 -Usuários
 
-deletar todos usuários
+deletar usuários selecionados
 
 -Integrações
 
 fazer integração com outras plataformas
-deletar integração
+editar integração
 
 -Editar trilhas
 -Banners e lançamentos dinâmicos

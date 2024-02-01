@@ -378,6 +378,38 @@ class modulosController extends Controller
 
     }
 
+    public function deletar_modulo()
+    {
+        // Verifica se o método enviado é POST
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            // Se não for POST, encerre a execução ou redirecione conforme necessário
+            die('Acesso não autorizado');
+        }
+
+        // Verifica se a variável obrigatória está definida
+        if (!isset($_POST['idModulo'])) {
+            // Se o campo obrigatório não estiver definido, encerre a execução ou redirecione conforme necessário
+            die("ID do usuário não está definido");
+        }
+
+        // Carrega dados do usuário
+        $usuario = $this->usuario;
+
+        $this->sessao->autorizaAdm($usuario['adm'], $this->cursoInfo['url_principal']);
+
+        // Acesso ao modelo "Aulas"
+        $modulosModel = new Modulos();
+
+        // Captura o ID do usuário a ser excluído
+        $idModulo = $_POST['idModulo'];
+
+        $resultado = $modulosModel->deleteModulo($idModulo);
+
+        // Retorna a resposta em formato JSON
+        header('Content-Type: application/json');
+        echo json_encode($resultado);
+    }
+
     public function nova_aula()
     {
         // Verifica se o formulário foi enviado via método POST

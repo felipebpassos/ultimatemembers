@@ -47,12 +47,6 @@
                         <!-- Se for Vimeo, exibir vídeo do Vimeo com o ID fornecido -->
                         <iframe src="https://player.vimeo.com/video/<?php echo $vimeoVideoId; ?>" width="100%" height="500"
                             frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                    <?php else: ?>
-                        <!-- Se não for YouTube nem Vimeo, exibir vídeo local -->
-                        <video controls controlsList="nodownload">
-                            <source src="<?php echo $video; ?>" type="video/mp4">
-                            Seu navegador não suporta o elemento de vídeo.
-                        </video>
                     <?php endif; ?>
                 </div>
 
@@ -222,7 +216,6 @@
                         </form>
 
                         <?php
-
                         // Loop para printar comentários da Aula
                         if (!empty($comentarios)) {
                             foreach ($comentarios as $comentario) {
@@ -245,44 +238,76 @@
                                 $autor = $primeiroNome . ' ' . $ultimoNome;
 
                                 // Aqui começa a estrutura HTML para cada comentário
-                                echo '<div class="comentario">';
-                                echo '<div class="foto-perfil-mini">';
-                                echo '<img class="perfil-img" id="perfil-img-form" src="http://localhost/ultimatemembers/' . (!empty($fotoUsuario) ? $fotoUsuario : '/public/img/default.png') . '" alt="Foto de Perfil" />';
-                                echo '</div>';
-                                echo '<div class="sidebox">';
-                                echo '<div>';
-                                echo '<span style="font-weight: bold;">' . $autor . '</span>';
-                                echo '<span style="font-size: 13px; margin-left: 5px;">' . $dataComentario . '</span>';
-                                echo '</div>';
-                                echo '<p>' . $textoComentario . '</p>';
-                                echo '<div style="display: flex; align-items: center;">';
-                                // Botões de like e dislike
-                                echo '<button class="like" data-id="' . $id_comentario . '">';
-                                echo '<i id="notliked" class="fa-regular fa-thumbs-up' . ($user_liked ? ' hidden' : '') . '"></i>';
-                                echo '<i id="liked" class="fa-solid fa-thumbs-up' . (!$user_liked ? ' hidden' : '') . '"  style="color: var(--cor-primaria-light);"></i>';
-                                echo '</button>';
-                                echo '<p class="numero-likes" data-id="' . $id_comentario . '" style="margin: -3px 15px 0px 3px;">' . $likes . '</p>';
-                                echo '<button class="dislike" data-id="' . $id_comentario . '">';
-                                echo '<i id="notdisliked" class="fa-regular fa-thumbs-down"></i>';
-                                echo '<i id="disliked" class="fa-solid fa-thumbs-down hidden" style="color: var(--cor-primaria-light);"></i>';
-                                echo '</button>';
-                                echo '<button class="reply-btn">Responder</button>';
-                                echo '</div>';
-                                echo '</div>';
-                                echo '<div class="op-comentario" id="op-' . $id_comentario . '">';
-                                // Botões de operação, como denunciar ou outras opções
-                                echo '<button class="op-btn" data-id="' . $id_comentario . '"><i class="fa-solid fa-ellipsis-vertical"></i></button>';
-                                echo '<div class="dropdown" id="dropdown-' . $id_comentario . '">';
-                                if ($id_autor === $id) {
-                                    // Se o usuário logado for o autor do comentário
-                                    echo '<button class="acao-btn deletar-btn" data-id="' . $id_comentario . '"><i class="fa-solid fa-trash"></i>Deletar</button>';
-                                } else {
-                                    // Se o usuário logado não for o autor do comentário
-                                    echo '<button class="acao-btn" data-id="' . $id_comentario . '"><i class="fa-solid fa-flag"></i>Denunciar</button>';
-                                }
-                                echo '</div>';
-                                echo '</div>';
-                                echo '</div>';
+                                ?>
+                                <div class="comentario">
+                                    <div class="foto-perfil-mini">
+                                        <img class="perfil-img" id="perfil-img-form"
+                                            src="http://localhost/ultimatemembers/<?php echo (!empty($fotoUsuario) ? $fotoUsuario : '/public/img/default.png'); ?>"
+                                            alt="Foto de Perfil" />
+                                    </div>
+                                    <div class="sidebox">
+                                        <div>
+                                            <span style="font-weight: bold;">
+                                                <?php echo $autor; ?>
+                                            </span>
+                                            <span style="font-size: 13px; margin-left: 5px;">
+                                                <?php echo $dataComentario; ?>
+                                            </span>
+                                        </div>
+                                        <p>
+                                            <?php echo $textoComentario; ?>
+                                        </p>
+                                        <div style="display: flex; align-items: center;">
+                                            <!-- Botões de like e dislike -->
+                                            <button class="like" data-id="<?php echo $id_comentario; ?>">
+                                                <i id="notliked"
+                                                    class="fa-regular fa-thumbs-up<?php echo ($user_liked ? ' hidden' : ''); ?>"></i>
+                                                <i id="liked"
+                                                    class="fa-solid fa-thumbs-up<?php echo (!$user_liked ? ' hidden' : ''); ?>"
+                                                    style="color: var(--cor-primaria-light);"></i>
+                                            </button>
+                                            <p class="numero-likes" data-id="<?php echo $id_comentario; ?>"
+                                                style="margin: -3px 15px 0px 3px;">
+                                                <?php echo $likes; ?>
+                                            </p>
+                                            <button class="dislike" data-id="<?php echo $id_comentario; ?>">
+                                                <i id="notdisliked" class="fa-regular fa-thumbs-down"></i>
+                                                <i id="disliked" class="fa-solid fa-thumbs-down hidden"
+                                                    style="color: var(--cor-primaria-light);"></i>
+                                            </button>
+                                            <button class="reply-btn">Responder</button>
+                                        </div>
+                                    </div>
+                                    <div class="op-comentario" id="op-<?php echo $id_comentario; ?>">
+                                        <!-- Botões de operação, como denunciar ou outras opções -->
+                                        <button class="op-btn" data-id="<?php echo $id_comentario; ?>"><i
+                                                class="fa-solid fa-ellipsis-vertical"></i></button>
+                                        <div class="dropdown" id="dropdown-<?php echo $id_comentario; ?>">
+                                            <?php
+                                            if ($id_autor === $id) {
+                                                // Se o usuário logado for o autor do comentário
+                                                ?>
+                                                <button class="acao-btn deletar-btn" data-id="<?php echo $id_comentario; ?>"><i
+                                                        class="fa-solid fa-trash"></i>Deletar</button>
+                                                <?php
+                                            } elseif (($adm) && (!$instrutor))  {
+                                                // Se o usuário logado for adm
+                                                ?>
+                                                <button class="acao-btn deletar-btn" data-id="<?php echo $id_comentario; ?>"><i
+                                                        class="fa-solid fa-trash"></i>Deletar</button>
+                                                <?php
+                                            } else {
+                                                // Se o usuário logado não for o autor do comentário
+                                                ?>
+                                                <button class="acao-btn denunciar-btn" data-id="<?php echo $id_comentario; ?>"><i
+                                                        class="fa-solid fa-flag"></i>Denunciar</button>
+                                                <?php
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
                             }
                         } else {
                             // Se não houver comentários, exibir a mensagem "Nenhum comentário nesta aula"

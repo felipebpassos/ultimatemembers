@@ -74,7 +74,7 @@ class painelController extends Controller
         $data['description'] = 'Assista às aulas e estude através do nosso material';
         $data['styles'] = array('drag-drop-files', 'painel', 'header', 'banners');
         $data['scripts_head'] = array('abas');
-        $data['scripts_body'] = array('slide', 'btn-selected', 'toggleSearch', 'pop-ups', 'enable-input', 'drag-drop-files', 'banner-roller', 'menu-responsivo', 'fade-in-slide-up', 'progresso-modulos');
+        $data['scripts_body'] = array('slide', 'btn-selected', 'toggleSearch', 'pop-ups', 'enable-input', 'drag-drop-files', 'banner-roller', 'menu-responsivo', 'fade-in-slide-up', 'progresso-modulos', 'deletar-btn');
 
         // Carrega a view passando $_SESSION['usuario']
         $this->loadTemplates($template, $data, $usuario);
@@ -430,6 +430,38 @@ class painelController extends Controller
                         } else {
 
                             print_r('Erro ao editar favicon');
+                            exit;
+
+                        }
+
+                    } else {
+
+                        print_r('Erro no upload');
+                        exit;
+
+                    }
+
+                }
+
+                // Verifica se há favicon fornecido
+                if (isset($_FILES['contato']) && $_FILES['contato']['error'] === UPLOAD_ERR_OK && !empty($_FILES['contato'])) {
+
+                    $contato = $cursosModel->uploadFile($_FILES['contato'], $cursoInfo['dir_name']);
+
+                    if ($contato) {
+
+                        // Obtém caminho antigo da do video
+                        $contatoAntigo = $cursosModel->getPathFile($this->curso, 'contato_ico');
+
+                        $result = $cursosModel->updateFile($this->curso, $contato, $contatoAntigo, 'contato_ico');
+
+                        if ($result) {
+
+                            print_r('Sucesso no upload');
+
+                        } else {
+
+                            print_r('Erro ao editar contato-img');
                             exit;
 
                         }

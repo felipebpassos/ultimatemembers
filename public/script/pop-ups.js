@@ -324,13 +324,7 @@ function exibirFormulario(option) {
         $('#oauth-integracao').show();
     }
     $('.scrollbar-container').addClass('blur');
-    $('header').addClass('hidden');
-    $('.main-banner').addClass('blur');
-    $('.dots').addClass('blur');
-    $('main').addClass('blur');
     $('.whatsapp-button').addClass('blur');
-    $('footer').addClass('blur');
-    $('.video-intro-container').addClass('blur');
     $('body').css('overflow', 'hidden'); // Impede o scroll da página
 }
 
@@ -352,13 +346,7 @@ function fecharFormulario(option) {
         $('#oauth-integracao').hide();
     }
     $('.scrollbar-container').removeClass('blur');
-    $('header').removeClass('hidden');
-    $('.main-banner').removeClass('blur');
-    $('.dots').removeClass('blur');
-    $('main').removeClass('blur');
     $('.whatsapp-button').removeClass('blur');
-    $('footer').removeClass('blur');
-    $('.video-intro-container').removeClass('blur');
     $('body').css('overflow', 'auto'); // Restaura o scroll da página
 }
 

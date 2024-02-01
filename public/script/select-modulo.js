@@ -80,7 +80,6 @@ $(document).ready(function () {
                         aulaHtml += '<section>';
                         aulaHtml += '<div class="info-aula">';
                         aulaHtml += '<div class="nome-aula" style="font-weight: bold;">Aula ' + formattedId + ' - ' + nome_aula + '</div>';
-                        aulaHtml += '<div class="duracao-aula">00:00</div>';
                         aulaHtml += '</div>';
                         aulaHtml += '</section>';
                         aulaHtml += '</div>';

@@ -2,7 +2,7 @@ use reelsdecinema;
 
 drop table aulas_nao_finalizadas;
 
-select * from trilhas_modulos;
+select * from trilhas;
 
 ALTER TABLE discussoes
 DROP FOREIGN KEY discussoes_ibfk_1,
@@ -15,10 +15,8 @@ ADD COLUMN integracao_id INT NOT NULL,
 ADD COLUMN plataforma VARCHAR(255) NOT NULL,
 ADD FOREIGN KEY (integracao_id) REFERENCES integracoes_api(id);
 
-ALTER TABLE usuarios
-ADD COLUMN instagram VARCHAR(255),
-ADD COLUMN facebook VARCHAR(255),
-ADD COLUMN linkedin VARCHAR(255);
+ALTER TABLE cursos
+ADD COLUMN contato_ico VARCHAR(255);
 
 ALTER TABLE respostas_comentarios DROP FOREIGN KEY fk_respostas_comentarios_curso;
 
@@ -58,7 +56,7 @@ select * from usuarios;
 
 select * from integracoes_api;
 
-DELETE FROM integracoes_api WHERE id = 4;
+DELETE FROM integracoes_api WHERE id = 5;
 
 INSERT INTO lancamentos (nome, capa, link_url)
 VALUES ('Reels de Cinema', './uploads/lançamentos/banners/lançamento01.png', 'http://localhost/reelsdecinema/');

@@ -182,21 +182,22 @@
         ?>
 
         <a href="https://api.whatsapp.com/send?phone=SEU_NUMERO_DE_TELEFONE" class="whatsapp-button" target="_blank">
-            <img src="http://localhost/ultimatemembers/public/img/whatsapp.png" alt="Ícone do WhatsApp">
+            <img src="<?= !empty($curso['contato_ico']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['contato_ico']) : "http://localhost/ultimatemembers/public/img/msg-default.png" ?>"
+                alt="Ícone do WhatsApp">
         </a>
 
     </div>
 
     <?php
 
-        //Carrega os pop-ups-adm
-        if ($adm) {
-            include 'pop-ups-adm.php';
-        } else {
-            include 'pop-ups-user.php';
-        }
+    //Carrega os pop-ups-adm
+    if ($adm) {
+        include 'pop-ups-adm.php';
+    } else {
+        include 'pop-ups-user.php';
+    }
 
-        ?>
+    ?>
 
     <!-- js files (body) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>

@@ -188,8 +188,12 @@ main {
 
 .op-comentario .acao-btn {
     display: flex;
-    padding: 5px;
+    align-items: center;
+    padding: 5px 10px;
     border-radius: 3px;
+    border: none;
+    background-color: var(--cor-secundaria-lighter);
+    color: var(--cor-primaria-lighter);
 }
 
 .like,

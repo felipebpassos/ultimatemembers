@@ -124,7 +124,7 @@
                                                 .jpeg</span></span></label>
                                     <div class="preview" id="preview-contato">
                                         <img id="img-contato"
-                                            src="<?= !empty($curso['url_favicon']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_favicon']) : "http://localhost/ultimatemembers/public/img/favicon-default.png" ?>"
+                                            src="<?= !empty($curso['contato_ico']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['contato_ico']) : "http://localhost/ultimatemembers/public/img/msg-default.png" ?>"
                                             alt="contato ícone">
                                         <input type="file" id="contato" name="contato" accept=".ico, .png">
                                         <button type="button" class="btn-file-1"

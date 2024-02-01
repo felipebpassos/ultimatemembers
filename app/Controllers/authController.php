@@ -96,4 +96,22 @@ class authController extends Controller
         exit();
     }
 
+    public function deletar_integracao()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idIntegracao'])) {
+
+            $integracao = $_POST['idIntegracao'];
+
+            $resultado = $this->auth->deleteIntegracao($integracao);
+
+            // Retorna a resposta em formato JSON
+            header('Content-Type: application/json');
+            echo json_encode($resultado);
+
+        } else {
+            // ERRO
+            exit;
+        }
+    }
+
 }

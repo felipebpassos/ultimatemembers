@@ -6,6 +6,7 @@
     min-height: 410px;
     margin-bottom: 30px;
     padding-top: 80px;
+    overflow: hidden;
 }
 
 .banner-box.lançamentos {
