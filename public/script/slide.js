@@ -90,16 +90,3 @@ window.addEventListener('load', function() {
     // Define a altura do contêiner pai como a altura máxima encontrada
     carouselContainer.style.height = maxHeight + 'px';
 });
-
-function calcularAlturaTotal() {
-    var carrosselPai = document.getElementById('banner-container');
-    var slide = document.querySelector('.slides'); // Selecione apenas um slide, ajuste o seletor conforme necessário
-
-    var alturaTotal = slide.offsetHeight; // Obtém a altura do slide único
-
-    carrosselPai.style.height = alturaTotal + 'px'; // Define a altura total no elemento pai
-}
-
-// Calcular a altura total quando a página é carregada e quando a janela é redimensionada
-window.addEventListener('load', calcularAlturaTotal);
-window.addEventListener('resize', calcularAlturaTotal);

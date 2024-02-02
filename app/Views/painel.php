@@ -20,6 +20,21 @@
     </div>
 </div>
 
+<script>
+    function calcularAlturaTotal() {
+        var carrosselPai = document.getElementById('banner-container');
+        var slide = document.querySelector('.slides'); // Selecione apenas um slide, ajuste o seletor conforme necessário
+
+        var alturaTotal = slide.offsetHeight; // Obtém a altura do slide único
+
+        carrosselPai.style.height = alturaTotal + 'px'; // Define a altura total no elemento pai
+    }
+
+    // Calcular a altura total quando a página é carregada e quando a janela é redimensionada
+    window.addEventListener('load', calcularAlturaTotal);
+    window.addEventListener('resize', calcularAlturaTotal);
+</script>
+
 <div class="dots" style="display: flex; justify-content:center; align-items: center;">
     <span class="dot" onclick="currentSlide(1)"></span>
     <span class="dot" onclick="currentSlide(2)"></span>
