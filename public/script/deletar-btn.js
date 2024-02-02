@@ -58,6 +58,28 @@ $(document).ready(function () {
         $('body').css('overflow', 'hidden'); // Impede o scroll da página
     });
 
+    // Lidar com a exclusão de um comentario
+    $('.op-comentario').on('click', '.deletar-comentario', function () {
+        const idComentario = $(this).data('id');
+        // Define o ID do módulo no popup de confirmação.
+        $('#confirmacao').data('id-comentario', idComentario);
+
+        // Limpa os campos existentes antes de adicionar dinamicamente
+        $('#confirmacao-form').empty();
+
+        const confirmButton = $('<button type="submit" class="btn-2 btn-deletar">Deletar</button>');
+        const cancelButton = $('<button type="button" class="btn-2" id="btn-cancelar">Cancelar</button>');
+
+        // Adiciona os botões ao formulário
+        $('#confirmacao-form').append(confirmButton, cancelButton);
+        $('#confirmacao-form').attr('action', url_principal + 'modulos/deletar_comentario/');
+
+        $('#confirmacao').show();
+        $('#confirmacao h3').text('Tem certeza que deseja excluir comentário?');
+        $('.scrollbar-container, .whatsapp-button').addClass('blur');
+        $('body').css('overflow', 'hidden'); // Impede o scroll da página
+    });
+
     $('.usuarios').on('click', '.delete-user', function () {
         const idUser = $(this).data('id');
         // Define o ID do usuario no popup de confirmação.
@@ -115,6 +137,7 @@ $(document).ready(function () {
         formData['idAula'] = $('#confirmacao').data('id-aula');
         formData['idModulo'] = $('#confirmacao').data('id-modulo');
         formData['idIntegracao'] = $('#confirmacao').data('id-integracao');
+        formData['idComentario'] = $('#confirmacao').data('id-comentario');
 
         // Cria uma solicitação AJAX com jQuery.
         $.ajax({

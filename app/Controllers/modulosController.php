@@ -707,6 +707,27 @@ class modulosController extends Controller
 
     }
 
+    public function deletar_comentario()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idComentario'])) {
+
+            $comentario = $_POST['idComentario'];
+
+            // Instancie a classe Aulas
+            $aulas = new Aulas();
+
+            $resultado = $aulas->deleteComentario($comentario);
+
+            // Retorna a resposta em formato JSON
+            header('Content-Type: application/json');
+            echo json_encode($resultado);
+
+        } else {
+            // ERRO
+            exit;
+        }
+    }
+
     public function likes()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

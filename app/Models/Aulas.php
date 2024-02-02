@@ -306,6 +306,39 @@ class Aulas
         return $deleted;
     }
 
+    public function deleteComentario($idComentario)
+    {
+        try {
+
+            $this->deleteLikesComentarios([$idComentario]);
+
+            $this->deleteDislikesComentarios([$idComentario]);
+
+            // Prepare a consulta SQL para deletar o comentário
+            $sql = "DELETE FROM comentarios WHERE id = :id";
+            $stmt = $this->con->prepare($sql);
+
+            // Vincule o parâmetro do ID do comentário
+            $stmt->bindParam(':id', $idComentario, PDO::PARAM_INT);
+
+            // Execute a consulta preparada
+            $stmt->execute();
+
+            // Verifique se o comentário foi excluído com sucesso
+            if ($stmt->rowCount() > 0) {
+                // Comentário excluído com sucesso
+                return array('success' => true, 'message' => 'Comentário excluído com sucesso.');
+            } else {
+                // Nenhum comentário foi excluído
+                return array('success' => false, 'message' => 'Falha ao excluir o comentário.');
+            }
+        } catch (PDOException $e) {
+            // Em caso de erro, você pode tratar a exceção aqui
+            // Por exemplo, você pode registrar o erro ou retornar uma mensagem de erro
+            return array('success' => false, 'message' => 'Erro ao excluir o comentário: ' . $e->getMessage());
+        }
+    }
+
     private function deleteComentariosDaAula($id_aula)
     {
         // Recupere os IDs dos comentários associados a esta aula

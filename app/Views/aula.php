@@ -287,13 +287,13 @@
                                             if ($id_autor === $id) {
                                                 // Se o usuário logado for o autor do comentário
                                                 ?>
-                                                <button class="acao-btn deletar-btn" data-id="<?php echo $id_comentario; ?>"><i
+                                                <button class="acao-btn deletar-comentario" data-id="<?php echo $id_comentario; ?>"><i
                                                         class="fa-solid fa-trash"></i>Deletar</button>
                                                 <?php
                                             } elseif (($adm) && (!$instrutor))  {
                                                 // Se o usuário logado for adm
                                                 ?>
-                                                <button class="acao-btn deletar-btn" data-id="<?php echo $id_comentario; ?>"><i
+                                                <button class="acao-btn deletar-comentario" data-id="<?php echo $id_comentario; ?>"><i
                                                         class="fa-solid fa-trash"></i>Deletar</button>
                                                 <?php
                                             } else {

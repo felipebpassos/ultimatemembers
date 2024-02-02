@@ -94,17 +94,25 @@ class Cursos
 
             $query = 'SELECT url_logo FROM cursos WHERE id = :cursoId LIMIT 1';
 
+            $content = 'url_logo';
+
         } elseif ($file_type == 'favicon') {
 
             $query = 'SELECT url_favicon FROM cursos WHERE id = :cursoId LIMIT 1';
+
+            $content = 'url_favicon';
 
         } elseif ($file_type == 'contato_ico') {
 
             $query = 'SELECT contato_ico FROM cursos WHERE id = :cursoId LIMIT 1';
 
+            $content = 'contato_ico';
+
         } elseif ($file_type == 'banner_login') {
 
             $query = 'SELECT banner_login FROM cursos WHERE id = :cursoId LIMIT 1';
+
+            $content = 'banner_login';
 
         }
 
@@ -114,7 +122,7 @@ class Cursos
 
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($result) {
-            return $result[$file_type];
+            return $result[$content];
         } else {
             return null;
         }

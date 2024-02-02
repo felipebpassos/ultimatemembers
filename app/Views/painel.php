@@ -1,4 +1,4 @@
-<div class="main-banner">
+<div class="main-banner" id="banner-container">
     <div class="fade-left"></div>
     <div class="fade-right"></div>
     <div class="fade-top"></div>
