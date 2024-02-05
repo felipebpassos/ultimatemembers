@@ -193,9 +193,9 @@
     //Carrega os pop-ups-adm
     if ($adm) {
         include 'pop-ups-adm.php';
-    } else {
-        include 'pop-ups-user.php';
-    }
+    } 
+
+    include 'pop-ups-user.php';
 
     ?>
 

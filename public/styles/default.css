@@ -712,23 +712,22 @@ body {
     overflow-x: hidden;
 }
 
-#confirmacao {
-    height: fit-content;
+#confirmacao h3, #avalia h3, #denuncia h3 {
     text-align: center;
 }
 
 #confirmacao-form {
     width: fit-content;
     margin: auto;
-    margin-top: 80px;
+    margin-top: 60px;
 }
 
-#confirmacao .btn-box {
+#confirmacao .btn-box, #avalia .btn-box, #denuncia .btn-box {
     width: fit-content;
     margin: auto;
 }
 
-#confirmacao button {
+#confirmacao button, #avalia button, #denuncia button {
     display: inline-block;
     margin-right: 30px;
     margin-top: 40px;
@@ -1002,6 +1001,11 @@ body {
     display: flex;
 }
 
+.trilha-modulos li {
+    justify-content: space-between;
+    padding: 20px;
+}
+
 .modulos-list li a,
 .trilha-modulos li a {
     color: var(--cor-primaria);
@@ -1016,6 +1020,10 @@ body {
 .nome-modulo, .nome-trilha {flex: 1;}
 
 .op-modulo, .op-trilha {min-width: 160px;}
+
+.trilha-modulos li .op-modulo {
+    min-width: 30px;
+}
 
 .op-modulo button, .op-trilha button {
     position: unset;
@@ -1052,6 +1060,26 @@ body {
     border: 1px solid var(--cor-secundaria-light);
     border-radius: 5px;
     padding: 10px 20px;
+}
+
+.label-den {width: fit-content;}
+
+#checkbox-container {
+    width: fit-content;
+    margin: auto;
+    margin-top: 50px;
+    min-width: 360px;
+}
+
+#checkbox-container input {
+    display: inline-block;
+    margin-bottom: 25px;
+    width: 20px;
+    height: 20px;
+}
+
+#checkbox-container label {
+    transform: translateY(-5px);
 }
 
 .blur {

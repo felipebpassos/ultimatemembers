@@ -1,23 +1,12 @@
 $(document).ready(function () {
 
     // Lidar com a exclusão de um comentario
-    $('.op-comentario').on('click', '.deletar-comentario', function () {
+    $('.op-comentario').on('click', '.denunciar-btn', function () {
         const idComentario = $(this).data('id');
         // Define o ID do módulo no popup de confirmação.
-        $('#confirmacao').data('id-comentario', idComentario);
+        $('#denuncia').data('id-comentario', idComentario);
 
-        // Limpa os campos existentes antes de adicionar dinamicamente
-        $('#confirmacao-form').empty();
-
-        const confirmButton = $('<button type="submit" class="btn-2 btn-deletar">Deletar</button>');
-        const cancelButton = $('<button type="button" class="btn-2" id="btn-cancelar">Cancelar</button>');
-
-        // Adiciona os botões ao formulário
-        $('#confirmacao-form').append(confirmButton, cancelButton);
-        $('#confirmacao-form').attr('action', url_principal + 'modulos/deletar_comentario/');
-
-        $('#confirmacao').show();
-        $('#confirmacao h3').text('Tem certeza que deseja excluir comentário?');
+        $('#denuncia').show();
         $('.scrollbar-container, .whatsapp-button').addClass('blur');
         $('body').css('overflow', 'hidden'); // Impede o scroll da página
     });
@@ -54,16 +43,16 @@ $(document).ready(function () {
         });
     });
 
-    $('.popup').on('click', '#btn-cancelar', function () {
+    $('.popup').on('click', '#btn-cancelar-den', function () {
         // Fecha o popup de confirmação.
-        $('#confirmacao').hide();
+        $('#denuncia').hide();
         $('.scrollbar-container, .whatsapp-button').removeClass('blur');
         $('body').css('overflow', 'auto'); // Restaura o scroll da página
     });
 
-    $('.popup').on('click', '#closeDelPopup', function () {
+    $('.popup').on('click', '#closeDenPopup', function () {
         // Fecha o popup de confirmação.
-        $('#confirmacao').hide();
+        $('#denuncia').hide();
         $('.scrollbar-container, .whatsapp-button').removeClass('blur');
         $('body').css('overflow', 'auto'); // Restaura o scroll da página
     });

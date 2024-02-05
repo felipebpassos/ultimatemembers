@@ -1,6 +1,6 @@
 $(document).ready(function () {
     const avaliarButton = $('.avaliacao-estrelas label');
-    const confirmacaoPopup = $('#confirmacao');
+    const confirmacaoPopup = $('#avalia');
     const notaGivenSpan = $('#nota-given');
 
     avaliarButton.click(function () {
@@ -11,9 +11,8 @@ $(document).ready(function () {
         $('body').css('overflow', 'hidden'); // Impede o scroll da página
     });
 
-    $('#btn-confirmar').click(function () {
+    $('#btn-confirmar-ava').click(function () {
         const idAula = $('input[name="idAula"]').val();
-        const aluno = $('input[name="aluno"]').val();
         const avaliacao = $('input[name="avaliacao"]:checked').val();
         const feedback = $('#feedback').val();
         const manterAnonimato = $('input[name="anonimo"]').is(':checked');
@@ -24,7 +23,6 @@ $(document).ready(function () {
             url: url_principal + 'modulos/avalia_aula/',
             data: {
                 idAula: idAula,
-                aluno: aluno,
                 avaliacao: avaliacao,
                 feedback: feedback,
                 manterAnonimato: manterAnonimato
@@ -44,7 +42,7 @@ $(document).ready(function () {
         });
     });
 
-    $('#btn-cancelar').click(function () {
+    $('#btn-cancelar-ava').click(function () {
         // Fecha o popup de confirmação.
         confirmacaoPopup.hide();
         $('header, main, footer, .video-intro-container').removeClass('blur');
