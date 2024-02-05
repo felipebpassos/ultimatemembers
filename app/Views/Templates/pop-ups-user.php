@@ -41,7 +41,7 @@
             </svg>
         </div>
     </div>
-    <form action="">
+    <form id="form-avalia" action="">
 
         <div class="nota" style="display: flex; margin: 10px 0 15px 30px; ">
             <span id="nota-given" style="margin-right: 5px;"></span><label><i class="fa-solid fa-star"
@@ -50,18 +50,22 @@
 
         <div class="txt-input">
 
-            <div style="position: relative; margin: 0 40px 15px 10px; width:100%; margin-right: 0;">
-                <label for="feedback">Compartilhe seu feedback</label>
-                <textarea id="feedback" name="feedback"></textarea>
+            <div class="mb-3">
+                <label class="form-label" for="feedback">Compartilhe seu feedback (Opcional)</label>
+                <div class="campo-popup" style="width: 100%;">
+                    <textarea class="campo-input" id="feedback" name="feedback"
+                        placeholder="Compartilhe seu feedback (Opcional)"></textarea>
+                </div>
             </div>
 
             <input type="hidden" name="idAula" value="<?php echo $aula['id']; ?>">
 
         </div>
 
-        <label style="line-height: 1.5em; display: flex; margin: 0 40px 35px 30px;">
+        <label style="line-height: 1.5em; display: flex; margin: 0 0 35px 15px;">
             <input type="checkbox" name="anonimo" style="margin-right: 5px;">Manter anonimato
         </label>
+
     </form>
     <div class="btn-box">
         <button class="btn-2" id="btn-confirmar-ava">Confirmar</button>

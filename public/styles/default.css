@@ -712,6 +712,8 @@ body {
     overflow-x: hidden;
 }
 
+#form-avalia {width: 600px; margin: auto;}
+
 #confirmacao h3, #avalia h3, #denuncia h3 {
     text-align: center;
 }
@@ -767,8 +769,8 @@ body {
 }
 
 .popup .txt-input {
-    display: flex;
-    margin: 0 40px 0 20px;
+    margin: 0 20px;
+    margin-bottom: 10px;
 }
 
 .popup .txt-input div {
@@ -801,12 +803,14 @@ body {
 
 .campo-popup {
     width: 320px;
-    height: 48px;
+    height: fit-content;
     display: flex;
     margin-bottom: 30px;
     align-items: center;
     position: relative;
 }
+
+#avalia .campo-popup {margin-bottom: 10px;}
 
 .campo-popup input,
 .campo-popup textarea {
@@ -821,11 +825,7 @@ body {
     outline: none;
 }
 
-.campo-popup input {
-    height: 100%;
-}
-
-.campo-popup textarea {
+.campo-popup input, .campo-popup textarea {
     padding: 10px 15px;
 }
 
