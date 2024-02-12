@@ -301,6 +301,7 @@ main {
 }
 
 .table {
+    min-height: 300px;
     border: 1px solid var(--cor-secundaria-light);
     --bs-table-bg: transparent !important;
     --bs-table-border-color: var(--cor-secundaria-light) !important;

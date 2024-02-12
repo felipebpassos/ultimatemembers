@@ -13,10 +13,10 @@
         <img src="http://localhost/ultimatemembers/public/img/banner3.jpg" alt="Banner 3">
     </div>
     <div class="slides">
-        <img src="http://localhost/ultimatemembers/public/img/banner.png" alt="Banner 4">
+        <img src="http://localhost/ultimatemembers/public/img/banner4.jpg" alt="Banner 4">
     </div>
     <div class="slides">
-        <img src="http://localhost/ultimatemembers/public/img/banner2.jpg" alt="Banner 5">
+        <img src="http://localhost/ultimatemembers/public/img/banner.png" alt="Banner 5">
     </div>
 </div>
 

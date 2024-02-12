@@ -13,8 +13,8 @@ editar integração
 -Fazer funcionar pesquisas
 -Fazer paginação onde necessitar
 -Fazer sistema de avaliações (questionários)
--Fazer sistema de salvar aulas e publicações
--Deletar e reportar comentários
+-Fazer sistema de salvar publicações
+-Deletar e reportar posts e replies de posts
 -Fazer gameficação
 
 -Fazer funcionar simple e multiple selects onde tiver

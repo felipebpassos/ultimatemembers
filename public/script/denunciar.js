@@ -11,16 +11,25 @@ $(document).ready(function () {
         $('body').css('overflow', 'hidden'); // Impede o scroll da página
     });
 
-    $('.popup').on('click', '.btn-deletar', function () {
-        const action = $('#confirmacao-form').attr('action'); // Obtém a ação do formulário
+    $('.popup').on('click', '#btn-denunciar', function () {
+        const action = $('#denuncia-form-den').attr('action'); // Obtém a ação do formulário
         const formData = {};
 
         // Adiciona os dados do formulário ao objeto formData
-        $('#confirmacao-form input').each(function () {
-            formData[$(this).attr('id')] = $(this).val();
+        $('#denuncia-form-den input[type="checkbox"]').each(function () {
+            if ($(this).is(':checked')) {
+                formData['option'] = $(this).val(); // Armazena o valor do checkbox
+                return false; // Interrompe a iteração após encontrar a primeira opção selecionada
+            }
         });
 
-        formData['idComentario'] = $('#confirmacao').data('id-comentario');
+        // Verifica se alguma opção foi selecionada
+        if (!formData['option']) {
+            alert('Por favor, selecione uma opção de denúncia.');
+            return;
+        }
+
+        formData['idComentario'] = $('#denuncia').data('id-comentario');
 
         // Cria uma solicitação AJAX com jQuery.
         $.ajax({
@@ -30,9 +39,11 @@ $(document).ready(function () {
             success: function (response) {
                 // A resposta do servidor foi recebida e processada com sucesso.
                 // Você pode adicionar aqui lógica para fechar o popup, atualizar a interface do usuário, etc.
-                $('#confirmacao').hide();
+                $('#denuncia').hide();
                 $('.scrollbar-container, .whatsapp-button').removeClass('blur');
                 $('body').css('overflow', 'auto'); // Restaura o scroll da página
+                // Desmarca todos os checkboxes
+                $('#denuncia-form-den input[type="checkbox"]').prop('checked', false);
 
                 console.log(response);
             },
@@ -48,6 +59,8 @@ $(document).ready(function () {
         $('#denuncia').hide();
         $('.scrollbar-container, .whatsapp-button').removeClass('blur');
         $('body').css('overflow', 'auto'); // Restaura o scroll da página
+        // Desmarca todos os checkboxes
+        $('#denuncia-form-den input[type="checkbox"]').prop('checked', false);
     });
 
     $('.popup').on('click', '#closeDenPopup', function () {
@@ -55,5 +68,7 @@ $(document).ready(function () {
         $('#denuncia').hide();
         $('.scrollbar-container, .whatsapp-button').removeClass('blur');
         $('body').css('overflow', 'auto'); // Restaura o scroll da página
+        // Desmarca todos os checkboxes
+        $('#denuncia-form-den input[type="checkbox"]').prop('checked', false);
     });
 });

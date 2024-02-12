@@ -847,5 +847,123 @@ class Aulas
         return [];
     }
 
+    public function setDenuncia($acusador_id, $acusado_id, $comentario_id, $infracao)
+    {
+        // Verifica se já existe uma denúncia do acusador para o mesmo comentário com a mesma infração
+        $existingDenuncia = $this->getDenuncia($acusador_id, $comentario_id, $infracao);
+
+        if (!$existingDenuncia) {
+            // Se não existir, faz uma INSERT
+            $query = 'INSERT INTO denuncias_comentarios (id_acusador, id_acusado, id_comentario, infracao, data_denuncia) 
+                  VALUES (:acusador_id, :acusado_id, :comentario_id, :infracao, NOW())';
+
+            $stmt = $this->con->prepare($query);
+            $stmt->bindValue(':acusador_id', $acusador_id);
+            $stmt->bindValue(':acusado_id', $acusado_id);
+            $stmt->bindValue(':comentario_id', $comentario_id);
+            $stmt->bindValue(':infracao', $infracao);
+
+            return $stmt->execute();
+        }
+
+        // Retorna false se a denúncia já existir
+        return false;
+    }
+
+    // Método para verificar se já existe uma denúncia do acusador para o mesmo comentário com a mesma infração
+    public function getDenuncia($acusador_id, $comentario_id, $infracao)
+    {
+        $query = 'SELECT id 
+              FROM denuncias_comentarios 
+              WHERE id_acusador = :acusador_id 
+              AND id_comentario = :comentario_id 
+              AND infracao = :infracao';
+
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':acusador_id', $acusador_id);
+        $stmt->bindValue(':comentario_id', $comentario_id);
+        $stmt->bindValue(':infracao', $infracao);
+
+        if ($stmt->execute()) {
+            // Retorna true se já existir uma denúncia
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
+        // Retorna false se não existir denúncia ou em caso de erro
+        return false;
+    }
+
+    public function getDonoComentario($comentario_id)
+    {
+        $query = 'SELECT user_id FROM comentarios WHERE id = :comentario_id';
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':comentario_id', $comentario_id);
+
+        if ($stmt->execute()) {
+            // Retorna o id do usuário que fez o comentário
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['user_id'];
+        }
+
+        // Em caso de erro ou se o comentário não for encontrado, retorna null
+        return null;
+    }
+
+    public function setAulaFavorita($usuarioId, $aulaId)
+    {
+        // Verifica se já existe uma entrada para a mesma aula e o mesmo usuário
+        $existeAulaSalva = $this->existeAulaSalva($usuarioId, $aulaId);
+
+        // Se já existir uma entrada, exclua-a
+        if ($existeAulaSalva) {
+            $this->excluirAulaSalva($usuarioId, $aulaId);
+            return "Aula removida dos favoritos";
+        } else {
+            // Se não existir uma entrada, insira uma nova
+            $query = 'INSERT INTO aulas_salvas (aula_id, user_id) VALUES (:aula_id, :user_id)';
+            $stmt = $this->con->prepare($query);
+            $stmt->bindValue(':aula_id', $aulaId);
+            $stmt->bindValue(':user_id', $usuarioId);
+
+            if ($stmt->execute()) {
+                return "Aula adicionada aos favoritos";
+            } else {
+                return "Erro ao salvar aula nos favoritos";
+            }
+        }
+    }
+
+    // Verifica se já existe uma entrada para a mesma aula e o mesmo usuário
+    private function existeAulaSalva($usuarioId, $aulaId)
+    {
+        $query = 'SELECT COUNT(*) as total FROM aulas_salvas WHERE aula_id = :aula_id AND user_id = :user_id';
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':aula_id', $aulaId);
+        $stmt->bindValue(':user_id', $usuarioId);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['total'] > 0;
+    }
+
+    // Exclui uma entrada para a mesma aula e o mesmo usuário
+    private function excluirAulaSalva($usuarioId, $aulaId)
+    {
+        $query = 'DELETE FROM aulas_salvas WHERE aula_id = :aula_id AND user_id = :user_id';
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':aula_id', $aulaId);
+        $stmt->bindValue(':user_id', $usuarioId);
+        return $stmt->execute();
+    }
+
+    public function isFavorita($aulaId, $usuarioId)
+    {
+        $query = 'SELECT COUNT(*) as total FROM aulas_salvas WHERE aula_id = :aula_id AND user_id = :user_id';
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':aula_id', $aulaId);
+        $stmt->bindValue(':user_id', $usuarioId);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['total'] > 0;
+    }
 
 }

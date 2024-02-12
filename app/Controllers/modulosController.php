@@ -154,6 +154,8 @@ class modulosController extends Controller
             $avaliacao = $aulasModel->getAvaliacao($id, $usuario['id']);
         }
 
+        $data['favorita'] = $aulasModel->isFavorita($id, $usuario['id']);
+
         //Armazena dados necessários
         $data['aula'] = $aula;
         $data['aulas'] = $aulas_módulo;
@@ -172,7 +174,7 @@ class modulosController extends Controller
         $data['description'] = 'Assista às aulas e estude através do nosso material';
         $data['styles'] = array('painel', 'header', 'drag-drop-files', 'video-player', 'search-bar', 'aula');
         $data['scripts_head'] = array('select');
-        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'pop-ups', 'deletar-btn', 'deletar-btn-adm', 'simple_select', 'drag-drop-files', 'comment-box', 'comment-btns', 'aula_concluida', 'like_dislike', 'dropdown', 'select-modulo', 'select-videoaula', 'denunciar');
+        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'pop-ups', 'deletar-btn', 'deletar-btn-adm', 'simple_select', 'drag-drop-files', 'comment-box', 'comment-btns', 'aula_concluida', 'like_dislike', 'dropdown', 'select-modulo', 'select-videoaula', 'denunciar', 'salvar');
         if (!$usuario['adm']) {
             $data['scripts_body'][] = 'avaliação';
         }
@@ -624,6 +626,33 @@ class modulosController extends Controller
 
     }
 
+    public function favoritar()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            // Verifique se as variáveis POST estão definidas
+            if (isset($_POST['aulaId'])) {
+                // Recupere os valores das variáveis POST e armazene em variáveis locais
+                $aulaId = $_POST['aulaId'];
+
+                $usuario = $this->usuario['id'];
+
+                $aulas = new Aulas();
+
+                $resultado = $aulas->setAulaFavorita($usuario, $aulaId);
+
+                // Retorna a resposta em formato JSON
+                header('Content-Type: application/json');
+                echo json_encode($resultado);
+            }
+
+        } else {
+
+            print_r('erro');
+            exit;
+        }
+    }
+
     public function concluida()
     {
 
@@ -813,6 +842,32 @@ class modulosController extends Controller
 
                 $aulasModel->setAvaliacao($aluno, $aula, $avaliacao, $feedback, $anonimo);
 
+            }
+        }
+    }
+    public function denunciar()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Verifique se as variáveis POST estão definidas
+            if (isset($_POST['idComentario']) && isset($_POST['option'])) {
+
+                $acusador = $this->usuario['id'];
+                $comentario = $_POST['idComentario'];
+                $option = $_POST['option'];
+
+                $aulas_model = new Aulas();
+
+                $acusado = $aulas_model->getDonoComentario($comentario);
+
+                $resultado = $aulas_model->setDenuncia($acusador, $acusado, $comentario, $option);
+
+                // Retorna os dados em formato JSON
+                echo json_encode($resultado);
+
+            } else {
+                // ERRO
+                echo 'erro';
+                exit;
             }
         }
     }

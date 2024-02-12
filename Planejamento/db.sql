@@ -52,7 +52,7 @@ ALTER TABLE tags_forum
 ADD CONSTRAINT fk_tags_forum_curso
 FOREIGN KEY (id_curso) REFERENCES cursos(id);
 
-select * from usuarios;
+select * from aulas_salvas;
 
 select * from integracoes_api;
 
@@ -285,6 +285,35 @@ CREATE TABLE trilhas_modulos (
     id_modulo INT,
     FOREIGN KEY (id_trilha) REFERENCES trilhas(id) ON DELETE CASCADE,
     FOREIGN KEY (id_modulo) REFERENCES modulos(id) ON DELETE CASCADE
+) CHARSET=utf8;
+
+CREATE TABLE denuncias_comentarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    infracao tinyint NOT NULL,
+    -- 1 -> spam | 2 -> pornografia | 3 -> violencia | 4 -> bullying | 5 -> desinformação | 6 -> outro
+    id_comentario INT NOT NULL,
+    id_acusador INT NOT NULL,
+    id_acusado INT NOT NULL,
+    data_denuncia TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_comentario) REFERENCES comentarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_acusador) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_acusado) REFERENCES usuarios(id) ON DELETE CASCADE
+) CHARSET=utf8;
+
+CREATE TABLE aulas_salvas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    aula_id INT NOT NULL,
+    user_id INT NOT NULL,
+    FOREIGN KEY (aula_id) REFERENCES aulas(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE CASCADE
+) CHARSET=utf8;
+
+CREATE TABLE discussoes_salvas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    discussao_id INT NOT NULL,
+    user_id INT NOT NULL,
+    FOREIGN KEY (discussao_id) REFERENCES discussoes(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE CASCADE
 ) CHARSET=utf8;
 
 

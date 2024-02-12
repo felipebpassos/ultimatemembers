@@ -9,22 +9,46 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <a href=""><button class="relatorio"><i class="fa-solid fa-repeat"></i>Assinaturas</button></a>
+                    <a href=""><button class="relatorio">
+                        <div class="icone"><i class="fa-solid fa-repeat"></i></div>
+                        <div class="titulo">Assinaturas</div>
+                    </button></a>
                 </div>
                 <div class="col-md-4">
-                    <a href=""><button class="relatorio"><i class="fa-solid fa-hand-holding-dollar"></i>Saldo a receber</button></a>
+                    <a href=""><button class="relatorio">
+                        <div class="icone"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                        <div class="titulo">Saldo a receber</div>  
+                    </button></a>
                 </div>
                 <div class="col-md-4">
-                    <a href=""><button class="relatorio"><i class="fa-solid fa-cart-shopping"></i>Vendas abandonadas</button></a>
+                    <a href=""><button class="relatorio">
+                        <div class="icone"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                        <div class="titulo">Histórico de ações</div> 
+                    </button></a>
                 </div>
                 <div class="col-md-4">
-                    <a href=""><button class="relatorio"><i class="fa-solid fa-wallet"></i>Saldo a receber</button></a>
+                    <a href=""><button class="relatorio">
+                        <div class="icone"><i class="fa-solid fa-chart-simple"></i></div>
+                        <div class="titulo">Desempenho dos alunos</div>          
+                    </button></a>
                 </div>
                 <div class="col-md-4">
-                    <a href="<?php echo $curso['url_principal'] . 'relatorios/avaliacoes/';?>"><button class="relatorio"><i class="fa-solid fa-star"></i>Avaliação dos assinantes</button></a>
+                    <a href="<?php echo $curso['url_principal'] . 'relatorios/avaliacoes/';?>"><button class="relatorio">
+                        <div class="icone"><i class="fa-solid fa-star"></i></div>
+                        <div class="titulo">Avaliação dos alunos</div>           
+                    </button></a>
                 </div>
                 <div class="col-md-4">
-                    <a href=""><button class="relatorio"><i class="fa-solid fa-face-smile"></i>Engajamento dos alunos</button></a>
+                    <a href=""><button class="relatorio">
+                        <div class="icone"><i class="fa-solid fa-face-smile"></i></div>
+                        <div class="titulo">Engajamento dos alunos</div> 
+                    </button></a>
+                </div>
+                <div class="col-md-4">
+                    <a href=""><button class="relatorio">
+                        <div class="icone"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <div class="titulo">Denúncias</div>              
+                    </button></a>
                 </div>
             </div>
         </div>

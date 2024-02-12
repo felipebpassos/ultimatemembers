@@ -154,6 +154,7 @@ main {
 
 .comentario p {
     margin-bottom: 10px;
+    max-width: 100%;
 }
 
 .comentario .op-comentario {
@@ -464,12 +465,19 @@ label {
     display: block;
     bottom: -25px;
     left: 50%;
+    line-height: 1.4em;
+}
+
+.op-aula:hover .legenda {
+    bottom: -55px;
 }
 
 #apostila-btn:hover .legenda,
 #apostila-div:hover .legenda {
-    bottom: -40px;
+    bottom: -55px;
 }
+
+
 
 @media (max-width:650px) {
     #proxima {

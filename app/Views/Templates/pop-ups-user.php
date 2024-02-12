@@ -91,24 +91,24 @@
         </div>
     </div>
     <h3>Denunciar comentário</h3>
-    <div action="" method="POST" id="denuncia-form-den">
+    <div action="<?php echo $curso['url_principal']; ?>modulos/denunciar/" method="POST" id="denuncia-form-den">
         <div id="checkbox-container">
-            <input type="checkbox" name="option" id="option1" class="checkbox-option" onchange="uncheckOthers(this)">
+            <input type="checkbox" name="option" id="option1" class="checkbox-option" value="1" onchange="uncheckOthers(this)">
             <label class="label-den" for="option1">Conteúdo comercial indesejado ou spam</label><br>
 
-            <input type="checkbox" name="option" id="option2" class="checkbox-option" onchange="uncheckOthers(this)">
+            <input type="checkbox" name="option" id="option2" class="checkbox-option" value="2" onchange="uncheckOthers(this)">
             <label class="label-den" for="option2">Conteúdo sexual ou pornografia </label><br>
 
-            <input type="checkbox" name="option" id="option3" class="checkbox-option" onchange="uncheckOthers(this)">
+            <input type="checkbox" name="option" id="option3" class="checkbox-option" value="3" onchange="uncheckOthers(this)">
             <label class="label-den" for="option3">Discurso de ódio ou violência explícita</label><br>
 
-            <input type="checkbox" name="option" id="option4" class="checkbox-option" onchange="uncheckOthers(this)">
+            <input type="checkbox" name="option" id="option4" class="checkbox-option" value="4" onchange="uncheckOthers(this)">
             <label class="label-den" for="option4">Assédio ou bullying</label><br>
 
-            <input type="checkbox" name="option" id="option5" class="checkbox-option" onchange="uncheckOthers(this)">
-            <label class="label-den" for="option5">Desinformação</label><br>
+            <input type="checkbox" name="option" id="option5" class="checkbox-option" value="5" onchange="uncheckOthers(this)">
+            <label class="label-den" for="option5">Desinformação ou desserviço</label><br>
 
-            <input type="checkbox" name="option" id="option6" class="checkbox-option" onchange="uncheckOthers(this)">
+            <input type="checkbox" name="option" id="option6" class="checkbox-option" value="6" onchange="uncheckOthers(this)">
             <label class="label-den" for="option6">Outro</label><br>
         </div>
 

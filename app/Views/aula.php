@@ -119,8 +119,12 @@
                                 <span class="legenda">Sem material nesta aula</span>
                             </button>
                         <?php endif; ?>
-                        <button class="op-aula"><i class="fa-regular fa-bookmark"></i><span class="legenda">Salvar
-                                Aula</span></button>
+                        <button class="op-aula salvar-aula" data-id="<?php echo $aula['id']; ?>">
+                            <i id="notsaved" class="fa-regular fa-bookmark<?php echo ($favorita ? ' hidden' : ''); ?>"></i>
+                            <i id="saved" class="fa-solid fa-bookmark<?php echo (!$favorita ? ' hidden' : ''); ?>"></i>
+                            <span id="notsaved-sub" class="legenda<?php echo ($favorita ? ' hidden' : ''); ?>">Adicionar aos favoritos</span>
+                            <span id="saved-sub" class="legenda<?php echo (!$favorita ? ' hidden' : ''); ?>">Remover dos favoritos</span>
+                        </button>
                     </div>
                 </div>
 
@@ -287,13 +291,15 @@
                                             if ($id_autor === $id) {
                                                 // Se o usuário logado for o autor do comentário
                                                 ?>
-                                                <button class="acao-btn deletar-comentario" data-id="<?php echo $id_comentario; ?>"><i
+                                                <button class="acao-btn deletar-comentario"
+                                                    data-id="<?php echo $id_comentario; ?>"><i
                                                         class="fa-solid fa-trash"></i>Deletar</button>
                                                 <?php
-                                            } elseif (($adm) && (!$instrutor))  {
+                                            } elseif (($adm) && (!$instrutor)) {
                                                 // Se o usuário logado for adm
                                                 ?>
-                                                <button class="acao-btn deletar-comentario" data-id="<?php echo $id_comentario; ?>"><i
+                                                <button class="acao-btn deletar-comentario"
+                                                    data-id="<?php echo $id_comentario; ?>"><i
                                                         class="fa-solid fa-trash"></i>Deletar</button>
                                                 <?php
                                             } else {
