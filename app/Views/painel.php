@@ -3,6 +3,11 @@
     <div class="fade-right"></div>
     <div class="fade-top"></div>
     <div class="fade-bottom"></div>
+    <?php
+    if ($adm == 1) {
+        echo '<button class="editar" id="editar-banners"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>';
+    }
+    ?>
     <div class="slides">
         <img src="http://localhost/ultimatemembers/public/img/banner.png" alt="Banner 1">
     </div>
