@@ -29,6 +29,7 @@
                                 $publicacao = calcularTempoDecorrido($discussao['publish_date']);
                                 $likes = $discussao['likes'];
                                 $replies = $discussao['replies'];
+                                $favorita = $discussao['favorita'];
                                 ?>
 
                                 <div class="slides">
@@ -52,9 +53,12 @@
                                                             <i class="fa-solid fa-trash-can" style="font-size:18px;"></i>
                                                         </button>
                                                     <?php else: ?>
-                                                        <button id="save-discussao" style="margin:0 5px; padding: 0;"
+                                                        <button class="salvar-post" style="margin:0 5px; padding: 0;"
                                                             data-id="<?php echo $discussaoid; ?>">
-                                                            <i class="fa-regular fa-bookmark" style="font-size:20px;"></i>
+                                                            <i id="notsaved" class="fa-regular fa-bookmark<?php echo ($favorita ? ' hidden' : ''); ?>" style="font-size:20px;"></i>
+                                                            <i id="saved" class="fa-solid fa-bookmark<?php echo (!$favorita ? ' hidden' : ''); ?>" style="font-size:20px;"></i>
+                                                            <span id="notsaved-sub" class="legenda<?php echo ($favorita ? ' hidden' : ''); ?>">Adicionar aos favoritos</span>
+                                                            <span id="saved-sub" class="legenda<?php echo (!$favorita ? ' hidden' : ''); ?>">Remover dos favoritos</span>
                                                         </button>
                                                     <?php endif; ?>
                                                 </div>
@@ -130,12 +134,6 @@
 
                             <div class="fade-bottom"></div>
 
-                            <div class="dots">
-                                <?php for ($i = 0; $i < count($topDiscussoes); $i++): ?>
-                                    <span class="dot" onclick="currentSlide(<?php echo $i + 1; ?>)"></span>
-                                <?php endfor; ?>
-                            </div>
-
                             <div class="arrows">
                                 <button class="prev" onclick="plusSlides(-1)"
                                     style="margin-right: 15px; background-color: transparent; border: none;"><img
@@ -146,6 +144,13 @@
                                         src="http://localhost/ultimatemembers/public/img/next.png" width="30px"
                                         alt="próximo"></button>
                             </div>
+
+                        </div>
+
+                        <div class="dots">
+                            <?php for ($i = 0; $i < count($topDiscussoes); $i++): ?>
+                                <span class="dot" onclick="currentSlide(<?php echo $i + 1; ?>)"></span>
+                            <?php endfor; ?>
                         </div>
 
                         <div class="search-container">

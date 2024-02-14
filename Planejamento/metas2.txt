@@ -21,6 +21,7 @@ editar integração
 
 
 -Revisar segurança
+-Revisar mensagens de erro e sucesso
 -Responsividade de todas as páginas
 
 

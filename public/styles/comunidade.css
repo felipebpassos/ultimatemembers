@@ -7,8 +7,8 @@ main {
 
 .publicacoes-relevantes {
     border-radius: 8px;
-    height: 300px;
-    margin-bottom: 30px;
+    height: 290px;
+    margin-bottom: 20px;
     position: relative;
     background-color: var(--cor-secundaria-light);
 }
@@ -17,6 +17,18 @@ main {
     min-height: 0 !important;
     height: 120px;
     overflow-y: hidden;
+}
+
+.salvar-post {
+    position: relative;
+}
+
+.salvar-post:hover .legenda {
+    transform: translateX(-50%);
+    display: block;
+    bottom: -55px;
+    left: 50%;
+    line-height: 1.4em;
 }
 
 .publicacoes-relevantes .fade-bottom {
@@ -33,7 +45,7 @@ main {
     display: flex;
     justify-content: end;
     position: absolute;
-    bottom: 0;
+    bottom: -10px;
     width: 95%;
     z-index: 11;
 }
@@ -64,11 +76,9 @@ main {
 .dots {
     display: flex;
     align-items: center;
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
+    margin: auto;
+    margin-bottom: 20px;
     width: fit-content;
-    transform: translateX(-50%);
     z-index: 12;
 }
 

@@ -582,7 +582,7 @@ body {
     border: none;
     background-color: inherit;
     color: var(--cor-primaria-dark);
-    transition: transform 0.3s;
+    transition: all 0.3s;
 }
 
 .editar i,
@@ -626,6 +626,11 @@ body {
     z-index: 20;
     top: 20px;
     box-shadow: 0px 0px 12px var(--sombra);
+}
+
+#editar-banners:hover {
+    transform: scale(1);
+    background-color: var(--cor-secundaria-lighter);
 }
 
 #editar-banners i {
@@ -983,7 +988,8 @@ body {
 }
 
 .modulos-list,
-.trilhas-list {
+.trilhas-list,
+.banners-list {
     height: 65vh;
     overflow-y: auto;
     background-color: var(--cor-secundaria-light);
@@ -996,23 +1002,27 @@ body {
 }
 
 .modulos-list::-webkit-scrollbar,
-.trilhas-list::-webkit-scrollbar {
+.trilhas-list::-webkit-scrollbar,
+.banners-list::-webkit-scrollbar {
     width: 8px;
 }
 
 .modulos-list::-webkit-scrollbar-track,
-.trilhas-list::-webkit-scrollbar-track {
+.trilhas-list::-webkit-scrollbar-track,
+.banners-list::-webkit-scrollbar-track {
     background-color: transparent;
 }
 
 .modulos-list::-webkit-scrollbar-thumb,
-.trilhas-list::-webkit-scrollbar-thumb {
+.trilhas-list::-webkit-scrollbar-thumb,
+.banners-list::-webkit-scrollbar-thumb {
     background-color: var(--cor-secundaria-lightest);
     border-radius: 0;
 }
 
 .modulos-list li,
 .trilhas-list li,
+.banners-list li,
 .trilha-modulos li {
     padding: 20px 10px;
     padding-left: 0;
@@ -1035,20 +1045,20 @@ body {
     color: var(--cor-primaria-light);
 }
 
-.indice-modulo, .indice-trilha {flex: 0.15; min-width: 50px; text-align: center;}
-.nome-modulo, .nome-trilha {flex: 1;}
+.indice-modulo, .indice-trilha, .indice-banner {flex: 0.15; min-width: 50px; text-align: center;}
+.nome-modulo, .nome-trilha, .nome-banner {flex: 1;}
 
-.op-modulo, .op-trilha {min-width: 160px;}
+.op-modulo, .op-trilha, .op-banner {min-width: 160px;}
 
 .trilha-modulos li .op-modulo {
     min-width: 30px;
 }
 
-.op-modulo button, .op-trilha button {
+.op-modulo button, .op-trilha button, .op-banner button {
     position: unset;
 }
 
-.op-modulo button i, .op-trilha button i {
+.op-modulo button i, .op-trilha button i, .op-banner button i {
     font-size: 16px !important;
 }
 

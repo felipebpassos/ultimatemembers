@@ -48,7 +48,7 @@ class comunidadeController extends Controller
         $data['description'] = '';
         $data['styles'] = array('painel', 'header', 'search-bar', 'lista_resultados', 'comunidade');
         $data['scripts_head'] = array('select');
-        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'multiplo_select', 'fade-in-slide-up', 'pub_relevantes');
+        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'multiplo_select', 'fade-in-slide-up', 'pub_relevantes', 'salvar');
 
         //load view
         $this->loadTemplates($template, $data, $usuario);
@@ -98,6 +98,8 @@ class comunidadeController extends Controller
         //set template
         $template = 'painel-temp';
 
+        $data['favorita'] = $comunidade->isFavorita($id, $usuario['id']);
+
         //set page data
         $data['curso'] = $this->cursoInfo;
         $data['view'] = 'discussao';
@@ -105,7 +107,7 @@ class comunidadeController extends Controller
         $data['description'] = '';
         $data['styles'] = array('painel', 'header', 'lista_resultados', 'comunidade');
         $data['scripts_head'] = array('');
-        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'publicar', 'like_dislike');
+        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'publicar', 'like_dislike', 'salvar');
 
         //load view
         $this->loadTemplates($template, $data, $usuario);
@@ -230,5 +232,31 @@ class comunidadeController extends Controller
         }
     }
 
+    public function favoritar()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            // Verifique se as variáveis POST estão definidas
+            if (isset($_POST['discussaoId'])) {
+                // Recupere os valores das variáveis POST e armazene em variáveis locais
+                $discussaoId = $_POST['discussaoId'];
+
+                $usuario = $this->usuario['id'];
+
+                $aulas = new Comunidade();
+
+                $resultado = $aulas->setDiscussaoFavorita($usuario, $discussaoId);
+
+                // Retorna a resposta em formato JSON
+                header('Content-Type: application/json');
+                echo json_encode($resultado);
+            }
+
+        } else {
+
+            print_r('erro');
+            exit;
+        }
+    }
 
 }

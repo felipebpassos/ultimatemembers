@@ -277,12 +277,14 @@ class Comunidade
         u.foto_caminho AS foto,
         (SELECT COUNT(DISTINCT dl.like_id) FROM discussoes_likes dl WHERE dl.item_id = d.id AND dl.item_type = "d") AS likes,
         (SELECT COUNT(DISTINCT r.id) FROM discussoes_respostas r WHERE r.discussion_id = d.id) AS replies,
-        (SELECT COUNT(*) FROM discussoes_likes dl WHERE dl.item_id = d.id AND dl.item_type = "d" AND dl.user_id = :usuario_id) AS user_liked
+        (SELECT COUNT(*) FROM discussoes_likes dl WHERE dl.item_id = d.id AND dl.item_type = "d" AND dl.user_id = :usuario_id) AS user_liked,
+        (CASE WHEN (SELECT COUNT(*) FROM discussoes_salvas ds WHERE ds.discussao_id = d.id AND ds.user_id = :usuario_id) > 0 THEN 1 ELSE 0 END) AS favorita
       FROM
         discussoes d
       INNER JOIN usuarios u ON d.user_id = u.id
       LEFT JOIN discussoes_likes dl ON d.id = dl.item_id AND dl.item_type = "d"
       LEFT JOIN discussoes_respostas r ON d.id = r.discussion_id
+      LEFT JOIN discussoes_salvas ds ON d.id = ds.discussao_id
       WHERE d.id_curso = :id_curso
       GROUP BY
         d.id, d.title, d.content, u.nome, u.foto_caminho
@@ -298,6 +300,61 @@ class Comunidade
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function setDiscussaoFavorita($usuarioId, $discussaoId)
+    {
+        // Verifica se já existe uma entrada para a mesma discussao e o mesmo usuário
+        $existeDiscussaoSalva = $this->existeDiscussaoSalva($usuarioId, $discussaoId);
 
+        // Se já existir uma entrada, exclua-a
+        if ($existeDiscussaoSalva) {
+            $this->excluirDiscussaoSalva($usuarioId, $discussaoId);
+            return "Discussao removida dos favoritos";
+        } else {
+            // Se não existir uma entrada, insira uma nova
+            $query = 'INSERT INTO discussoes_salvas (discussao_id, user_id) VALUES (:discussao_id, :user_id)';
+            $stmt = $this->con->prepare($query);
+            $stmt->bindValue(':discussao_id', $discussaoId);
+            $stmt->bindValue(':user_id', $usuarioId);
+
+            if ($stmt->execute()) {
+                return "Discussão adicionada aos favoritos";
+            } else {
+                return "Erro ao salvar discussão nos favoritos";
+            }
+        }
+    }
+
+    // Verifica se já existe uma entrada para a mesma discussões e o mesmo usuário
+    private function existeDiscussaoSalva($usuarioId, $discussaoId)
+    {
+        $query = 'SELECT COUNT(*) as total FROM discussoes_salvas WHERE discussao_id = :discussao_id AND user_id = :user_id';
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':discussao_id', $discussaoId);
+        $stmt->bindValue(':user_id', $usuarioId);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['total'] > 0;
+    }
+
+    // Exclui uma entrada para a mesma discussão e o mesmo usuário
+    private function excluirDiscussaoSalva($usuarioId, $discussaoId)
+    {
+        $query = 'DELETE FROM discussoes_salvas WHERE discussao_id = :discussao_id AND user_id = :user_id';
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':discussao_id', $discussaoId);
+        $stmt->bindValue(':user_id', $usuarioId);
+        return $stmt->execute();
+    }
+
+    public function isFavorita($discussaoId, $usuarioId)
+    {
+        $query = 'SELECT COUNT(*) as total FROM discussoes_salvas WHERE discussao_id = :discussao_id AND user_id = :user_id';
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':discussao_id', $discussaoId);
+        $stmt->bindValue(':user_id', $usuarioId);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['total'] > 0;
+    }
 
 }

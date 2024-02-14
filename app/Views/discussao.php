@@ -49,8 +49,11 @@ $foto_autor = $discussao['foto'];
                             class="fa-regular fa-heart <?php echo $discussao['user_liked'] ? 'hidden' : ''; ?>"></i>
                         <i id="liked" class="fa-solid fa-heart <?php echo $discussao['user_liked'] ? '' : 'hidden'; ?>"></i>
                     </button>
-                    <button id="save-discussao" data-id="<?php echo $discussao['id']; ?>">
-                        <i class="fa-regular fa-bookmark"></i>
+                    <button class="salvar-post" data-id="<?php echo $discussao['id']; ?>">
+                        <i id="notsaved" class="fa-regular fa-bookmark<?php echo ($favorita ? ' hidden' : ''); ?>"></i>
+                        <i id="saved" class="fa-solid fa-bookmark<?php echo (!$favorita ? ' hidden' : ''); ?>"></i>
+                        <span id="notsaved-sub" class="legenda<?php echo ($favorita ? ' hidden' : ''); ?>">Adicionar aos favoritos</span>
+                        <span id="saved-sub" class="legenda<?php echo (!$favorita ? ' hidden' : ''); ?>">Remover dos favoritos</span>
                     </button>
                 <?php endif; ?>
             </div>

@@ -300,7 +300,6 @@
                     <h2 style="margin: 10px 0; color: var(--cor-primaria);">0</h2>
                     <span style="font-size: 14px; color: var(--cor-primaria);">Total concluído</span>
                 </a>
-
             </li>
             <li>
                 <a href="">
