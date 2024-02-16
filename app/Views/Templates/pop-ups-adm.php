@@ -294,14 +294,14 @@
                     <div class="op-modulo">
                         <button class="up-list" id="up-list" data-id="' . $id . '"><i class="fa-solid fa-caret-up"></i><span class="legenda">Subir</span></button>
                         <button class="down-list" id="down-list" data-id="' . $id . '"><i class="fa-solid fa-caret-down"></i><span class="legenda">Descer</span></button>
-                        <button class="editar-modulo" id="editar-modulo" data-id="' . $id . '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
-                        <button class="delete-modulo" id="delete-modulo" data-id="' . $id . '"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>
+                        <button class="editar-modulo editar" id="editar-modulo" data-id="' . $id . '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
+                        <button class="delete-modulo editar" id="delete-modulo" data-id="' . $id . '"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>
                     </div> 
                     </li>';
                 }
             } else {
                 // Caso a variável de sessão 'modulos' não exista ou esteja vazia
-                echo 'Nenhum módulo criado.';
+                echo '<h5>Nenhum módulo criado.</h5>';
             }
             ?>
 
@@ -532,14 +532,14 @@
                     <div class="op-trilha">
                         <button class="up-list" id="up-list" data-id="' . $id . '"><i class="fa-solid fa-caret-up"></i><span class="legenda">Subir</span></button>
                         <button class="down-list" id="down-list" data-id="' . $id . '"><i class="fa-solid fa-caret-down"></i><span class="legenda">Descer</span></button>
-                        <button class="editar-trilha" id="editar-trilha" data-id="' . $id . '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
-                        <button class="delete-trilha" id="delete-trilha" data-id="' . $id . '"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>
+                        <button class="editar-trilha editar" id="editar-trilha" data-id="' . $id . '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
+                        <button class="delete-trilha editar" id="delete-trilha" data-id="' . $id . '"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>
                     </div> 
                     </li>';
                 }
             } else {
                 // Caso a variável 'trilhas' não exista ou esteja vazia
-                echo 'Nenhuma trilha criada.';
+                echo '<h5>Nenhuma trilha criada.</h5>';
             }
             ?>
 
@@ -877,20 +877,103 @@
                     <div class="op-banner">
                         <button class="up-list" id="up-list" data-id="' . $id . '"><i class="fa-solid fa-caret-up"></i><span class="legenda">Subir</span></button>
                         <button class="down-list" id="down-list" data-id="' . $id . '"><i class="fa-solid fa-caret-down"></i><span class="legenda">Descer</span></button>
-                        <button class="editar-banner" id="editar-banner" data-id="' . $id . '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
-                        <button class="delete-banner" id="delete-banner" data-id="' . $id . '"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>
+                        <button class="editar-banner editar" id="editar-banner" data-id="' . $id . '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
+                        <button class="delete-banner editar" id="delete-banner" data-id="' . $id . '"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>
                     </div> 
                     </li>';
                 }
             } else {
                 // Caso a variável 'banners' não exista ou esteja vazia
-                echo 'Nenhum banner criado.';
+                echo '<h5>Nenhum banner criado.</h5>';
             }
             ?>
 
         </ul>
 
-        <button class="btn-2" id="add-trilha" style="margin:auto;">Novo Banner</button>
+        <button class="btn-2" id="add-banner" style="margin:auto;">Novo Banner</button>
 
+    </div>
+</div>
+
+<!-- Formulário para adicionar banner -->
+<div id="addBanner" class="popup">
+    <div class="popup-content">
+
+        <div class="close-container">
+            <div class="close" id="closePopupAddBanner" onmouseover="startAnimation()" onmouseout="resetAnimation()">
+                <svg class="close-ring" width="51" height="51">
+                    <circle class="close-ring__circle" id="closeCircle" stroke="var(--cor-primaria-light)"
+                        stroke-width="2" fill="transparent" r="23" cx="25" cy="25" />
+                    <circle class="close-ring__circle-full" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2"
+                        fill="transparent" r="23" cx="25" cy="25" />
+                </svg>
+                <svg class="x" viewBox="0 0 12 12" style="height: 12px; width: 12px;">
+                    <path stroke="rgb(180, 180, 180)" fill="rgb(180, 180, 180)"
+                        d="M4.674 6L.344 1.05A.5.5 0 0 1 1.05.343L6 4.674l4.95-4.33a.5.5 0 0 1 .707.706L7.326 6l4.33 4.95a.5.5 0 0 1-.706.707L6 7.326l-4.95 4.33a.5.5 0 0 1-.707-.706L4.674 6z">
+                    </path>
+                </svg>
+            </div>
+        </div>
+
+        <h2 style="margin: auto; font-weight: bold; width:fit-content;">Novo Banner</h2>
+
+        <form id="bannerFormAdd" action="<?php echo $curso['url_principal']; ?>painel/novo_banner/" enctype="multipart/form-data" method="POST">
+
+            <div style="width: 600px; margin: auto;">
+
+                <div class="mb-3">
+                    <label class="form-label" for="nomeBanner">Nome do banner</label>
+                    <div class="campo-popup" style="width: 100%;">
+                        <input type="text" id="nomeBanner" name="nomeBanner" class="campo-input"
+                            placeholder="Digite o nome do banner" required>
+                    </div>
+                </div>
+
+                <div class="mb-1">
+                    <div class="checkbox-container" style="display: flex;">
+                        <input type="checkbox" name="acaoBtn" id="acao-btn-checkbox" class="acao-btn-checkbox">
+                        <label class="label-checkbox" for="acao-btn-checkbox" style="display: flex; align-items: center;">Botão de ação <span class="info-span"
+                                id="info-btn-acao"><i class="fa-solid fa-info"></i>
+                                <span class="legenda" style="width: 260px;">Botão de link para produto, lançamento ou qualquer outro conteúdo</span></span></label>
+                    </div>
+                </div>
+
+                <div class="mb-1">
+                    <div class="campo-popup" style="width: 100%; margin-bottom: 20px;">
+                        <input type="text" id="textoBotao" name="textoBotao" class="campo-input"
+                            placeholder="Texto do botão de ação" disabled>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="campo-popup" style="width: 100%;">
+                        <input type="text" id="linkBotao" name="linkBotao" class="campo-input"
+                            placeholder="Link de redirecionamento" disabled>
+                    </div>
+                </div>
+
+                <div class="mb-1">
+                    <label class="form-label" style="display: flex; align-items: center;">Imagem do banner <span class="info-span" id="info-banner-img"><i
+                                class="fa-solid fa-info"></i>
+                            <span class="legenda" style="width: 260px;">Proporção recomendada: 3:1<br>
+                                Formatos aceitos: .png ou .jpeg<br>
+                                Tamanho máximo: 3 MB</span></span></label>
+                    <div class="drop-area" id="dropImgBanner">
+                        Arraste e solte uma imagem aqui ou clique para fazer upload.
+                        <span id="imgInfoBanner"></span>
+                        <input type="file" id="banner" style="width: 0; height:0; margin:0;" name="banner"
+                            accept="img/*" required>
+                    </div>
+                </div>
+
+                <div class="mb-2">
+                    <button class="preview-btn" type="button" id="preview-banner">Pré-visualização <i
+                            class="fa-solid fa-eye" id="togglePassword1"></i></button>
+                </div>
+
+            </div>
+
+            <button class="btn-2" type="submit" style="margin: auto; margin-top: 20px;">Criar Banner</button>
+        </form>
     </div>
 </div>

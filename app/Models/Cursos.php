@@ -203,4 +203,51 @@ class Cursos
         return $integracoes;
     }
 
+    public function setBanner($nomeBanner, $banner, $acaoBotao, $textoBotao, $linkBotao, $curso)
+    {
+        try {
+            // Prepara a query SQL para inserir o novo banner na tabela de banners
+            $sql = "INSERT INTO banners (nome_banner, banner, botao_acao, texto_botao, link_botao, id_curso) VALUES (:nomeBanner, :banner, :acaoBotao, :textoBotao, :linkBotao, :curso)";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindParam(':nomeBanner', $nomeBanner, PDO::PARAM_STR);
+            $stmt->bindParam(':banner', $banner, PDO::PARAM_STR);
+            $stmt->bindParam(':acaoBotao', $acaoBotao, PDO::PARAM_BOOL);
+            $stmt->bindParam(':textoBotao', $textoBotao, PDO::PARAM_STR);
+            $stmt->bindParam(':linkBotao', $linkBotao, PDO::PARAM_STR);
+            $stmt->bindParam(':curso', $curso, PDO::PARAM_INT);
+
+            // Executa a query SQL
+            $stmt->execute();
+
+            // Verifica se a inserção foi bem-sucedida
+            if ($stmt->rowCount() > 0) {
+                return true; // Retorna true se a inserção foi bem-sucedida
+            } else {
+                return false; // Retorna false se nenhum registro foi inserido
+            }
+        } catch (PDOException $e) {
+            // Em caso de erro, você pode tratar a exceção aqui
+            echo "Erro: " . $e->getMessage();
+            return false; // Retorna false em caso de erro
+        }
+    }
+
+    public function getBanners($id_curso)
+    {
+        try {
+            // Prepara a query SQL para selecionar todos os banners de um curso específico
+            $sql = "SELECT * FROM banners WHERE id_curso = :id_curso";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindParam(':id_curso', $id_curso, PDO::PARAM_INT);
+            $stmt->execute();
+
+            // Retorna os resultados como um array associativo
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            // Em caso de erro, você pode tratar a exceção aqui
+            echo "Erro: " . $e->getMessage();
+            return array(); // Retorna um array vazio em caso de erro
+        }
+    }
+
 }

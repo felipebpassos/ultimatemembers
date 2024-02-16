@@ -3,26 +3,21 @@
     <div class="fade-right"></div>
     <div class="fade-top"></div>
     <div class="fade-bottom"></div>
-    <?php
-    if ($adm == 1) {
-        echo '<button class="editar" id="editar-banners"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>';
-    }
-    ?>
-    <div class="slides">
-        <img src="http://localhost/ultimatemembers/public/img/banner.png" alt="Banner 1">
-    </div>
-    <div class="slides">
-        <img src="http://localhost/ultimatemembers/public/img/banner2.jpg" alt="Banner 2">
-    </div>
-    <div class="slides">
-        <img src="http://localhost/ultimatemembers/public/img/banner3.jpg" alt="Banner 3">
-    </div>
-    <div class="slides">
-        <img src="http://localhost/ultimatemembers/public/img/banner4.jpg" alt="Banner 4">
-    </div>
-    <div class="slides">
-        <img src="http://localhost/ultimatemembers/public/img/banner.png" alt="Banner 5">
-    </div>
+    <?php if ($adm == 1): ?>
+        <button class="editar" id="editar-banners"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
+    <?php endif; ?>
+
+    <?php if (empty($banners)): ?>
+        <div class="slides">
+            <img src="http://localhost/ultimatemembers/public/img/default_banner.png" alt="Banner default">
+        </div>
+    <?php else: ?>
+        <?php foreach ($banners as $banner): ?>
+            <div class="slides">
+                <img src="<?php echo str_replace("./", "http://localhost/ultimatemembers/", $banner['banner']); ?>" alt="<?php echo $banner['nome_banner']; ?>">
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
 </div>
 
 <script>
@@ -40,14 +35,13 @@
     window.addEventListener('resize', calcularAlturaTotal);
 </script>
 
-<div class="dots" style="display: flex; justify-content:center; align-items: center;">
-    <span class="dot" onclick="currentSlide(1)"></span>
-    <span class="dot" onclick="currentSlide(2)"></span>
-    <span class="dot" onclick="currentSlide(3)"></span>
-    <span class="dot" onclick="currentSlide(4)"></span>
-    <span class="dot" onclick="currentSlide(5)"></span>
-    <!-- Adicione mais pontos aqui conforme necessário -->
-</div>
+<?php if (count($banners) > 1): ?>
+    <div class="dots" style="display: flex; justify-content:center; align-items: center;">
+        <?php for ($i = 0; $i < count($banners); $i++): ?>
+            <span class="dot" onclick="currentSlide(<?php echo $i + 1; ?>)"></span>
+        <?php endfor; ?>
+    </div>
+<?php endif; ?>
 
 <main>
 

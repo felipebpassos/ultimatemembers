@@ -52,6 +52,8 @@ class painelController extends Controller
 
         $aulasPorModulo = $modulosModel->getAulasPorModulo($this->curso);
 
+        $banners = $this->cursosModel->getBanners($this->curso);
+
         $lancamentos = $this->cursosModel->getLancamentos();
 
         // Busca aulas concluídas pelo usuário
@@ -62,6 +64,7 @@ class painelController extends Controller
         $data['trilhas'] = $trilhas;
         $data['aulasPorModulo'] = $aulasPorModulo;
         $data['aulasConcluidas'] = $aulasConcluidas;
+        $data['banners'] = $banners;
         $data['lancamentos'] = $lancamentos;
 
         // set template
@@ -78,6 +81,79 @@ class painelController extends Controller
 
         // Carrega a view passando $_SESSION['usuario']
         $this->loadTemplates($template, $data, $usuario);
+    }
+
+    public function novo_banner()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            // Verifique se as variáveis POST estão definidas
+            if (isset($_POST['nomeBanner']) && isset($_FILES['banner']) && $_FILES['banner']['error'] === UPLOAD_ERR_OK && !empty($_FILES['banner'])) {
+
+                // Carrega dados do usuário
+                $usuario = $this->usuario;
+                $this->sessao->autorizaAdm($usuario['adm'], $this->cursoInfo['url_principal']);
+
+                // Recupere os valores das variáveis POST e armazene em variáveis locais
+                $nomeBanner = $_POST['nomeBanner'];
+                $botaoAcao = isset($_POST['acaoBtn']) ? $_POST['acaoBtn'] : 0;
+
+                // Verifique se o checkbox "acao-btn" está marcado
+                if ($botaoAcao) {
+                    // Verifique se os campos "textoBotao" e "linkBotao" estão preenchidos
+                    if (isset($_POST['textoBotao']) && isset($_POST['linkBotao'])) {
+
+                        $textoBotao = $_POST['textoBotao'];
+                        $linkBotao = $_POST['linkBotao'];
+
+                    } else {
+                        // Retorna uma mensagem de erro se os campos "textoBotao" ou "linkBotao" estiverem ausentes
+                        print_r('erro');
+                        exit;
+                    }
+                } else {
+                    $textoBotao = null;
+                    $linkBotao = null;
+                }
+
+                // faz upload do banner
+                $banner = $this->cursosModel->uploadFile($_FILES['banner'], $this->cursoInfo['dir_name']);
+
+                if ($banner) {
+
+                    $resultado = $this->cursosModel->setBanner($nomeBanner, $banner, $botaoAcao, $textoBotao, $linkBotao, $this->curso);
+
+                    if ($resultado) {
+
+                        header("Location: " . $this->cursoInfo['url_principal'] . "painel/");
+                        exit(); // Certifica-se de que o script seja encerrado após o redirecionamento
+
+                    } else {
+
+                        print_r('erro');
+                        exit;
+
+                    }
+
+                } else {
+
+                    print_r('Erro no upload');
+                    exit;
+
+                }
+
+            } else {
+
+                print_r('erro');
+                exit;
+
+            }
+
+        } else {
+
+            print_r('erro');
+            exit;
+        }
     }
 
     public function progresso()
@@ -443,7 +519,7 @@ class painelController extends Controller
 
                 }
 
-                // Verifica se há favicon fornecido
+                // Verifica se há imagem de contato fornecido
                 if (isset($_FILES['contato']) && $_FILES['contato']['error'] === UPLOAD_ERR_OK && !empty($_FILES['contato'])) {
 
                     $contato = $cursosModel->uploadFile($_FILES['contato'], $cursoInfo['dir_name']);
@@ -571,5 +647,3 @@ class painelController extends Controller
     }
 
 }
-
-?>

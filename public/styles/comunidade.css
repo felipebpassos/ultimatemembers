@@ -6,7 +6,7 @@ main {
 /* comunidade.php */
 
 .publicacoes-relevantes {
-    border-radius: 8px;
+    border-radius: 3px;
     height: 290px;
     margin-bottom: 20px;
     position: relative;
@@ -168,7 +168,6 @@ main {
 .top-contribuintes {
     color: var(--cor-primaria);
     background-color: var(--cor-secundaria-light);
-    box-shadow: 0px 0px 12px var(--sombra);
     max-height: 600px;
     border-radius: 3px;
     padding: 20px;
@@ -593,7 +592,11 @@ textarea:focus {
 
 .answers {
     box-sizing: border-box;
-    margin-bottom: 80px;
+    min-height: 140px;
+}
+
+.answers h5 {
+    margin-top: 20px;
 }
 
 .answer {

@@ -26,6 +26,10 @@ const dropImgModuloEdit = document.getElementById('dropImgModuloEdit');
 const imgInfoModuloEdit = document.getElementById('imgInfoModuloEdit');
 const capaModuloEdit = document.getElementById('capaModuloEdit');
 
+const dropImgBanner = document.getElementById('dropImgBanner');
+const imgInfoBanner = document.getElementById('imgInfoBanner');
+const banner = document.getElementById('banner');
+
 // Impedir o comportamento padrão de arrastar e soltar para dropVideo
 dropVideoModulo.addEventListener('dragover', (e) => {
     e.preventDefault();
@@ -133,6 +137,21 @@ dropImgModuloEdit.addEventListener('drop', (e) => {
     handleImageFile(imgInfoModuloEdit, e.dataTransfer.files[0]);
 });
 
+dropImgBanner.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropImgBanner.classList.add('active');
+});
+
+dropImgBanner.addEventListener('dragleave', () => {
+    dropImgBanner.classList.remove('active');
+});
+
+dropImgBanner.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropImgBanner.classList.remove('active');
+    handleVideoFile(imgInfoBanner, e.dataTransfer.files[0]);
+});
+
 // Lidar com o clique para selecionar um arquivo de vídeo
 dropVideoModulo.addEventListener('click', () => {
     videoModulo.click();
@@ -189,6 +208,14 @@ dropImgModuloEdit.addEventListener('click', () => {
 
 capaModuloEdit.addEventListener('change', () => {
     handleImageFile(imgInfoModuloEdit, capaModuloEdit.files[0]);
+});
+
+dropImgBanner.addEventListener('click', () => {
+    banner.click();
+});
+
+banner.addEventListener('change', () => {
+    handleImageFile(imgInfoBanner, banner.files[0]);
 });
 
 // Função para lidar com o arquivo de vídeo selecionado ou arrastado

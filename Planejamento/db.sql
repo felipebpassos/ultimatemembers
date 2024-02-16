@@ -1,6 +1,6 @@
 use reelsdecinema;
 
-drop table aulas_nao_finalizadas;
+drop table banners;
 
 select * from trilhas;
 
@@ -52,7 +52,7 @@ ALTER TABLE tags_forum
 ADD CONSTRAINT fk_tags_forum_curso
 FOREIGN KEY (id_curso) REFERENCES cursos(id);
 
-select * from aulas_salvas;
+select * from banners;
 
 select * from integracoes_api;
 
@@ -315,6 +315,20 @@ CREATE TABLE discussoes_salvas (
     FOREIGN KEY (discussao_id) REFERENCES discussoes(id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE CASCADE
 ) CHARSET=utf8;
+
+CREATE TABLE banners (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome_banner VARCHAR(50) NOT NULL,
+    banner VARCHAR(200) NOT NULL,
+    botao_acao BOOLEAN NOT NULL,
+    texto_botao VARCHAR(20),
+    link_botao VARCHAR(200),
+    id_curso INT,
+    FOREIGN KEY (id_curso)
+        REFERENCES cursos(id)
+        ON DELETE CASCADE
+) CHARSET=utf8;
+
 
 
 

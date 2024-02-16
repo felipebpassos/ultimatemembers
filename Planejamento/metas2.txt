@@ -11,16 +11,17 @@ editar integração
 -Banners e lançamentos dinâmicos
 -Fazer editor de texto funcionar
 -Fazer funcionar pesquisas
--Fazer paginação onde necessitar
+-Fazer funcionar mudança de índice (arrows up e down)
+-Fazer paginação onde necessitar (comunidade, trilhas e tabelas)
 -Fazer sistema de avaliações (questionários)
--Fazer sistema de salvar publicações
 -Deletar e reportar posts e replies de posts
 -Fazer gameficação
+-relatórios
 
 -Fazer funcionar simple e multiple selects onde tiver
 
 
--Revisar segurança
+-Revisar segurança - verificar se usuario é do curso nos controllers
 -Revisar mensagens de erro e sucesso
 -Responsividade de todas as páginas
 

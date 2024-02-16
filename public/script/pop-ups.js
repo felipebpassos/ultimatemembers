@@ -225,6 +225,18 @@ $('#closePopupBanners').click(function () {
     fecharFormulario('banners');
 });
 
+// Quando o botão de adicionar modulo for clicado
+$('#add-banner').click(function () {
+    $('#banners-list').hide();
+    $('#addBanner').show(); // Exibir o formulário
+});
+
+// Quando o botão de fechar for clicado
+$('#closePopupAddBanner').click(function () {
+    $('#addBanner').hide();
+    $('#banners-list').show();
+});
+
 //USUÁRIOS
 
 // Quando o botão de adicionar aula for clicado

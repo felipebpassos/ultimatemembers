@@ -47,7 +47,7 @@
                 <div class="col-md-4">
                     <a href=""><button class="relatorio">
                         <div class="icone"><i class="fa-solid fa-triangle-exclamation"></i></div>
-                        <div class="titulo">Denúncias</div>              
+                        <div class="titulo">Central de denúncias</div>              
                     </button></a>
                 </div>
             </div>

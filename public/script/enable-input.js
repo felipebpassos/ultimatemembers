@@ -14,14 +14,12 @@ function updateDataHoraInputs(dataInput, horaInput, radio) {
     }
 }
 
-
 // Obtenha referências aos elementos de botões de opção do primeiro conjunto
 const disponivelRadio = document.getElementById('disponivel');
 const emBreveRadio = document.getElementById('em_breve');
 const indisponivelRadio = document.getElementById('indisponivel');
 const dataInput = document.getElementById('data');
 const horaInput = document.getElementById('hora');
-
 
 // Obtenha referências aos elementos de botões de opção do segundo conjunto
 const disponivelEditRadio = document.getElementById('disponivelEdit');
@@ -39,4 +37,30 @@ indisponivelRadio.addEventListener('change', () => updateDataHoraInputs(dataInpu
 disponivelEditRadio.addEventListener('change', () => updateDataHoraInputs(dataEditInput, horaEditInput, disponivelEditRadio));
 emBreveEditRadio.addEventListener('change', () => updateDataHoraInputs(dataEditInput, horaEditInput, emBreveEditRadio));
 indisponivelEditRadio.addEventListener('change', () => updateDataHoraInputs(dataEditInput, horaEditInput, indisponivelEditRadio));
+
+
+// Função para atualizar os campos de botão de ação
+function updateBotaoAcaoInputs(textoInput, linkInput, radio) {
+    // Verifique qual botão de opção está selecionado
+    if (radio.checked) {
+        // Desabilite os campos de entrada de data e hora por padrão
+        textoInput.disabled = false;
+        linkInput.disabled = false;
+        textoInput.required = true;
+        linkInput.required = true;
+    } else {
+        textoInput.disabled = true;
+        linkInput.disabled = true;
+        textoInput.required = false;
+        linkInput.required = false;
+    }
+}
+
+// Obtenha referências aos elementos de botões de opção do primeiro conjunto
+const botaoRadio = document.getElementById('acao-btn-checkbox');
+const textoInput = document.getElementById('textoBotao');
+const linkInput = document.getElementById('linkBotao');
+
+// Adicione ouvintes de eventos para os botões de opção do primeiro conjunto
+botaoRadio.addEventListener('change', () => updateBotaoAcaoInputs(textoInput, linkInput, botaoRadio));
 

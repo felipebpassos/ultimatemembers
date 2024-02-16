@@ -126,8 +126,8 @@ $foto_autor = $discussao['foto'];
             <form id="addResposta"
                 action="<?php echo $curso['url_principal']; ?>comunidade/responder/<?php echo $discussao['id']; ?>"
                 method="POST" enctype="multipart/form-data">
-                <div class="campo" style="padding:20px 30px; padding-bottom: 40px; border-radius: 0px;">
-                    <h5 style="color: var(--cor-primaria-dark); margin-bottom:20px;">Publique uma Resposta</h5>
+                <div class="campo" style="padding:20px 30px; padding-bottom: 40px; border-radius: 0px; margin-top: 0;">
+                    <h5 style="color: var(--cor-primaria-dark); margin-bottom:10px;">Publique uma Resposta</h5>
                     <div class="texto">
                         <div class="botoes-formatar">
                             <button type="button" id="btn-font-size"><i class="fa-solid fa-text-height"></i></button>
