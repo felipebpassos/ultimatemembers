@@ -214,6 +214,39 @@ $('#closePopupTrilha').click(function () {
     $('#trilhas-list').show();
 });
 
+// Quando os botões de editar trilha for clicado
+$('.editar-trilha').click(function () {
+    const trilhaId = $(this).data('id'); // Obtém o ID da módulo do atributo data-id
+
+    $('#idTrilha').val(trilhaId);
+
+    // Encontra trilha correspondente
+    const trilha = encontrarPorId(trilhaId, trilhasArray);
+
+    // Verifica se trilha é definida e possui as propriedades 'nome' e 'descricao'
+    if (trilha) {
+        // Preenche os campos do popup com os valores do módulo
+        $('#nomeTrilhaEdit').val(trilha['nome_trilha']);
+        $('#descricaoTrilhaEdit').val(trilha['descricao_trilha']);
+
+        // Marca as caixas de seleção dos módulos da trilha
+        trilha['modulos'].forEach(modulo => {
+            $('input[type="checkbox"][value="' + modulo['id'] + '"]').prop('checked', true);
+        });
+    } else {
+        console.error('Trilha não encontrada ou propriedades ausentes.');
+    }
+
+    $('#trilhas-list').hide();
+    $('#edit-trilha-form').show();
+});
+
+// Quando o botão de fechar for clicado
+$('#closePopupTrilhaEdit').click(function () {
+    $('#edit-trilha-form').hide();
+    $('#trilhas-list').show();
+});
+
 //BANNERS
 
 $('#editar-banners').click(function () {
