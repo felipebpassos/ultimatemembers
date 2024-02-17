@@ -31,7 +31,7 @@ class Cursos
     public function getLancamentos()
     {
         try {
-            $sql = "SELECT id, capa, link_url FROM lancamentos";
+            $sql = "SELECT id, nome, capa, link_url FROM lancamentos";
             $stmt = $this->con->prepare($sql);
             $stmt->execute();
 

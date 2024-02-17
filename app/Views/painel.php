@@ -4,7 +4,8 @@
     <div class="fade-top"></div>
     <div class="fade-bottom"></div>
     <?php if ($adm == 1): ?>
-        <button class="editar" id="editar-banners"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
+        <button class="editar" id="editar-banners"><i class="fa-solid fa-pen-to-square"></i><span
+                class="legenda">Editar</span></button>
     <?php endif; ?>
 
     <?php if (empty($banners)): ?>
@@ -14,7 +15,8 @@
     <?php else: ?>
         <?php foreach ($banners as $banner): ?>
             <div class="slides">
-                <img src="<?php echo str_replace("./", "http://localhost/ultimatemembers/", $banner['banner']); ?>" alt="<?php echo $banner['nome_banner']; ?>">
+                <img src="<?php echo str_replace("./", "http://localhost/ultimatemembers/", $banner['banner']); ?>"
+                    alt="<?php echo $banner['nome_banner']; ?>">
             </div>
         <?php endforeach; ?>
     <?php endif; ?>
@@ -248,6 +250,11 @@
         <div class="seção-titulo" id="titulo-banner">
             <i class="fa-solid fa-rocket"></i>
             <h3 style="margin: 0px;">Lançamentos</h3>
+            <?php
+            if ($adm == 1) {
+                echo '<button class="editar" id="editar-lancamentos"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>';
+            }
+            ?>
         </div>
         <div class="fade-before hidden"></div>
         <div class="fade-after"></div>
@@ -281,69 +288,71 @@
         </section>
     </div>
 
-    <div class="activity slide-left">
-        <ul>
-            <li>
-                <a href="">
-                    <div class="activity-titulo">
-                        <div class="icon-border">
-                            <i class="fa-solid fa-check"></i>
+    <?php if (!$adm): ?>
+        <div class="activity slide-left">
+            <ul>
+                <li>
+                    <a href="">
+                        <div class="activity-titulo">
+                            <div class="icon-border">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                            <span>Concluídos</span>
                         </div>
-                        <span>Concluídos</span>
-                    </div>
-                    <h2 style="margin: 10px 0; color: var(--cor-primaria);">0</h2>
-                    <span style="font-size: 14px; color: var(--cor-primaria);">Total concluído</span>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <div class="activity-titulo">
-                        <div class="icon-border">
-                            <i class="fa-solid fa-bookmark"></i>
+                        <h2 style="margin: 10px 0; color: var(--cor-primaria);">0</h2>
+                        <span style="font-size: 14px; color: var(--cor-primaria);">Total concluído</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <div class="activity-titulo">
+                            <div class="icon-border">
+                                <i class="fa-solid fa-bookmark"></i>
+                            </div>
+                            <span>Salvos</span>
                         </div>
-                        <span>Salvos</span>
-                    </div>
-                    <h2 style="margin: 10px 0; color: var(--cor-primaria);">0</h2>
-                    <span style="font-size: 14px; color: var(--cor-primaria);">Total salvo</span>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <div class="activity-titulo">
-                        <div class="icon-border">
-                            <i class="fa-solid fa-trophy"></i>
+                        <h2 style="margin: 10px 0; color: var(--cor-primaria);">0</h2>
+                        <span style="font-size: 14px; color: var(--cor-primaria);">Total salvo</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <div class="activity-titulo">
+                            <div class="icon-border">
+                                <i class="fa-solid fa-trophy"></i>
+                            </div>
+                            <span>Conquistas</span>
                         </div>
-                        <span>Conquistas</span>
-                    </div>
-                    <h2 style="margin: 10px 0; color: var(--cor-primaria);">0</h2>
-                    <span style="font-size: 14px; color: var(--cor-primaria);">Total de conquistas</span>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <div class="activity-titulo">
-                        <div class="icon-border">
-                            <i class="fa-solid fa-comments"></i>
+                        <h2 style="margin: 10px 0; color: var(--cor-primaria);">0</h2>
+                        <span style="font-size: 14px; color: var(--cor-primaria);">Total de conquistas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <div class="activity-titulo">
+                            <div class="icon-border">
+                                <i class="fa-solid fa-comments"></i>
+                            </div>
+                            <span>Comentários</span>
                         </div>
-                        <span>Comentários</span>
-                    </div>
-                    <h2 style="margin: 10px 0; color: var(--cor-primaria);">0</h2>
-                    <span style="font-size: 14px; color: var(--cor-primaria);">Total comentado</span>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <div class="activity-titulo">
-                        <div class="icon-border">
-                            <i class="fa-solid fa-quote-left"></i>
+                        <h2 style="margin: 10px 0; color: var(--cor-primaria);">0</h2>
+                        <span style="font-size: 14px; color: var(--cor-primaria);">Total comentado</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <div class="activity-titulo">
+                            <div class="icon-border">
+                                <i class="fa-solid fa-quote-left"></i>
+                            </div>
+                            <span>Publicações</span>
                         </div>
-                        <span>Publicações</span>
-                    </div>
-                    <h2 style="margin: 10px 0; color: var(--cor-primaria);">0</h2>
-                    <span style="font-size: 14px; color: var(--cor-primaria);">Total publicado</span>
-                </a>
-            </li>
-        </ul>
-    </div>
+                        <h2 style="margin: 10px 0; color: var(--cor-primaria);">0</h2>
+                        <span style="font-size: 14px; color: var(--cor-primaria);">Total publicado</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    <?php endif; ?>
 
 </main>

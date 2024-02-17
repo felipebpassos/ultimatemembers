@@ -237,6 +237,17 @@ $('#closePopupAddBanner').click(function () {
     $('#banners-list').show();
 });
 
+//LANÇAMENTOS
+
+$('#editar-lancamentos').click(function () {
+    exibirFormulario('lancamentos'); // Função para exibir o formulário
+});
+
+// Quando o botão de fechar for clicado
+$('#closePopuplancamentos').click(function () {
+    fecharFormulario('lancamentos');
+});
+
 //USUÁRIOS
 
 // Quando o botão de adicionar aula for clicado
@@ -341,6 +352,8 @@ function exibirFormulario(option) {
         $('#trilhas-list').show();
     } else if (option === 'banners') {
         $('#banners-list').show();
+    } else if (option === 'lancamentos') {
+        $('#lancamentos-list').show();
     } else if (option === 'add-user') {
         $('#add-usuario').show();
     } else if (option === 'edit-user') {
@@ -365,6 +378,8 @@ function fecharFormulario(option) {
         $('#trilhas-list').hide();
     } else if (option === 'banners') {
         $('#banners-list').hide();
+    } else if (option === 'lancamentos') {
+        $('#lancamentos-list').hide();
     } else if (option === 'add-user') {
         $('#add-usuario').hide();
     } else if (option === 'edit-user') {

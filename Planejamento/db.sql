@@ -2,7 +2,17 @@ use reelsdecinema;
 
 drop table banners;
 
-select * from trilhas;
+select * from lancamentos;
+
+UPDATE lancamentos
+SET id_curso = 1;
+
+ALTER TABLE lancamentos
+ADD COLUMN id_curso INT,
+ADD CONSTRAINT fk_lancamentos_curso
+    FOREIGN KEY (id_curso)
+    REFERENCES cursos(id)
+    ON DELETE CASCADE;
 
 ALTER TABLE discussoes
 DROP FOREIGN KEY discussoes_ibfk_1,

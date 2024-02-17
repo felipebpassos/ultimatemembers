@@ -14,7 +14,7 @@ $(document).ready(function () {
     });
 
     // Lidar com a exclusão de um módulo
-    $('.modulos-list').on('click', '.delete-modulo', function () {
+    $('#modulos-list').on('click', '.delete-modulo', function () {
         const idModulo = $(this).data('id');
         // Define o ID do módulo no popup de confirmação.
         $('#confirmacao').data('id-modulo', idModulo);

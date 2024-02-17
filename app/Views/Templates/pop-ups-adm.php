@@ -272,12 +272,12 @@
         <h2 style="margin: auto; font-weight: bold; width:fit-content;">Módulos</h2>
 
         <div class="list-header">
-            <span class="indice-modulo">Índice</span>
-            <span class="nome-modulo">Título</span>
-            <span class="op-modulo">Opções</span>
+            <span class="indice-item">Índice</span>
+            <span class="nome-item">Módulo</span>
+            <span class="op-item">Opções</span>
         </div>
 
-        <ul class="modulos-list">
+        <ul class="items-list">
 
             <?php
             if (isset($modulos) && !empty($modulos)) {
@@ -290,12 +290,12 @@
                     } else {
                         $formattedId = $id; // Mantém o ID como está se não estiver entre 0 e 9
                     }
-                    echo '<li><span class="indice-modulo">' . $formattedId . '</span><a class="nome-modulo" href="' . $curso['url_principal'] . 'modulos/modulo/' . $formattedId . '">' . $modulo['nome'] . '</a>
-                    <div class="op-modulo">
-                        <button class="up-list" id="up-list" data-id="' . $id . '"><i class="fa-solid fa-caret-up"></i><span class="legenda">Subir</span></button>
-                        <button class="down-list" id="down-list" data-id="' . $id . '"><i class="fa-solid fa-caret-down"></i><span class="legenda">Descer</span></button>
-                        <button class="editar-modulo editar" id="editar-modulo" data-id="' . $id . '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
-                        <button class="delete-modulo editar" id="delete-modulo" data-id="' . $id . '"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>
+                    echo '<li><span class="indice-item">' . $formattedId . '</span><a class="nome-item" href="' . $curso['url_principal'] . 'modulos/modulo/' . $formattedId . '">' . $modulo['nome'] . '</a>
+                    <div class="op-item">
+                        <button class="up-list" data-id="' . $id . '"><i class="fa-solid fa-caret-up"></i><span class="legenda">Subir</span></button>
+                        <button class="down-list" data-id="' . $id . '"><i class="fa-solid fa-caret-down"></i><span class="legenda">Descer</span></button>
+                        <button class="editar-modulo editar" data-id="' . $id . '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
+                        <button class="delete-modulo editar" data-id="' . $id . '"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>
                     </div> 
                     </li>';
                 }
@@ -510,12 +510,12 @@
         <h2 style="margin: auto; font-weight: bold; width:fit-content;">Trilhas</h2>
 
         <div class="list-header">
-            <span class="indice-trilha">Índice</span>
-            <span class="nome-trilha">Título</span>
-            <span class="op-trilha">Opções</span>
+            <span class="indice-item">Índice</span>
+            <span class="nome-item">Trilha</span>
+            <span class="op-item">Opções</span>
         </div>
 
-        <ul class="trilhas-list">
+        <ul class="items-list">
 
             <?php
             if (isset($trilhas) && !empty($trilhas)) {
@@ -528,12 +528,12 @@
                     } else {
                         $formattedId = $id; // Mantém o ID como está se não estiver entre 0 e 9
                     }
-                    echo '<li><span class="indice-trilha">' . $formattedId . '</span><span class="nome-trilha">' . $trilha['nome_trilha'] . '</span>
-                    <div class="op-trilha">
-                        <button class="up-list" id="up-list" data-id="' . $id . '"><i class="fa-solid fa-caret-up"></i><span class="legenda">Subir</span></button>
-                        <button class="down-list" id="down-list" data-id="' . $id . '"><i class="fa-solid fa-caret-down"></i><span class="legenda">Descer</span></button>
-                        <button class="editar-trilha editar" id="editar-trilha" data-id="' . $id . '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
-                        <button class="delete-trilha editar" id="delete-trilha" data-id="' . $id . '"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>
+                    echo '<li><span class="indice-item">' . $formattedId . '</span><span class="nome-item">' . $trilha['nome_trilha'] . '</span>
+                    <div class="op-item">
+                        <button class="up-list" data-id="' . $id . '"><i class="fa-solid fa-caret-up"></i><span class="legenda">Subir</span></button>
+                        <button class="down-list" data-id="' . $id . '"><i class="fa-solid fa-caret-down"></i><span class="legenda">Descer</span></button>
+                        <button class="editar-trilha editar" data-id="' . $id . '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
+                        <button class="delete-trilha editar" data-id="' . $id . '"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>
                     </div> 
                     </li>';
                 }
@@ -855,12 +855,12 @@
         <h2 style="margin: auto; font-weight: bold; width:fit-content;">Banners</h2>
 
         <div class="list-header">
-            <span class="indice-banner">Índice</span>
-            <span class="nome-banner">Banner</span>
-            <span class="op-banner">Opções</span>
+            <span class="indice-item">Índice</span>
+            <span class="nome-item">Banner</span>
+            <span class="op-item">Opções</span>
         </div>
 
-        <ul class="banners-list">
+        <ul class="items-list">
 
             <?php
             if (isset($banners) && !empty($banners)) {
@@ -873,12 +873,12 @@
                     } else {
                         $formattedId = $id; // Mantém o ID como está se não estiver entre 0 e 9
                     }
-                    echo '<li><span class="indice-banner">' . $formattedId . '</span><span class="nome-banner">' . $banner['nome_banner'] . '</span>
-                    <div class="op-banner">
-                        <button class="up-list" id="up-list" data-id="' . $id . '"><i class="fa-solid fa-caret-up"></i><span class="legenda">Subir</span></button>
-                        <button class="down-list" id="down-list" data-id="' . $id . '"><i class="fa-solid fa-caret-down"></i><span class="legenda">Descer</span></button>
-                        <button class="editar-banner editar" id="editar-banner" data-id="' . $id . '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
-                        <button class="delete-banner editar" id="delete-banner" data-id="' . $id . '"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>
+                    echo '<li><span class="indice-item">' . $formattedId . '</span><span class="nome-item">' . $banner['nome_banner'] . '</span>
+                    <div class="op-item">
+                        <button class="up-list" data-id="' . $id . '"><i class="fa-solid fa-caret-up"></i><span class="legenda">Subir</span></button>
+                        <button class="down-list" data-id="' . $id . '"><i class="fa-solid fa-caret-down"></i><span class="legenda">Descer</span></button>
+                        <button class="editar-banner editar" data-id="' . $id . '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
+                        <button class="delete-banner editar" data-id="' . $id . '"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>
                     </div> 
                     </li>';
                 }
@@ -975,5 +975,68 @@
 
             <button class="btn-2" type="submit" style="margin: auto; margin-top: 20px;">Criar Banner</button>
         </form>
+    </div>
+</div>
+
+<!-- Formulário para editar lançamentos -->
+<div id="lancamentos-list" class="popup">
+    <div class="popup-content">
+
+        <div class="close-container">
+            <div class="close" id="closePopuplancamentos" onmouseover="startAnimation()" onmouseout="resetAnimation()">
+                <svg class="close-ring" width="51" height="51">
+                    <circle class="close-ring__circle" id="closeCircle" stroke="var(--cor-primaria-light)"
+                        stroke-width="2" fill="transparent" r="23" cx="25" cy="25" />
+                    <circle class="close-ring__circle-full" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2"
+                        fill="transparent" r="23" cx="25" cy="25" />
+                </svg>
+                <svg class="x" viewBox="0 0 12 12" style="height: 12px; width: 12px;">
+                    <path stroke="rgb(180, 180, 180)" fill="rgb(180, 180, 180)"
+                        d="M4.674 6L.344 1.05A.5.5 0 0 1 1.05.343L6 4.674l4.95-4.33a.5.5 0 0 1 .707.706L7.326 6l4.33 4.95a.5.5 0 0 1-.706.707L6 7.326l-4.95 4.33a.5.5 0 0 1-.707-.706L4.674 6z">
+                    </path>
+                </svg>
+            </div>
+        </div>
+
+        <h2 style="margin: auto; font-weight: bold; width:fit-content;">Lançamentos</h2>
+
+        <div class="list-header">
+            <span class="indice-item">Índice</span>
+            <span class="nome-item">Lançamento</span>
+            <span class="op-item">Opções</span>
+        </div>
+
+        <ul class="items-list">
+
+            <?php
+            if (isset($lancamentos) && !empty($lancamentos)) {
+
+                foreach ($lancamentos as $lancamento) {
+                    $id = $lancamento['id'];
+
+                    if ($id >= 0 && $id <= 9) {
+                        $formattedId = sprintf("0%d", $id); // Formata o ID para 0X (sendo X o ID)
+                    } else {
+                        $formattedId = $id; // Mantém o ID como está se não estiver entre 0 e 9
+                    }
+                    echo '<li><span class="indice-item">' . $formattedId . '</span><span class="nome-item">' . $lancamento['nome'] . '</span>
+                    <div class="op-item">
+                        <button class="up-list" data-id="' . $id . '"><i class="fa-solid fa-caret-up"></i><span class="legenda">Subir</span></button>
+                        <button class="down-list" data-id="' . $id . '"><i class="fa-solid fa-caret-down"></i><span class="legenda">Descer</span></button>
+                        <button class="editar-lacamento editar" data-id="' . $id . '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
+                        <button class="delete-lacamento editar" data-id="' . $id . '"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>
+                    </div> 
+                    </li>';
+                }
+            } else {
+                // Caso a variável 'lançamentos' não exista ou esteja vazia
+                echo '<h5>Nenhum lançamento criado.</h5>';
+            }
+            ?>
+
+        </ul>
+
+        <button class="btn-2" id="add-lancamento" style="margin:auto;">Novo</button>
+
     </div>
 </div>
