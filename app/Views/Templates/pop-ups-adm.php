@@ -20,8 +20,8 @@
 
         <h2 style="margin: auto; font-weight: bold; width:fit-content;">Nova aula</h2>
 
-        <form id="aulaFormAdd" action="<?php echo $curso['url_principal']; ?>modulos/nova_aula/" method="POST"
-            enctype="multipart/form-data">
+        <form class="formPopUp" id="aulaFormAdd" action="<?php echo $curso['url_principal']; ?>modulos/nova_aula/"
+            method="POST" enctype="multipart/form-data">
 
             <div class="row">
                 <div class="col-md-6">
@@ -131,8 +131,8 @@
 
         <h2 style="margin: auto; font-weight: bold; width:fit-content;">Editar aula</h2>
 
-        <form id="aulaFormEdit" action="<?php echo $curso['url_principal']; ?>modulos/edita_aula/" method="POST"
-            enctype="multipart/form-data">
+        <form class="formPopUp" id="aulaFormEdit" action="<?php echo $curso['url_principal']; ?>modulos/edita_aula/"
+            method="POST" enctype="multipart/form-data">
 
             <div class="row">
                 <div class="col-md-6">
@@ -339,8 +339,8 @@
 
         <h2 style="margin: auto; font-weight: bold; width:fit-content;">Novo Módulo</h2>
 
-        <form id="moduloFormAdd" action="<?php echo $curso['url_principal']; ?>modulos/novo_modulo/" method="POST"
-            enctype="multipart/form-data">
+        <form class="formPopUp" id="moduloFormAdd" action="<?php echo $curso['url_principal']; ?>modulos/novo_modulo/"
+            method="POST" enctype="multipart/form-data">
 
             <div class="txt-input">
 
@@ -423,8 +423,8 @@
 
         <h2 style="margin: auto; font-weight: bold; width:fit-content;">Editar Módulo</h2>
 
-        <form id="moduloFormEdit" action="<?php echo $curso['url_principal']; ?>modulos/edita_modulo/" method="POST"
-            enctype="multipart/form-data">
+        <form class="formPopUp" id="moduloFormEdit" action="<?php echo $curso['url_principal']; ?>modulos/edita_modulo/"
+            method="POST" enctype="multipart/form-data">
 
             <div class="txt-input">
 
@@ -572,7 +572,8 @@
 
         <h2 style="margin: auto; font-weight: bold; width:fit-content;">Nova Trilha</h2>
 
-        <form id="trilhaFormAdd" action="<?php echo $curso['url_principal']; ?>modulos/nova_trilha/" method="POST">
+        <form class="formPopUp" id="trilhaFormAdd" action="<?php echo $curso['url_principal']; ?>modulos/nova_trilha/"
+            method="POST">
 
             <div style="width: 600px; margin: auto;">
 
@@ -635,7 +636,7 @@
     </div>
 </div>
 
-<!-- Formulário para adicionar trilha -->
+<!-- Formulário para editar trilha -->
 <div id="edit-trilha-form" class="popup">
     <div class="popup-content">
 
@@ -657,7 +658,8 @@
 
         <h2 style="margin: auto; font-weight: bold; width:fit-content;">Editar Trilha</h2>
 
-        <form id="trilhaFormEdit" action="<?php echo $curso['url_principal']; ?>modulos/editar_trilha/" method="POST">
+        <form class="formPopUp" id="trilhaFormEdit"
+            action="<?php echo $curso['url_principal']; ?>modulos/editar_trilha/" method="POST">
 
             <div style="width: 600px; margin: auto;">
 
@@ -803,7 +805,7 @@
     </div>
 </div>
 
-<!-- Formulário para adicionar usuário -->
+<!-- Formulário para editar usuário -->
 <div id="edit-usuario" class="popup">
     <div class="popup-content" style="max-width:600px; margin: auto;">
 
@@ -1010,7 +1012,7 @@
 
         <h2 style="margin: auto; font-weight: bold; width:fit-content;">Novo Banner</h2>
 
-        <form id="bannerFormAdd" action="<?php echo $curso['url_principal']; ?>painel/novo_banner/"
+        <form class="formPopUp" id="bannerFormAdd" action="<?php echo $curso['url_principal']; ?>painel/novo_banner/"
             enctype="multipart/form-data" method="POST">
 
             <div style="width: 600px; margin: auto;">
@@ -1119,8 +1121,8 @@
                     <div class="op-item">
                         <button class="up-list" data-id="' . $id . '"><i class="fa-solid fa-caret-up"></i><span class="legenda">Subir</span></button>
                         <button class="down-list" data-id="' . $id . '"><i class="fa-solid fa-caret-down"></i><span class="legenda">Descer</span></button>
-                        <button class="editar-lacamento editar" data-id="' . $id . '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
-                        <button class="delete-lacamento editar" data-id="' . $id . '"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>
+                        <button class="editar-lancamento editar" data-id="' . $id . '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
+                        <button class="delete-lancamento editar" data-id="' . $id . '"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>
                     </div> 
                     </li>';
                 }
@@ -1142,7 +1144,8 @@
     <div class="popup-content">
 
         <div class="close-container">
-            <div class="close" id="closePopupAddLancamento" onmouseover="startAnimation()" onmouseout="resetAnimation()">
+            <div class="close" id="closePopupAddLancamento" onmouseover="startAnimation()"
+                onmouseout="resetAnimation()">
                 <svg class="close-ring" width="51" height="51">
                     <circle class="close-ring__circle" id="closeCircle" stroke="var(--cor-primaria-light)"
                         stroke-width="2" fill="transparent" r="23" cx="25" cy="25" />
@@ -1159,8 +1162,9 @@
 
         <h2 style="margin: auto; font-weight: bold; width:fit-content;">Novo Lançamento</h2>
 
-        <form id="lancamentoFormAdd" action="<?php echo $curso['url_principal']; ?>painel/novo_lancamento/"
-            enctype="multipart/form-data" method="POST">
+        <form class="formPopUp" id="lancamentoFormAdd"
+            action="<?php echo $curso['url_principal']; ?>painel/novo_lancamento/" enctype="multipart/form-data"
+            method="POST">
 
             <div style="width: 600px; margin: auto;">
 
@@ -1199,4 +1203,77 @@
             <button class="btn-2" type="submit" style="margin: auto; margin-top: 20px;">Criar</button>
         </form>
     </div>
+</div>
+
+<!-- Formulário para adicionar lançamento -->
+<div id="editLancamento" class="popup">
+    <div class="popup-content">
+
+        <div class="close-container">
+            <div class="close" id="closePopupLancamentoEdit" onmouseover="startAnimation()"
+                onmouseout="resetAnimation()">
+                <svg class="close-ring" width="51" height="51">
+                    <circle class="close-ring__circle" id="closeCircle" stroke="var(--cor-primaria-light)"
+                        stroke-width="2" fill="transparent" r="23" cx="25" cy="25" />
+                    <circle class="close-ring__circle-full" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2"
+                        fill="transparent" r="23" cx="25" cy="25" />
+                </svg>
+                <svg class="x" viewBox="0 0 12 12" style="height: 12px; width: 12px;">
+                    <path stroke="rgb(180, 180, 180)" fill="rgb(180, 180, 180)"
+                        d="M4.674 6L.344 1.05A.5.5 0 0 1 1.05.343L6 4.674l4.95-4.33a.5.5 0 0 1 .707.706L7.326 6l4.33 4.95a.5.5 0 0 1-.706.707L6 7.326l-4.95 4.33a.5.5 0 0 1-.707-.706L4.674 6z">
+                    </path>
+                </svg>
+            </div>
+        </div>
+
+        <h2 style="margin: auto; font-weight: bold; width:fit-content;">Editar Lançamento</h2>
+
+        <form class="formPopUp" id="lancamentoFormEdit"
+            action="<?php echo $curso['url_principal']; ?>painel/editar_lancamento/" enctype="multipart/form-data"
+            method="POST">
+
+            <div style="width: 600px; margin: auto;">
+
+                <input type="hidden" id="idLancamento" name="idLancamento">
+
+                <div class="mb-3">
+                    <label class="form-label" for="nomeLancamentoEdit">Nome do produto</label>
+                    <div class="campo-popup" style="width: 100%;">
+                        <input type="text" id="nomeLancamentoEdit" name="nomeLancamento" class="campo-input"
+                            placeholder="Digite o nome do lançamento" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="linkLancamentoEdit">Link do produto</label>
+                    <div class="campo-popup" style="width: 100%;">
+                        <input type="text" id="linkLancamentoEdit" name="linkLancamento" class="campo-input"
+                            placeholder="Digite o link do produto digital" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" style="display: flex; align-items: center;">Banner do lançamento <span
+                            class="info-span" id="info-lancamento-img-edit"><i class="fa-solid fa-info"></i>
+                            <span class="legenda" style="width: 260px;">Proporção recomendada: 1:3<br>
+                                Formatos aceitos: .png ou .jpeg<br>
+                                Tamanho máximo: 3 MB</span></span></label>
+                    <div class="drop-area" id="dropImgLancamentoEdit">
+                        Arraste e solte uma imagem aqui ou clique para fazer upload.
+                        <span id="imgInfoLancamento"></span>
+                        <input type="file" id="lancamentoEdit" style="width: 0; height:0; margin:0;" name="lancamento"
+                            accept="img/*">
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="btn-2" type="submit" style="margin: auto; margin-top: 20px;">Editar</button>
+        </form>
+    </div>
+
+    <script>
+        var lancamentosData = <?php echo json_encode($lancamentos); ?>;
+        var lancamentosArray = Object.values(lancamentosData);
+    </script>
 </div>

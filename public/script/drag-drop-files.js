@@ -30,6 +30,14 @@ const dropImgBanner = document.getElementById('dropImgBanner');
 const imgInfoBanner = document.getElementById('imgInfoBanner');
 const banner = document.getElementById('banner');
 
+const dropImgLancamento = document.getElementById('dropImgLancamento');
+const imgInfoLancamento = document.getElementById('imgInfoLancamento');
+const lancamento = document.getElementById('lancamento');
+
+const dropImgLancamentoEdit = document.getElementById('dropImgLancamentoEdit');
+const imgInfoLancamentoEdit = document.getElementById('imgInfoLancamentoEdit');
+const lancamentoEdit = document.getElementById('lancamentoEdit');
+
 // Impedir o comportamento padrão de arrastar e soltar para dropVideo
 dropVideoModulo.addEventListener('dragover', (e) => {
     e.preventDefault();
@@ -152,6 +160,36 @@ dropImgBanner.addEventListener('drop', (e) => {
     handleVideoFile(imgInfoBanner, e.dataTransfer.files[0]);
 });
 
+dropImgLancamento.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropImgLancamento.classList.add('active');
+});
+
+dropImgLancamento.addEventListener('dragleave', () => {
+    dropImgLancamento.classList.remove('active');
+});
+
+dropImgLancamento.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropImgLancamento.classList.remove('active');
+    handleVideoFile(imgInfoLancamento, e.dataTransfer.files[0]);
+});
+
+dropImgLancamentoEdit.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropImgLancamentoEdit.classList.add('active');
+});
+
+dropImgLancamentoEdit.addEventListener('dragleave', () => {
+    dropImgLancamentoEdit.classList.remove('active');
+});
+
+dropImgLancamentoEdit.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropImgLancamentoEdit.classList.remove('active');
+    handleVideoFile(imgInfoLancamentoEdit, e.dataTransfer.files[0]);
+});
+
 // Lidar com o clique para selecionar um arquivo de vídeo
 dropVideoModulo.addEventListener('click', () => {
     videoModulo.click();
@@ -216,6 +254,22 @@ dropImgBanner.addEventListener('click', () => {
 
 banner.addEventListener('change', () => {
     handleImageFile(imgInfoBanner, banner.files[0]);
+});
+
+dropImgLancamento.addEventListener('click', () => {
+    lancamento.click();
+});
+
+lancamento.addEventListener('change', () => {
+    handleImageFile(imgInfoLancamento, lancamento.files[0]);
+});
+
+dropImgLancamentoEdit.addEventListener('click', () => {
+    lancamentoEdit.click();
+});
+
+lancamentoEdit.addEventListener('change', () => {
+    handleImageFile(imgInfoLancamentoEdit, lancamentoEdit.files[0]);
 });
 
 // Função para lidar com o arquivo de vídeo selecionado ou arrastado

@@ -216,7 +216,7 @@ $('#closePopupTrilha').click(function () {
 
 // Quando os botões de editar trilha for clicado
 $('.editar-trilha').click(function () {
-    const trilhaId = $(this).data('id'); // Obtém o ID da módulo do atributo data-id
+    const trilhaId = $(this).data('id'); // Obtém o ID da trilha do atributo data-id
 
     $('#idTrilha').val(trilhaId);
 
@@ -225,7 +225,7 @@ $('.editar-trilha').click(function () {
 
     // Verifica se trilha é definida e possui as propriedades 'nome' e 'descricao'
     if (trilha) {
-        // Preenche os campos do popup com os valores do módulo
+        // Preenche os campos do popup com os valores da trilha
         $('#nomeTrilhaEdit').val(trilha['nome_trilha']);
         $('#descricaoTrilhaEdit').val(trilha['descricao_trilha']);
 
@@ -290,6 +290,34 @@ $('#add-lancamento').click(function () {
 // Quando o botão de fechar for clicado
 $('#closePopupAddLancamento').click(function () {
     $('#addLancamento').hide();
+    $('#lancamentos-list').show();
+});
+
+// Quando os botões de editar lançamento for clicado
+$('.editar-lancamento').click(function () {
+    const lancamentoId = $(this).data('id'); // Obtém o ID do lançamento do atributo data-id
+
+    $('#idLancamento').val(lancamentoId);
+
+    // Encontra lançamento correspondente
+    const lancamento = encontrarPorId(lancamentoId, lancamentosArray);
+
+    // Verifica se lançamento é definido e possui as propriedades 'nome' e 'link'
+    if (lancamento) {
+        // Preenche os campos do popup com os valores do lançamento
+        $('#nomeLancamentoEdit').val(lancamento['nome']);
+        $('#linkLancamentoEdit').val(lancamento['link_url']);
+    } else {
+        console.error('Lançamento não encontrado ou propriedades ausentes.');
+    }
+
+    $('#lancamentos-list').hide();
+    $('#editLancamento').show();
+});
+
+// Quando o botão de fechar for clicado
+$('#closePopupLancamentoEdit').click(function () {
+    $('#editLancamento').hide();
     $('#lancamentos-list').show();
 });
 
