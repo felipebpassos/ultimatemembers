@@ -139,3 +139,5 @@
 }
 
 .lock-sign i {color: rgb(78, 78, 78); font-size: 13px;}
+
+.no-items {min-height: fit-content; height: fit-content; margin-bottom: 50px;}

@@ -12,6 +12,18 @@ function hexToRgb(hex) {
     return { r, g, b };
 }
 
+function rgbToRgbObj(rgb) {
+    // Remove os parênteses e divide a string em três partes (vermelho, verde, azul)
+    const rgbValues = rgb.substring(rgb.indexOf('(') + 1, rgb.lastIndexOf(')')).split(',');
+
+    // Converte os valores de string para números inteiros
+    const r = parseInt(rgbValues[0]);
+    const g = parseInt(rgbValues[1]);
+    const b = parseInt(rgbValues[2]);
+
+    return { r, g, b };
+}
+
 // Função para calcular uma cor mais escura ou mais clara
 function calcularCor(cor, diff, multiplicador) {
     return `rgb(${Math.max(cor.r + multiplicador * diff, 0)}, ${Math.max(cor.g + multiplicador * diff, 0)}, ${Math.max(cor.b + multiplicador * diff, 0)})`;
@@ -60,6 +72,10 @@ const corWhatsapp = calcularCor(corTextoObj, 100, multiplicador);
 const corSecundaria = calcularCor(corFundoObj, 0, multiplicador);
 const corSecundariaTransparent = calcularCorTransparente(corFundoObj, 0.7);
 const corSecundariaLight = calcularCor(corFundoObj, -20, multiplicador);
+// Converte a cor secundária light de rgb para um objeto { r, g, b }
+const corSecundariaLightObj = rgbToRgbObj(corSecundariaLight);
+// Calcula a cor secundária light com 50% de transparência
+const corSecundariaLightTransparent = calcularCorTransparente(corSecundariaLightObj, 0.4);
 const corSecundariaLighter = calcularCor(corFundoObj, -40, multiplicador);
 const corSecundariaLightest = calcularCor(corFundoObj, -60, multiplicador);
 
@@ -77,6 +93,7 @@ dinamicroot.style.setProperty("--whatsapp", corWhatsapp);
 dinamicroot.style.setProperty("--cor-secundaria", corSecundaria);
 dinamicroot.style.setProperty("--cor-secundaria-transparent", corSecundariaTransparent);
 dinamicroot.style.setProperty("--cor-secundaria-light", corSecundariaLight);
+dinamicroot.style.setProperty("--cor-secundaria-light-transparent", corSecundariaLightTransparent);
 dinamicroot.style.setProperty("--cor-secundaria-lighter", corSecundariaLighter);
 dinamicroot.style.setProperty("--cor-secundaria-lightest", corSecundariaLightest);
 // Defina a variável de sombra CSS dinâmica com o valor calculado

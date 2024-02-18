@@ -258,7 +258,7 @@ $('#closePopupBanners').click(function () {
     fecharFormulario('banners');
 });
 
-// Quando o botão de adicionar modulo for clicado
+// Quando o botão de adicionar banner for clicado
 $('#add-banner').click(function () {
     $('#banners-list').hide();
     $('#addBanner').show(); // Exibir o formulário
@@ -279,6 +279,18 @@ $('#editar-lancamentos').click(function () {
 // Quando o botão de fechar for clicado
 $('#closePopuplancamentos').click(function () {
     fecharFormulario('lancamentos');
+});
+
+// Quando o botão de adicionar lançamento for clicado
+$('#add-lancamento').click(function () {
+    $('#lancamentos-list').hide();
+    $('#addLancamento').show(); // Exibir o formulário
+});
+
+// Quando o botão de fechar for clicado
+$('#closePopupAddLancamento').click(function () {
+    $('#addLancamento').hide();
+    $('#lancamentos-list').show();
 });
 
 //USUÁRIOS

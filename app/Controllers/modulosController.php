@@ -949,4 +949,25 @@ class modulosController extends Controller
         }
     }
 
+    public function deletar_trilha()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idTrilha'])) {
+
+            $trilha = $_POST['idTrilha'];
+
+            // Instancie a classe Trilhas
+            $trilhasModel = new Trilhas();
+
+            $resultado = $trilhasModel->deleteTrilha($trilha);
+
+            // Retorna a resposta em formato JSON
+            header('Content-Type: application/json');
+            echo json_encode($resultado);
+
+        } else {
+            // ERRO
+            exit;
+        }
+    }
+
 }

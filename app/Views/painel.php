@@ -1,4 +1,4 @@
-<div class="main-banner" id="banner-container">
+<div class="main-banner <?php echo (count($banners) < 2) ? 'no-dots' : ''; ?>" id="banner-container">
     <div class="fade-left"></div>
     <div class="fade-right"></div>
     <div class="fade-top"></div>
@@ -48,7 +48,7 @@
 <main>
 
     <!-- Seção de banners dos módulos -->
-    <div class="banner-box slide-left">
+    <div class="banner-box slide-left <?php echo (isset($modulos) && !empty($modulos)) ? '' : 'no-items'; ?>">
         <div class="seção-titulo" id="titulo-banner">
             <i class="fa-solid fa-folder-open"></i>
             <h3 style="margin: 0px;">Módulos</h3>
@@ -60,7 +60,7 @@
         </div>
         <div class="fade-before"></div>
         <div class="fade-after"></div>
-        <section class="banner-section">
+        <section class="banner-section <?php echo (isset($modulos) && !empty($modulos)) ? '' : 'no-items'; ?>">
             <div class="banner-container">
                 <div class="banners">
                     <!-- Aqui você pode repetir esse bloco para cada banner -->
@@ -82,7 +82,7 @@
                         }
                     } else {
                         // Caso a variável de sessão 'modulos' não exista ou esteja vazia
-                        echo 'Nenhum módulo disponível.';
+                        echo '<h5>Nenhum módulo criado ainda.</h5>';
                     }
                     ?>
 
@@ -95,7 +95,7 @@
     </div>
 
     <!-- Seção de trilhas -->
-    <div class="banner-box fade-in-slide-up" style="padding-top: 80px; margin-bottom: 50px; padding-bottom: 30px;">
+    <div class="banner-box fade-in-slide-up <?php echo (isset($trilhas) && !empty($trilhas)) ? '' : 'no-items'; ?>" style="padding-top: 20px; margin-bottom: 50px; padding-bottom: 30px;">
         <div class="seção-titulo" id="titulo-banner">
             <i class="fa-solid fa-graduation-cap"></i>
             <h3 style="margin: 0px;">Trilhas</h3>
@@ -108,7 +108,7 @@
         <?php
         if (isset($trilhas) && !empty($trilhas)) {
             foreach ($trilhas as $trilha) {
-                echo '<h4 style="margin: 8px 10px; margin-top: 0;">' . $trilha['nome_trilha'] . '</h4>';
+                echo '<h4 style="margin: 8px 10px; margin-top: 60px;">' . $trilha['nome_trilha'] . '</h4>';
                 echo '<p style="margin-bottom: 50px; margin-left:10px;">' . $trilha['descricao_trilha'] . '</p>';
 
                 // Agora, para cada trilha, exiba um carrossel de banners de módulos associados
@@ -137,7 +137,7 @@
             }
         } else {
             // Caso a variável de sessão 'trilhas' não exista ou esteja vazia
-            echo 'Nenhuma trilha disponível.';
+            echo '<h5 style="margin-top: 60px; margin-bottom: 50px; padding-left: 10px;">Nenhuma trilha criada ainda.</h5>';
         }
         ?>
     </div>
@@ -279,7 +279,7 @@
                         }
                     } else {
                         // Caso a variável de sessão 'modulos' não exista ou esteja vazia
-                        echo 'Nenhum Lançamento disponível.';
+                        echo '<h5>Nenhum lançamento criado ainda.</h5>';
                     }
                     ?>
 

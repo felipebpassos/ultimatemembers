@@ -2,7 +2,7 @@ use reelsdecinema;
 
 drop table banners;
 
-select * from lancamentos;
+select * from trilhas;
 
 UPDATE lancamentos
 SET id_curso = 1;

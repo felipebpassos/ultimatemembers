@@ -73,6 +73,10 @@ h6 {
     overflow: hidden;
 }
 
+.no-dots {
+    margin-bottom: 50px;
+}
+
 .main-banner .slides {
     position: absolute;
     width: 100%;
@@ -248,7 +252,7 @@ main {
     list-style-type: none;
     width: 100%;
     height: 60px;
-    border-bottom: solid 1px var(--cor-secundaria-light);
+    border-bottom: solid 1px var(--cor-secundaria-light-transparent);
 }
 
 .content .modulos-ul li a {

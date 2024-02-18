@@ -1136,3 +1136,67 @@
 
     </div>
 </div>
+
+<!-- Formulário para adicionar lançamento -->
+<div id="addLancamento" class="popup">
+    <div class="popup-content">
+
+        <div class="close-container">
+            <div class="close" id="closePopupAddLancamento" onmouseover="startAnimation()" onmouseout="resetAnimation()">
+                <svg class="close-ring" width="51" height="51">
+                    <circle class="close-ring__circle" id="closeCircle" stroke="var(--cor-primaria-light)"
+                        stroke-width="2" fill="transparent" r="23" cx="25" cy="25" />
+                    <circle class="close-ring__circle-full" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2"
+                        fill="transparent" r="23" cx="25" cy="25" />
+                </svg>
+                <svg class="x" viewBox="0 0 12 12" style="height: 12px; width: 12px;">
+                    <path stroke="rgb(180, 180, 180)" fill="rgb(180, 180, 180)"
+                        d="M4.674 6L.344 1.05A.5.5 0 0 1 1.05.343L6 4.674l4.95-4.33a.5.5 0 0 1 .707.706L7.326 6l4.33 4.95a.5.5 0 0 1-.706.707L6 7.326l-4.95 4.33a.5.5 0 0 1-.707-.706L4.674 6z">
+                    </path>
+                </svg>
+            </div>
+        </div>
+
+        <h2 style="margin: auto; font-weight: bold; width:fit-content;">Novo Lançamento</h2>
+
+        <form id="lancamentoFormAdd" action="<?php echo $curso['url_principal']; ?>painel/novo_lancamento/"
+            enctype="multipart/form-data" method="POST">
+
+            <div style="width: 600px; margin: auto;">
+
+                <div class="mb-3">
+                    <label class="form-label" for="nomeLancamento">Nome do produto</label>
+                    <div class="campo-popup" style="width: 100%;">
+                        <input type="text" id="nomeLancamento" name="nomeLancamento" class="campo-input"
+                            placeholder="Digite o nome do lançamento" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="linkLancamento">Link do produto</label>
+                    <div class="campo-popup" style="width: 100%;">
+                        <input type="text" id="linkLancamento" name="linkLancamento" class="campo-input"
+                            placeholder="Digite o link do produto digital" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" style="display: flex; align-items: center;">Banner do lançamento <span
+                            class="info-span" id="info-lancamento-img"><i class="fa-solid fa-info"></i>
+                            <span class="legenda" style="width: 260px;">Proporção recomendada: 1:3<br>
+                                Formatos aceitos: .png ou .jpeg<br>
+                                Tamanho máximo: 3 MB</span></span></label>
+                    <div class="drop-area" id="dropImgLancamento">
+                        Arraste e solte uma imagem aqui ou clique para fazer upload.
+                        <span id="imgInfoLancamento"></span>
+                        <input type="file" id="lancamento" style="width: 0; height:0; margin:0;" name="lancamento"
+                            accept="img/*" required>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="btn-2" type="submit" style="margin: auto; margin-top: 20px;">Criar</button>
+        </form>
+    </div>
+</div>
