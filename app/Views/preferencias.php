@@ -237,6 +237,8 @@
                             id="botaoPesquisa"><i class="fa fa-search"></i></button></a>
                 </div>
 
+                <button class="editar" id="filter-btn"><i class="fa-solid fa-filter"></i></button>
+
             </div>
 
             <div class="exportar" style="position:relative;">

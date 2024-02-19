@@ -878,6 +878,10 @@ class modulosController extends Controller
 
             if (isset($_POST["nomeTrilha"]) && isset($_POST["modulos_selecionados"])) {
 
+                // Carrega dados do usuário
+                $usuario = $this->usuario;
+                $this->sessao->autorizaAdm($usuario['adm'], $this->cursoInfo['url_principal']);
+
                 $nome_trilha = $_POST["nomeTrilha"];
                 $descricao_trilha = isset($_POST["descricaoTrilha"]) ? $_POST["descricaoTrilha"] : null;
                 $modulos_selecionados = $_POST["modulos_selecionados"]; // array com os IDs dos módulos selecionados
@@ -916,6 +920,10 @@ class modulosController extends Controller
 
             if (isset($_POST["idTrilha"]) && isset($_POST["nomeTrilha"]) && isset($_POST["modulos_selecionados"])) {
 
+                // Carrega dados do usuário
+                $usuario = $this->usuario;
+                $this->sessao->autorizaAdm($usuario['adm'], $this->cursoInfo['url_principal']);
+
                 $trilha = $_POST["idTrilha"];
                 $nome_trilha = $_POST["nomeTrilha"];
                 $descricao_trilha = isset($_POST["descricaoTrilha"]) ? $_POST["descricaoTrilha"] : null;
@@ -952,6 +960,10 @@ class modulosController extends Controller
     public function deletar_trilha()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idTrilha'])) {
+
+            // Carrega dados do usuário
+            $usuario = $this->usuario;
+            $this->sessao->autorizaAdm($usuario['adm'], $this->cursoInfo['url_principal']);
 
             $trilha = $_POST['idTrilha'];
 

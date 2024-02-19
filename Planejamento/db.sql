@@ -2,7 +2,7 @@ use reelsdecinema;
 
 drop table banners;
 
-select * from trilhas;
+select * from lancamentos;
 
 UPDATE lancamentos
 SET id_curso = 1;
@@ -138,7 +138,11 @@ CREATE TABLE lancamentos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome varchar(60) NOT NULL,
     capa VARCHAR(100) NOT NULL,
-    link_url VARCHAR(100) NOT NULL
+    link_url VARCHAR(100) NOT NULL,
+    curso_id INT NOT NULL,
+    FOREIGN KEY (curso_id)
+        REFERENCES cursos(id)
+        ON DELETE CASCADE
 ) CHARSET=utf8;
 
 CREATE TABLE tags_forum (

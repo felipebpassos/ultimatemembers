@@ -156,6 +156,83 @@ class painelController extends Controller
         }
     }
 
+    public function novo_lancamento()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            // Verifique se as variáveis POST estão definidas
+            if (isset($_POST['nomeLancamento']) && isset($_POST['linkLancamento']) && isset($_FILES['lancamento']) && $_FILES['lancamento']['error'] === UPLOAD_ERR_OK && !empty($_FILES['lancamento'])) {
+
+                // Carrega dados do usuário
+                $usuario = $this->usuario;
+                $this->sessao->autorizaAdm($usuario['adm'], $this->cursoInfo['url_principal']);
+
+                // Recupere os valores das variáveis POST e armazene em variáveis locais
+                $nomeLancamento = $_POST['nomeLancamento'];
+                $linkLancamento = $_POST['linkLancamento'];
+
+                // faz upload do banner
+                $capa = $this->cursosModel->uploadFile($_FILES['lancamento'], $this->cursoInfo['dir_name']);
+
+                if ($capa) {
+
+                    $resultado = $this->cursosModel->setLancamento($nomeLancamento, $linkLancamento, $capa, $this->curso);
+
+                    if ($resultado) {
+
+                        header("Location: " . $this->cursoInfo['url_principal'] . "painel/");
+                        exit(); // Certifica-se de que o script seja encerrado após o redirecionamento
+
+                    } else {
+
+                        print_r('erro');
+                        exit;
+
+                    }
+
+                } else {
+
+                    print_r('Erro no upload');
+                    exit;
+
+                }
+
+            } else {
+
+                print_r('erro');
+                exit;
+
+            }
+
+        } else {
+
+            print_r('erro');
+            exit;
+        }
+    }
+
+    public function deletar_lancamento()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idLancamento'])) {
+
+            // Carrega dados do usuário
+            $usuario = $this->usuario;
+            $this->sessao->autorizaAdm($usuario['adm'], $this->cursoInfo['url_principal']);
+
+            $lancamento = $_POST['idLancamento'];
+
+            $resultado = $this->cursosModel->deleteLancamento($lancamento);
+
+            // Retorna a resposta em formato JSON
+            header('Content-Type: application/json');
+            echo json_encode($resultado);
+
+        } else {
+            // ERRO
+            exit;
+        }
+    }
+
     public function progresso()
     {
 

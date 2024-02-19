@@ -28,6 +28,57 @@ class Cursos
         }
     }
 
+    public function setLancamento($nome, $link_url, $capa, $curso_id)
+    {
+        try {
+            // Prepara a query SQL para inserir o novo lançamento na tabela de lançamentos
+            $sql = "INSERT INTO lancamentos (nome, capa, link_url, curso_id) VALUES (:nome, :capa, :link_url, :curso_id)";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
+            $stmt->bindParam(':link_url', $link_url, PDO::PARAM_STR);
+            $stmt->bindParam(':capa', $capa, PDO::PARAM_STR);
+            $stmt->bindParam(':curso_id', $curso_id, PDO::PARAM_INT);
+
+            // Executa a query SQL
+            $stmt->execute();
+
+            // Verifica se a inserção foi bem-sucedida
+            if ($stmt->rowCount() > 0) {
+                return true; // Retorna true se a inserção foi bem-sucedida
+            } else {
+                return false; // Retorna false se nenhum registro foi inserido
+            }
+        } catch (PDOException $e) {
+            // Em caso de erro, você pode tratar a exceção aqui
+            echo "Erro: " . $e->getMessage();
+            return false; // Retorna false em caso de erro
+        }
+    }
+
+    public function deleteLancamento($id)
+    {
+        try {
+            // Prepara a query SQL para excluir o lançamento com o ID fornecido
+            $sql = "DELETE FROM lancamentos WHERE id = :id";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+            // Executa a query SQL
+            $stmt->execute();
+
+            // Verifica se a exclusão foi bem-sucedida
+            if ($stmt->rowCount() > 0) {
+                return true; // Retorna true se a exclusão foi bem-sucedida
+            } else {
+                return false; // Retorna false se nenhum registro foi excluído
+            }
+        } catch (PDOException $e) {
+            // Em caso de erro, você pode tratar a exceção aqui
+            echo "Erro: " . $e->getMessage();
+            return false; // Retorna false em caso de erro
+        }
+    }
+
     public function getLancamentos()
     {
         try {

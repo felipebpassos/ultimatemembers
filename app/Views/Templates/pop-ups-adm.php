@@ -1205,7 +1205,7 @@
     </div>
 </div>
 
-<!-- Formulário para adicionar lançamento -->
+<!-- Formulário para editar lançamento -->
 <div id="editLancamento" class="popup">
     <div class="popup-content">
 
