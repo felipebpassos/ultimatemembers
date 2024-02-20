@@ -270,6 +270,42 @@ $('#closePopupAddBanner').click(function () {
     $('#banners-list').show();
 });
 
+// Quando os botões de editar banner for clicado
+$('.editar-banner').click(function () {
+    const bannerId = $(this).data('id'); // Obtém o ID do banner do atributo data-id
+
+    $('#idBanner').val(bannerId);
+
+    // Encontra banner correspondente
+    const banner = encontrarPorId(bannerId, bannersArray);
+
+    // Verifica se banner é definido e possui as propriedades 'nome_banner', 'botao_acao', 'texto_botao' e 'link_botao'
+    if (banner) {
+        // Preenche os campos do popup com os valores do banner
+        $('#nomeBannerEdit').val(banner['nome_banner']);
+        if (banner['botao_acao'] == 1) {
+            $('#acao-btn-checkbox-edit').prop('checked', true);
+            $('#textoBotaoEdit').val(banner['texto_botao']).prop('disabled', false);
+            $('#linkBotaoEdit').val(banner['link_botao']).prop('disabled', false);
+        } else {
+            $('#acao-btn-checkbox-edit').prop('checked', false);
+            $('#textoBotaoEdit').val('').prop('disabled', true);
+            $('#linkBotaoEdit').val('').prop('disabled', true);
+        }
+    } else {
+        console.error('Banner não encontrado ou propriedades ausentes.');
+    }
+
+    $('#banners-list').hide();
+    $('#editBanner').show();
+});
+
+// Quando o botão de fechar for clicado
+$('#closePopupBannerEdit').click(function () {
+    $('#editBanner').hide();
+    $('#banners-list').show();
+});
+
 //LANÇAMENTOS
 
 $('#editar-lancamentos').click(function () {

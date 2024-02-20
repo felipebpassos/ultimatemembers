@@ -59,6 +59,29 @@ $(document).ready(function () {
         $('body').css('overflow', 'hidden'); // Impede o scroll da página
     });
 
+    // Lidar com a exclusão de um banner
+    $('#banners-list').on('click', '.delete-banner', function () {
+        const idBanner = $(this).data('id');
+        // Define o ID do banner no popup de confirmação.
+        $('#confirmacao').data('id-banner', idBanner);
+
+        // Limpa os campos existentes antes de adicionar dinamicamente
+        $('#confirmacao-form').empty();
+
+        const confirmButton = $('<button type="submit" class="btn-2 btn-deletar">Deletar</button>');
+        const cancelButton = $('<button type="button" class="btn-2" id="btn-cancelar">Cancelar</button>');
+
+        // Adiciona os botões ao formulário
+        $('#confirmacao-form').append(confirmButton, cancelButton);
+        $('#confirmacao-form').attr('action', url_principal + 'painel/deletar_banner/');
+
+        $('#banners-list').hide();
+        $('#confirmacao').show();
+        $('#confirmacao h3').text('Tem certeza que deseja excluir banner?');
+        $('.scrollbar-container, .whatsapp-button').addClass('blur');
+        $('body').css('overflow', 'hidden'); // Impede o scroll da página
+    });
+
     // Lidar com a exclusão de um lançamento
     $('#lancamentos-list').on('click', '.delete-lancamento', function () {
         const idLancamento = $(this).data('id');
@@ -186,6 +209,7 @@ $(document).ready(function () {
         formData['idComentario'] = $('#confirmacao').data('id-comentario');
         formData['idTrilha'] = $('#confirmacao').data('id-trilha');
         formData['idLancamento'] = $('#confirmacao').data('id-lancamento');
+        formData['idBanner'] = $('#confirmacao').data('id-banner');
 
         // Cria uma solicitação AJAX com jQuery.
         $.ajax({

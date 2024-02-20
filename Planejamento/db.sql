@@ -1,8 +1,8 @@
 use reelsdecinema;
 
-drop table banners;
+drop table xxx;
 
-select * from lancamentos;
+select * from banners;
 
 UPDATE lancamentos
 SET id_curso = 1;

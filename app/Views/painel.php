@@ -17,6 +17,11 @@
             <div class="slides">
                 <img src="<?php echo str_replace("./", "http://localhost/ultimatemembers/", $banner['banner']); ?>"
                     alt="<?php echo $banner['nome_banner']; ?>">
+                <?php if ($banner['botao_acao']): ?>
+                    <a class="link-acao" href="<?php echo $banner['link_botao']; ?>" target="_blank"><button class="btn-2">
+                            <?php echo $banner['texto_botao']; ?>
+                        </button></a>
+                <?php endif; ?>
             </div>
         <?php endforeach; ?>
     <?php endif; ?>
@@ -95,7 +100,8 @@
     </div>
 
     <!-- Seção de trilhas -->
-    <div class="banner-box fade-in-slide-up <?php echo (isset($trilhas) && !empty($trilhas)) ? '' : 'no-items'; ?>" style="padding-top: 20px; margin-bottom: 50px; padding-bottom: 30px;">
+    <div class="banner-box fade-in-slide-up <?php echo (isset($trilhas) && !empty($trilhas)) ? '' : 'no-items'; ?>"
+        style="padding-top: 20px; margin-bottom: 50px; padding-bottom: 30px;">
         <div class="seção-titulo" id="titulo-banner">
             <i class="fa-solid fa-graduation-cap"></i>
             <h3 style="margin: 0px;">Trilhas</h3>

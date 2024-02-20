@@ -61,6 +61,14 @@ const botaoRadio = document.getElementById('acao-btn-checkbox');
 const textoInput = document.getElementById('textoBotao');
 const linkInput = document.getElementById('linkBotao');
 
+// Obtenha referências aos elementos de botões de opção do primeiro conjunto
+const botaoRadioEdit = document.getElementById('acao-btn-checkbox-edit');
+const textoInputEdit = document.getElementById('textoBotaoEdit');
+const linkInputEdit = document.getElementById('linkBotaoEdit');
+
 // Adicione ouvintes de eventos para os botões de opção do primeiro conjunto
 botaoRadio.addEventListener('change', () => updateBotaoAcaoInputs(textoInput, linkInput, botaoRadio));
+
+// Adicione ouvintes de eventos para os botões de opção do primeiro conjunto
+botaoRadioEdit.addEventListener('change', () => updateBotaoAcaoInputs(textoInputEdit, linkInputEdit, botaoRadioEdit));
 

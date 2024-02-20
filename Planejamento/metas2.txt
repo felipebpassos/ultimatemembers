@@ -7,7 +7,6 @@ deletar usuários selecionados
 fazer integração com outras plataformas
 editar integração
 
--Banners e lançamentos dinâmicos
 -Fazer editor de texto funcionar
 -Fazer funcionar pesquisas
 -Fazer funcionar mudança de índice (arrows up e down)

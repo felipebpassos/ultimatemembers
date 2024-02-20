@@ -55,28 +55,77 @@ class Cursos
         }
     }
 
-    public function deleteLancamento($id)
+    public function updateLancamento($idLancamento, $nomeLancamento, $linkLancamento)
     {
         try {
-            // Prepara a query SQL para excluir o lançamento com o ID fornecido
-            $sql = "DELETE FROM lancamentos WHERE id = :id";
+            // Prepara a query SQL para atualizar o lançamento na tabela de lançamentos
+            $sql = "UPDATE lancamentos SET nome = :nomeLancamento, link_url = :linkLancamento WHERE id = :idLancamento";
             $stmt = $this->con->prepare($sql);
-            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->bindParam(':idLancamento', $idLancamento, PDO::PARAM_INT);
+            $stmt->bindParam(':nomeLancamento', $nomeLancamento, PDO::PARAM_STR);
+            $stmt->bindParam(':linkLancamento', $linkLancamento, PDO::PARAM_STR);
 
             // Executa a query SQL
             $stmt->execute();
 
-            // Verifica se a exclusão foi bem-sucedida
+            // Verifica se a atualização foi bem-sucedida
             if ($stmt->rowCount() > 0) {
-                return true; // Retorna true se a exclusão foi bem-sucedida
+                return true; // Retorna true se a atualização foi bem-sucedida
             } else {
-                return false; // Retorna false se nenhum registro foi excluído
+                return false; // Retorna false se nenhum registro foi atualizado
             }
         } catch (PDOException $e) {
             // Em caso de erro, você pode tratar a exceção aqui
             echo "Erro: " . $e->getMessage();
             return false; // Retorna false em caso de erro
         }
+    }
+
+    public function deleteLancamento($id)
+    {
+        $query = 'SELECT capa FROM lancamentos WHERE id = :id';
+
+        $stmt = $this->con->prepare($query);
+
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+
+            $capa = $result['capa'];
+
+            try {
+                // Prepara a query SQL para excluir o lançamento com o ID fornecido
+                $sql = "DELETE FROM lancamentos WHERE id = :id";
+                $stmt = $this->con->prepare($sql);
+                $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+                // Executa a query SQL
+                $stmt->execute();
+
+                // Verifica se a exclusão foi bem-sucedida
+                if ($stmt->rowCount() > 0) {
+
+                    if (!empty($capa) && file_exists($capa)) {
+                        unlink($capa);
+                    }
+
+                    return true; // Retorna true se a exclusão foi bem-sucedida
+
+                } else {
+                    return false; // Retorna false se nenhum registro foi excluído
+                }
+            } catch (PDOException $e) {
+                // Em caso de erro, você pode tratar a exceção aqui
+                echo "Erro: " . $e->getMessage();
+                return false; // Retorna false em caso de erro
+            }
+
+        }
+
     }
 
     public function getLancamentos()
@@ -230,6 +279,77 @@ class Cursos
         }
     }
 
+    public function getPathFileById($id, $file_type)
+    {
+        if ($file_type == 'logo') {
+
+            $query = 'SELECT banner FROM banners WHERE id = :id LIMIT 1';
+
+            $content = 'banner';
+
+        } elseif ($file_type == 'favicon') {
+
+            $query = 'SELECT capa FROM lancamentos WHERE id = :id LIMIT 1';
+
+            $content = 'lancamento';
+
+        }
+
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($result) {
+            return $result[$content];
+        } else {
+            return null;
+        }
+    }
+
+    public function updateFileById($id, $novo, $antigo, $file_type)
+    {
+        // Inicie uma transação para garantir consistência nos dados
+        $this->con->beginTransaction();
+
+        try {
+
+            // Atualiza url do arquivo com o novo caminho
+            if ($file_type == 'banner') {
+
+                $sql = "UPDATE banners SET banner = :novo WHERE id = :id";
+
+            } elseif ($file_type == 'lancamento') {
+
+                $sql = "UPDATE lancamentos SET capa = :novo WHERE id = :id";
+
+            }
+
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindValue(':novo', $novo);
+            $stmt->bindValue(':id', $id);
+            $stmt->execute();
+
+            // Se a atualização ocorreu com sucesso, exclua a capa antiga
+            if ($stmt->rowCount() > 0 && !empty($antigo)) {
+                unlink($antigo);
+            }
+
+            // Confirme a transação
+            $this->con->commit();
+
+            return true; // Sucesso
+        } catch (PDOException $e) {
+            // Em caso de erro, reverta a transação
+            $this->con->rollback();
+
+            // Você pode adicionar um log de erro aqui se necessário
+            // Exemplo: error_log("Erro ao atualizar capa: " . $e->getMessage());
+
+            return false; // Erro
+        }
+    }
+
     public function getIntegracoesVideo($curso)
     {
         $query = 'SELECT id, nome, plataforma, token_acesso, refresh_token, user_uri FROM integracoes_api WHERE curso_id = :curso AND tipo = 1';
@@ -281,6 +401,81 @@ class Cursos
             echo "Erro: " . $e->getMessage();
             return false; // Retorna false em caso de erro
         }
+    }
+
+    public function updateBanner($idBanner, $nomeBanner, $botaoAcao, $textoBotao, $linkBotao)
+    {
+        try {
+            // Prepara a query SQL para atualizar o banner na tabela de banners
+            $sql = "UPDATE banners SET nome_banner = :nomeBanner, botao_acao = :botaoAcao, texto_botao = :textoBotao, link_botao = :linkBotao WHERE id = :idBanner";
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindParam(':idBanner', $idBanner, PDO::PARAM_INT);
+            $stmt->bindParam(':nomeBanner', $nomeBanner, PDO::PARAM_STR);
+            $stmt->bindParam(':botaoAcao', $botaoAcao, PDO::PARAM_BOOL);
+            $stmt->bindParam(':textoBotao', $textoBotao, PDO::PARAM_STR);
+            $stmt->bindParam(':linkBotao', $linkBotao, PDO::PARAM_STR);
+
+            // Executa a query SQL
+            $stmt->execute();
+
+            // Verifica se a atualização foi bem-sucedida
+            if ($stmt->rowCount() > 0) {
+                return true; // Retorna true se a atualização foi bem-sucedida
+            } else {
+                return false; // Retorna false se nenhum registro foi atualizado
+            }
+        } catch (PDOException $e) {
+            // Em caso de erro, você pode tratar a exceção aqui
+            echo "Erro: " . $e->getMessage();
+            return false; // Retorna false em caso de erro
+        }
+    }
+
+    public function deleteBanner($id)
+    {
+        $query = 'SELECT banner FROM banners WHERE id = :id';
+
+        $stmt = $this->con->prepare($query);
+
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+
+            $banner = $result['banner'];
+
+            try {
+                // Prepara a query SQL para excluir o banner com o ID fornecido
+                $sql = "DELETE FROM banners WHERE id = :id";
+                $stmt = $this->con->prepare($sql);
+                $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+                // Executa a query SQL
+                $stmt->execute();
+
+                // Verifica se a exclusão foi bem-sucedida
+                if ($stmt->rowCount() > 0) {
+
+                    if (!empty($banner) && file_exists($banner)) {
+                        unlink($banner);
+                    }
+
+                    return true; // Retorna true se a exclusão foi bem-sucedida
+
+                } else {
+                    return false; // Retorna false se nenhum registro foi excluído
+                }
+            } catch (PDOException $e) {
+                // Em caso de erro, você pode tratar a exceção aqui
+                echo "Erro: " . $e->getMessage();
+                return false; // Retorna false em caso de erro
+            }
+
+        }
+
     }
 
     public function getBanners($id_curso)

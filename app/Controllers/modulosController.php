@@ -419,6 +419,11 @@ class modulosController extends Controller
 
             if (isset($_POST["id_modulo"]) && isset($_POST["nomeAula"]) && isset($_POST["videoId"]) && isset($_POST["plataforma"]) && isset($_POST["integracao"])) {
 
+                // Carrega dados do usuário
+                $usuario = $this->usuario;
+
+                $this->sessao->autorizaAdm($usuario['adm'], $this->cursoInfo['url_principal']);
+
                 $aulasModel = new Aulas();
 
                 $id_modulo = $_POST["id_modulo"];
@@ -485,6 +490,11 @@ class modulosController extends Controller
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             if (isset($_POST["idAula"]) && isset($_POST["nomeAula"])) {
+
+                // Carrega dados do usuário
+                $usuario = $this->usuario;
+
+                $this->sessao->autorizaAdm($usuario['adm'], $this->cursoInfo['url_principal']);
 
                 $aulasModel = new Aulas();
 
@@ -556,7 +566,7 @@ class modulosController extends Controller
 
                 }
 
-                // Salva dados da nova aula no banco de dados
+                // Atualiza dados da aula editada no banco de dados
                 $result = $aulasModel->updateAula($idAula, $nomeAula, $descricaoAula);
 
                 if ($result) {
@@ -565,21 +575,21 @@ class modulosController extends Controller
 
                 } else {
 
-                    print_r('Erro ao criar Nova Aula');
+                    print_r('Erro ao editar Aula');
                     exit;
 
                 }
 
             } else {
 
-                print_r('Dados da Nova Aula não enviados');
+                print_r('Dados da Aula não enviados');
                 exit;
 
             }
 
         } else {
 
-            print_r('Dados da Nova Aula não enviados');
+            print_r('Dados da Aula não enviados');
             exit;
 
         }

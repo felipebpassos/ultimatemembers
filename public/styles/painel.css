@@ -95,6 +95,13 @@ h6 {
     z-index: 1;
 }
 
+.main-banner .link-acao {
+    position: absolute;
+    bottom: 40px;
+    right: 50px;
+    z-index: 2;
+}
+
 .dot {
     height: 4px;
     width: 4px;

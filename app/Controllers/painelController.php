@@ -156,6 +156,126 @@ class painelController extends Controller
         }
     }
 
+    public function edita_banner()
+    {
+        // Verifica se o formulário foi enviado via método POST
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+            if (isset($_POST["idBanner"]) && isset($_POST["nomeBanner"])) {
+
+                // Carrega dados do usuário
+                $usuario = $this->usuario;
+
+                $this->sessao->autorizaAdm($usuario['adm'], $this->cursoInfo['url_principal']);
+
+                $idBanner = $_POST["idBanner"];
+                $nomeBanner = $_POST["nomeBanner"];
+
+                $botaoAcao = isset($_POST['acaoBtn']) ? $_POST['acaoBtn'] : 0;
+
+                // Verifique se o checkbox "acao-btn" está marcado
+                if ($botaoAcao) {
+                    // Verifique se os campos "textoBotao" e "linkBotao" estão preenchidos
+                    if (isset($_POST['textoBotao']) && isset($_POST['linkBotao'])) {
+
+                        $textoBotao = $_POST['textoBotao'];
+                        $linkBotao = $_POST['linkBotao'];
+
+                    } else {
+                        // Retorna uma mensagem de erro se os campos "textoBotao" ou "linkBotao" estiverem ausentes
+                        print_r('erro');
+                        exit;
+                    }
+                } else {
+                    $textoBotao = null;
+                    $linkBotao = null;
+                }
+
+                // Verifica se há foto do banner fornecida
+                if (isset($_FILES['banner']) && $_FILES['banner']['error'] === UPLOAD_ERR_OK && !empty($_FILES['banner'])) {
+
+                    $banner = $this->cursosModel->uploadFile($_FILES['banner'], $this->cursoInfo['dir_name']);
+
+                    if ($banner) {
+
+                        // Obtém caminho antigo do banner
+                        $bannerAntigo = $this->cursosModel->getPathFileById($idBanner, 'banner');
+
+                        $result = $this->cursosModel->updateFileById($idBanner, $banner, $bannerAntigo, 'banner');
+
+                        if ($result) {
+
+                            print_r('Sucesso no upload');
+
+                        } else {
+
+                            print_r('Erro ao editar Banner');
+                            exit;
+
+                        }
+
+                    } else {
+
+                        print_r('Erro no upload');
+                        exit;
+
+                    }
+
+                }
+
+                // Atualiza dados do banner editado no banco de dados
+                $result = $this->cursosModel->updateBanner($idBanner, $nomeBanner, $botaoAcao, $textoBotao, $linkBotao);
+
+                if ($result) {
+
+                    header("Location: " . $this->cursoInfo['url_principal'] . "painel/");
+                    exit(); // Certifica-se de que o script seja encerrado após o redirecionamento
+
+                } else {
+
+                    print_r('Erro ao editar Banner');
+                    exit;
+
+                }
+
+            } else {
+
+                print_r('Dados do Banner não enviados');
+                exit;
+
+            }
+
+        } else {
+
+            print_r('Dados do Banner não enviados');
+            exit;
+
+        }
+
+    }
+
+    public function deletar_banner()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idBanner'])) {
+
+            // Carrega dados do usuário
+            $usuario = $this->usuario;
+            $this->sessao->autorizaAdm($usuario['adm'], $this->cursoInfo['url_principal']);
+
+            $banner = $_POST['idBanner'];
+
+            $resultado = $this->cursosModel->deleteBanner($banner);
+
+            // Retorna a resposta em formato JSON
+            header('Content-Type: application/json');
+            echo json_encode($resultado);
+
+        } else {
+            // ERRO
+            exit;
+        }
+    }
+
     public function novo_lancamento()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -209,6 +329,86 @@ class painelController extends Controller
             print_r('erro');
             exit;
         }
+    }
+
+    public function edita_lancamento()
+    {
+        // Verifica se o formulário foi enviado via método POST
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+            if (isset($_POST["idLancamento"]) && isset($_POST["nomeLancamento"]) && isset($_POST["linkLancamento"])) {
+
+                // Carrega dados do usuário
+                $usuario = $this->usuario;
+
+                $this->sessao->autorizaAdm($usuario['adm'], $this->cursoInfo['url_principal']);
+
+                $idLancamento = $_POST["idLancamento"];
+                $nomeLancamento = $_POST["nomeLancamento"];
+                $linkLancamento = $_POST["linkLancamento"];
+
+
+                // Verifica se há foto do lançamento fornecida
+                if (isset($_FILES['lancamento']) && $_FILES['lancamento']['error'] === UPLOAD_ERR_OK && !empty($_FILES['lancamento'])) {
+
+                    $lancamento = $this->cursosModel->uploadFile($_FILES['lancamento'], $this->cursoInfo['dir_name']);
+
+                    if ($lancamento) {
+
+                        // Obtém caminho antigo do lançamento
+                        $lancamentoAntigo = $this->cursosModel->getPathFileById($idLancamento, 'lancamento');
+
+                        $result = $this->cursosModel->updateFileById($idLancamento, $lancamento, $lancamentoAntigo, 'lancamento');
+
+                        if ($result) {
+
+                            print_r('Sucesso no upload');
+
+                        } else {
+
+                            print_r('Erro ao editar Lançamento');
+                            exit;
+
+                        }
+
+                    } else {
+
+                        print_r('Erro no upload');
+                        exit;
+
+                    }
+
+                }
+
+                // Atualiza dados do lançamento editado no banco de dados
+                $result = $this->cursosModel->updateLancamento($idLancamento, $nomeLancamento, $linkLancamento);
+
+                if ($result) {
+
+                    header("Location: " . $this->cursoInfo['url_principal'] . "painel/");
+                    exit(); // Certifica-se de que o script seja encerrado após o redirecionamento
+
+                } else {
+
+                    print_r('Erro ao editar Lançamento');
+                    exit;
+
+                }
+
+            } else {
+
+                print_r('Dados do Lançamento não enviados');
+                exit;
+
+            }
+
+        } else {
+
+            print_r('Dados do Lançamento não enviados');
+            exit;
+
+        }
+
     }
 
     public function deletar_lancamento()
