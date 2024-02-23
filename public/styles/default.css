@@ -169,7 +169,7 @@ textarea {
     color: var(--cor-secundaria);
     border: none;
     padding: 8px 15px;
-    border-radius: 8px;
+    border-radius: 5px;
 }
 
 .checkbox {
@@ -709,9 +709,14 @@ body {
     overflow-x: hidden;
 }
 
-#form-avalia {width: 600px; margin: auto;}
+#form-avalia {
+    width: 600px;
+    margin: auto;
+}
 
-#confirmacao h3, #avalia h3, #denuncia h3 {
+#confirmacao h3,
+#avalia h3,
+#denuncia h3 {
     text-align: center;
 }
 
@@ -721,12 +726,16 @@ body {
     margin-top: 60px;
 }
 
-#confirmacao .btn-box, #avalia .btn-box, #denuncia .btn-box {
+#confirmacao .btn-box,
+#avalia .btn-box,
+#denuncia .btn-box {
     width: fit-content;
     margin: auto;
 }
 
-#confirmacao button, #avalia button, #denuncia button {
+#confirmacao button,
+#avalia button,
+#denuncia button {
     display: inline-block;
     margin-right: 30px;
     margin-top: 40px;
@@ -807,7 +816,9 @@ body {
     position: relative;
 }
 
-#avalia .campo-popup {margin-bottom: 10px;}
+#avalia .campo-popup {
+    margin-bottom: 10px;
+}
 
 .campo-popup input,
 .campo-popup textarea {
@@ -1013,9 +1024,19 @@ body {
     color: var(--cor-primaria-light);
 }
 
-.indice-item {flex: 0.15; min-width: 50px; text-align: center;}
-.nome-item {flex: 1;}
-.op-item {min-width: 160px;}
+.indice-item {
+    flex: 0.15;
+    min-width: 50px;
+    text-align: center;
+}
+
+.nome-item {
+    flex: 1;
+}
+
+.op-item {
+    min-width: 160px;
+}
 
 .trilha-modulos li .op-item {
     min-width: 30px;
@@ -1058,7 +1079,9 @@ body {
     padding: 10px 20px;
 }
 
-.label-den {width: fit-content;}
+.label-den {
+    width: fit-content;
+}
 
 #checkbox-container {
     width: fit-content;
@@ -1107,6 +1130,59 @@ body {
 
 .preview-btn:hover {
     color: var(--cor-primaria-lighter);
+}
+
+.tabela {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+.tabela.avaliacoes {
+    min-height: 335px;
+    max-height: 335px;
+    border: solid 1px var(--cor-secundaria-light-transparent);
+}
+
+.linha {
+    display: flex;
+    border-bottom: solid 1px var(--cor-secundaria-light-transparent);
+    position: relative;
+}
+
+.cabecalho,
+.celula {
+    flex: 1;
+    padding: 8px 0;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.avaliacoes .cabecalho {
+    padding: 0;
+    max-height: 35px;
+}
+
+.cabecalho {
+    background-color: var(--cor-secundaria-light);
+    display: flex;
+}
+
+.titulo-prova {
+    flex: 1;
+}
+
+.celula {
+    padding: 8px;
+}
+
+.prazo {
+    flex: 0.6;
+}
+
+.iniciar-btn {
+    flex: 0.3;
 }
 
 .blur {

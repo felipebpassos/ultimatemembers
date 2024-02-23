@@ -176,7 +176,6 @@ main {
     width: 90%;
     margin-bottom: 0px;
     padding: 0px;
-    border-bottom: solid 1px var(--cor-secundaria-light);
     position: relative;
 }
 
@@ -239,6 +238,8 @@ main {
     padding: 0px;
     width: 90%;
     max-height: 300px;
+    min-height: 300px;
+    border: 1px solid var(--cor-secundaria-light-transparent);
     overflow-y: auto;
 }
 
@@ -309,24 +310,6 @@ main {
 .content ul li a:hover {
     transition: 0.15s;
     background-color: var(--cor-secundaria-light);
-}
-
-.table {
-    min-height: 300px;
-    border: 1px solid var(--cor-secundaria-light);
-    --bs-table-bg: transparent !important;
-    --bs-table-border-color: var(--cor-secundaria-light) !important;
-}
-
-.table thead {
-    --bs-table-accent-bg: var(--cor-secundaria-lighter);
-    --bs-table-color: var(--cor-primaria-light);
-}
-
-.table tbody {
-    --bs-table-color: var(--cor-primaria);
-    overflow-y: auto;
-    height: 100px;
 }
 
 .seção-container {

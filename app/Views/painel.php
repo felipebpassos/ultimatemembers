@@ -198,7 +198,7 @@
                         <h3>Progresso</h3>
                     </div>
                     <div class="lista-preferências">
-                        <ul class="barra" style="border-bottom: solid 1px var(--cor-secundaria-lighter);">
+                        <ul class="barra" style="border-bottom: solid 1px var(--cor-secundaria-light-transparent);">
                             <li>
                                 <button class="aba" onclick="abrirAba(event, 'ativos')">Em Aberto</button>
                             </li>
@@ -220,33 +220,31 @@
                         <i class="fa-regular fa-square-check"></i>
                         <h3>Avaliações</h3>
                     </div>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col" style="width: 45%;">Prova</th>
-                                <th scope="col" style="width: 20%;">Prazo final</th>
-                                <th scope="col" style="width: 15%;"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="align-middle">Avaliação 1</td>
-                                <td class="align-middle">01/01/2024</td>
-                                <td class="align-middle"><a href="<?= $curso['url_principal'] ?>questionario"><button
-                                            class="btn-3">Iniciar</button></a></td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle">Avaliação 2</td>
-                                <td class="align-middle">02/01/2024</td>
-                                <td class="align-middle"><button class="btn-3">Iniciar</button></td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle">Avaliação 3</td>
-                                <td class="align-middle">02/01/2024</td>
-                                <td class="align-middle"><button class="btn-3">Iniciar</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="avaliacoes tabela">
+                        <div class="cabecalho">
+                            <div class="celula titulo-prova">Prova</div>
+                            <div class="celula prazo">Prazo final</div>
+                            <div class="celula iniciar-btn"></div>
+                        </div>
+                        <div class='prova linha'>
+                            <div class="celula titulo-prova">Avaliação 1</div>
+                            <div class="celula prazo">01/01/2024</div>
+                            <div class="celula iniciar-btn"><a href="<?= $curso['url_principal'] ?>questionario"><button
+                                            class="btn-3">Iniciar</button></a></div>
+                        </div>
+                        <div class='prova linha'>
+                            <div class="celula titulo-prova">Avaliação 2</div>
+                            <div class="celula prazo">14/02/2024</div>
+                            <div class="celula iniciar-btn"><a href="<?= $curso['url_principal'] ?>questionario"><button
+                                            class="btn-3">Iniciar</button></a></div>
+                        </div>
+                        <div class='prova linha'>
+                            <div class="celula titulo-prova">Avaliação 3</div>
+                            <div class="celula prazo">20/03/2024</div>
+                            <div class="celula iniciar-btn"><a href="<?= $curso['url_principal'] ?>questionario"><button
+                                            class="btn-3">Iniciar</button></a></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

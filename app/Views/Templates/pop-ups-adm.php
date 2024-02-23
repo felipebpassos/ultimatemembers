@@ -342,58 +342,56 @@
         <form class="formPopUp" id="moduloFormAdd" action="<?php echo $curso['url_principal']; ?>modulos/novo_modulo/"
             method="POST" enctype="multipart/form-data">
 
-            <div class="txt-input">
+            <div style="width: 600px; margin: auto;">
 
-                <div>
-                    <label for="indice">Índice</label>
-                    <input type="text" id="indice" name="indice">
-                </div>
-
-                <div style="flex:1;">
-                    <label for="nomeModulo">Nome do Módulo</label>
-                    <input type="text" id="nomeModulo" name="nomeModulo" required>
-                </div>
-
-            </div>
-
-            <div class="container status-modulo " style="padding:20px;">
-                <div class="row">
-                    <div class="col-md-5">
-                        <label style="padding-bottom:10px;">Status do Módulo</label><br>
-
-                        <input type="radio" id="disponivel" name="status" value="1" style="display:inline-block;"
-                            checked>
-                        <label for="disponivel">Disponível</label><br>
-
-                        <input type="radio" id="em_breve" name="status" value="2" style="display:inline-block;">
-                        <label for="em_breve">Em Breve</label><br>
-
-                        <input type="radio" id="indisponivel" name="status" value="3" style="display:inline-block;">
-                        <label for="indisponivel">Indisponível</label><br>
-                    </div>
-                    <div class="col-md-7">
-                        <label for="data" style="padding-bottom:10px;">Data de Lançamento (opcional)</label>
-                        <input type="date" id="data" name="data" style="display:inline-block;" disabled>
-                        <input type="time" id="hora" name="hora" style="display:inline-block;" disabled>
+                <div class="mb-3">
+                    <label class="form-label" for="nomeModulo">Título do Módulo</label>
+                    <div class="campo-popup" style="width: 100%;">
+                        <input type="text" id="nomeModulo" name="nomeModulo" class="campo-input"
+                            placeholder="Digite o título do módulo" required>
                     </div>
                 </div>
-            </div>
+
+                <div class="container status-modulo " style="padding:20px;">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <label style="padding-bottom:10px;">Status do Módulo</label><br>
+
+                            <input type="radio" id="disponivel" name="status" value="1" style="display:inline-block;"
+                                checked>
+                            <label for="disponivel">Disponível</label><br>
+
+                            <input type="radio" id="em_breve" name="status" value="2" style="display:inline-block;">
+                            <label for="em_breve">Em Breve</label><br>
+
+                            <input type="radio" id="indisponivel" name="status" value="3" style="display:inline-block;">
+                            <label for="indisponivel">Indisponível</label><br>
+                        </div>
+                        <div class="col-md-7">
+                            <label for="data" style="padding-bottom:10px;">Data de Lançamento (opcional)</label>
+                            <input type="date" id="data" name="data" style="display:inline-block;" disabled>
+                            <input type="time" id="hora" name="hora" style="display:inline-block;" disabled>
+                        </div>
+                    </div>
+                </div>
 
 
-            <p style="margin: 10px 20px; font-weight: bold;">Capa do módulo (Opcional)</p>
-            <div class="drop-area" id="dropImgModulo">
-                Arraste e solte uma imagem aqui ou clique para fazer upload.
-                <span id="imgInfoModulo"></span>
-                <input type="file" id="capaModulo" style="width: 0; height:0; margin:0;" name="capaModulo"
-                    accept="img/*">
-            </div>
+                <p style="margin: 10px 20px; font-weight: bold;">Capa do módulo (Opcional)</p>
+                <div class="drop-area" id="dropImgModulo">
+                    Arraste e solte uma imagem aqui ou clique para fazer upload.
+                    <span id="imgInfoModulo"></span>
+                    <input type="file" id="capaModulo" style="width: 0; height:0; margin:0;" name="capaModulo"
+                        accept="img/*">
+                </div>
 
-            <p style="margin: 10px 20px; font-weight: bold;">Vídeo Introdutório do módulo (Opcional)</p>
-            <div class="drop-area" id="dropVideoModulo">
-                Arraste e solte um vídeo aqui ou clique para fazer upload.
-                <span id="videoInfoModulo"></span>
-                <input type="file" id="videoModulo" style="width: 0; height:0; margin:0;" name="videoModulo"
-                    accept="video/*">
+                <p style="margin: 10px 20px; font-weight: bold;">Vídeo Introdutório do módulo (Opcional)</p>
+                <div class="drop-area" id="dropVideoModulo">
+                    Arraste e solte um vídeo aqui ou clique para fazer upload.
+                    <span id="videoInfoModulo"></span>
+                    <input type="file" id="videoModulo" style="width: 0; height:0; margin:0;" name="videoModulo"
+                        accept="video/*">
+                </div>
+
             </div>
 
             <button class="btn-2" type="submit" style="margin: auto; margin-top: 40px;">Criar Módulo</button>
@@ -426,60 +424,59 @@
         <form class="formPopUp" id="moduloFormEdit" action="<?php echo $curso['url_principal']; ?>modulos/edita_modulo/"
             method="POST" enctype="multipart/form-data">
 
-            <div class="txt-input">
+            <div style="width: 600px; margin: auto;">
 
-                <div>
-                    <label for="indice">Índice</label>
-                    <input type="text" id="indice" name="indice">
-                </div>
-
-                <div style="flex:1;">
-                    <label for="nomeModulo">Nome do Módulo</label>
-                    <input type="text" id="nomeModuloEdit" name="nomeModulo" required>
+                <div class="mb-3">
+                    <label class="form-label" for="nomeModulo">Título do Módulo</label>
+                    <div class="campo-popup" style="width: 100%;">
+                        <input type="text" id="nomeModuloEdit" name="nomeModulo" class="campo-input"
+                            placeholder="Digite o título do módulo" required>
+                    </div>
                 </div>
 
                 <input type="hidden" id="idModulo" name="idModulo">
 
-            </div>
+                <div class="container status-modulo " style="padding:20px;">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <label style="padding-bottom:10px;">Status do Módulo</label><br>
 
-            <div class="container status-modulo " style="padding:20px;">
-                <div class="row">
-                    <div class="col-md-5">
-                        <label style="padding-bottom:10px;">Status do Módulo</label><br>
+                            <input type="radio" id="disponivelEdit" name="status" value="1"
+                                style="display:inline-block;" checked>
+                            <label for="disponivel">Disponível</label><br>
 
-                        <input type="radio" id="disponivelEdit" name="status" value="1" style="display:inline-block;"
-                            checked>
-                        <label for="disponivel">Disponível</label><br>
+                            <input type="radio" id="em_breveEdit" name="status" value="2" style="display:inline-block;">
+                            <label for="em_breve">Em Breve</label><br>
 
-                        <input type="radio" id="em_breveEdit" name="status" value="2" style="display:inline-block;">
-                        <label for="em_breve">Em Breve</label><br>
-
-                        <input type="radio" id="indisponivelEdit" name="status" value="3" style="display:inline-block;">
-                        <label for="indisponivel">Indisponível</label><br>
-                    </div>
-                    <div class="col-md-7">
-                        <label for="data" style="padding-bottom:10px;">Data de Lançamento (opcional)</label>
-                        <input type="date" id="dataEdit" name="data" style="display:inline-block;" disabled>
-                        <input type="time" id="horaEdit" name="hora" style="display:inline-block;" disabled>
+                            <input type="radio" id="indisponivelEdit" name="status" value="3"
+                                style="display:inline-block;">
+                            <label for="indisponivel">Indisponível</label><br>
+                        </div>
+                        <div class="col-md-7">
+                            <label for="data" style="padding-bottom:10px;">Data de Lançamento (opcional)</label>
+                            <input type="date" id="dataEdit" name="data" style="display:inline-block;" disabled>
+                            <input type="time" id="horaEdit" name="hora" style="display:inline-block;" disabled>
+                        </div>
                     </div>
                 </div>
-            </div>
 
 
-            <p style="margin: 10px 20px; font-weight: bold;">Capa do módulo (Opcional)</p>
-            <div class="drop-area" id="dropImgModuloEdit">
-                Arraste e solte uma imagem aqui ou clique para fazer upload.
-                <span id="imgInfoModuloEdit"></span>
-                <input type="file" id="capaModuloEdit" style="width: 0; height:0; margin:0;" name="capaModulo"
-                    accept="img/*">
-            </div>
+                <p style="margin: 10px 20px; font-weight: bold;">Capa do módulo (Opcional)</p>
+                <div class="drop-area" id="dropImgModuloEdit">
+                    Arraste e solte uma imagem aqui ou clique para fazer upload.
+                    <span id="imgInfoModuloEdit"></span>
+                    <input type="file" id="capaModuloEdit" style="width: 0; height:0; margin:0;" name="capaModulo"
+                        accept="img/*">
+                </div>
 
-            <p style="margin: 10px 20px; font-weight: bold;">Vídeo Introdutório do módulo (Opcional)</p>
-            <div class="drop-area" id="dropVideoModuloEdit">
-                Arraste e solte um vídeo aqui ou clique para fazer upload.
-                <span id="videoInfoModuloEdit"></span>
-                <input type="file" id="videoModuloEdit" style="width: 0; height:0; margin:0;" name="videoModulo"
-                    accept="video/*">
+                <p style="margin: 10px 20px; font-weight: bold;">Vídeo Introdutório do módulo (Opcional)</p>
+                <div class="drop-area" id="dropVideoModuloEdit">
+                    Arraste e solte um vídeo aqui ou clique para fazer upload.
+                    <span id="videoInfoModuloEdit"></span>
+                    <input type="file" id="videoModuloEdit" style="width: 0; height:0; margin:0;" name="videoModulo"
+                        accept="video/*">
+                </div>
+
             </div>
 
             <button class="btn-2" type="submit" style="margin: auto; margin-top: 40px;">Editar Módulo</button>
