@@ -58,6 +58,8 @@ main {
     color: var(--cor-primaria);
 }
 
+.publicacoes-relevantes .conteudo-pergunta p {width: 90%;}
+
 .slides {
     opacity: 0;
     transition: opacity 1.5s ease-in-out;
@@ -70,8 +72,13 @@ main {
     padding: 15px;
 }
 
-.slides .box a {color: var(--cor-primaria);}
-.slides .box a:hover {color: var(--cor-primaria-light);}
+.slides .box a {
+    color: var(--cor-primaria);
+}
+
+.slides .box a:hover {
+    color: var(--cor-primaria-light);
+}
 
 .dots {
     display: flex;
@@ -165,27 +172,61 @@ main {
     margin-bottom: 80px;
 }
 
+.top-contribuintes-header, .publicacoes-relevantes-header {
+    width: 100%;
+    padding: 15px 20px;
+    background-color: var(--cor-secundaria-light);
+    border-bottom: 3px solid var(--cor-secundaria);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
 .top-contribuintes {
     color: var(--cor-primaria);
     background-color: var(--cor-secundaria-light);
     max-height: 600px;
-    border-radius: 3px;
-    padding: 20px;
-    padding-right: 10px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    padding: 20px 0;
+    padding-top: 0;
+    width: 100%;
 }
 
 .contributors {
     color: var(--cor-primaria-dark);
     margin: 0;
-    margin-top: 30px;
-    padding: 0 10px;
+    padding: 0;
 }
 
 .contributors li {
     display: flex;
-    padding: 10px 0;
+    padding: 10px 30px;
+    padding-right: 25px;
     width: 100%;
     justify-content: space-between;
+    position: relative;
+    margin-bottom: 8px;
+}
+
+.top-contribuintes .top-contributor::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 6px; /* largura do traço vertical */
+    height: 100%;
+}
+
+.top-contribuintes .top-contributor:nth-child(1)::before {
+    background-color: gold; /* Cor dourada para o primeiro lugar */
+}
+
+.top-contribuintes .top-contributor:nth-child(2)::before {
+    background-color: silver; /* Cor prateada para o segundo lugar */
+}
+
+.top-contribuintes .top-contributor:nth-child(3)::before {
+    background-color: #cd7f32; /* Cor de bronze para o terceiro lugar */
 }
 
 .contributors li h5,
@@ -534,7 +575,7 @@ textarea:focus {
     padding: 20px;
     padding-left: 0;
     box-sizing: border-box;
-    border-bottom: solid 1px var(--cor-secundaria-light);
+    border-bottom: solid 1px var(--cor-secundaria-light-transparent);
     position: relative;
 }
 
@@ -561,6 +602,48 @@ textarea:focus {
     padding-right: 0;
     box-sizing: border-box;
     position: relative;
+}
+
+.op-toggle {
+    display: none;
+}
+
+.conteudo-pergunta:hover .op-toggle,
+.answer:hover .op-toggle {
+    display: flex !important;
+}
+
+.op-toggle {
+    position: absolute;
+    right: 0;
+    top: 30px;
+}
+
+.op-toggle .op-btn {
+    padding: 5px 10px;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+    color: var(--cor-primaria);
+}
+
+.op-toggle .op-btn i {
+    margin: 0;
+}
+
+.op-toggle .op-btn:hover {
+    background-color: var(--cor-secundaria-light);
+}
+
+.op-toggle .acao-btn {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 3px;
+    border: none;
+    background-color: var(--cor-secundaria-lighter);
+    color: var(--cor-primaria-lighter);
 }
 
 .publicacoes-relevantes .botoes,
@@ -605,7 +688,7 @@ textarea:focus {
     min-height: 160px;
     box-sizing: border-box;
     position: relative;
-    border-bottom: solid 1px var(--cor-secundaria-light);
+    border-bottom: solid 1px var(--cor-secundaria-light-transparent);
 }
 
 .num-likes {

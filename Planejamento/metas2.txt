@@ -13,7 +13,7 @@ editar integração
 -Fazer funcionar mudança de índice (arrows up e down)
 -Fazer sistema de avaliações (questionários)
 -Fazer quiz
--Deletar e reportar posts e replies de posts
+-Deletar e denunciar posts e replies de posts
 -Fazer gameficação
 -relatórios
 

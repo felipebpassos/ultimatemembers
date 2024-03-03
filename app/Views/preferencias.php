@@ -5,7 +5,7 @@
     </div>
 
     <div class="lista-preferências">
-        <ul class="barra">
+        <ul class="barra" style="border-bottom: solid 1px var(--cor-primaria-transparent-4);">
             <!-- Botões -->
             <li>
                 <button class="aba" onclick="abrirAba(event, 'curso')">Curso</button>

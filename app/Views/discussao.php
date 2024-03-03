@@ -52,8 +52,10 @@ $foto_autor = $discussao['foto'];
                     <button class="salvar-post" data-id="<?php echo $discussao['id']; ?>">
                         <i id="notsaved" class="fa-regular fa-bookmark<?php echo ($favorita ? ' hidden' : ''); ?>"></i>
                         <i id="saved" class="fa-solid fa-bookmark<?php echo (!$favorita ? ' hidden' : ''); ?>"></i>
-                        <span id="notsaved-sub" class="legenda<?php echo ($favorita ? ' hidden' : ''); ?>">Adicionar aos favoritos</span>
-                        <span id="saved-sub" class="legenda<?php echo (!$favorita ? ' hidden' : ''); ?>">Remover dos favoritos</span>
+                        <span id="notsaved-sub" class="legenda<?php echo ($favorita ? ' hidden' : ''); ?>">Adicionar aos
+                            favoritos</span>
+                        <span id="saved-sub" class="legenda<?php echo (!$favorita ? ' hidden' : ''); ?>">Remover dos
+                            favoritos</span>
                     </button>
                 <?php endif; ?>
             </div>
@@ -61,6 +63,34 @@ $foto_autor = $discussao['foto'];
             <p>
                 <?php echo $discussao['content']; ?>
             </p>
+            <div class="op-discussao op-toggle" id="op-<?php echo $discussao['id']; ?>">
+                <!-- Botões de operação, como denunciar ou outras opções -->
+                <button class="op-btn" data-id="<?php echo $discussao['id']; ?>"><i
+                        class="fa-solid fa-ellipsis-vertical"></i></button>
+                <div class="dropdown" id="dropdown-<?php echo $discussao['id']; ?>">
+                    <?php
+                    if ($discussao['autor_id'] === $id) {
+                        // Se o usuário logado for o autor da discussão
+                        ?>
+                        <button class="acao-btn deletar-discussao" data-id="<?php echo $discussao['id']; ?>"><i
+                                class="fa-solid fa-trash"></i>Deletar</button>
+                        <?php
+                    } elseif (($adm) && (!$instrutor)) {
+                        // Se o usuário logado for adm
+                        ?>
+                        <button class="acao-btn deletar-discussao" data-id="<?php echo $discussao['id']; ?>"><i
+                                class="fa-solid fa-trash"></i>Deletar</button>
+                        <?php
+                    } else {
+                        // Se o usuário logado não for o autor da discussão
+                        ?>
+                        <button class="acao-btn denunciar-btn" data-id="<?php echo $discussao['id']; ?>"><i
+                                class="fa-solid fa-flag"></i>Denunciar</button>
+                        <?php
+                    }
+                    ?>
+                </div>
+            </div>
         </div>
         <form class="barra-superior" style="justify-content: space-between;">
             <?php
@@ -90,19 +120,54 @@ $foto_autor = $discussao['foto'];
                 <?php foreach ($respostas as $resposta): ?>
                     <div class="answer">
                         <div class="botoes">
-                            <button class="like-resposta" data-id="<?php echo $resposta['id']; ?>">
-                                <i id="notliked"
-                                    class="fa-regular fa-heart <?php echo $resposta['user_liked'] ? 'hidden' : ''; ?>"></i>
-                                <i id="liked"
-                                    class="fa-solid fa-heart <?php echo $resposta['user_liked'] ? '' : 'hidden'; ?>"></i>
-                            </button>
-                            <span class="num-likes" data-id="<?php echo $resposta['id']; ?>">
-                                <?php echo $resposta['likes']; ?>
-                            </span>
+                            <?php if ($resposta['autor_id'] == $id): ?>
+                                <!-- Mostra os botões de excluir se o autor_id for igual a $id -->
+                                <button id="delete-resposta" data-id="<?php echo $resposta['id']; ?>">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            <?php else: ?>
+                                <button class="like-resposta" data-id="<?php echo $resposta['id']; ?>">
+                                    <i id="notliked"
+                                        class="fa-regular fa-heart <?php echo $resposta['user_liked'] ? 'hidden' : ''; ?>"></i>
+                                    <i id="liked"
+                                        class="fa-solid fa-heart <?php echo $resposta['user_liked'] ? '' : 'hidden'; ?>"></i>
+                                </button>
+                                <span class="num-likes" data-id="<?php echo $resposta['id']; ?>">
+                                    <?php echo $resposta['likes']; ?>
+                                </span>
+                            <?php endif; ?>
                         </div>
                         <p>
                             <?php echo $resposta['content']; ?>
                         </p>
+                        <div class="op-resposta op-toggle" id="op-<?php echo $resposta['id']; ?>">
+                            <!-- Botões de operação, como denunciar ou outras opções -->
+                            <button class="op-btn" data-id="<?php echo $resposta['id']; ?>"><i
+                                    class="fa-solid fa-ellipsis-vertical"></i></button>
+                            <div class="dropdown" id="dropdown-<?php echo $resposta['id']; ?>">
+                                <?php
+                                if ($resposta['autor_id'] === $id) {
+                                    // Se o usuário logado for o autor da resposta
+                                    ?>
+                                    <button class="acao-btn deletar-resposta" data-id="<?php echo $resposta['id']; ?>"><i
+                                            class="fa-solid fa-trash"></i>Deletar</button>
+                                    <?php
+                                } elseif (($adm) && (!$instrutor)) {
+                                    // Se o usuário logado for adm
+                                    ?>
+                                    <button class="acao-btn deletar-resposta" data-id="<?php echo $resposta['id']; ?>"><i
+                                            class="fa-solid fa-trash"></i>Deletar</button>
+                                    <?php
+                                } else {
+                                    // Se o usuário logado não for o autor da resposta
+                                    ?>
+                                    <button class="acao-btn denunciar-btn" data-id="<?php echo $resposta['id']; ?>"><i
+                                            class="fa-solid fa-flag"></i>Denunciar</button>
+                                    <?php
+                                }
+                                ?>
+                            </div>
+                        </div>
                         <div class="post-info" style="right:0; margin-bottom:25px;">
                             <div class="foto-perfil-micro" style="margin-left:10px; margin-right:15px;">
                                 <img class="perfil-img" name="imagem"

@@ -1,8 +1,8 @@
 use reelsdecinema;
 
-drop table xxx;
+drop table xxxx;
 
-select * from banners;
+select * from discussoes_respostas;
 
 UPDATE lancamentos
 SET id_curso = 1;
@@ -310,6 +310,32 @@ CREATE TABLE denuncias_comentarios (
     id_acusado INT NOT NULL,
     data_denuncia TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_comentario) REFERENCES comentarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_acusador) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_acusado) REFERENCES usuarios(id) ON DELETE CASCADE
+) CHARSET=utf8;
+
+CREATE TABLE denuncias_discussoes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    infracao tinyint NOT NULL,
+    -- 1 -> spam | 2 -> pornografia | 3 -> violencia | 4 -> bullying | 5 -> desinformação | 6 -> outro
+    id_discussao INT NOT NULL,
+    id_acusador INT NOT NULL,
+    id_acusado INT NOT NULL,
+    data_denuncia TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_discussao) REFERENCES discussoes(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_acusador) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_acusado) REFERENCES usuarios(id) ON DELETE CASCADE
+) CHARSET=utf8;
+
+CREATE TABLE denuncias_discussoes_respostas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    infracao tinyint NOT NULL,
+    -- 1 -> spam | 2 -> pornografia | 3 -> violencia | 4 -> bullying | 5 -> desinformação | 6 -> outro
+    id_discussao_resposta INT NOT NULL,
+    id_acusador INT NOT NULL,
+    id_acusado INT NOT NULL,
+    data_denuncia TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_discussao_resposta) REFERENCES discussoes(id) ON DELETE CASCADE,
     FOREIGN KEY (id_acusador) REFERENCES usuarios(id) ON DELETE CASCADE,
     FOREIGN KEY (id_acusado) REFERENCES usuarios(id) ON DELETE CASCADE
 ) CHARSET=utf8;

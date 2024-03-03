@@ -1,12 +1,43 @@
 $(document).ready(function () {
 
-    // Lidar com a exclusão de um comentario
+    // Lidar com a denúncia de um comentario
     $('.op-comentario').on('click', '.denunciar-btn', function () {
         const idComentario = $(this).data('id');
-        // Define o ID do módulo no popup de confirmação.
-        $('#denuncia').data('id-comentario', idComentario);
+        // Define o ID do comentário no popup de confirmação.
+        $('#denuncia').data('id-item', idComentario);
+
+        $('#denuncia-form-den').attr('action', url_principal + 'modulos/denunciar/');
 
         $('#denuncia').show();
+        $('#denuncia h3').text('Denunciar comentário');
+        $('.scrollbar-container, .whatsapp-button').addClass('blur');
+        $('body').css('overflow', 'hidden'); // Impede o scroll da página
+    });
+
+    // Lidar com a denúncia de uma discussão
+    $('.op-discussao').on('click', '.denunciar-btn', function () {
+        const idDiscussao = $(this).data('id');
+        // Define o ID da discussão no popup de confirmação.
+        $('#denuncia').data('id-item', idDiscussao);
+
+        $('#denuncia-form-den').attr('action', url_principal + 'comunidade/denunciar/discussao');
+
+        $('#denuncia').show();
+        $('#denuncia h3').text('Denunciar post');
+        $('.scrollbar-container, .whatsapp-button').addClass('blur');
+        $('body').css('overflow', 'hidden'); // Impede o scroll da página
+    });
+
+    // Lidar com a denúncia de uma resposta
+    $('.op-resposta').on('click', '.denunciar-btn', function () {
+        const idResposta = $(this).data('id');
+        // Define o ID da resposta no popup de confirmação.
+        $('#denuncia').data('id-item', idResposta);
+
+        $('#denuncia-form-den').attr('action', url_principal + 'comunidade/denunciar/resposta');
+
+        $('#denuncia').show();
+        $('#denuncia h3').text('Denunciar resposta');
         $('.scrollbar-container, .whatsapp-button').addClass('blur');
         $('body').css('overflow', 'hidden'); // Impede o scroll da página
     });
@@ -29,7 +60,7 @@ $(document).ready(function () {
             return;
         }
 
-        formData['idComentario'] = $('#denuncia').data('id-comentario');
+        formData['idItem'] = $('#denuncia').data('id-item');
 
         // Cria uma solicitação AJAX com jQuery.
         $.ajax({
@@ -44,8 +75,6 @@ $(document).ready(function () {
                 $('body').css('overflow', 'auto'); // Restaura o scroll da página
                 // Desmarca todos os checkboxes
                 $('#denuncia-form-den input[type="checkbox"]').prop('checked', false);
-
-                console.log(response);
             },
             error: function () {
                 // Lida com erros de solicitação

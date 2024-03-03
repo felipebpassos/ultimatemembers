@@ -107,7 +107,7 @@ class comunidadeController extends Controller
         $data['description'] = '';
         $data['styles'] = array('painel', 'header', 'lista_resultados', 'comunidade');
         $data['scripts_head'] = array('');
-        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'publicar', 'like_dislike', 'salvar');
+        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'publicar', 'like_dislike', 'salvar', 'dropdown-discussao', 'denunciar', 'deletar-btn');
 
         //load view
         $this->loadTemplates($template, $data, $usuario);
@@ -256,6 +256,33 @@ class comunidadeController extends Controller
 
             print_r('erro');
             exit;
+        }
+    }
+
+    public function denunciar($type)
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Verifique se as variáveis POST estão definidas
+            if (isset($_POST['idItem']) && isset($_POST['option'])) {
+
+                $acusador = $this->usuario['id'];
+                $item = $_POST['idItem'];
+                $option = $_POST['option'];
+
+                $comunidade_model = new Comunidade();
+
+                $acusado = $comunidade_model->getDonoPublicacao($item, $type);
+
+                $resultado = $comunidade_model->setDenuncia($acusador, $acusado, $item, $option, $type);
+
+                // Retorna os dados em formato JSON
+                echo json_encode($resultado);
+
+            } else {
+                // ERRO
+                echo 'erro';
+                exit;
+            }
         }
     }
 

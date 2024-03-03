@@ -90,8 +90,8 @@
             </svg>
         </div>
     </div>
-    <h3>Denunciar comentário</h3>
-    <div action="<?php echo $curso['url_principal']; ?>modulos/denunciar/" method="POST" id="denuncia-form-den">
+    <h3></h3>
+    <div id="denuncia-form-den">
         <div id="checkbox-container">
             <input type="checkbox" name="option" id="option1" class="checkbox-option" value="1" onchange="uncheckOthers(this)">
             <label class="label-den" for="option1">Conteúdo comercial indesejado ou spam</label><br>

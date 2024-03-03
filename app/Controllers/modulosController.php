@@ -174,7 +174,7 @@ class modulosController extends Controller
         $data['description'] = 'Assista às aulas e estude através do nosso material';
         $data['styles'] = array('painel', 'header', 'drag-drop-files', 'video-player', 'search-bar', 'aula');
         $data['scripts_head'] = array('select');
-        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'pop-ups', 'deletar-btn', 'deletar-btn-adm', 'simple_select', 'drag-drop-files', 'comment-box', 'comment-btns', 'aula_concluida', 'like_dislike', 'dropdown', 'select-modulo', 'select-videoaula', 'denunciar', 'salvar');
+        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'pop-ups', 'deletar-btn', 'deletar-btn-adm', 'simple_select', 'drag-drop-files', 'comment-box', 'comment-btns', 'aula_concluida', 'like_dislike', 'dropdown-comentario', 'select-modulo', 'select-videoaula', 'denunciar', 'salvar');
         if (!$usuario['adm']) {
             $data['scripts_body'][] = 'avaliação';
         }
@@ -859,10 +859,10 @@ class modulosController extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Verifique se as variáveis POST estão definidas
-            if (isset($_POST['idComentario']) && isset($_POST['option'])) {
+            if (isset($_POST['idItem']) && isset($_POST['option'])) {
 
                 $acusador = $this->usuario['id'];
-                $comentario = $_POST['idComentario'];
+                $comentario = $_POST['idItem'];
                 $option = $_POST['option'];
 
                 $aulas_model = new Aulas();

@@ -127,7 +127,7 @@ class Comunidade
 
     public function getRespostasPorDiscussao($discussion_id, $usuario_id)
     {
-        $query = 'SELECT r.id, r.content, r.publish_date, u.nome AS autor, u.foto_caminho AS foto,
+        $query = 'SELECT r.id, r.content, r.publish_date, u.id AS autor_id, u.nome AS autor, u.foto_caminho AS foto,
                 COUNT(DISTINCT dl.like_id) AS likes,
                 (CASE WHEN (SELECT COUNT(*) FROM discussoes_likes dl WHERE dl.item_id = r.id AND dl.item_type = "r" AND dl.user_id = :usuario_id) > 0 THEN 1 ELSE 0 END) AS user_liked
               FROM discussoes_respostas r
@@ -355,6 +355,100 @@ class Comunidade
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row['total'] > 0;
+    }
+
+    public function setDenuncia($acusador_id, $acusado_id, $item_id, $infracao, $type)
+    {
+        // Verifica se já existe uma denúncia do acusador para o mesmo comentário com a mesma infração
+        $existingDenuncia = $this->getDenuncia($acusador_id, $item_id, $infracao, $type);
+
+        if (!$existingDenuncia) {
+            // Se não existir, faz uma INSERT
+
+            if ($type == 'discussao') {
+
+                $query = 'INSERT INTO denuncias_discussoes (id_acusador, id_acusado, id_discussao, infracao, data_denuncia) 
+                  VALUES (:acusador_id, :acusado_id, :item_id, :infracao, NOW())';
+    
+            } elseif ($type == 'resposta') {
+    
+                $query = 'INSERT INTO denuncias_discussoes_respostas (id_acusador, id_acusado, id_discussao_resposta, infracao, data_denuncia) 
+                  VALUES (:acusador_id, :acusado_id, :item_id, :infracao, NOW())';
+    
+            }
+
+            $stmt = $this->con->prepare($query);
+            $stmt->bindValue(':acusador_id', $acusador_id);
+            $stmt->bindValue(':acusado_id', $acusado_id);
+            $stmt->bindValue(':item_id', $item_id);
+            $stmt->bindValue(':infracao', $infracao);
+
+            return $stmt->execute();
+        }
+
+        // Retorna false se a denúncia já existir
+        return false;
+    }
+
+    // Método para verificar se já existe uma denúncia do acusador para o mesmo comentário com a mesma infração
+    public function getDenuncia($acusador_id, $item_id, $infracao, $type)
+    {
+        if ($type == 'discussao') {
+
+            $query = 'SELECT id 
+              FROM denuncias_discussoes 
+              WHERE id_acusador = :acusador_id 
+              AND id_discussao = :item_id 
+              AND infracao = :infracao';
+
+        } elseif ($type == 'resposta') {
+
+            $query = 'SELECT id 
+              FROM denuncias_discussoes_respostas 
+              WHERE id_acusador = :acusador_id 
+              AND id_discussao_resposta = :item_id 
+              AND infracao = :infracao';
+
+        }
+
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':acusador_id', $acusador_id);
+        $stmt->bindValue(':item_id', $item_id);
+        $stmt->bindValue(':infracao', $infracao);
+
+        if ($stmt->execute()) {
+            // Retorna true se já existir uma denúncia
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
+        // Retorna false se não existir denúncia ou em caso de erro
+        return false;
+    }
+
+    public function getDonoPublicacao($item_id, $type)
+    {
+
+        if ($type == 'discussao') {
+
+            $query = 'SELECT user_id FROM discussoes WHERE id = :item_id';
+
+        } elseif ($type == 'resposta') {
+
+            $query = 'SELECT user_id FROM discussoes_respostas WHERE id = :item_id';
+
+        }
+
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':item_id', $item_id);
+
+        if ($stmt->execute()) {
+            // Retorna o id do usuário que fez o comentário
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['user_id'];
+        }
+
+        // Em caso de erro ou se o comentário não for encontrado, retorna null
+        return null;
     }
 
 }
