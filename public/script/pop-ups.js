@@ -11,42 +11,52 @@ $('#add-aula').click(function () {
         success: function (data) {
 
             // Seleciona a div.videos
+            var videos = $('.videos');
+
+            // Seleciona a div.videos.row
             var videosContainer = $('.videos .row');
-
             videosContainer.empty();
-
+    
             // Itera sobre os vídeos e cria as divs conforme necessário
             for (var i = 0; i < data.length; i++) {
+                // Verifica se o elemento tem success true
+                if (!data[i].success) {
+                    // Se não tiver, cria um span com a mensagem de erro e adiciona à div.videos
+                    var errorMessage = $('<span class="alert-erro">Houve um erro com a plataforma ' + data[i].plataforma + '. Atualizar integração.</span>');
+                    videos.append(errorMessage);
+                    continue; // Pula para o próximo elemento do loop
+                }
+    
                 // Cria a div.video
                 var videoDiv = $('<div class="video col-md-3 col-lg-3"></div>');
-
+    
                 // Cria a imagem com o src definido pela thumbnailUrl
                 var thumbnailImg = $('<img src="' + data[i].thumbnailUrl + '" alt="Thumbnail">');
-
+    
                 // Cria a imagem da integração
                 let plataforma = integracoes[data[i].plataforma];
                 var plataformaImg = $('<img class="plataforma-img" src="' + plataforma['img-mini'] + '" alt="Thumbnail">');
-
+    
                 // Cria o título
                 var title = $('<p>' + data[i].title + '</p>');
-
+    
                 // Adiciona o data-id ao elemento
                 videoDiv.attr('data-id', data[i].videoId);
-
+    
                 // Adiciona o data-nome ao elemento
                 videoDiv.attr('data-nome', data[i].title);
-
+    
                 // Adiciona o data-plataforma ao elemento
                 videoDiv.attr('data-plataforma', data[i].plataforma);
-
+    
                 // Adiciona o data-integracao ao elemento
                 videoDiv.attr('data-integracao', data[i].integracao);
-
+    
                 // Adiciona a imagem e o título à div.video
                 videoDiv.append(thumbnailImg);
                 videoDiv.append(plataformaImg);
                 videoDiv.append(title);
-
+    
                 // Adiciona a div.video à div.videos
                 videosContainer.append(videoDiv);
             }
@@ -54,7 +64,7 @@ $('#add-aula').click(function () {
         error: function (error) {
             console.error('Erro na requisição AJAX:', error);
         }
-    });
+    });    
 });
 
 // Quando o botão de fechar for clicado
@@ -88,12 +98,23 @@ $('.aulas').on('click', '.editar-aula', function () {
         success: function (data) {
 
             // Seleciona a div.videos
+            var videos = $('.videos');
+
+            // Seleciona a div.videos.row
             var videosContainer = $('.videos .row');
 
             videosContainer.empty();
 
             // Itera sobre os vídeos e cria as divs conforme necessário
             for (var i = 0; i < data.length; i++) {
+                // Verifica se o elemento tem success true
+                if (!data[i].success) {
+                    // Se não tiver, cria um span com a mensagem de erro e adiciona à div.videos
+                    var errorMessage = $('<span class="alert-erro">Houve um erro com a plataforma ' + data[i].plataforma + '. Atualizar integração.</span>');
+                    videos.append(errorMessage);
+                    continue; // Pula para o próximo elemento do loop
+                }
+
                 // Cria a div.video
                 var videoDiv = $('<div class="video col-md-3 col-lg-3"></div>');
 

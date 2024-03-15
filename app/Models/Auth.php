@@ -225,6 +225,7 @@ class Auth
 
                 // Adiciona os detalhes do vídeo ao array
                 $videos[] = array(
+                    'success' => true,
                     'plataforma' => $plataforma,
                     'integracao' => $integracao,
                     'videoId' => $videoId,
@@ -236,22 +237,17 @@ class Auth
             // Retorna o array de vídeos
             return $videos;
         } else {
-            // Verifica se o erro é devido a credenciais inválidas
-            if (isset($searchData['error']['errors'][0]['reason']) && $searchData['error']['errors'][0]['reason'] === 'authError') {
-                // Tenta renovar o token
-                $novoAccessToken = $this->refreshTokenYoutube($dados);
-
-                if ($novoAccessToken) {
-                    // Tenta a solicitação novamente com o novo token
-                    return $this->getYoutubeVideos(array_merge($dados, ['token_acesso' => $novoAccessToken]));
-                } else {
-                    // Lida com falha ao renovar o token
-                    return array('erro' => 'Falha ao renovar o token de acesso.');
-                }
-            } else {
-                // Lida com outros tipos de erros
-                return array('erro' => 'Erro ao solicitar vídeos do YouTube.');
-            }
+            // Retorna um array com um item indicando falha
+            return array(
+                array(
+                    'success' => false,
+                    'plataforma' => $plataforma,
+                    'integracao' => $integracao,
+                    'videoId' => null,
+                    'title' => null,
+                    'thumbnailUrl' => null,
+                )
+            );
         }
     }
 
@@ -384,6 +380,7 @@ class Auth
 
             // Adiciona os dados do vídeo ao array
             $videos[] = array(
+                'success' => true,
                 'plataforma' => $plataforma,
                 'integracao' => $integracao,
                 'videoId' => $videoId,
@@ -430,12 +427,12 @@ class Auth
 
         try {
             if ($stmt->execute()) {
-                echo "Integração definida com sucesso!";
+                return "Integração definida com sucesso!";
             } else {
-                echo "Erro ao definir a integração.";
+                return "Erro ao definir a integração.";
             }
         } catch (PDOException $e) {
-            echo "Erro ao definir a integração: " . $e->getMessage();
+            return "Erro ao definir a integração: " . $e->getMessage();
         }
     }
 

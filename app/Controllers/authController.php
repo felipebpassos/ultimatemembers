@@ -56,6 +56,9 @@ class authController extends Controller
 
             $this->auth->setIntegracao($plataforma, $data, $this->curso);
 
+            header("Location: " . $this->cursoInfo['url_principal'] . "painel/preferencias/");
+            exit(); // Certifica-se de que o script seja encerrado após o redirecionamento
+
         } else {
             // ERRO
             exit;

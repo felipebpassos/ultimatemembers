@@ -2,7 +2,7 @@ use reelsdecinema;
 
 drop table xxxx;
 
-select * from discussoes_respostas;
+select * from discussoes;
 
 UPDATE lancamentos
 SET id_curso = 1;
@@ -30,8 +30,8 @@ ADD COLUMN contato_ico VARCHAR(255);
 
 ALTER TABLE respostas_comentarios DROP FOREIGN KEY fk_respostas_comentarios_curso;
 
-ALTER TABLE cursos
-DROP COLUMN dir_name;
+ALTER TABLE discussoes
+DROP COLUMN last_edit_date;
 
 SHOW CREATE TABLE notificacoes;
 

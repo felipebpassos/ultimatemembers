@@ -3,8 +3,6 @@ let isFixed = false;
 
 const scrollContainer = document.querySelector(".scrollbar-container");
 
-console.log(scrollContainer);
-
 scrollContainer.addEventListener("scroll", function () {
     const header = document.querySelector("header");
     const scrollPosition = scrollContainer.scrollTop;

@@ -26,20 +26,29 @@ $foto_autor = $discussao['foto'];
                     <?php echo $publicacao; ?>
                 </p>
             </div>
-            <ul class="engajamento" style="position:absolute; right:0; bottom:0;">
-                <li><i class="fa-solid fa-heart"></i><span id="num-likes-discussao">
-                        <?php echo $discussao['likes']; ?>
-                    </span></li>
-                <li><i class="fa-solid fa-comments"></i><span>
-                        <?php echo $discussao['respostas']; ?>
-                    </span></li>
-            </ul>
+            <div class="opcoes" style="position: absolute; right: 0; bottom: 0; margin-bottom: 15px;">
+                <?php if ($discussao['autor_id'] == $id): ?>
+                    <!-- Mostra os botões de excluir se o autor_id for igual a $id -->
+                    <button class="delete-discussao" id="delete-discussao" data-id="<?php echo $discussao['id']; ?>">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                <?php else: ?>
+                    <button class="salvar-post" data-id="<?php echo $discussao['id']; ?>">
+                        <i id="notsaved" class="fa-regular fa-bookmark<?php echo ($favorita ? ' hidden' : ''); ?>"></i>
+                        <i id="saved" class="fa-solid fa-bookmark<?php echo (!$favorita ? ' hidden' : ''); ?>"></i>
+                        <span id="notsaved-sub" class="legenda<?php echo ($favorita ? ' hidden' : ''); ?>">Adicionar aos
+                            favoritos</span>
+                        <span id="saved-sub" class="legenda<?php echo (!$favorita ? ' hidden' : ''); ?>">Remover dos
+                            favoritos</span>
+                    </button>
+                <?php endif; ?>
+            </div>
         </div>
         <div class="conteudo-pergunta">
             <div class="botoes">
                 <?php if ($discussao['autor_id'] == $id): ?>
                     <!-- Mostra os botões de excluir se o autor_id for igual a $id -->
-                    <button id="delete-discussao" data-id="<?php echo $discussao['id']; ?>">
+                    <button class="delete-discussao" id="delete-discussao" data-id="<?php echo $discussao['id']; ?>">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
                 <?php else: ?>
@@ -49,14 +58,9 @@ $foto_autor = $discussao['foto'];
                             class="fa-regular fa-heart <?php echo $discussao['user_liked'] ? 'hidden' : ''; ?>"></i>
                         <i id="liked" class="fa-solid fa-heart <?php echo $discussao['user_liked'] ? '' : 'hidden'; ?>"></i>
                     </button>
-                    <button class="salvar-post" data-id="<?php echo $discussao['id']; ?>">
-                        <i id="notsaved" class="fa-regular fa-bookmark<?php echo ($favorita ? ' hidden' : ''); ?>"></i>
-                        <i id="saved" class="fa-solid fa-bookmark<?php echo (!$favorita ? ' hidden' : ''); ?>"></i>
-                        <span id="notsaved-sub" class="legenda<?php echo ($favorita ? ' hidden' : ''); ?>">Adicionar aos
-                            favoritos</span>
-                        <span id="saved-sub" class="legenda<?php echo (!$favorita ? ' hidden' : ''); ?>">Remover dos
-                            favoritos</span>
-                    </button>
+                    <span class="num-likes" data-id="<?php echo $discussao['id']; ?>">
+                        <?php echo $discussao['likes']; ?>
+                    </span>
                 <?php endif; ?>
             </div>
             <!-- Conteúdo da Discussão -->
@@ -191,7 +195,7 @@ $foto_autor = $discussao['foto'];
             <form id="addResposta"
                 action="<?php echo $curso['url_principal']; ?>comunidade/responder/<?php echo $discussao['id']; ?>"
                 method="POST" enctype="multipart/form-data">
-                <div class="campo" style="padding:20px 30px; padding-bottom: 40px; border-radius: 0px; margin-top: 0;">
+                <div class="campo" style="padding:20px 30px; padding-bottom: 40px; border-radius: 0px; margin-top: 120px; background-color:var(--cor-secundaria-less-light);">
                     <h5 style="color: var(--cor-primaria-dark); margin-bottom:10px;">Publique uma Resposta</h5>
                     <div class="texto">
                         <div class="botoes-formatar">

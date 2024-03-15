@@ -48,7 +48,7 @@ class comunidadeController extends Controller
         $data['description'] = '';
         $data['styles'] = array('painel', 'header', 'search-bar', 'lista_resultados', 'comunidade');
         $data['scripts_head'] = array('select');
-        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'multiplo_select', 'fade-in-slide-up', 'pub_relevantes', 'salvar');
+        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'multiplo_select', 'fade-in-slide-up', 'pub_relevantes', 'salvar', 'deletar-btn');
 
         //load view
         $this->loadTemplates($template, $data, $usuario);
@@ -283,6 +283,54 @@ class comunidadeController extends Controller
                 echo 'erro';
                 exit;
             }
+        }
+    }
+
+    public function deletar_discussao()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Verifique se o ID da discussão foi enviado
+            if (isset($_POST['idDiscussao'])) {
+                $discussaoId = $_POST['idDiscussao'];
+
+                try {
+                    // Excluir a discussão
+                    $comunidade = new Comunidade();
+                    $comunidade->deleteDiscussao($discussaoId, $this->usuario['id'], $this->usuario['adm'], $this->usuario['instrutor']);
+
+                    echo json_encode(array('success' => true, 'message' => 'Discussão excluída com sucesso.'));
+                } catch (Exception $e) {
+                    echo json_encode(array('success' => false, 'message' => $e->getMessage()));
+                }
+            } else {
+                echo json_encode(array('success' => false, 'message' => 'ID da discussão não fornecido.'));
+            }
+        } else {
+            echo json_encode(array('success' => false, 'message' => 'Método não permitido.'));
+        }
+    }
+
+    public function deletar_resposta()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Verifique se o ID da resposta foi enviado
+            if (isset($_POST['idResposta'])) {
+                $respostaId = $_POST['idResposta'];
+
+                try {
+                    // Excluir a resposta
+                    $comunidade = new Comunidade();
+                    $comunidade->deleteResposta($respostaId, $this->usuario['id'], $this->usuario['adm'], $this->usuario['instrutor']);
+
+                    echo json_encode(array('success' => true, 'message' => 'Resposta excluída com sucesso.'));
+                } catch (Exception $e) {
+                    echo json_encode(array('success' => false, 'message' => $e->getMessage()));
+                }
+            } else {
+                echo json_encode(array('success' => false, 'message' => 'ID da resposta não fornecido.'));
+            }
+        } else {
+            echo json_encode(array('success' => false, 'message' => 'Método não permitido.'));
         }
     }
 

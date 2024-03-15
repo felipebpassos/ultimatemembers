@@ -890,7 +890,17 @@ body {
 .videos {
     height: 410px;
     padding: 20px 30px;
+    padding-bottom: 35px;
     overflow: auto;
+    position: relative;
+}
+
+.alert-erro {
+    position: absolute;
+    left: 20px;
+    bottom: 10px;
+    color: rgb(204, 0, 0);
+    padding: 0;
 }
 
 .videos::-webkit-scrollbar,

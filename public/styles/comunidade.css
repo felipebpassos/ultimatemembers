@@ -10,13 +10,13 @@ main {
     height: 290px;
     margin-bottom: 20px;
     position: relative;
-    background-color: var(--cor-secundaria-light);
+    background-color: var(--cor-secundaria-light-transparent);
 }
 
 .publicacoes-relevantes .conteudo-pergunta {
     min-height: 0 !important;
     height: 120px;
-    overflow-y: hidden;
+    position: relative;
 }
 
 .salvar-post {
@@ -37,8 +37,8 @@ main {
     height: 20px;
     position: absolute;
     z-index: 11;
-    bottom: 95px;
-    background: linear-gradient(to bottom, transparent, var(--cor-secundaria-light));
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent, var(--cor-secundaria-less-light));
 }
 
 .publicacoes-relevantes .bottom-options {
@@ -58,11 +58,11 @@ main {
     color: var(--cor-primaria);
 }
 
-.publicacoes-relevantes .conteudo-pergunta p {width: 90%;}
+.publicacoes-relevantes .conteudo-pergunta p {width: 90%; max-height: 90px; overflow: hidden;}
 
 .slides {
     opacity: 0;
-    transition: opacity 1.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
     position: absolute;
     left: 0;
     top: 0;
@@ -134,7 +134,7 @@ main {
 }
 
 .pesquisar {
-    padding-right: 20px;
+    padding: 0 20px;
     margin-top: 10px;
     flex: 1;
     height: 50px;
@@ -152,13 +152,20 @@ main {
     border: none;
 }
 
+#filtros {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.8s ease;
+}
+
 .opcoes-comunidade {
     width: 100%;
+    margin-bottom: 10px;
 }
 
 .opcoes-comunidade .nova-publicacao {
     display: block;
-    margin: 5px 0 20px 10px;
+    margin: 10px 0 10px 0;
     width: fit-content;
 }
 
@@ -167,23 +174,35 @@ main {
     color: var(--cor-secundaria);
 }
 
+.nova-publicacao button {
+    min-width: 100px;
+}
+
 .lista-discussoes {
     min-height: 800px;
     margin-bottom: 80px;
 }
 
+.top-contribuintes-box {
+    min-width:250px;
+}
+
 .top-contribuintes-header, .publicacoes-relevantes-header {
     width: 100%;
-    padding: 15px 20px;
-    background-color: var(--cor-secundaria-light);
+    padding: 18px 20px;
+    background-color: var(--cor-secundaria-less-light);
     border-bottom: 3px solid var(--cor-secundaria);
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
 
+.top-contribuintes-header h4, .publicacoes-relevantes-header h4 {
+    font-weight: 800;
+}
+
 .top-contribuintes {
     color: var(--cor-primaria);
-    background-color: var(--cor-secundaria-light);
+    background-color: var(--cor-secundaria-less-light);
     max-height: 600px;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
@@ -218,15 +237,15 @@ main {
 }
 
 .top-contribuintes .top-contributor:nth-child(1)::before {
-    background-color: gold; /* Cor dourada para o primeiro lugar */
+    background-color: rgb(165, 140, 0); /* Cor dourada para o primeiro lugar */
 }
 
 .top-contribuintes .top-contributor:nth-child(2)::before {
-    background-color: silver; /* Cor prateada para o segundo lugar */
+    background-color: rgb(165, 165, 165); /* Cor prateada para o segundo lugar */
 }
 
 .top-contribuintes .top-contributor:nth-child(3)::before {
-    background-color: #cd7f32; /* Cor de bronze para o terceiro lugar */
+    background-color: #a36527; /* Cor de bronze para o terceiro lugar */
 }
 
 .contributors li h5,
@@ -426,7 +445,7 @@ textarea:focus {
     font-weight: 600;
     width: 150px;
     height: 50px;
-    background-color: var(--cor-secundaria-lighter);
+    background-color: var(--cor-secundaria-light);
     margin-top: 10px;
     margin-right: 10px;
     border-radius: 8px;
@@ -489,7 +508,7 @@ textarea:focus {
     margin-top: 15px;
     border-radius: 10px;
     padding: 16px;
-    background-color: var(--cor-secundaria-lighter);
+    background-color: var(--cor-secundaria-light);
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
     display: none;
     z-index: 9999;
@@ -526,7 +545,7 @@ textarea:focus {
 }
 
 .item:hover {
-    background-color: var(--cor-secundaria-light);
+    background-color: var(--cor-secundaria-less-light);
     cursor: pointer;
 }
 
@@ -535,10 +554,12 @@ textarea:focus {
     align-items: center;
     justify-content: center;
     height: 16px;
-    width: 16px;
+    min-width: 16px;
+    max-width: 16px;
     border: 1.5px solid;
     border-radius: 4px;
     margin-right: 12px;
+    margin-left: 0;
     transition: all 0.3s ease-in-out;
 }
 
@@ -646,28 +667,22 @@ textarea:focus {
     color: var(--cor-primaria-lighter);
 }
 
-.publicacoes-relevantes .botoes,
-.conteudo-pergunta .botoes,
-.answer .botoes {
+.botoes {
     position: absolute;
     top: 30px;
     left: 10px;
+    z-index: 12;
 }
 
-.publicacoes-relevantes .botoes button,
-.conteudo-pergunta .botoes button,
-.answer .botoes button {
+.botoes button, .opcoes button {
     display: block;
     width: 40px;
     background-color: transparent;
     border: none;
-    margin-bottom: 10px;
     padding: 5px 0px;
 }
 
-.publicacoes-relevantes .botoes button i,
-.conteudo-pergunta .botoes button i,
-.answer .botoes button i {
+.botoes button i, .opcoes button i {
     color: var(--cor-primaria);
     font-size: 22px;
     margin: auto;
@@ -675,7 +690,7 @@ textarea:focus {
 
 .answers {
     box-sizing: border-box;
-    min-height: 140px;
+    min-height: 100px;
 }
 
 .answers h5 {
@@ -696,4 +711,8 @@ textarea:focus {
     width: 40px;
     font-size: 20px;
     text-align: center;
+}
+
+#filter-btn {
+    position: unset;
 }

@@ -8,7 +8,7 @@
 
         <div class="row">
 
-            <div class="col-md-8" style="min-width:600px; padding-right:30px;">
+            <div class="col-md-8" style="min-width:600px; padding-right:30px; flex: 1;">
 
                 <!-- Mostra a lista as discussões do forum -->
                 <div class="lista-discussoes">
@@ -16,7 +16,8 @@
                     <div class="opcoes-comunidade">
 
                         <div class="publicacoes-relevantes-header">
-                            <h4 style="margin-bottom:0;"><i class="fa-solid fa-thumbtack" style="margin-right: 15px;"></i>Publicações Relevantes</h4>
+                            <h4 style="margin-bottom:0;"><i class="fa-solid fa-thumbtack"
+                                    style="margin-right: 15px;"></i>Publicações Relevantes</h4>
                         </div>
 
                         <div class="publicacoes-relevantes">
@@ -49,31 +50,6 @@
                                                     href="<?php echo $curso['url_principal'] . 'comunidade/discussao/' . $discussaoid; ?>">
                                                     <?php echo $title; ?>
                                                 </a>
-                                                <div class="botoes" style="position: unset;">
-                                                    <?php if ($autor_id == $id): ?>
-                                                        <!-- Mostra os botões de excluir se o autor_id for igual a $id -->
-                                                        <button id="delete-discussao" style="margin:0 5px; padding: 0;"
-                                                            data-id="<?php echo $discussaoid; ?>">
-                                                            <i class="fa-solid fa-trash-can" style="font-size:18px;"></i>
-                                                        </button>
-                                                    <?php else: ?>
-                                                        <button class="salvar-post" style="margin:0 5px; padding: 0;"
-                                                            data-id="<?php echo $discussaoid; ?>">
-                                                            <i id="notsaved"
-                                                                class="fa-regular fa-bookmark<?php echo ($favorita ? ' hidden' : ''); ?>"
-                                                                style="font-size:20px;"></i>
-                                                            <i id="saved"
-                                                                class="fa-solid fa-bookmark<?php echo (!$favorita ? ' hidden' : ''); ?>"
-                                                                style="font-size:20px;"></i>
-                                                            <span id="notsaved-sub"
-                                                                class="legenda<?php echo ($favorita ? ' hidden' : ''); ?>">Adicionar
-                                                                aos favoritos</span>
-                                                            <span id="saved-sub"
-                                                                class="legenda<?php echo (!$favorita ? ' hidden' : ''); ?>">Remover
-                                                                dos favoritos</span>
-                                                        </button>
-                                                    <?php endif; ?>
-                                                </div>
                                             </span>
                                             <div style="display:flex;">
                                                 <p style="font-size: 13px; margin: 10px 20px 0px 0px;"><i
@@ -96,7 +72,7 @@
                                                     data-id="<?php echo $discussaoid; ?>">
                                                     <i class="fa-solid fa-heart"></i>
                                                 </button>
-                                                <span class="num-likes" style="margin-bottom:10px;"
+                                                <span class="num-likes" style="margin-bottom:20px;"
                                                     data-id="<?php echo $discussaoid; ?>">
                                                     <?php echo $likes; ?>
                                                 </span>
@@ -114,11 +90,37 @@
                                                     <?php echo $likes; ?>
                                                 </span>
                                             <?php endif; ?>
+                                            <?php if ($autor_id == $id): ?>
+                                                <!-- Mostra os botões de excluir se o autor_id for igual a $id -->
+                                                <button class="delete-discussao" id="delete-discussao"
+                                                    data-id="<?php echo $discussaoid; ?>">
+                                                    <i class="fa-solid fa-trash-can"></i>
+                                                </button>
+                                            <?php else: ?>
+                                                <button class="salvar-post" data-id="<?php echo $discussaoid; ?>">
+                                                    <i id="notsaved"
+                                                        class="fa-regular fa-bookmark<?php echo ($favorita ? ' hidden' : ''); ?>"
+                                                        style="font-size:20px;"></i>
+                                                    <i id="saved"
+                                                        class="fa-solid fa-bookmark<?php echo (!$favorita ? ' hidden' : ''); ?>"
+                                                        style="font-size:20px;"></i>
+                                                    <span id="notsaved-sub"
+                                                        class="legenda<?php echo ($favorita ? ' hidden' : ''); ?>">Adicionar
+                                                        aos favoritos</span>
+                                                    <span id="saved-sub"
+                                                        class="legenda<?php echo (!$favorita ? ' hidden' : ''); ?>">Remover
+                                                        dos favoritos</span>
+                                                </button>
+                                            <?php endif; ?>
                                         </div>
+
                                         <!-- Conteúdo da Discussão -->
                                         <p>
                                             <?php echo $content; ?>
                                         </p>
+
+                                        <div class="fade-bottom"></div>
+
                                     </div>
 
                                     <div class="bottom-options">
@@ -144,8 +146,6 @@
 
                             <?php endforeach; ?>
 
-                            <div class="fade-bottom"></div>
-
                             <div class="arrows">
                                 <button class="prev" onclick="plusSlides(-1)"
                                     style="margin-right: 15px; background-color: transparent; border: none;"><img
@@ -167,28 +167,35 @@
 
                         <div class="search-container">
 
-                            <ul class="select-categorias"></ul>
-                            <script>
-                                $(".select-categorias").append(MultiploSelect('', 'Categorias', ['Perguntas', 'Experiênicias', 'Tag 1', 'Tag 2', 'Tag 3'], true));
-                            </script>
+                            <a class="nova-publicacao"
+                                href="<?php echo $curso['url_principal']; ?>comunidade/publicar/"><button class="btn-2"
+                                    id="pergunta">
+                                    <p>Novo Post</p><i class="fa-regular fa-comment"></i>
+                                </button></a>
 
                             <div class="pesquisar">
-                                <input type="text" id="campoPesquisa" name="pesquisa" placeholder="Pesquisar">
+                                <input type="text" id="campoPesquisa" name="pesquisa"
+                                    placeholder="Pesquisar publicação">
                                 <a href="<?php echo $curso['url_principal']; ?>pesquisa/resultados/"><button
                                         type="submit" id="botaoPesquisa"><i class="fa fa-search"></i></button></a>
                             </div>
 
-                            <a class="nova-publicacao"
-                                href="<?php echo $curso['url_principal']; ?>comunidade/publicar/"><button class="btn-2"
-                                    id="pergunta">
-                                    <p>Nova publicação</p><i class="fa-regular fa-comment"></i>
-                                </button></a>
+                            <button class="editar" id="filter-btn"><i class="fa-solid fa-filter"></i></button>
 
                         </div>
 
                     </div>
 
-                    <p class="legenda-filtro-pesquisa">Filtre as publicações selecionando as categorias.</p>
+                    <div id="filtros">
+
+                        <ul class="select-categorias"></ul>
+                        <script>
+                            $(".select-categorias").append(MultiploSelect('', 'Categorias', ['Perguntas', 'Experiênicias', 'Tag 1', 'Tag 2', 'Tag 3'], true));
+                        </script>
+
+                        <p class="legenda-filtro-pesquisa">Filtre as publicações selecionando as categorias.</p>
+
+                    </div>
 
                     <div class="resultados" style="padding-top: 10px;">
                         <form class="barra-superior">
@@ -228,7 +235,6 @@
                                         $foto_autor = $discussao['foto'];
                                         $titulo = $discussao['title'];
                                         $publicacao = calcularTempoDecorrido($discussao['publish_date']);
-                                        $ultima_edicao = calcularTempoDecorrido($discussao['last_edit_date']);
                                         $likes = $discussao['likes'];
                                         $respostas = $discussao['respostas'];
 
@@ -272,10 +278,11 @@
                 </div>
 
             </div>
-            <div class="col-md-4" style="min-width:250px;">
+            <div class="col-md-4 top-contribuintes-box">
                 <!-- Esta div ocupará 1/5 da largura da div pai -->
                 <div class="top-contribuintes-header">
-                    <h4 style="margin-bottom:0;"><i class="fa-solid fa-trophy" style="margin-right: 15px;"></i>Top Contribuintes</h4>
+                    <h4 style="margin-bottom:0;"><i class="fa-solid fa-trophy" style="margin-right: 15px;"></i>Top
+                        Contribuintes</h4>
                 </div>
                 <div class="top-contribuintes">
                     <ul class="contributors">

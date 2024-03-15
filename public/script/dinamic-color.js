@@ -71,6 +71,7 @@ const corWhatsapp = calcularCor(corTextoObj, 100, multiplicador);
 // Calcula as variações das cores secundárias com base na cor de fundo
 const corSecundaria = calcularCor(corFundoObj, 0, multiplicador);
 const corSecundariaTransparent = calcularCorTransparente(corFundoObj, 0.7);
+const corSecundariaLessLight = calcularCor(corFundoObj, -10, multiplicador);
 const corSecundariaLight = calcularCor(corFundoObj, -20, multiplicador);
 // Converte a cor secundária light de rgb para um objeto { r, g, b }
 const corSecundariaLightObj = rgbToRgbObj(corSecundariaLight);
@@ -92,6 +93,7 @@ dinamicroot.style.setProperty("--cor-primaria-lighter", corPrimariaLighter);
 dinamicroot.style.setProperty("--whatsapp", corWhatsapp);
 dinamicroot.style.setProperty("--cor-secundaria", corSecundaria);
 dinamicroot.style.setProperty("--cor-secundaria-transparent", corSecundariaTransparent);
+dinamicroot.style.setProperty("--cor-secundaria-less-light", corSecundariaLessLight);
 dinamicroot.style.setProperty("--cor-secundaria-light", corSecundariaLight);
 dinamicroot.style.setProperty("--cor-secundaria-light-transparent", corSecundariaLightTransparent);
 dinamicroot.style.setProperty("--cor-secundaria-lighter", corSecundariaLighter);

@@ -1,0 +1,19 @@
+Dicas chatgpt
+
+Use bloco de notas para preparar texto
+
+Abra uma nova aba se for perguntar algo não diretamente relacionado com a thread, evitando embaralhar as ideias
+e também pq o chat vai ficando lendo conforme vai aumentando, pois é muito mais otimizado vc continuar perguntas que
+se relacionam numa thread de prompts, pois vc pergunta só complementos
+
+Quando vc perceber que o chat está ficando lento e ainda não solucionou aquela tarefa mas o chatgpt não viajou na maionese ainda, 
+peça para fazer um resumo que faça ele te entender melhor em outra aba, para que vc possa continuar as perguntas em uma outra aba, ficando menos lento
+
+Caso fique lento e o chatgpt fique vijando na maionese e errando constantemente, o melhor a se fazer é reiniciar a conversa em outra aba, retirando os
+vieses que forjam o chat a continuar errando. Às vezes é mais fácil pedir tudo reexplicando, descartando os prompts anteriores
+
+https://chat.openai.com/share/66dcc2a1-3c67-4763-ba21-006b40110d8a
+
+
+
+

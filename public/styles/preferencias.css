@@ -233,6 +233,9 @@ main {
 .celula.checkbox {
     position: relative;
     flex: 0.2;
+    margin: 0;
+    height: 100%;
+    width: 100%;
 }
 
 .checkbox input {

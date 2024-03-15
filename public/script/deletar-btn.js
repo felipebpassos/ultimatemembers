@@ -3,7 +3,7 @@ $(document).ready(function () {
     // Lidar com a exclusão de um comentario
     $('.op-comentario').on('click', '.deletar-comentario', function () {
         const idComentario = $(this).data('id');
-        // Define o ID do módulo no popup de confirmação.
+        // Define o ID do comentário no popup de confirmação.
         $('#confirmacao').data('id-comentario', idComentario);
 
         // Limpa os campos existentes antes de adicionar dinamicamente
@@ -22,6 +22,72 @@ $(document).ready(function () {
         $('body').css('overflow', 'hidden'); // Impede o scroll da página
     });
 
+    // Lidar com a exclusão de uma discussão
+    $('.delete-discussao').click(function () {
+        const idDiscussao = $(this).data('id');
+        // Define o ID da discussão no popup de confirmação.
+        $('#confirmacao').data('id-discussao', idDiscussao);
+
+        // Limpa os campos existentes antes de adicionar dinamicamente
+        $('#confirmacao-form').empty();
+
+        const confirmButton = $('<button type="submit" class="btn-2 btn-deletar">Deletar</button>');
+        const cancelButton = $('<button type="button" class="btn-2" id="btn-cancelar">Cancelar</button>');
+
+        // Adiciona os botões ao formulário
+        $('#confirmacao-form').append(confirmButton, cancelButton);
+        $('#confirmacao-form').attr('action', url_principal + 'comunidade/deletar_discussao/');
+
+        $('#confirmacao').show();
+        $('#confirmacao h3').text('Tem certeza que deseja excluir o post?');
+        $('.scrollbar-container, .whatsapp-button').addClass('blur');
+        $('body').css('overflow', 'hidden'); // Impede o scroll da página
+    });
+
+    // Lidar com a exclusão de uma discussão
+    $('.op-discussao').on('click', '.deletar-discussao', function () {
+        const idDiscussao = $(this).data('id');
+        // Define o ID da discussão no popup de confirmação.
+        $('#confirmacao').data('id-discussao', idDiscussao);
+
+        // Limpa os campos existentes antes de adicionar dinamicamente
+        $('#confirmacao-form').empty();
+
+        const confirmButton = $('<button type="submit" class="btn-2 btn-deletar">Deletar</button>');
+        const cancelButton = $('<button type="button" class="btn-2" id="btn-cancelar">Cancelar</button>');
+
+        // Adiciona os botões ao formulário
+        $('#confirmacao-form').append(confirmButton, cancelButton);
+        $('#confirmacao-form').attr('action', url_principal + 'comunidade/deletar_discussao/');
+
+        $('#confirmacao').show();
+        $('#confirmacao h3').text('Tem certeza que deseja excluir o post?');
+        $('.scrollbar-container, .whatsapp-button').addClass('blur');
+        $('body').css('overflow', 'hidden'); // Impede o scroll da página
+    });
+
+    // Lidar com a exclusão de uma resposta
+    $('.op-resposta').on('click', '.deletar-resposta', function () {
+        const idResposta = $(this).data('id');
+        // Define o ID da resposta no popup de confirmação.
+        $('#confirmacao').data('id-resposta', idResposta);
+
+        // Limpa os campos existentes antes de adicionar dinamicamente
+        $('#confirmacao-form').empty();
+
+        const confirmButton = $('<button type="submit" class="btn-2 btn-deletar">Deletar</button>');
+        const cancelButton = $('<button type="button" class="btn-2" id="btn-cancelar">Cancelar</button>');
+
+        // Adiciona os botões ao formulário
+        $('#confirmacao-form').append(confirmButton, cancelButton);
+        $('#confirmacao-form').attr('action', url_principal + 'comunidade/deletar_resposta/');
+
+        $('#confirmacao').show();
+        $('#confirmacao h3').text('Tem certeza que deseja excluir resposta?');
+        $('.scrollbar-container, .whatsapp-button').addClass('blur');
+        $('body').css('overflow', 'hidden'); // Impede o scroll da página
+    });
+
     $('.popup').on('click', '.btn-deletar', function () {
         const action = $('#confirmacao-form').attr('action'); // Obtém a ação do formulário
         const formData = {};
@@ -32,6 +98,8 @@ $(document).ready(function () {
         });
 
         formData['idComentario'] = $('#confirmacao').data('id-comentario');
+        formData['idDiscussao'] = $('#confirmacao').data('id-discussao');
+        formData['idResposta'] = $('#confirmacao').data('id-resposta');
 
         // Cria uma solicitação AJAX com jQuery.
         $.ajax({

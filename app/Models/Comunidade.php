@@ -33,7 +33,7 @@ class Comunidade
     public function getDiscussao($id, $usuario_id)
     {
         $data = array();
-        $query = 'SELECT d.id, u.id AS autor_id, u.nome AS autor, u.foto_caminho AS foto, d.title, d.content, d.publish_date, d.last_edit_date, d.views,
+        $query = 'SELECT d.id, u.id AS autor_id, u.nome AS autor, u.foto_caminho AS foto, d.title, d.content, d.publish_date,
                     COUNT(DISTINCT dl.like_id) AS likes,
                     COUNT(DISTINCT r.id) AS respostas,
                     (CASE WHEN (SELECT COUNT(*) FROM discussoes_likes dl WHERE dl.item_id = d.id AND dl.item_type = "d" AND dl.user_id = :usuario_id) > 0 THEN 1 ELSE 0 END) AS user_liked
@@ -59,7 +59,7 @@ class Comunidade
     public function getDiscussoes($id_curso)
     {
         $data = array();
-        $query = 'SELECT d.id, u.nome AS autor, u.foto_caminho AS foto, d.title, d.publish_date, d.last_edit_date, d.views, 
+        $query = 'SELECT d.id, u.nome AS autor, u.foto_caminho AS foto, d.title, d.publish_date, 
                      COUNT(DISTINCT dl.like_id) AS likes,
                      COUNT(DISTINCT r.id) AS respostas
               FROM discussoes d
@@ -193,7 +193,7 @@ class Comunidade
 
         $likeId = $stmt->fetchColumn();
 
-        return ($likeId !== false) ? $likeId : false;
+        return($likeId !== false) ? $likeId : false;
     }
 
     public function removeLikeDiscussao($type, $user_id, $discussao_id, $likeid)
@@ -217,14 +217,14 @@ class Comunidade
         }
     }
 
-    public function getLikesDiscussao($type, $discussao_id)
+    public function getLikesDiscussao($type, $item_id)
     {
 
-        $query = 'SELECT COUNT(*) AS total_likes FROM discussoes_likes WHERE item_id = :discussao_id AND item_type = :item_type';
+        $query = 'SELECT COUNT(*) AS total_likes FROM discussoes_likes WHERE item_id = :item_id AND item_type = :item_type';
 
         $stmt = $this->con->prepare($query);
         $stmt->bindValue(':item_type', $type);
-        $stmt->bindValue(':discussao_id', $discussao_id);
+        $stmt->bindValue(':item_id', $item_id);
 
         if ($stmt->execute()) {
             // Recupere o resultado da contagem de likes
@@ -369,12 +369,12 @@ class Comunidade
 
                 $query = 'INSERT INTO denuncias_discussoes (id_acusador, id_acusado, id_discussao, infracao, data_denuncia) 
                   VALUES (:acusador_id, :acusado_id, :item_id, :infracao, NOW())';
-    
+
             } elseif ($type == 'resposta') {
-    
+
                 $query = 'INSERT INTO denuncias_discussoes_respostas (id_acusador, id_acusado, id_discussao_resposta, infracao, data_denuncia) 
                   VALUES (:acusador_id, :acusado_id, :item_id, :infracao, NOW())';
-    
+
             }
 
             $stmt = $this->con->prepare($query);
@@ -449,6 +449,115 @@ class Comunidade
 
         // Em caso de erro ou se o comentário não for encontrado, retorna null
         return null;
+    }
+
+    public function deleteResposta($respostaId, $user_id, $adm, $instrutor)
+    {
+        // Verificar se o usuário é o dono da resposta ou é um administrador (não um instrutor)
+        if ($this->isDonoResposta($respostaId, $user_id) || ($adm && !$instrutor)) {
+            // Obter todos os likes da resposta
+            $likesResposta = $this->selectAllLikesDiscussao('r', $respostaId);
+
+            $notificacoesModel = new Notificacoes;
+
+            // Apagar as notificações relacionadas aos likes da resposta
+            foreach ($likesResposta as $like) {
+                $notificacoesModel->deleteNotificacao(3, $like['like_id']);
+            }
+
+            // Apagar a resposta
+            $query = 'DELETE FROM discussoes_respostas WHERE id = :resposta_id';
+            $stmt = $this->con->prepare($query);
+            $stmt->bindValue(':resposta_id', $respostaId);
+            return $stmt->execute();
+        } else {
+            // O usuário não tem permissão para excluir a resposta
+            throw new Exception("Você não tem permissão para excluir esta resposta.");
+        }
+    }
+
+    public function deleteDiscussao($discussaoId, $user_id, $adm, $instrutor)
+    {
+        // Verificar se o usuário é o dono da discussão ou é um administrador (não um instrutor)
+        if ($this->isDonoDiscussao($discussaoId, $user_id) || ($adm && !$instrutor)) {
+            // Obter todos os likes da discussão
+            $likesDiscussao = $this->selectAllLikesDiscussao('d', $discussaoId);
+
+            $notificacoesModel = new Notificacoes;
+
+            // Apagar as notificações relacionadas aos likes da discussão
+            foreach ($likesDiscussao as $like) {
+                $notificacoesModel->deleteNotificacao(3, $like['like_id']);
+            }
+
+            // Obter todas as respostas da discussão
+            $respostas = $this->selectRespostasPorDiscussao($discussaoId);
+
+            // Para cada resposta, verificar todos os likes e apagar as notificações
+            foreach ($respostas as $resposta) {
+                $likesResposta = $this->selectAllLikesDiscussao('r', $resposta['id']);
+                foreach ($likesResposta as $like) {
+                    $notificacoesModel->deleteNotificacao(3, $like['like_id']);
+                }
+                $notificacoesModel->deleteNotificacao(4, $resposta['id']); // Apagar notificação da resposta
+            }
+
+            // Apagar a discussão
+            $query = 'DELETE FROM discussoes WHERE id = :discussao_id';
+            $stmt = $this->con->prepare($query);
+            $stmt->bindValue(':discussao_id', $discussaoId);
+            return $stmt->execute();
+        } else {
+            // O usuário não tem permissão para excluir a discussão
+            throw new Exception("Você não tem permissão para excluir esta discussão.");
+        }
+    }
+
+    public function selectAllLikesDiscussao($type, $item_id)
+    {
+        $query = 'SELECT like_id FROM discussoes_likes WHERE item_type = :type AND item_id = :item_id';
+
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':type', $type);
+        $stmt->bindValue(':item_id', $item_id);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function selectRespostasPorDiscussao($discussion_id)
+    {
+        $query = 'SELECT id FROM discussoes_respostas WHERE discussion_id = :discussion_id';
+
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':discussion_id', $discussion_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+
+    // Método para verificar se o usuário é o dono da resposta
+    private function isDonoResposta($respostaId, $user_id)
+    {
+        $query = 'SELECT COUNT(*) as total FROM discussoes_respostas WHERE id = :resposta_id AND user_id = :user_id';
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':resposta_id', $respostaId);
+        $stmt->bindValue(':user_id', $user_id);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['total'] > 0;
+    }
+
+    // Método para verificar se o usuário é o dono da discussão
+    private function isDonoDiscussao($discussaoId, $user_id)
+    {
+        $query = 'SELECT COUNT(*) as total FROM discussoes WHERE id = :discussao_id AND user_id = :user_id';
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':discussao_id', $discussaoId);
+        $stmt->bindValue(':user_id', $user_id);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['total'] > 0;
     }
 
 }
