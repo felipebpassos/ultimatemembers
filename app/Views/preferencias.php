@@ -96,7 +96,7 @@
                                                 .jpeg</span></span></label>
                                     <div class="preview" id="preview-logo">
                                         <img id="img-logo"
-                                            src="<?= !empty($curso['url_logo']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_logo']) : "http://localhost/ultimatemembers/public/img/logo-default.png" ?>"
+                                            src="<?= !empty ($curso['url_logo']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_logo']) : "http://localhost/ultimatemembers/public/img/logo-default.png" ?>"
                                             alt="logo">
                                         <input type="file" id="logo" name="logo" accept=".ico, .png">
                                         <button type="button" class="btn-file-1"
@@ -110,7 +110,7 @@
                                                 .ico</span></span></label>
                                     <div class="preview" id="preview-favicon">
                                         <img id="img-favicon"
-                                            src="<?= !empty($curso['url_favicon']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_favicon']) : "http://localhost/ultimatemembers/public/img/favicon-default.png" ?>"
+                                            src="<?= !empty ($curso['url_favicon']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_favicon']) : "http://localhost/ultimatemembers/public/img/favicon-default.png" ?>"
                                             alt="favicon">
                                         <input type="file" id="favicon" name="favicon" accept=".ico, .png">
                                         <button type="button" class="btn-file-1"
@@ -124,7 +124,7 @@
                                                 .jpeg</span></span></label>
                                     <div class="preview" id="preview-contato">
                                         <img id="img-contato"
-                                            src="<?= !empty($curso['contato_ico']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['contato_ico']) : "http://localhost/ultimatemembers/public/img/msg-default.png" ?>"
+                                            src="<?= !empty ($curso['contato_ico']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['contato_ico']) : "http://localhost/ultimatemembers/public/img/msg-default.png" ?>"
                                             alt="contato ícone">
                                         <input type="file" id="contato" name="contato" accept=".ico, .png">
                                         <button type="button" class="btn-file-1"
@@ -168,7 +168,7 @@
                                 </div>
                                 <div class="banner-curso">
                                     <img id="img-login"
-                                        src="<?= !empty($curso['banner_login']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['banner_login']) : "http://localhost/ultimatemembers/public/img/default_img.png" ?>"
+                                        src="<?= !empty ($curso['banner_login']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['banner_login']) : "http://localhost/ultimatemembers/public/img/default_img.png" ?>"
                                         alt="Banner do <?= $curso['nome'] ?>">
                                 </div>
                                 <div class="login-box">
@@ -267,8 +267,18 @@
             </div>
         </div>
 
-        <div><button class="editar-selected-users" style="margin: 0;"><i
-                    class='fa-solid fa-trash-can'></i>Deletar selecionados</button></div>
+        <div style="display: flex; justify-content: space-between;">
+            <button class="editar-selected-users" style="margin: 0; margin-top: 10px;"><i class='fa-solid fa-trash-can'></i>Deletar
+                selecionados</button>
+            <div class="pagination-container" style="margin-top: 10px; height: fit-content;">
+                <div class="pagination">
+                    <script>
+                        var totalPaginas = 22; // Defina o total de páginas aqui
+                        var paginaAtual = 1; // Página inicial
+                    </script>
+                </div>
+            </div>
+        </div>
 
     </section>
 
@@ -315,7 +325,7 @@
             </span>
         </div>
         <div class="container container-instaladas">
-            <?php if (empty($integracoes)): ?>
+            <?php if (empty ($integracoes)): ?>
                 <div class="integracao-instalada">Nenhuma integração instalada.</div>
             <?php else: ?>
                 <div class="integracoes-tabela tabela">

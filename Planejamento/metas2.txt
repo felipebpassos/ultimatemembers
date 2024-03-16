@@ -7,13 +7,12 @@ deletar usuários selecionados
 fazer integração com outras plataformas
 editar integração
 
--Fazer paginação onde necessitar (comunidade, trilhas e tabelas)
+-Fazer paginação onde necessitar (comunidade, trilhas e tabelas) **
 -Fazer editor de texto funcionar
 -Fazer funcionar pesquisas
 -Fazer funcionar mudança de índice (arrows up e down)
 -Fazer sistema de avaliações (questionários)
 -Fazer quiz
--Deletar posts e replies de posts
 -Fazer gameficação
 -relatórios
 
@@ -23,6 +22,9 @@ editar integração
 -Revisar segurança - verificar se usuario é do curso nos controllers
 -Revisar mensagens de erro e sucesso
 -Responsividade de todas as páginas
+
+
+
 
 
 

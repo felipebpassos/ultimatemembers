@@ -29,7 +29,7 @@
                                 $content = $discussao['content'];
                                 $autor_id = $discussao['autor_id'];
                                 $autor = obterPrimeiroEUltimoNome($discussao['autor']);
-                                $foto_autor = (!empty($discussao['foto']) ? $discussao['foto'] : '/public/img/default.png');
+                                $foto_autor = (!empty ($discussao['foto']) ? $discussao['foto'] : '/public/img/default.png');
                                 $user_liked = $discussao['user_liked'];
                                 $publicacao = calcularTempoDecorrido($discussao['publish_date']);
                                 $likes = $discussao['likes'];
@@ -197,6 +197,14 @@
 
                     </div>
 
+                    <script>
+                        $(document).ready(function () {
+                            $('#filter-btn').click(function () {
+                                $('#filtros').toggleClass('opened');
+                            });
+                        });
+                    </script>
+
                     <div class="resultados" style="padding-top: 10px;">
                         <form class="barra-superior">
                             <?php
@@ -220,10 +228,7 @@
                         <div class="encontrados fade-in-slide-up">
                             <ul>
                                 <?php
-                                if (isset($discussoes) && !empty($discussoes)) {
-
-                                    //Usa função 'compararPorData' para reordenar publicações
-                                    usort($discussoes, 'compararPorData');
+                                if (isset ($discussoes) && !empty ($discussoes)) {
 
                                     // Loop pelos resultados da página atual e exibe os links para nome e sobrenome
                                     foreach ($discussoes as $discussao) {
@@ -245,7 +250,7 @@
                                             <div class="row" style="align-items:center; justify-content: space-between;">
                                                 <div class="col-md-8" style="display:flex; align-items:center;">
 
-                                                <div class="foto-perfil-mini"><img class="perfil-img" name="imagem" src="http://localhost/ultimatemembers' . (!empty($foto_autor) ? $foto_autor : '/public/img/default.png') . '" alt="Foto de Perfil"></div>
+                                                <div class="foto-perfil-mini"><img class="perfil-img" name="imagem" src="http://localhost/ultimatemembers' . (!empty ($foto_autor) ? $foto_autor : '/public/img/default.png') . '" alt="Foto de Perfil"></div>
                                                 <div class="box">
                                                     <span style="font-size: 22px; font-weight: bold;">' . $titulo . '</span>
                                                     <div style="display:flex;">
@@ -274,6 +279,14 @@
                                 ?>
                             </ul>
                         </div>
+                        <div class="pagination-container">
+                            <div class="pagination">
+                                <script>
+                                    var totalPaginas = <?php echo $totalPaginas; ?>; // Defina o total de páginas aqui
+                                    var paginaAtual = 1; // Página inicial
+                                </script>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -292,7 +305,7 @@
                                 <div style="display: flex;">
                                     <div class="foto-perfil-mini">
                                         <img class="perfil-img" name="imagem"
-                                            src="http://localhost/ultimatemembers<?php echo (!empty($contributor['foto_usuario']) ? $contributor['foto_usuario'] : '/public/img/default.png'); ?>"
+                                            src="http://localhost/ultimatemembers<?php echo (!empty ($contributor['foto_usuario']) ? $contributor['foto_usuario'] : '/public/img/default.png'); ?>"
                                             alt="Foto de Perfil" />
                                     </div>
                                     <h5>

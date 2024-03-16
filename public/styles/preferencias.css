@@ -174,10 +174,6 @@ main {
     margin: 30px auto;
 }
 
-#filter-btn {
-    position: unset;
-}
-
 .botoes-opcao {
     width: fit-content;
     position: absolute;

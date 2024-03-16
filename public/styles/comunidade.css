@@ -10,7 +10,7 @@ main {
     height: 290px;
     margin-bottom: 20px;
     position: relative;
-    background-color: var(--cor-secundaria-light-transparent);
+    background-color: var(--cor-secundaria-less-light);
 }
 
 .publicacoes-relevantes .conteudo-pergunta {
@@ -152,12 +152,6 @@ main {
     border: none;
 }
 
-#filtros {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.8s ease;
-}
-
 .opcoes-comunidade {
     width: 100%;
     margin-bottom: 10px;
@@ -174,7 +168,7 @@ main {
     color: var(--cor-secundaria);
 }
 
-.nova-publicacao button {
+.nova-publicacao .btn-2 {
     min-width: 100px;
 }
 
@@ -711,8 +705,4 @@ textarea:focus {
     width: 40px;
     font-size: 20px;
     text-align: center;
-}
-
-#filter-btn {
-    position: unset;
 }

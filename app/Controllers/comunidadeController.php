@@ -33,10 +33,11 @@ class comunidadeController extends Controller
         $usuario = $this->usuario;
 
         //get metadados
-        $data['discussoes'] = $comunidade->getDiscussoes($this->curso);
+        $data['discussoes'] = $comunidade->getDiscussoes(1, $this->curso);
         $data['num_de_discussoes'] = $comunidade->getNumeroDeDiscussoes($this->curso);
         $data['contributors'] = $comunidade->obterTopUsuariosCurtidas($this->curso);
         $data['topDiscussoes'] = $comunidade->getTopDiscussoes($usuario['id'], $this->curso);
+        $data['totalPaginas'] = ceil($data['num_de_discussoes'] / 8);
 
         //set template
         $template = 'painel-temp';
@@ -48,7 +49,7 @@ class comunidadeController extends Controller
         $data['description'] = '';
         $data['styles'] = array('painel', 'header', 'search-bar', 'lista_resultados', 'comunidade');
         $data['scripts_head'] = array('select');
-        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'multiplo_select', 'fade-in-slide-up', 'pub_relevantes', 'salvar', 'deletar-btn');
+        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'multiplo_select', 'fade-in-slide-up', 'pub_relevantes', 'salvar', 'deletar-btn', 'paginacao');
 
         //load view
         $this->loadTemplates($template, $data, $usuario);
@@ -121,7 +122,7 @@ class comunidadeController extends Controller
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-            if (isset($_POST["titulo"]) && isset($_POST["texto"])) {
+            if (isset ($_POST["titulo"]) && isset ($_POST["texto"])) {
 
                 $comunidade = new Comunidade();
 
@@ -166,7 +167,7 @@ class comunidadeController extends Controller
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-            if (isset($_POST["texto"])) {
+            if (isset ($_POST["texto"])) {
 
                 $comunidade = new Comunidade();
 
@@ -208,7 +209,7 @@ class comunidadeController extends Controller
 
             $comunidade = new Comunidade();
 
-            if (isset($_POST['discussaoId']) && isset($_POST['type'])) {
+            if (isset ($_POST['discussaoId']) && isset ($_POST['type'])) {
 
                 $discussaoId = $_POST['discussaoId'];
                 $type = $_POST['type'];
@@ -218,7 +219,7 @@ class comunidadeController extends Controller
 
                 echo $likes;
 
-            } else if (isset($_POST['respostaId']) && isset($_POST['type'])) {
+            } else if (isset ($_POST['respostaId']) && isset ($_POST['type'])) {
 
                 $respostaId = $_POST['respostaId'];
                 $type = $_POST['type'];
@@ -237,7 +238,7 @@ class comunidadeController extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Verifique se as variáveis POST estão definidas
-            if (isset($_POST['discussaoId'])) {
+            if (isset ($_POST['discussaoId'])) {
                 // Recupere os valores das variáveis POST e armazene em variáveis locais
                 $discussaoId = $_POST['discussaoId'];
 
@@ -263,7 +264,7 @@ class comunidadeController extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Verifique se as variáveis POST estão definidas
-            if (isset($_POST['idItem']) && isset($_POST['option'])) {
+            if (isset ($_POST['idItem']) && isset ($_POST['option'])) {
 
                 $acusador = $this->usuario['id'];
                 $item = $_POST['idItem'];
@@ -290,7 +291,7 @@ class comunidadeController extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Verifique se o ID da discussão foi enviado
-            if (isset($_POST['idDiscussao'])) {
+            if (isset ($_POST['idDiscussao'])) {
                 $discussaoId = $_POST['idDiscussao'];
 
                 try {
@@ -314,7 +315,7 @@ class comunidadeController extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Verifique se o ID da resposta foi enviado
-            if (isset($_POST['idResposta'])) {
+            if (isset ($_POST['idResposta'])) {
                 $respostaId = $_POST['idResposta'];
 
                 try {
@@ -331,6 +332,33 @@ class comunidadeController extends Controller
             }
         } else {
             echo json_encode(array('success' => false, 'message' => 'Método não permitido.'));
+        }
+    }
+
+    public function discussoes()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Verifique se as variáveis POST estão definidas
+            if (isset ($_POST['pagina'])) {
+
+                $pagina = $_POST['pagina'];
+
+                $comunidade_model = new Comunidade();
+
+                $resultados = $comunidade_model->getDiscussoes($pagina, $this->curso);
+
+                foreach ($resultados as &$resultado) {
+                    $resultado['publish_date'] = calcularTempoDecorrido($resultado['publish_date']);
+                }
+
+                header('Content-Type: application/json');
+                echo json_encode($resultados);
+
+            } else {
+                // ERRO
+                echo 'erro';
+                exit;
+            }
         }
     }
 

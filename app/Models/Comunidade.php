@@ -55,23 +55,28 @@ class Comunidade
         return $data;
     }
 
-    // Modelo para pegar discussões
-    public function getDiscussoes($id_curso)
+    public function getDiscussoes($pagina, $id_curso)
     {
         $data = array();
+        $discussoes_por_pagina = 8;
+        $offset = ($pagina - 1) * $discussoes_por_pagina;
+
         $query = 'SELECT d.id, u.nome AS autor, u.foto_caminho AS foto, d.title, d.publish_date, 
-                     COUNT(DISTINCT dl.like_id) AS likes,
-                     COUNT(DISTINCT r.id) AS respostas
-              FROM discussoes d
-              INNER JOIN usuarios u ON d.user_id = u.id
-              LEFT JOIN discussoes_likes dl ON d.id = dl.item_id AND dl.item_type = "d"
-              LEFT JOIN discussoes_respostas r ON d.id = r.discussion_id
-              WHERE d.id_curso = :id_curso
-              GROUP BY d.id
-              LIMIT 20';
+                 COUNT(DISTINCT dl.like_id) AS likes,
+                 COUNT(DISTINCT r.id) AS respostas
+          FROM discussoes d
+          INNER JOIN usuarios u ON d.user_id = u.id
+          LEFT JOIN discussoes_likes dl ON d.id = dl.item_id AND dl.item_type = "d"
+          LEFT JOIN discussoes_respostas r ON d.id = r.discussion_id
+          WHERE d.id_curso = :id_curso
+          GROUP BY d.id
+          ORDER BY d.publish_date DESC
+          LIMIT :offset, :discussoes_por_pagina';
 
         $stmt = $this->con->prepare($query);
         $stmt->bindValue(':id_curso', $id_curso);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->bindValue(':discussoes_por_pagina', $discussoes_por_pagina, PDO::PARAM_INT);
 
         if ($stmt->execute()) {
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -193,7 +198,7 @@ class Comunidade
 
         $likeId = $stmt->fetchColumn();
 
-        return($likeId !== false) ? $likeId : false;
+        return ($likeId !== false) ? $likeId : false;
     }
 
     public function removeLikeDiscussao($type, $user_id, $discussao_id, $likeid)
