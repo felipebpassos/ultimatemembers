@@ -278,7 +278,7 @@ main {
 
 .accordion-1 .elemento {
     padding: 15px 20px 15px 20px;
-    background-color: var(--cor-secundaria-lighter);
+    background-color: var(--cor-secundaria-light);
     font-weight: bold;
     font-size: 22px;
     display: flex;
@@ -296,7 +296,7 @@ main {
 
 .resposta {
     color: var(--cor-primaria);
-    background-color: var(--cor-secundaria-light);
+    background-color: var(--cor-secundaria-less-light);
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.8s ease;
@@ -344,7 +344,7 @@ main {
 }
 
 .campo {
-    background-color: var(--cor-secundaria-light);
+    background-color: var(--cor-secundaria-less-light);
     padding: 10px 20px 20px 20px;
     margin: 10px 0;
     border-radius: 5px;

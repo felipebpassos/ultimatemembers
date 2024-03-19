@@ -32,6 +32,8 @@
                         id="botaoPesquisa"><i class="fa fa-search"></i></button></a>
             </div>
 
+            <button class="editar" id="filter-btn"><i class="fa-solid fa-filter"></i></button>
+
         </div>
 
         <div class="exportar" style="position:relative;">
@@ -54,48 +56,44 @@
         </div>
 
         <div class="container" style="padding: 0px;">
-            <table class="table table-responsive tabela">
-                <thead>
-                    <tr>
-                        <th>DATA</th>
-                        <th>PRODUTO</th>
-                        <th>CLIENTE</th>
-                        <th>STATUS</th>
-                        <th>VALOR LÍQUIDO</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>2023-10-19</td>
-                        <td>Produto A</td>
-                        <td>Cliente 1</td>
-                        <td>Pago</td>
-                        <td>R$ 100.00</td>
-                    </tr>
-                    <tr>
-                        <td>2023-10-20</td>
-                        <td>Produto B</td>
-                        <td>Cliente 2</td>
-                        <td>Pendente</td>
-                        <td>R$ 75.50</td>
-                    </tr>
-                    <tr>
-                        <td>2023-10-21</td>
-                        <td>Produto C</td>
-                        <td>Cliente 3</td>
-                        <td>Cancelado</td>
-                        <td>R$ 200.25</td>
-                    </tr>
-                    <tr>
-                        <td>2023-10-22</td>
-                        <td>Produto D</td>
-                        <td>Cliente 4</td>
-                        <td>Pago</td>
-                        <td>R$ 120.90</td>
-                    </tr>
-                    <!-- Adicione mais linhas conforme necessário -->
-                </tbody>
-            </table>
+            <div class="relatorios tabela">
+                <div class="cabecalho">
+                    <div class="celula">DATA</div>
+                    <div class="celula">CLIENTE</div>
+                    <div class="celula">PLANO</div>
+                    <div class="celula">STATUS</div>
+                    <div class="celula">VALOR LÍQUIDO</div>
+                </div>
+                <div class='linha'>
+                    <div class="celula">2023-10-19</div>
+                    <div class="celula">Cliente 1</div>
+                    <div class="celula">Básico</div>
+                    <div class="celula">Pago</div>
+                    <div class="celula">R$ 100.00</div>
+                </div>
+                <div class='linha'>
+                    <div class="celula">2023-10-30</div>
+                    <div class="celula">Cliente 2</div>
+                    <div class="celula">Premium</div>
+                    <div class="celula">Pago</div>
+                    <div class="celula">R$ 160.00</div>
+                </div>
+                <div class='linha'>
+                    <div class="celula">2023-11-05</div>
+                    <div class="celula">Cliente 3</div>
+                    <div class="celula">Premium</div>
+                    <div class="celula">Pago</div>
+                    <div class="celula">R$ 160.00</div>
+                </div>
+                <div class='linha'>
+                    <div class="celula">2023-11-07</div>
+                    <div class="celula">Cliente 4</div>
+                    <div class="celula">Básico</div>
+                    <div class="celula">Pendente</div>
+                    <div class="celula">R$ 100.00</div>
+                </div>
+                <!-- Adicione mais linhas conforme necessário -->
+            </div>
         </div>
 
     </div>

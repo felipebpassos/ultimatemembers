@@ -88,7 +88,7 @@ class painelController extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Verifique se as variáveis POST estão definidas
-            if (isset($_POST['nomeBanner']) && isset($_FILES['banner']) && $_FILES['banner']['error'] === UPLOAD_ERR_OK && !empty($_FILES['banner'])) {
+            if (isset ($_POST['nomeBanner']) && isset ($_FILES['banner']) && $_FILES['banner']['error'] === UPLOAD_ERR_OK && !empty ($_FILES['banner'])) {
 
                 // Carrega dados do usuário
                 $usuario = $this->usuario;
@@ -96,12 +96,12 @@ class painelController extends Controller
 
                 // Recupere os valores das variáveis POST e armazene em variáveis locais
                 $nomeBanner = $_POST['nomeBanner'];
-                $botaoAcao = isset($_POST['acaoBtn']) ? $_POST['acaoBtn'] : 0;
+                $botaoAcao = isset ($_POST['acaoBtn']) ? $_POST['acaoBtn'] : 0;
 
                 // Verifique se o checkbox "acao-btn" está marcado
                 if ($botaoAcao) {
                     // Verifique se os campos "textoBotao" e "linkBotao" estão preenchidos
-                    if (isset($_POST['textoBotao']) && isset($_POST['linkBotao'])) {
+                    if (isset ($_POST['textoBotao']) && isset ($_POST['linkBotao'])) {
 
                         $textoBotao = $_POST['textoBotao'];
                         $linkBotao = $_POST['linkBotao'];
@@ -161,7 +161,7 @@ class painelController extends Controller
         // Verifica se o formulário foi enviado via método POST
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-            if (isset($_POST["idBanner"]) && isset($_POST["nomeBanner"])) {
+            if (isset ($_POST["idBanner"]) && isset ($_POST["nomeBanner"])) {
 
                 // Carrega dados do usuário
                 $usuario = $this->usuario;
@@ -171,12 +171,12 @@ class painelController extends Controller
                 $idBanner = $_POST["idBanner"];
                 $nomeBanner = $_POST["nomeBanner"];
 
-                $botaoAcao = isset($_POST['acaoBtn']) ? $_POST['acaoBtn'] : 0;
+                $botaoAcao = isset ($_POST['acaoBtn']) ? $_POST['acaoBtn'] : 0;
 
                 // Verifique se o checkbox "acao-btn" está marcado
                 if ($botaoAcao) {
                     // Verifique se os campos "textoBotao" e "linkBotao" estão preenchidos
-                    if (isset($_POST['textoBotao']) && isset($_POST['linkBotao'])) {
+                    if (isset ($_POST['textoBotao']) && isset ($_POST['linkBotao'])) {
 
                         $textoBotao = $_POST['textoBotao'];
                         $linkBotao = $_POST['linkBotao'];
@@ -192,7 +192,7 @@ class painelController extends Controller
                 }
 
                 // Verifica se há foto do banner fornecida
-                if (isset($_FILES['banner']) && $_FILES['banner']['error'] === UPLOAD_ERR_OK && !empty($_FILES['banner'])) {
+                if (isset ($_FILES['banner']) && $_FILES['banner']['error'] === UPLOAD_ERR_OK && !empty ($_FILES['banner'])) {
 
                     $banner = $this->cursosModel->uploadFile($_FILES['banner'], $this->cursoInfo['dir_name']);
 
@@ -256,7 +256,7 @@ class painelController extends Controller
 
     public function deletar_banner()
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idBanner'])) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['idBanner'])) {
 
             // Carrega dados do usuário
             $usuario = $this->usuario;
@@ -281,7 +281,7 @@ class painelController extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Verifique se as variáveis POST estão definidas
-            if (isset($_POST['nomeLancamento']) && isset($_POST['linkLancamento']) && isset($_FILES['lancamento']) && $_FILES['lancamento']['error'] === UPLOAD_ERR_OK && !empty($_FILES['lancamento'])) {
+            if (isset ($_POST['nomeLancamento']) && isset ($_POST['linkLancamento']) && isset ($_FILES['lancamento']) && $_FILES['lancamento']['error'] === UPLOAD_ERR_OK && !empty ($_FILES['lancamento'])) {
 
                 // Carrega dados do usuário
                 $usuario = $this->usuario;
@@ -336,7 +336,7 @@ class painelController extends Controller
         // Verifica se o formulário foi enviado via método POST
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-            if (isset($_POST["idLancamento"]) && isset($_POST["nomeLancamento"]) && isset($_POST["linkLancamento"])) {
+            if (isset ($_POST["idLancamento"]) && isset ($_POST["nomeLancamento"]) && isset ($_POST["linkLancamento"])) {
 
                 // Carrega dados do usuário
                 $usuario = $this->usuario;
@@ -349,7 +349,7 @@ class painelController extends Controller
 
 
                 // Verifica se há foto do lançamento fornecida
-                if (isset($_FILES['lancamento']) && $_FILES['lancamento']['error'] === UPLOAD_ERR_OK && !empty($_FILES['lancamento'])) {
+                if (isset ($_FILES['lancamento']) && $_FILES['lancamento']['error'] === UPLOAD_ERR_OK && !empty ($_FILES['lancamento'])) {
 
                     $lancamento = $this->cursosModel->uploadFile($_FILES['lancamento'], $this->cursoInfo['dir_name']);
 
@@ -413,7 +413,7 @@ class painelController extends Controller
 
     public function deletar_lancamento()
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idLancamento'])) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['idLancamento'])) {
 
             // Carrega dados do usuário
             $usuario = $this->usuario;
@@ -529,10 +529,13 @@ class painelController extends Controller
         $this->sessao->autorizaAdm($usuario['adm'], $this->cursoInfo['url_principal']);
 
         $auth = new Auth();
+        $usuarios_model = new Usuarios();
 
         $integracoes = $auth->getIntegracoesAPI($this->curso);
+        $num_usuarios = $usuarios_model->countUsuarios($this->curso);
 
         $data['integracoes'] = $integracoes;
+        $data['totalPaginas'] = ceil($num_usuarios / 10);
 
         //set template
         $template = 'painel-temp';
@@ -553,18 +556,39 @@ class painelController extends Controller
 
     public function get_users()
     {
-        // Carrega dados do usuário
-        $usuario = $this->usuario;
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Verifique se as variáveis POST estão definidas
 
-        $this->sessao->autorizaAdm($usuario['adm'], $this->cursoInfo['url_principal']);
+            // Carrega dados do usuário
+            $usuario = $this->usuario;
 
-        // Acesso ao modelo "Aulas"
-        $usuariosModel = new Usuarios();
+            $this->sessao->autorizaAdm($usuario['adm'], $this->cursoInfo['url_principal']);
 
-        $users = $usuariosModel->getUsuarios($this->curso);
+            // Acesso ao modelo "Aulas"
+            $usuariosModel = new Usuarios();
 
-        header('Content-Type: application/json');
-        echo json_encode($users);
+            if (isset ($_POST['pagina'])) {
+
+                $pagina = $_POST['pagina'];
+
+                $users = $usuariosModel->getUsuarios($pagina, $this->curso);
+
+                header('Content-Type: application/json');
+                echo json_encode($users);
+
+            } else {
+                $users = $usuariosModel->getUsuarios(1, $this->curso);
+
+                header('Content-Type: application/json');
+                echo json_encode($users);
+            }
+        } else {
+
+            // ERRO
+            echo 'erro';
+            exit;
+
+        }
 
     }
 
@@ -573,16 +597,16 @@ class painelController extends Controller
         // Verifica se o método enviado é POST
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             // Se não for POST, encerre a execução ou redirecione conforme necessário
-            die('Acesso não autorizado');
+            die ('Acesso não autorizado');
         }
 
         // Verifica se as variáveis obrigatórias estão definidas
         $required_fields = ['nome', 'email']; // Adicione outros campos obrigatórios conforme necessário
 
         foreach ($required_fields as $field) {
-            if (!isset($_POST[$field])) {
+            if (!isset ($_POST[$field])) {
                 // Se algum campo obrigatório não estiver definido, encerre a execução ou redirecione conforme necessário
-                die("Campo obrigatório '$field' não está definido");
+                die ("Campo obrigatório '$field' não está definido");
             }
         }
 
@@ -602,7 +626,7 @@ class painelController extends Controller
         $nascimento = $_POST['nascimento'];
 
         // Verifica se a opção está marcada e atribui os valores apropriados
-        $plano = isset($_POST['status']) ? 1 : 0;
+        $plano = isset ($_POST['status']) ? 1 : 0;
         $adm = 0;
         $instrutor = 0;
 
@@ -628,16 +652,16 @@ class painelController extends Controller
         // Verifica se o método enviado é POST
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             // Se não for POST, encerre a execução ou redirecione conforme necessário
-            die('Acesso não autorizado');
+            die ('Acesso não autorizado');
         }
 
         // Verifica se as variáveis obrigatórias estão definidas
         $required_fields = ['nome', 'email']; // Adicione outros campos obrigatórios conforme necessário
 
         foreach ($required_fields as $field) {
-            if (!isset($_POST[$field])) {
+            if (!isset ($_POST[$field])) {
                 // Se algum campo obrigatório não estiver definido, encerre a execução ou redirecione conforme necessário
-                die("Campo obrigatório '$field' não está definido");
+                die ("Campo obrigatório '$field' não está definido");
             }
         }
 
@@ -657,7 +681,7 @@ class painelController extends Controller
         $nascimento = $_POST['nascimento'];
 
         // Verifica se a opção está marcada e atribui os valores apropriados
-        $plano = isset($_POST['status']) ? 1 : 0;
+        $plano = isset ($_POST['status']) ? 1 : 0;
         $adm = 0;
         $instrutor = 0;
 
@@ -681,15 +705,15 @@ class painelController extends Controller
     public function deletar_user()
     {
         // Verifica se o método enviado é POST
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['adminEmail']) || !isset($_POST['adminPassword'])) {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset ($_POST['adminEmail']) || !isset ($_POST['adminPassword'])) {
             // Se não for POST, encerre a execução ou redirecione conforme necessário
-            die('Acesso não autorizado');
+            die ('Acesso não autorizado');
         }
 
         // Verifica se a variável obrigatória está definida
-        if (!isset($_POST['idUser'])) {
+        if (!isset ($_POST['idUser'])) {
             // Se o campo obrigatório não estiver definido, encerre a execução ou redirecione conforme necessário
-            die("ID do usuário não está definido");
+            die ("ID do usuário não está definido");
         }
 
         // Carrega dados do usuário
@@ -713,7 +737,7 @@ class painelController extends Controller
             echo json_encode($resultado);
         } else {
             // Credenciais do instrutor inválidas
-            die('Credenciais do instrutor inválidas');
+            die ('Credenciais do instrutor inválidas');
         }
     }
 
@@ -722,7 +746,7 @@ class painelController extends Controller
         // Verifica se o formulário foi enviado via método POST
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-            if (isset($_POST['nome_curso']) && isset($_POST["cor_texto"]) && isset($_POST["cor_fundo"])) {
+            if (isset ($_POST['nome_curso']) && isset ($_POST["cor_texto"]) && isset ($_POST["cor_fundo"])) {
 
                 $nomeCurso = $_POST['nome_curso'];
                 $corTexto = $_POST["cor_texto"];
@@ -733,7 +757,7 @@ class painelController extends Controller
                 $cursoInfo = $cursosModel->getCurso($this->curso);
 
                 // Verifica se há foto de logo fornecida
-                if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK && !empty($_FILES['logo'])) {
+                if (isset ($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK && !empty ($_FILES['logo'])) {
 
                     $logo = $cursosModel->uploadFile($_FILES['logo'], $cursoInfo['dir_name']);
 
@@ -765,7 +789,7 @@ class painelController extends Controller
                 }
 
                 // Verifica se há favicon fornecido
-                if (isset($_FILES['favicon']) && $_FILES['favicon']['error'] === UPLOAD_ERR_OK && !empty($_FILES['favicon'])) {
+                if (isset ($_FILES['favicon']) && $_FILES['favicon']['error'] === UPLOAD_ERR_OK && !empty ($_FILES['favicon'])) {
 
                     $favicon = $cursosModel->uploadFile($_FILES['favicon'], $cursoInfo['dir_name']);
 
@@ -797,7 +821,7 @@ class painelController extends Controller
                 }
 
                 // Verifica se há imagem de contato fornecido
-                if (isset($_FILES['contato']) && $_FILES['contato']['error'] === UPLOAD_ERR_OK && !empty($_FILES['contato'])) {
+                if (isset ($_FILES['contato']) && $_FILES['contato']['error'] === UPLOAD_ERR_OK && !empty ($_FILES['contato'])) {
 
                     $contato = $cursosModel->uploadFile($_FILES['contato'], $cursoInfo['dir_name']);
 
@@ -829,7 +853,7 @@ class painelController extends Controller
                 }
 
                 // Verifica se há banner de login fornecido
-                if (isset($_FILES['login-img-form']) && $_FILES['login-img-form']['error'] === UPLOAD_ERR_OK && !empty($_FILES['login-img-form'])) {
+                if (isset ($_FILES['login-img-form']) && $_FILES['login-img-form']['error'] === UPLOAD_ERR_OK && !empty ($_FILES['login-img-form'])) {
 
                     $banner = $cursosModel->uploadFile($_FILES['login-img-form'], $cursoInfo['dir_name']);
 

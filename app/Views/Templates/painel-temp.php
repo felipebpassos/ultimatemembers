@@ -34,6 +34,7 @@
     ?>
 
     <!-- Scripts (head) -->
+    <script src="http://localhost/ultimatemembers/public/script/funcoes.js"></script>
     <?php
     foreach ($scripts_head as $script) {
         echo '<script src="http://localhost/ultimatemembers/public/script/' . $script . '.js"></script>';
@@ -84,7 +85,7 @@
                     <?php
                     if ($adm) {
                         echo '<li>
-                            <a href="' . $curso['url_principal'] . 'painel/preferencias"><button id="settings"><i class="fa-solid fa-gear"></i></i></button></a>
+                            <a href="' . $curso['url_principal'] . 'painel/preferencias"><button id="settings"><i class="fa-solid fa-gear"></i></button></a>
                         </li>';
                     }
                     ?>

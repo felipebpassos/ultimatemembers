@@ -983,14 +983,14 @@ body {
 }
 
 .items-list {
-    height: 65vh;
+    height: 56vh;
     overflow-y: auto;
     background-color: var(--cor-secundaria-light);
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
     padding: 0 10px;
     padding-left: 0;
-    margin: 30px 50px;
+    margin: 50px 50px;
     margin-top: 0;
 }
 
@@ -1247,7 +1247,7 @@ body {
     height: 30px;
     border: solid 1px var(--cor-primaria-darker);
     background-color: transparent;
-    color: var(--cor-primaria-light);
+    color: var(--cor-primaria-dark);
     margin-right: 0px;
     font-weight: bold;
 }

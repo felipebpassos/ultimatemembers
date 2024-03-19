@@ -280,7 +280,7 @@
         <ul class="items-list">
 
             <?php
-            if (isset($modulos) && !empty($modulos)) {
+            if (isset ($modulos) && !empty ($modulos)) {
 
                 foreach ($modulos as $modulo) {
                     $id = $modulo['id'];
@@ -515,7 +515,7 @@
         <ul class="items-list">
 
             <?php
-            if (isset($trilhas) && !empty($trilhas)) {
+            if (isset ($trilhas) && !empty ($trilhas)) {
 
                 foreach ($trilhas as $trilha) {
                     $id = $trilha['id'];
@@ -596,7 +596,7 @@
                         <div class="trilha-modulos-box">
                             <ul class="trilha-modulos">
                                 <?php
-                                if (isset($modulos) && !empty($modulos)) {
+                                if (isset ($modulos) && !empty ($modulos)) {
 
                                     foreach ($modulos as $modulo) {
                                         $id = $modulo['id'];
@@ -684,7 +684,7 @@
                         <div class="trilha-modulos-box">
                             <ul class="trilha-modulos" id="trilha-modulos-Edit">
                                 <?php
-                                if (isset($modulos) && !empty($modulos)) {
+                                if (isset ($modulos) && !empty ($modulos)) {
 
                                     foreach ($modulos as $modulo) {
                                         $id = $modulo['id'];
@@ -753,25 +753,33 @@
             <form id="usuarioFormAdd" action="<?php echo $curso['url_principal']; ?>painel/add_user/" method="POST"
                 enctype="multipart/form-data">
                 <div class="mb-3">
-                    <label for="nome" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome" required>
+                    <label for="nome" class="form-label">Nome completo</label>
+                    <div class="campo-popup" style="width: 100%;">
+                        <input type="text" id="nome" name="nome" class="campo-input" placeholder="Digite o nome"
+                            required>
+                    </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Digite o email"
-                        required>
+                    <div class="campo-popup" style="width: 100%;">
+                        <input type="email" id="email" name="email" class="campo-input" placeholder="Digite o email"
+                            required>
+                    </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="whatsapp" class="form-label">WhatsApp (opcional)</label>
-                    <input type="tel" class="form-control" id="whatsapp" name="whatsapp"
-                        placeholder="Digite o número de WhatsApp (opcional)">
+                    <div class="campo-popup" style="width: 100%;">
+                        <input type="tel" id="whatsapp" name="whatsapp" class="campo-input" placeholder="Digite o número de WhatsApp (opcional)">
+                    </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="nascimento" class="form-label">Nascimento (opcional)</label>
-                    <input type="date" class="form-control" id="nascimento" name="nascimento">
+                    <div class="campo-popup" style="width: 100%;">
+                        <input type="date" id="nascimento" name="nascimento" class="campo-input">
+                    </div>
                 </div>
 
                 <label>Permissão</label>
@@ -829,26 +837,33 @@
                 enctype="multipart/form-data">
                 <input type="hidden" id="idUser" name="idUser">
                 <div class="mb-3">
-                    <label for="nome" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="nomeEdit" name="nome" placeholder="Digite o nome"
-                        required>
+                    <label for="nome" class="form-label">Nome completo</label>
+                    <div class="campo-popup" style="width: 100%;">
+                        <input type="text" id="nomeEdit" name="nome" class="campo-input" placeholder="Digite o nome"
+                            required>
+                    </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="emailEdit" name="email" placeholder="Digite o email"
-                        required>
+                    <div class="campo-popup" style="width: 100%;">
+                        <input type="email" id="emailEdit" name="email" class="campo-input" placeholder="Digite o email"
+                            required>
+                    </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="whatsapp" class="form-label">WhatsApp (opcional)</label>
-                    <input type="tel" class="form-control" id="whatsappEdit" name="whatsapp"
-                        placeholder="Digite o número de WhatsApp (opcional)">
+                    <div class="campo-popup" style="width: 100%;">
+                        <input type="tel" id="whatsappEdit" name="whatsapp" class="campo-input" placeholder="Digite o número de WhatsApp (opcional)">
+                    </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="nascimento" class="form-label">Nascimento (opcional)</label>
-                    <input type="date" class="form-control" id="nascimentoEdit" name="nascimento">
+                    <div class="campo-popup" style="width: 100%;">
+                        <input type="date" id="nascimentoEdit" name="nascimento" class="campo-input">
+                    </div>
                 </div>
 
                 <label>Permissão</label>
@@ -955,7 +970,7 @@
         <ul class="items-list">
 
             <?php
-            if (isset($banners) && !empty($banners)) {
+            if (isset ($banners) && !empty ($banners)) {
 
                 foreach ($banners as $banner) {
                     $id = $banner['id'];
@@ -1197,7 +1212,7 @@
         <ul class="items-list">
 
             <?php
-            if (isset($lancamentos) && !empty($lancamentos)) {
+            if (isset ($lancamentos) && !empty ($lancamentos)) {
 
                 foreach ($lancamentos as $lancamento) {
                     $id = $lancamento['id'];

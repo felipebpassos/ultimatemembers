@@ -36,59 +36,90 @@
         </ul>
     </div>
 
-    <section id="curso" class="content" style="margin-top: 100px;">
+    <section id="curso" class="content">
 
         <form action="<?php echo $curso['url_principal']; ?>painel/edit_geral/" method="post"
             enctype="multipart/form-data">
 
-            <div class="container">
+            <div class="container bloco" style="padding-top:0;">
 
-                <div class="botoes-opcao">
-                    <button class="btn-2" type="button"><i class="fa-solid fa-arrow-rotate-left"></i>Reset</button>
-                    <button class="btn-2" type="submit" style="margin-left: 30px;"><i
-                            class="fa-regular fa-floppy-disk"></i>Salvar</button>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div style="margin-bottom: 60px;">
+                            <h4 class="title"><i class="fa-solid fa-gear" style="margin-right: 15px;"></i>Configurações
+                                gerais</h4>
+                            <p>Altere os dados básicos da sua área de membros</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-7">
+
+                        <div class="card">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="campo" style="margin-bottom: 30px;">
+                                        <label for="">Nome do Curso</label>
+                                        <input class="campo-texto" id="nome_curso" type="text" name="nome_curso"
+                                            value="<?= $curso['nome'] ?>" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <!-- Campo para email de contato -->
+                                    <div class="campo" id="campo_email_contato" style="margin-bottom: 30px;">
+                                        <label for="">Email para contato</label>
+                                        <input class="campo-texto" type="email" id="email_contato" name="email_contato"
+                                            placeholder="exemplo@email.com" disabled>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="campo" style="margin-bottom: 30px;">
+                                        <label for="">Domínio personalizado</label>
+                                        <input class="campo-texto" id="dominio" type="text" name="dominio"
+                                            value="<?= $curso['url_principal'] ?>" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="campo" style="margin-bottom: 30px;">
+                                        <label for="">Senha novos membros</label>
+                                        <input class="campo-texto" id="senha" type="text" name="senha" value="1234"
+                                            required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Checkbox "Bloquear comentários nas aulas" -->
+                            <div class="mb-3 form-check" style="margin-bottom: 10px;">
+                                <input class="form-check-input" type="checkbox" id="block_comentarios"
+                                    name="block_comentarios">
+                                <label class="form-check-label" for="block_comentarios">Bloquear comentários nas
+                                    aulas</label>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="container bloco">
+
+                <div style="margin-bottom: 60px;">
+                    <h4 class="title"><i class="fa-solid fa-palette" style="margin-right: 15px;"></i>Identidade visual e
+                        formatação</h4>
+                    <p>Defina ícones, imagens, fonte e paleta de cor do seu curso</p>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6">
+
+                    <div class="col-md-5">
 
                         <div class="campo" style="margin-bottom: 30px;">
-                            <label for="">Nome do Curso</label>
-                            <input class="campo-texto" id="nome_curso" type="text" name="nome_curso"
-                                value="<?= $curso['nome'] ?>" required>
-                        </div>
-
-                        <!-- Checkbox "Permitir número para contato" -->
-                        <div class="mb-3 form-check" style="margin-bottom: 10px;">
-                            <input class="form-check-input" type="checkbox" id="permitir_contato"
-                                name="permitir_contato" onchange="mostrarNumeroContato()">
-                            <label class="form-check-label" for="permitir_contato">Permitir número para contato</label>
-                        </div>
-
-                        <!-- Campo para número de contato -->
-                        <div class="campo" id="campo_numero_contato" style="margin-bottom: 30px;">
-                            <input class="campo-texto" type="text" id="numero_contato" name="numero_contato"
-                                placeholder="Número para contato (Whatsapp)" disabled>
-                        </div>
-
-                        <script>
-                            function mostrarNumeroContato() {
-                                var checkbox = document.getElementById('permitir_contato');
-                                var inputNumeroContato = document.getElementById('numero_contato');
-
-                                if (checkbox.checked) {
-                                    inputNumeroContato.required = true;
-                                    inputNumeroContato.disabled = false;
-                                } else {
-                                    inputNumeroContato.required = false;
-                                    inputNumeroContato.disabled = true;
-                                    inputNumeroContato.value = ''; // Limpa o valor quando oculta
-                                }
-                            }
-                        </script>
-
-                        <div class="campo" style="margin-bottom: 30px;">
-                            <div style="display: flex;">
+                            <div style="display: flex; justify-content:space-between; width: 80%;">
                                 <div style="margin-right: 20px;">
                                     <label for="preview-logo" style="display:flex;">Logo <span class="info-span"
                                             id="info-logo"><i class="fa-solid fa-info"></i>
@@ -148,11 +179,36 @@
                                 <option value="montserrat" style="font-family: 'Montserrat', sans-serif;">Montserrat,
                                     sans-serif</option>
                             </select>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                                <path d="M7 10l5 5 5-5z" />
+                            </svg>
+                        </div>
+
+                        <div style="display:flex;">
+
+                            <div class="campo" style="margin-right: 40px;">
+                                <label for="">Cor de texto</label>
+                                <div style="display:flex;">
+                                    <input class="campo-texto" id="cor_texto" type="text" name="cor_texto"
+                                        value="<?php echo $curso['cor_texto']; ?>" required>
+                                    <div class="picker-primario"></div>
+                                </div>
+                            </div>
+
+                            <div class="campo">
+                                <label for="cor_fundo">Cor de fundo</label>
+                                <div style="display:flex;">
+                                    <input class="campo-texto" id="cor_fundo" type="text" name="cor_fundo"
+                                        value="<?php echo $curso['cor_fundo']; ?>" required>
+                                    <div class="picker-secundario"></div>
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-7">
 
                         <div class="campo">
                             <label for="login-area">Área de login</label>
@@ -185,36 +241,13 @@
                     </div>
 
                 </div>
+
             </div>
 
-            <div class="container ultimo">
-
-                <div class="row">
-                    <div class="col-md-6">
-
-                        <div class="campo">
-                            <label for="">Cor de texto</label>
-                            <div style="display:flex;">
-                                <input class="campo-texto" id="cor_texto" type="text" name="cor_texto"
-                                    value="<?php echo $curso['cor_texto']; ?>" required>
-                                <div class="picker-primario"></div>
-                            </div>
-                        </div>
-
-                        <div class="campo">
-                            <label for="cor_fundo">Cor de fundo</label>
-                            <div style="display:flex;">
-                                <input class="campo-texto" id="cor_fundo" type="text" name="cor_fundo"
-                                    value="<?php echo $curso['cor_fundo']; ?>" required>
-                                <div class="picker-secundario"></div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-md-6">
-
-                    </div>
-                </div>
+            <div class="botoes-opcao">
+                <button class="btn-2" type="button"><i class="fa-solid fa-arrow-rotate-left"></i>Reset</button>
+                <button class="btn-2" type="submit" style="margin-left: 30px;"><i
+                        class="fa-regular fa-floppy-disk"></i>Salvar</button>
             </div>
 
         </form>
@@ -232,7 +265,7 @@
                 </div>
 
                 <div class="pesquisar">
-                    <input type="text" id="campoPesquisa" name="pesquisa" placeholder="Pesquisar">
+                    <input type="text" id="campoPesquisa" name="pesquisa" placeholder="Pesquisar usuário">
                     <a href="<?php echo $curso['url_principal']; ?>pesquisa/resultados/"><button type="submit"
                             id="botaoPesquisa"><i class="fa fa-search"></i></button></a>
                 </div>
@@ -268,12 +301,13 @@
         </div>
 
         <div style="display: flex; justify-content: space-between;">
-            <button class="editar-selected-users" style="margin: 0; margin-top: 10px;"><i class='fa-solid fa-trash-can'></i>Deletar
+            <button class="editar-selected-users" style="margin: 0; margin-top: 10px;"><i
+                    class='fa-solid fa-trash-can'></i>Deletar
                 selecionados</button>
             <div class="pagination-container" style="margin-top: 10px; height: fit-content;">
                 <div class="pagination">
                     <script>
-                        var totalPaginas = 22; // Defina o total de páginas aqui
+                        var totalPaginas = <?php echo $totalPaginas; ?>; // Defina o total de páginas aqui
                         var paginaAtual = 1; // Página inicial
                     </script>
                 </div>

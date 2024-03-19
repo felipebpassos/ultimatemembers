@@ -34,6 +34,9 @@ class modulosController extends Controller
         // Acesso ao modelo "Aulas"
         $aulasModel = new Aulas();
 
+        // Acesso ao modelo "Trilhas"
+        $trilhasModel = new Trilhas();
+
         // Carrega dados do usuário
         $usuario = $this->usuario;
 
@@ -42,11 +45,19 @@ class modulosController extends Controller
 
         $aulasPorModulo = $modulosModel->getAulasPorModulo($this->curso);
 
+        // Busca por trilhas e seus módulos associados
+        $trilhas = $trilhasModel->getTrilhas($this->curso);
+
+        foreach ($trilhas as &$trilha) {
+            $trilha['modulos'] = $trilhasModel->getModulosDaTrilha($trilha['id']);
+        }
+
         //Busca aulas concluidas pelo usuário
         $aulasConcluidas = $aulasModel->getAulasConcluidas($usuario['id'], $this->curso);
 
         //Armazena em variável de sessão
         $data['modulos'] = $modulos;
+        $data['trilhas'] = $trilhas;
         $data['aulasPorModulo'] = $aulasPorModulo;
         $data['aulasConcluidas'] = $aulasConcluidas;
 
@@ -60,7 +71,7 @@ class modulosController extends Controller
         $data['description'] = 'Assista às aulas e estude através do nosso material';
         $data['styles'] = array('painel', 'header', 'modulos', 'banners');
         $data['scripts_head'] = array('');
-        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'banner-roller');
+        $data['scripts_body'] = array('toggleSearch', 'menu-responsivo', 'banner-roller', 'fade-in-slide-up');
 
         //load view
         $this->loadTemplates($template, $data, $usuario);

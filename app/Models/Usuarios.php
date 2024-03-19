@@ -213,7 +213,7 @@ class Usuarios
             $stmt->execute();
 
             // Se a atualização ocorreu com sucesso, exclua a foto antiga (se existir)
-            if ($stmt->rowCount() > 0 && !empty($caminhoAntigo)) {
+            if ($stmt->rowCount() > 0 && !empty ($caminhoAntigo)) {
                 unlink($caminhoAntigo);
             }
 
@@ -234,7 +234,7 @@ class Usuarios
 
     public function excluirFotoPerfil($caminho)
     {
-        if (!empty($caminho)) {
+        if (!empty ($caminho)) {
             try {
                 // Exclui o arquivo de foto
                 unlink($caminho);
@@ -286,20 +286,41 @@ class Usuarios
         return $data;
     }
 
-    public function getUsuarios($id_curso)
+    public function getUsuarios($pagina = 1, $id_curso)
     {
         $data = array();
+        $itensPorPagina = 10;
+        $offset = ($pagina - 1) * $itensPorPagina;
+
         $query = 'SELECT id, nome, email, whatsapp, nascimento, data_matricula, ultima_visita, foto_caminho, plano, adm, instrutor FROM usuarios
-              WHERE id_curso = :id_curso';
+          WHERE id_curso = :id_curso LIMIT :offset, :itensPorPagina';
 
         $stmt = $this->con->prepare($query);
         $stmt->bindValue(':id_curso', $id_curso);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->bindValue(':itensPorPagina', $itensPorPagina, PDO::PARAM_INT);
 
         if ($stmt->execute()) {
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         return $data;
+    }
+
+    public function countUsuarios($id_curso)
+    {
+        $query = 'SELECT COUNT(*) AS total FROM usuarios WHERE id_curso = :id_curso';
+
+        $stmt = $this->con->prepare($query);
+        $stmt->bindValue(':id_curso', $id_curso);
+
+        if ($stmt->execute()) {
+            $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $resultado['total'];
+        } else {
+            // Tratar erro de execução da consulta
+            return 0;
+        }
     }
 
 }
