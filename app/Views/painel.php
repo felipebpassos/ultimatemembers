@@ -8,7 +8,7 @@
                 class="legenda">Editar</span></button>
     <?php endif; ?>
 
-    <?php if (empty($banners)): ?>
+    <?php if (empty ($banners)): ?>
         <div class="slides">
             <img src="http://localhost/ultimatemembers/public/img/default_banner.png" alt="Banner default">
         </div>
@@ -53,8 +53,8 @@
 <main>
 
     <!-- Seção de banners dos módulos -->
-    <div class="banner-box slide-left <?php echo (isset($modulos) && !empty($modulos)) ? '' : 'no-items'; ?>">
-        <div class="seção-titulo" id="titulo-banner">
+    <div class="banner-box slide-left <?php echo (isset ($modulos) && !empty ($modulos)) ? '' : 'no-items'; ?>">
+        <div class="secao-titulo" id="titulo-banner">
             <i class="fa-solid fa-folder-open"></i>
             <h3 style="margin: 0px;">Módulos</h3>
             <?php
@@ -65,16 +65,16 @@
         </div>
         <div class="fade-before"></div>
         <div class="fade-after"></div>
-        <section class="banner-section <?php echo (isset($modulos) && !empty($modulos)) ? '' : 'no-items'; ?>">
+        <section class="banner-section <?php echo (isset ($modulos) && !empty ($modulos)) ? '' : 'no-items'; ?>">
             <div class="banner-container">
                 <div class="banners">
                     <!-- Aqui você pode repetir esse bloco para cada banner -->
                     <?php
-                    if (isset($modulos) && !empty($modulos)) {
+                    if (isset ($modulos) && !empty ($modulos)) {
 
                         foreach ($modulos as $modulo) {
                             $id = $modulo['id'];
-                            $banner = !empty($modulo['banner']) ? str_replace("./", "http://localhost/ultimatemembers/", $modulo['banner']) : "http://localhost/ultimatemembers/public/img/video-default.png";
+                            $banner = !empty ($modulo['banner']) ? str_replace("./", "http://localhost/ultimatemembers/", $modulo['banner']) : "http://localhost/ultimatemembers/public/img/video-default.png";
 
                             if ($id >= 0 && $id <= 9) {
                                 $formattedId = sprintf("0%d", $id); // Formata o ID para 0X (sendo X o ID)
@@ -100,21 +100,23 @@
     </div>
 
     <!-- Seção de trilhas -->
-    <div class="banner-box fade-in-slide-up <?php echo (isset($trilhas) && !empty($trilhas)) ? '' : 'no-items'; ?>"
-        style="padding-top: 20px; margin-bottom: 50px; padding-bottom: 30px;">
-        <div class="seção-titulo" id="titulo-banner">
-            <i class="fa-solid fa-graduation-cap"></i>
-            <h3 style="margin: 0px;">Trilhas</h3>
-            <?php
-            if ($adm == 1) {
-                echo '<button class="editar" id="editar-trilhas"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>';
-            }
-            ?>
-        </div>
+    <div class="banner-box fade-in-slide-up <?php echo (isset ($trilhas) && !empty ($trilhas)) ? '' : 'no-items'; ?>"
+        style="padding-top: 20px; margin-bottom: 80px; padding-bottom: 30px;">
+        <?php if ($adm == 1): ?>
+            <div class="secao-titulo" id="titulo-banner">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <h3 style="margin: 0px;">Trilhas</h3>
+                <button class="editar" id="editar-trilhas">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <span class="legenda">Editar</span>
+                </button>
+            </div>
+        <?php endif; ?>
+
         <?php
-        if (isset($trilhas) && !empty($trilhas)) {
+        if (isset ($trilhas) && !empty ($trilhas)) {
             foreach ($trilhas as $trilha) {
-                echo '<h4 style="margin: 8px 10px; margin-top: 60px;">' . $trilha['nome_trilha'] . '</h4>';
+                echo '<h4 style="margin: 8px 10px; margin-top: ' . (($adm == 1) ? '60px' : '20px') . ';">' . $trilha['nome_trilha'] . '</h4>';
                 echo '<p style="margin-bottom: 50px; margin-left:10px;">' . $trilha['descricao_trilha'] . '</p>';
 
                 // Agora, para cada trilha, exiba um carrossel de banners de módulos associados
@@ -125,7 +127,7 @@
                 // Exibir banners dos módulos associados à trilha
                 foreach ($trilha['modulos'] as $modulo) {
                     $id = $modulo['id'];
-                    $banner = !empty($modulo['banner']) ? str_replace("./", "http://localhost/ultimatemembers/", $modulo['banner']) : "http://localhost/ultimatemembers/public/img/video-default.png";
+                    $banner = !empty ($modulo['banner']) ? str_replace("./", "http://localhost/ultimatemembers/", $modulo['banner']) : "http://localhost/ultimatemembers/public/img/video-default.png";
 
                     if ($id >= 0 && $id <= 9) {
                         $formattedId = sprintf("0%d", $id); // Formata o ID para 0X (sendo X o ID)
@@ -149,109 +151,98 @@
     </div>
 
     <?php if (!$adm): ?>
-        <div id="proximos-passos" class="container slide-left"
-            style="padding: 0px !important; margin-left: 0px !important; margin-bottom:100px;">
-            <ul>
-                <li class="proximos-passos">
-                    <div class="seçao">
-                        <div>
-                            <div class="seção-titulo">
-                                <i class="fa-solid fa-arrow-trend-up"></i>
-                                <h3 style="margin: 0px;">Próxima Aula</h3>
-                            </div>
-                            <a href="<?php echo $curso['url_principal']; ?>modulos/aula/01" class="seção-container"
-                                id="img-aula-2">
-                                <img class="imagem-aula" src="http://localhost/ultimatemembers/public/img/aula2.png"
-                                    alt="Imagem da Aula">
-                            </a>
-                            <div class="info-aula" style="width: 300px !important">
-                                <div class="nome-aula" style="font-weight: bold;">
-                                    <p>Aula 01 - Nome da aula</p>
-                                </div>
-                                <div class="descricao-aula">
-                                    <p>Descrição: Lorem ipsum dolor sit amet, consectetur adipiscing
-                                        elit.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="quiz">
-                    <div class="seçao">
-                        <div>
-                            <div class="seção-titulo">
-                                <i class="fa-solid fa-circle-question"></i>
-                                <h3 style="margin: 0px;">Quiz</h3>
-                            </div>
-                            <div class="seção-container" id="news"><span>Quiz</span></div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-        <div class="container slide-left" style="margin: 0; margin-bottom:100px;">
+        <div class="container slide-left" style="height: 480px; margin-bottom:50px;">
             <div class="row">
-                <div class="col-md-6" style="min-width: 500px;">
-                    <div class="seção-titulo" style="margin-bottom: 15px;">
-                        <i class="fa-solid fa-chart-simple"></i>
-                        <h3>Progresso</h3>
+                <div class="col-md-4" style="padding-right: 50px;">
+                    <div class="secao-titulo">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                        <h3 style="margin: 0px;">Próxima Aula</h3>
                     </div>
-                    <div class="lista-preferências">
-                        <ul class="barra" style="border-bottom: solid 1px var(--cor-secundaria-light-transparent);">
-                            <li>
-                                <button class="aba" onclick="abrirAba(event, 'ativos')">Em Aberto</button>
-                            </li>
-                            <li>
-                                <button class="aba" onclick="abrirAba(event, 'finalizados')">Finalizados</button>
-                            </li>
-                        </ul>
-                    </div>
-                    <div id="ativos" class="content">
-                        <?php gerarModulosHtml($aulasConcluidas, $modulos, $aulasPorModulo, 'ativos'); ?>
-                    </div>
-                    <div id="finalizados" class="content">
-                        <?php gerarModulosHtml($aulasConcluidas, $modulos, $aulasPorModulo, 'finalizados'); ?>
+                    <a href="<?php echo $curso['url_principal']; ?>modulos/aula/01" class="secao-container" id="img-aula-2">
+                        <img class="imagem-aula" src="http://localhost/ultimatemembers/public/img/aula2.png"
+                            alt="Imagem da Aula">
+                    </a>
+                    <div class="info-aula" style="width: 300px !important">
+                        <div class="nome-aula" style="font-weight: bold;">
+                            <p>Aula 01 - Nome da aula</p>
+                        </div>
+                        <div class="descricao-aula">
+                            <p>Descrição: Lorem ipsum dolor sit amet, consectetur adipiscing
+                                elit.</p>
+                        </div>
                     </div>
                 </div>
-
-                <div class="col-md-6" style="min-width: 500px;">
-                    <div class="seção-titulo" style="margin-bottom: 15px;">
-                        <i class="fa-regular fa-square-check"></i>
-                        <h3>Avaliações</h3>
+                <div class="col-md-8">
+                    <div style="display:flex;">
+                        <div class="secao-aba" onclick="abrirSecaoAba(event, 'progresso')">
+                            <i class="fa-solid fa-chart-simple"></i>
+                            <h3 style="margin: 0px;">Progresso</h3>
+                        </div>
+                        <div class="secao-aba" onclick="abrirSecaoAba(event, 'quiz')">
+                            <i class="fa-solid fa-circle-question"></i>
+                            <h3 style="margin: 0px;">Quiz</h3>
+                        </div>
+                        <div class="secao-aba" onclick="abrirSecaoAba(event, 'avaliacoes')">
+                            <i class="fa-regular fa-square-check"></i>
+                            <h3 style="margin: 0px;">Avaliações</h3>
+                        </div>
                     </div>
-                    <div class="avaliacoes tabela">
-                        <div class="cabecalho">
-                            <div class="celula titulo-prova">Prova</div>
-                            <div class="celula prazo">Prazo final</div>
-                            <div class="celula iniciar-btn"></div>
+                    <div class="secao-content" id="progresso">
+                        <div class="lista-preferências">
+                            <ul class="barra" style="border-bottom: solid 1px var(--cor-secundaria-light-transparent); padding-top:10px; padding-left: 10px; background-color: var(--cor-secundaria-light);">
+                                <li>
+                                    <button class="aba" onclick="abrirAba(event, 'ativos')" style="background-color: var(--cor-secundaria-light);">Em Aberto</button>
+                                </li>
+                                <li>
+                                    <button class="aba" onclick="abrirAba(event, 'finalizados')" style="background-color: var(--cor-secundaria-light);">Finalizados</button>
+                                </li>
+                            </ul>
                         </div>
-                        <div class='prova linha'>
-                            <div class="celula titulo-prova">Avaliação 1</div>
-                            <div class="celula prazo">01/01/2024</div>
-                            <div class="celula iniciar-btn"><a href="<?= $curso['url_principal'] ?>questionario"><button
-                                            class="btn-3">Iniciar</button></a></div>
+                        <div id="ativos" class="content">
+                            <?php gerarModulosHtml($aulasConcluidas, $modulos, $aulasPorModulo, 'ativos'); ?>
                         </div>
-                        <div class='prova linha'>
-                            <div class="celula titulo-prova">Avaliação 2</div>
-                            <div class="celula prazo">14/02/2024</div>
-                            <div class="celula iniciar-btn"><a href="<?= $curso['url_principal'] ?>questionario"><button
-                                            class="btn-3">Iniciar</button></a></div>
+                        <div id="finalizados" class="content">
+                            <?php gerarModulosHtml($aulasConcluidas, $modulos, $aulasPorModulo, 'finalizados'); ?>
                         </div>
-                        <div class='prova linha'>
-                            <div class="celula titulo-prova">Avaliação 3</div>
-                            <div class="celula prazo">20/03/2024</div>
-                            <div class="celula iniciar-btn"><a href="<?= $curso['url_principal'] ?>questionario"><button
+                    </div>
+                    <div class="secao-content" id="quiz">
+                        <span>Quiz</span>
+                    </div>
+                    <div class="secao-content" id="avaliacoes">
+                        <div class="avaliacoes tabela">
+                            <div class="cabecalho">
+                                <div class="celula titulo-prova">Prova</div>
+                                <div class="celula prazo">Prazo final</div>
+                                <div class="celula iniciar-btn"></div>
+                            </div>
+                            <div class='prova linha'>
+                                <div class="celula titulo-prova">Avaliação 1</div>
+                                <div class="celula prazo">01/01/2024</div>
+                                <div class="celula iniciar-btn"><a href="<?= $curso['url_principal'] ?>questionario"><button
                                             class="btn-3">Iniciar</button></a></div>
+                            </div>
+                            <div class='prova linha'>
+                                <div class="celula titulo-prova">Avaliação 2</div>
+                                <div class="celula prazo">14/02/2024</div>
+                                <div class="celula iniciar-btn"><a href="<?= $curso['url_principal'] ?>questionario"><button
+                                            class="btn-3">Iniciar</button></a></div>
+                            </div>
+                            <div class='prova linha'>
+                                <div class="celula titulo-prova">Avaliação 3</div>
+                                <div class="celula prazo">20/03/2024</div>
+                                <div class="celula iniciar-btn"><a href="<?= $curso['url_principal'] ?>questionario"><button
+                                            class="btn-3">Iniciar</button></a></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     <?php endif; ?>
 
     <div class="banner-box lançamentos fade-in-slide-up">
-        <div class="seção-titulo" id="titulo-banner">
+        <div class="secao-titulo" id="titulo-banner">
             <i class="fa-solid fa-rocket"></i>
             <h3 style="margin: 0px;">Lançamentos</h3>
             <?php
@@ -267,7 +258,7 @@
                 <div class="banners">
                     <!-- Aqui você pode repetir esse bloco para cada banner -->
                     <?php
-                    if (isset($lancamentos) && !empty($lancamentos)) {
+                    if (isset ($lancamentos) && !empty ($lancamentos)) {
 
                         foreach ($lancamentos as $lancamento) {
                             $id = $lancamento['id'];

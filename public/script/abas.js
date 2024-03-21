@@ -1,5 +1,7 @@
 var conteudos = document.getElementsByClassName('content');
 var abas = document.getElementsByClassName('aba');
+var secaoConteudos = document.getElementsByClassName('secao-content');
+var secaoAbas = document.getElementsByClassName('secao-aba');
 var outrosButton = document.getElementById('outrosButton');
 var dropdown = document.getElementById('outrosDropdown');
 
@@ -20,6 +22,19 @@ function abrirAba(event, idAba) {
     if (!event.target.closest('.dropdown') && !event.target.closest('.aba-ativa')) {
         outrosButton.textContent = 'Outras';
     }
+}
+
+function abrirSecaoAba(event, idAba) {
+    for (var i = 0; i < secaoConteudos.length; i++) {
+        secaoConteudos[i].style.display = 'none';
+    }
+
+    for (var i = 0; i < secaoAbas.length; i++) {
+        secaoAbas[i].className = secaoAbas[i].className.replace('secao-aba-ativa', '');
+    }
+
+    document.getElementById(idAba).style.display = 'block';
+    event.currentTarget.className += ' secao-aba-ativa';
 }
 
 function selecionarOpcao(opcaoSelecionada, textoNome) {

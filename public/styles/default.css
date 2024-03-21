@@ -1151,7 +1151,6 @@ body {
 .tabela.avaliacoes {
     min-height: 335px;
     max-height: 335px;
-    border: solid 1px var(--cor-secundaria-light-transparent);
 }
 
 .linha {

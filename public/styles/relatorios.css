@@ -29,6 +29,7 @@
 .lista-preferências .barra {
     width: 960px;
     margin: auto;
+    border-bottom: solid 1px var(--cor-primaria-transparent-4);
 }
 
 /* select simples */

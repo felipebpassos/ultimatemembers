@@ -11,6 +11,7 @@ main {
 .lista-preferências .barra {
     min-width: 100%;
     margin: auto;
+    border-bottom: solid 1px var(--cor-primaria-transparent-4);
 }
 
 .content {

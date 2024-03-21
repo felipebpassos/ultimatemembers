@@ -149,7 +149,7 @@ main {
     width: 60%;
 }
 
-.seção-titulo {
+.secao-titulo {
     display: flex;
     margin: 0px 0px 15px 5px;
     color: var(--cor-primaria-dark);
@@ -158,7 +158,7 @@ main {
     z-index: 9998;
 }
 
-.seção-titulo i {
+.secao-titulo i {
     display: flex;
     align-items: center;
     margin-right: 20px;
@@ -173,7 +173,7 @@ main {
 }
 
 .lista-preferências .barra {
-    width: 90%;
+    width: 100%;
     margin-bottom: 0px;
     padding: 0px;
     position: relative;
@@ -236,10 +236,9 @@ main {
 
 .content .modulos-ul {
     padding: 0px;
-    width: 90%;
+    width: 100%;
     max-height: 300px;
     min-height: 300px;
-    border: 1px solid var(--cor-secundaria-light-transparent);
     overflow-y: auto;
 }
 
@@ -312,29 +311,52 @@ main {
     background-color: var(--cor-secundaria-light);
 }
 
-.seção-container {
-    width: 350px;
+.secao-aba, .secao-aba-ativa {
     display: flex;
-    justify-content: center;
+    color: var(--cor-primaria-dark);
+    z-index: 9998;
+    cursor: pointer;
+    padding: 10px 20px;
+}
+
+.secao-aba-ativa {
+    background-color: var(--cor-secundaria-less-light);
+}
+
+.secao-aba h3 {
+    display: none;
+}
+
+.secao-aba-ativa h3 {
+    display: block;
+}
+
+.secao-aba i {
+    display: flex;
     align-items: center;
-    background-color: var(--cor-secundaria-light);
+    font-size: 22px;
+    color: var(--cor-primaria-dark);
 }
 
-#img-aula.seção-container {
-    margin: 0px 0px 15px 0px;
-    min-height: 200px;
-    width: 100% !important;
+.secao-aba-ativa i {
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    color: var(--cor-primaria-dark);
 }
 
-#news.seção-container {
-    height: 270px;
-    border-radius: 10px;
+.secao-content {
+    width: 100%;
+    height: 100%;
+    display: none;
+    border: solid 1px var(--cor-secundaria-light-transparent);
 }
 
 .activity {
     padding-bottom: 20px;
     margin-bottom: 80px;
-    border-bottom: solid 1px var(--cor-secundaria-lighter);
+    border-bottom: solid 1px var(--cor-secundaria-light);
 }
 
 .activity ul {
@@ -400,7 +422,7 @@ main {
 }
 
 @media (min-width: 840px) {
-    #img-aula.seção-container {
+    #img-aula.secao-container {
         height: 180px !important;
         width: 300px !important;
     }
