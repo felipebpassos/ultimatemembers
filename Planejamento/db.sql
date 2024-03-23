@@ -2,7 +2,7 @@ use reelsdecinema;
 
 drop table xxxx;
 
-select * from discussoes;
+select * from usuarios;
 
 UPDATE lancamentos
 SET id_curso = 1;
@@ -368,6 +368,47 @@ CREATE TABLE banners (
         REFERENCES cursos(id)
         ON DELETE CASCADE
 ) CHARSET=utf8;
+
+CREATE TABLE provas (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(50) NOT NULL,
+    descricao TEXT,
+    prazo DATETIME,
+    numero_questoes INT NOT NULL,
+    tempo_limite INT NOT NULL, -- em minutos
+    numero_tentativas INT NOT NULL,
+    pontuacao_minima INT NOT NULL, -- de 0 a 100
+    curso_id INT NOT NULL,
+    FOREIGN KEY (curso_id) REFERENCES cursos(id) ON DELETE CASCADE
+) CHARSET=utf8;
+
+CREATE TABLE questoes (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    prova_id INT NOT NULL,
+    tipo ENUM('multipla_escolha', 'verdadeiro_falso'),
+    pergunta TEXT, -- html com texto, quebra de linha, vídeo do youtube e imagem
+    imagem_url VARCHAR(150),
+    FOREIGN KEY (prova_id) REFERENCES provas(id) ON DELETE CASCADE
+) CHARSET=utf8;
+
+CREATE TABLE opcoes_questao (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    questao_id INT NOT NULL,
+    opcao VARCHAR(800) NOT NULL,
+    correta BOOLEAN NOT NULL,
+    FOREIGN KEY (questao_id) REFERENCES Questoes(id) ON DELETE CASCADE
+) CHARSET=utf8;
+
+CREATE TABLE tentativas_prova (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    prova_id INT NOT NULL,
+    aluno_id INT NOT NULL,
+    data_hora_inicio DATETIME,
+    data_hora_fim DATETIME,
+    pontuacao_obtida FLOAT NOT NULL,
+    FOREIGN KEY (prova_id) REFERENCES provas(id) ON DELETE CASCADE,
+    FOREIGN KEY (aluno_id) REFERENCES usuarios(id) ON DELETE CASCADE 
+)
 
 
 

@@ -1382,3 +1382,83 @@
         var lancamentosArray = Object.values(lancamentosData);
     </script>
 </div>
+
+<!-- Formulário para adicionar prova -->
+<div id="addProva" class="popup">
+    <div class="popup-content">
+
+        <div class="close-container">
+            <div class="close" id="closePopupAddProva" onmouseover="startAnimation()"
+                onmouseout="resetAnimation()">
+                <svg class="close-ring" width="51" height="51">
+                    <circle class="close-ring__circle" id="closeCircle" stroke="var(--cor-primaria-light)"
+                        stroke-width="2" fill="transparent" r="23" cx="25" cy="25" />
+                    <circle class="close-ring__circle-full" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2"
+                        fill="transparent" r="23" cx="25" cy="25" />
+                </svg>
+                <svg class="x" viewBox="0 0 12 12" style="height: 12px; width: 12px;">
+                    <path stroke="rgb(180, 180, 180)" fill="rgb(180, 180, 180)"
+                        d="M4.674 6L.344 1.05A.5.5 0 0 1 1.05.343L6 4.674l4.95-4.33a.5.5 0 0 1 .707.706L7.326 6l4.33 4.95a.5.5 0 0 1-.706.707L6 7.326l-4.95 4.33a.5.5 0 0 1-.707-.706L4.674 6z">
+                    </path>
+                </svg>
+            </div>
+        </div>
+
+        <h2 style="margin: auto; font-weight: bold; width:fit-content;">Nova Prova</h2>
+
+        <form class="formPopUp" id="provaFormAdd"
+            action="<?php echo $curso['url_principal']; ?>painel/nova_prova/" enctype="multipart/form-data"
+            method="POST">
+
+            <div style="width: 600px; margin: auto;">
+
+                <div class="mb-3">
+                    <label class="form-label" for="nomeProva">Título da prova</label>
+                    <div class="campo-popup" style="width: 100%;">
+                        <input type="text" id="nomeProva" name="nomeProva" class="campo-input"
+                            placeholder="Digite o título da prova" required>
+                    </div>
+                </div> 
+
+                <div class="mb-3">
+                    <label class="form-label" for="prazoFinal">Prazo Final</label>
+                    <div class="campo-popup" style="width: 100%;">
+                        <input type="datetime-local" id="prazoFinal" name="prazoFinal" class="campo-input" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="tempoRealizacao">Tempo de Realização por Tentativa (minutos)</label>
+                    <div class="campo-popup" style="width: 100%;">
+                        <input type="number" id="tempoRealizacao" name="tempoRealizacao" class="campo-input" min="0" value="0" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="numeroTentativas">Número Máximo de Tentativas</label>
+                    <div class="campo-popup" style="width: 100%;">
+                        <input type="number" id="numeroTentativas" name="numeroTentativas" class="campo-input" min="1" max="3" value="1" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="pontuacaoMinima">Porcentagem mínima de acertos (0 a 100%)</label>
+                    <div class="campo-popup" style="width: 100%;">
+                        <input type="number" id="pontuacaoMinima" name="pontuacaoMinima" class="campo-input" min="0" max="100" value="50" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="descricaoProva">Descrição da Prova</label>
+                    <div class="campo-popup" style="width: 100%;">
+                        <textarea id="descricaoProva" name="descricaoProva" class="campo-input" placeholder="Descreva sobre o que é a Prova" required></textarea>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+
+            <button class="btn-2" type="submit" style="margin: auto; margin-top: 20px;">Criar Prova</button>
+        </form>
+    </div>
+</div>

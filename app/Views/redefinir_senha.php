@@ -2,6 +2,11 @@
 
     <div class="header-container">
 
+        <div class="logo-login" style="margin-top: 30px;">
+            <?php $logo = !empty ($curso['url_logo']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_logo']) : "http://localhost/ultimatemembers/public/img/logo-default.png"; ?>
+            <img width="80" src="<?php echo $logo; ?>" alt="<?php echo $curso['nome']; ?>">
+        </div>
+
         <h3>Defina sua nova senha</h3>
         <p>Ainda não é aluno? <a href="<?php echo $curso['url_principal']; ?>matricula/">Matricule-se</a></p>
 
@@ -18,7 +23,8 @@
         </div>
 
         <div class="campo">
-            <input type="email" name="email" autocomplete="email" placeholder="Repetir e-mail" class="campo-input" required>
+            <input type="email" name="email" autocomplete="email" placeholder="Repetir e-mail" class="campo-input"
+                required>
         </div>
 
         <div class="campo">

@@ -41,7 +41,7 @@ main {
 
 .ultimo {border-bottom: none;}
 
-.bloco .card {padding: 20px 30px; border: none; border-radius: 5px; background-color: var(--cor-secundaria-light-transparent);}
+.content .card {padding: 20px 30px; border: none; border-radius: 5px; background-color: var(--cor-secundaria-light-transparent);}
 
 .campo {
     margin-bottom: 10px;

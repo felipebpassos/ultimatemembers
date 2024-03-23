@@ -2,8 +2,9 @@
 
     <div class="header-container">
 
-        <div class="logo">
-            <a href="<?php echo $curso['url_principal']; ?>"></a>
+        <div class="logo-login">
+            <?php $logo = !empty($curso['url_logo']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_logo']) : "http://localhost/ultimatemembers/public/img/logo-default.png"; ?>
+            <img width="80" src="<?php echo $logo; ?>" alt="<?php echo $curso['nome']; ?>">
         </div>
 
         <h3>Faça login na sua conta</h3>
@@ -20,15 +21,6 @@
     </p>
     <?php unset($_SESSION['mensagemErro']); // Limpa a mensagem após exibir ?>
 <?php endif; ?>
-
-<div class="redes-sociais">
-    <button class="facebook-button">
-        <i class="fa-brands fa-facebook"></i>
-    </button>
-    <button class="google-button">
-        <i class="fa-brands fa-google"></i>
-    </button>
-</div>
 
 <div class="form-container">
 

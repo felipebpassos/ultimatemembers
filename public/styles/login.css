@@ -50,7 +50,9 @@ header {
     margin-bottom: 25px;
 }
 
-.logo {
+.logo-login {
+    width: fit-content;
+    margin: 50px auto;
     margin-bottom: 15px;
 }
 

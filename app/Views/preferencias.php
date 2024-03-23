@@ -25,17 +25,31 @@
                 </svg>
                 <!-- Dropdown simulado com abas -->
                 <ul class="dropdown-content" id="outrosDropdown">
-                    <li><button class="aba" onclick="selecionarOpcao('comunidade', 'Comunidade')">Comunidade</button>
-                    </li>
-                    <li><button class="aba" onclick="selecionarOpcao('gamificacao', 'Gamificação')">Gamificação</button>
-                    </li>
-                    <li><button class="aba" onclick="selecionarOpcao('avaliacoes', 'Avaliações')">Avaliações</button>
-                    </li>
+                    <div style="margin-right: 30px;">
+                        <li><button class="aba"
+                                onclick="selecionarOpcao('comunidade', 'Comunidade')">Comunidade</button>
+                        </li>
+                        <li><button class="aba" onclick="selecionarOpcao('quiz', 'Quiz')">Quiz</button>
+                        </li>
+                        <li><button class="aba"
+                                onclick="selecionarOpcao('gamificacao', 'Gamificação')">Gamificação</button>
+                        </li>
+                    </div>
+                    <div>
+                        <li><button class="aba" onclick="selecionarOpcao('provas', 'Provas')">Provas</button>
+                        </li>
+                        <li><button class="aba"
+                                onclick="selecionarOpcao('certificados', 'Centificados')">Certificados</button>
+                        </li>
+                        <li><button class="aba" onclick="selecionarOpcao('avancado', 'Avançado')">Avançado</button>
+                        </li>
+                    </div>
                 </ul>
             </li>
         </ul>
     </div>
 
+    <!-- Preferências: Curso -->
     <section id="curso" class="content">
 
         <form action="<?php echo $curso['url_principal']; ?>painel/edit_geral/" method="post"
@@ -65,7 +79,6 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <!-- Campo para email de contato -->
                                     <div class="campo" id="campo_email_contato" style="margin-bottom: 30px;">
                                         <label for="">Email para contato</label>
                                         <input class="campo-texto" type="email" id="email_contato" name="email_contato"
@@ -91,7 +104,6 @@
                                 </div>
                             </div>
 
-                            <!-- Checkbox "Bloquear comentários nas aulas" -->
                             <div class="mb-3 form-check" style="margin-bottom: 10px;">
                                 <input class="form-check-input" type="checkbox" id="block_comentarios"
                                     name="block_comentarios">
@@ -254,6 +266,7 @@
 
     </section>
 
+    <!-- Preferências: Usuários -->
     <section id="usuarios" class="content">
 
         <div class="opcoes">
@@ -316,6 +329,7 @@
 
     </section>
 
+    <!-- Preferências: Integrações -->
     <section id="integracoes" class="content">
 
         <script>
@@ -415,9 +429,26 @@
 
     <section id="gamificacao" class="content"></section>
 
-    <section id="avaliacoes" class="content"></section>
+    <!-- Preferências: Provas -->
+    <section id="provas" class="content">
+
+        <div class="card" style="min-height: 500px;">
+            <div style="display: flex; justify-content: space-between; align-items:center;">
+                <div class="texto">
+                    <h4 class="title">Provas Cadastradas</h4>
+                    <p>Cadastre provas e avalie seus alunos</p>
+                </div>
+                <button class="btn-2" id="novaProva">+ Nova Prova</button>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="quiz" class="content"></section>
 
     <section id="certificados" class="content"></section>
+
+    <section id="avancado" class="content"></section>
 
 
 </main>

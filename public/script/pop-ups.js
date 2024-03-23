@@ -457,6 +457,17 @@ $('#closePopupIntAuth').click(function () {
     fecharFormulario('oauth-int');
 });
 
+//LANÇAMENTOS
+
+$('#novaProva').click(function () {
+    exibirFormulario('add-prova'); // Função para exibir o formulário
+});
+
+// Quando o botão de fechar for clicado
+$('#closePopupAddProva').click(function () {
+    fecharFormulario('add-prova');
+});
+
 // Função para encontrar aula por ID
 function encontrarPorId(id, data) {
     // Obtém as aulas da variável JavaScript aulasData
@@ -490,6 +501,8 @@ function exibirFormulario(option) {
         $('#edit-usuario').show();
     } else if (option === 'oauth-int') {
         $('#oauth-integracao').show();
+    } else if (option === 'add-prova') {
+        $('#addProva').show();
     }
     $('.scrollbar-container').addClass('blur');
     $('.whatsapp-button').addClass('blur');
@@ -516,6 +529,8 @@ function fecharFormulario(option) {
         $('#edit-usuario').hide();
     } else if (option === 'oauth-int') {
         $('#oauth-integracao').hide();
+    } else if (option === 'add-prova') {
+        $('#addProva').hide();
     }
     $('.scrollbar-container').removeClass('blur');
     $('.whatsapp-button').removeClass('blur');

@@ -151,7 +151,7 @@
     </div>
 
     <?php if (!$adm): ?>
-        <div class="container slide-left" style="height: 480px; margin-bottom:50px;">
+        <div class="container slide-left" style="height: 480px; margin-bottom:20px;">
             <div class="row">
                 <div class="col-md-4" style="padding-right: 50px;">
                     <div class="secao-titulo">
@@ -182,19 +182,22 @@
                             <i class="fa-solid fa-circle-question"></i>
                             <h3 style="margin: 0px;">Quiz</h3>
                         </div>
-                        <div class="secao-aba" onclick="abrirSecaoAba(event, 'avaliacoes')">
-                            <i class="fa-regular fa-square-check"></i>
-                            <h3 style="margin: 0px;">Avaliações</h3>
+                        <div class="secao-aba" onclick="abrirSecaoAba(event, 'provas')">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            <h3 style="margin: 0px;">Provas</h3>
                         </div>
                     </div>
                     <div class="secao-content" id="progresso">
                         <div class="lista-preferências">
-                            <ul class="barra" style="border-bottom: solid 1px var(--cor-secundaria-light-transparent); padding-top:10px; padding-left: 10px; background-color: var(--cor-secundaria-light);">
+                            <ul class="barra"
+                                style="border-bottom: solid 1px var(--cor-secundaria-light-transparent); padding-top:10px; padding-left: 10px; background-color: var(--cor-secundaria-light);">
                                 <li>
-                                    <button class="aba" onclick="abrirAba(event, 'ativos')" style="background-color: var(--cor-secundaria-light);">Em Aberto</button>
+                                    <button class="aba" onclick="abrirAba(event, 'ativos')"
+                                        style="background-color: var(--cor-secundaria-light);">Em Aberto</button>
                                 </li>
                                 <li>
-                                    <button class="aba" onclick="abrirAba(event, 'finalizados')" style="background-color: var(--cor-secundaria-light);">Finalizados</button>
+                                    <button class="aba" onclick="abrirAba(event, 'finalizados')"
+                                        style="background-color: var(--cor-secundaria-light);">Finalizados</button>
                                 </li>
                             </ul>
                         </div>
@@ -208,7 +211,7 @@
                     <div class="secao-content" id="quiz">
                         <span>Quiz</span>
                     </div>
-                    <div class="secao-content" id="avaliacoes">
+                    <div class="secao-content" id="provas">
                         <div class="avaliacoes tabela">
                             <div class="cabecalho">
                                 <div class="celula titulo-prova">Prova</div>
