@@ -53,7 +53,7 @@ const luminanciaCorSecundaria = calcularLuminancia(corFundoObj);
 const multiplicador = luminanciaCorSecundaria > 0.5 ? 1 : -1;
 
 // Calcula a sombra com base na luminância da cor de fundo
-const corSombra = luminanciaCorSecundaria > 0.5 ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.15)";
+const corSombra = luminanciaCorSecundaria > 0.5 ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.05)";
 
 // Calcula as variações das cores com base na cor de texto
 const corTextoObj = hexToRgb(corTexto);

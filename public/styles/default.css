@@ -172,6 +172,31 @@ textarea {
     border-radius: 5px;
 }
 
+.toggle-button {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    background-color: var(--cor-secundaria-light);
+    border-radius: 10px;
+    cursor: pointer;
+}
+.toggle-button.active {
+    background-color: var(--cor-secundaria-lightest);
+}
+.toggle-button .ball {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--cor-primaria-light);
+    transition: transform 0.2s;
+}
+.toggle-button.active .ball {
+    transform: translateX(20px);
+}
+
 .checkbox {
     position: relative;
     display: inline-block;

@@ -23,6 +23,8 @@ class modulosController extends Controller
 
         // Carrega dados do usuário no construtor
         $this->usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $this->cursoInfo['url_principal']);
+
+        unset($_SESSION['pagina']);
     }
 
     public function index()
@@ -81,6 +83,8 @@ class modulosController extends Controller
     public function modulo($id)
     {
 
+        $_SESSION['pagina'] = 'modulo';
+
         $id = intval($id);
 
         // Acesso ao modelo "Modulos"
@@ -127,6 +131,8 @@ class modulosController extends Controller
 
     public function aula($id)
     {
+
+        $_SESSION['pagina'] = 'aulas';
 
         $id = intval($id);
 

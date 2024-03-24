@@ -24,10 +24,13 @@ class painelController extends Controller
         // Carrega dados do usuário no construtor
         $this->usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $this->cursoInfo['url_principal']);
 
+        unset($_SESSION['pagina']);
     }
 
     public function index()
     {
+        $_SESSION['pagina'] = 'painel';
+
         // Acesso ao modelo "Modulos"
         $modulosModel = new Modulos();
 
@@ -523,6 +526,8 @@ class painelController extends Controller
 
     public function preferencias()
     {
+        $_SESSION['pagina'] = 'preferencias';
+
         // Carrega dados do usuário
         $usuario = $this->usuario;
 

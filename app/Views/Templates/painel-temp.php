@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.9">
 
     <!-- ... meta tags, título e icone ... -->
-    <?php echo isset($description) && !empty($description) ? '<meta name="description" content="' . $description . '">' : ''; ?>
+    <?php echo isset ($description) && !empty ($description) ? '<meta name="description" content="' . $description . '">' : ''; ?>
     <title>
         <?php echo $title; ?>
     </title>
 
-    <?php $favicon = !empty($curso['url_favicon']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_favicon']) : "http://localhost/ultimatemembers/public/img/logo-default.png"; ?>
+    <?php $favicon = !empty ($curso['url_favicon']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_favicon']) : "http://localhost/ultimatemembers/public/img/logo-default.png"; ?>
     <link rel="icon" href="<?php echo $favicon; ?>">
 
     <!-- Pickr -->
@@ -60,7 +60,7 @@
 
                 <ul class="menu">
                     <li><a href="<?php echo $curso['url_principal']; ?>painel/">
-                            <?php $logo = !empty($curso['url_logo']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_logo']) : "http://localhost/ultimatemembers/public/img/logo-default.png"; ?>
+                            <?php $logo = !empty ($curso['url_logo']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['url_logo']) : "http://localhost/ultimatemembers/public/img/logo-default.png"; ?>
                             <img class="logo" src="<?php echo $logo; ?>" alt="logo">
                         </a></li>
                     <li class="op-menu-high">
@@ -132,7 +132,7 @@
                     <button class="perfil-menu-toggle">
                         <div class="foto-perfil-micro">
                             <img class="perfil-img"
-                                src="<?php echo 'http://localhost/ultimatemembers' . (!empty($foto_caminho) ? $foto_caminho : '/public/img/default.png'); ?>"
+                                src="<?php echo 'http://localhost/ultimatemembers' . (!empty ($foto_caminho) ? $foto_caminho : '/public/img/default.png'); ?>"
                                 alt="Foto de Perfil" />
                         </div>
                         <svg width="14" height="7" viewBox="0 0 42 25">
@@ -183,7 +183,7 @@
         ?>
 
         <a href="https://api.whatsapp.com/send?phone=SEU_NUMERO_DE_TELEFONE" class="whatsapp-button" target="_blank">
-            <img src="<?= !empty($curso['contato_ico']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['contato_ico']) : "http://localhost/ultimatemembers/public/img/msg-default.png" ?>"
+            <img src="<?= !empty ($curso['contato_ico']) ? str_replace("./", "http://localhost/ultimatemembers/", $curso['contato_ico']) : "http://localhost/ultimatemembers/public/img/msg-default.png" ?>"
                 alt="Ícone do WhatsApp">
         </a>
 
@@ -193,8 +193,16 @@
 
     //Carrega os pop-ups-adm
     if ($adm) {
-        include 'pop-ups-adm.php';
-    } 
+        if (isset($_SESSION['pagina'])) {
+            if ($_SESSION['pagina'] == 'painel') {
+                include 'pop-ups-adm-painel.php';
+            } elseif (($_SESSION['pagina'] == 'aulas') || ($_SESSION['pagina'] == 'modulo')) {
+                include 'pop-ups-adm-aulas.php';
+            } elseif ($_SESSION['pagina'] == 'preferencias') {
+                include 'pop-ups-adm-preferencias.php';
+            }
+        }
+    }
 
     include 'pop-ups-user.php';
 

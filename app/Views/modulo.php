@@ -250,4 +250,9 @@ if ($adm) {
     </script>
     <?php
 }
+
+//Carrega os pop-ups-adm
+if ($adm) {
+    include 'http://localhost/ultimatemembers/app/Views/Templates/pop-ups-adm-aulas.php';
+} 
 ?>

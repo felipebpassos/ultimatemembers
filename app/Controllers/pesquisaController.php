@@ -23,6 +23,7 @@ Class pesquisaController extends Controller {
         // Carrega dados do usuário no construtor
         $this->usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $this->cursoInfo['url_principal']);
         
+        unset($_SESSION['pagina']);
     }
 
     public function index() {

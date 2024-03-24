@@ -4,6 +4,8 @@ Class liveController extends Controller {
 
     public function index() {
 
+        unset($_SESSION['pagina']);
+
         //MODELS
 
         //Inicia os Modelos

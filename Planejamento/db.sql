@@ -2,7 +2,7 @@ use reelsdecinema;
 
 drop table xxxx;
 
-select * from usuarios;
+select * from cursos;
 
 UPDATE lancamentos
 SET id_curso = 1;
@@ -374,7 +374,6 @@ CREATE TABLE provas (
     titulo VARCHAR(50) NOT NULL,
     descricao TEXT,
     prazo DATETIME,
-    numero_questoes INT NOT NULL,
     tempo_limite INT NOT NULL, -- em minutos
     numero_tentativas INT NOT NULL,
     pontuacao_minima INT NOT NULL, -- de 0 a 100

@@ -23,6 +23,8 @@ class relatoriosController extends Controller
         // Carrega dados do usuário no construtor
         $this->usuario = $this->sessao->carregarUsuario($_SESSION['usuario'], $this->cursoInfo['url_principal']);
         $this->sessao->autorizaAdm($_SESSION['usuario']['adm'], $this->cursoInfo['url_principal']);
+
+        unset($_SESSION['pagina']);
     }
 
     public function index()
