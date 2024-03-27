@@ -10,7 +10,7 @@ editar integração
 -Fazer paginação de trilhas
 -Fazer editor de texto funcionar
 -Fazer funcionar mudança de índice (arrows up e down)
--Fazer sistema de avaliações (questionários)
+-Fazer sistema de avaliações (questionários) **
 -Fazer quiz
 -Fazer gameficação
 -relatórios

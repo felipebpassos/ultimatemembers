@@ -8,7 +8,7 @@
         <ul class="barra">
             <!-- Botões -->
             <li>
-                <button class="aba" onclick="abrirAba(event, 'curso')">Curso</button>
+                <button class="aba" onclick="abrirAba(event, 'geral')">Geral</button>
             </li>
             <li>
                 <button class="aba" id="usuarios-btn" onclick="abrirAba(event, 'usuarios')">Usuários</button>
@@ -50,7 +50,7 @@
     </div>
 
     <!-- Preferências: Curso -->
-    <section id="curso" class="content">
+    <section id="geral" class="content">
 
         <form action="<?php echo $curso['url_principal']; ?>painel/edit_geral/" method="post"
             enctype="multipart/form-data">
@@ -433,13 +433,71 @@
     <section id="provas" class="content">
 
         <div class="card" style="min-height: 500px;">
-            <div style="display: flex; justify-content: space-between; align-items:center;">
+            <div style="display: flex; justify-content: space-between; align-items:center; margin-bottom: 40px;">
                 <div class="texto">
                     <h4 class="title">Provas Cadastradas</h4>
                     <p>Cadastre provas e avalie seus alunos</p>
                 </div>
                 <button class="btn-2" id="novaProva">+ Nova Prova</button>
             </div>
+            <div class="container">
+                <?php
+
+                // Verificar se há provas
+                if (empty ($provas)) {
+                    // Se não houver provas, exibir uma mensagem de erro
+                    ?>
+                    <div class="col-md-12">
+                        <div class="error-message">
+                            <img width="350" src="http://localhost/ultimatemembers/public/img/isometric_erro.png"
+                                alt="Sem Resultado">
+                            Não há provas disponíveis no momento.
+                        </div>
+                    </div>
+                    <?php
+                } else {
+                    // Se houver provas, gerar o conteúdo das provas
+                    ?>
+                    <div class="row">
+                        <?php foreach ($provas as $prova) { ?>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="prova">
+                                    <div class="prova-header">
+                                        <h6>
+                                            <?php echo $prova['titulo']; ?>
+                                        </h6>
+                                        <div class="toggle-button">
+                                            <div class="ball"></div>
+                                        </div>
+                                    </div>
+                                    <div class="prova-info">
+                                        <ul>
+                                            <li><span><i class="fa-solid fa-calendar"></i></span>Prazo:
+                                                <?php echo calcularTempoDecorrido($prova['prazo']); ?>
+                                            </li>
+                                            <li><span><i class="fa-solid fa-list"></i></span>Questões:
+                                                <?php echo $prova['numero_questoes']; ?>
+                                            </li>
+                                            <li><span><i class="fa-solid fa-clock"></i></span>Tempo:
+                                                <?php echo $prova['tempo_limite'] . ' min'; ?>
+                                            </li>
+                                            <li><span><i class="fa-solid fa-user-check"></i></span>Nota mínima:
+                                                <?php echo $prova['pontuacao_minima'] . '/100'; ?>
+                                            </li>
+                                        </ul>
+                                        <div class="opcoes-prova">
+                                            <button class="editar editar-prova" data-id="<?php echo $prova['id']; ?>"><i
+                                                    class="fa-solid fa-pen-to-square"></i></button>
+                                            <button class="editar deletar-prova" data-id="<?php echo $prova['id']; ?>"><i class="fa-solid fa-trash-can"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                <?php } ?>
+            </div>
+
         </div>
 
     </section>

@@ -26,15 +26,15 @@ function calcularTempoDecorrido($dataPublicacao)
 
     // Agora você pode construir a string com base no intervalo de tempo
     if ($anos > 0) {
-        $tempoDecorrido = $anos . " ano(s) atrás";
+        $tempoDecorrido = $anos . " ano(s)";
     } elseif ($meses > 0) {
-        $tempoDecorrido = $meses . " mês(es) atrás";
+        $tempoDecorrido = $meses . " mês(es)";
     } elseif ($dias > 0) {
-        $tempoDecorrido = $dias . " dia(s) atrás";
+        $tempoDecorrido = $dias . " dia(s)";
     } elseif ($horas > 0) {
-        $tempoDecorrido = $horas . " hora(s) atrás";
+        $tempoDecorrido = $horas . " hora(s)";
     } else {
-        $tempoDecorrido = $minutos . " minuto(s) atrás";
+        $tempoDecorrido = $minutos . " minuto(s)";
     }
 
     return $tempoDecorrido;

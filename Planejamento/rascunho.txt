@@ -1,0 +1,9 @@
+if (prova['prazo'] !== null) {
+            // Separar data e hora
+            const prazoData = prova['prazo'].split(' ')[0];
+            const prazoHora = prova['prazo'].split(' ')[1];
+
+            $('#toggle-prazo-edit').addClass('active');
+            $('#prazoFinalEdit').val(prazoData); // Preencher campo de data
+            $('#horaPrazoFinalEdit').val(prazoHora); // Preencher campo de hora
+        } é assim, perdão. foi erro meu. Mas eu quero tbm que #prazoFinalEdit e #horaPrazoFinalEdit também removam 'disabled' e adicione 'required' em ambos

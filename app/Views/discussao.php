@@ -23,7 +23,7 @@ $foto_autor = $discussao['foto'];
                 </p>
                 <p style="font-size: 13px; margin: 0 20px 0px 0px;"><i class="fa-regular fa-clock"
                         style="margin-right:5px;"></i></i>
-                    <?php echo $publicacao; ?>
+                    <?php echo $publicacao  . ' atrás'; ?>
                 </p>
             </div>
             <div class="opcoes" style="position: absolute; right: 0; bottom: 0; margin-bottom: 15px;">

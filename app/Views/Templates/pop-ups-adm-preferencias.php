@@ -261,8 +261,7 @@
         <h2 style="margin: auto; font-weight: bold; width:fit-content;">Nova Prova</h2>
 
         <form class="formPopUp" id="provaFormAdd"
-            action="<?php echo $curso['url_principal']; ?>questionario/nova_prova/" enctype="multipart/form-data"
-            method="POST">
+            action="<?php echo $curso['url_principal']; ?>questionario/nova_prova/" method="POST">
 
             <div style="width: 600px; margin: auto;">
 
@@ -281,7 +280,7 @@
                         <div class="ball"></div>
                     </div>
 
-                    <div class="campo-popup" style="width: 100%; margin-bottom: 10px;">
+                    <div class="campo-popup" style="width: 100%; margin-bottom: 15px;">
                         <input type="date" id="prazoFinal" name="prazoFinal" class="campo-input" disabled>
                     </div>
 
@@ -346,4 +345,144 @@
 
     </div>
 
+</div>
+
+<!-- Formulário para editar prova -->
+<div id="editProva" class="popup">
+    <div class="popup-content">
+
+        <div class="close-container">
+            <div class="close" id="closePopupEditProva" onmouseover="startAnimation()" onmouseout="resetAnimation()">
+                <svg class="close-ring" width="51" height="51">
+                    <circle class="close-ring__circle" id="closeCircle" stroke="var(--cor-primaria-light)"
+                        stroke-width="2" fill="transparent" r="23" cx="25" cy="25" />
+                    <circle class="close-ring__circle-full" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2"
+                        fill="transparent" r="23" cx="25" cy="25" />
+                </svg>
+                <svg class="x" viewBox="0 0 12 12" style="height: 12px; width: 12px;">
+                    <path stroke="rgb(180, 180, 180)" fill="rgb(180, 180, 180)"
+                        d="M4.674 6L.344 1.05A.5.5 0 0 1 1.05.343L6 4.674l4.95-4.33a.5.5 0 0 1 .707.706L7.326 6l4.33 4.95a.5.5 0 0 1-.706.707L6 7.326l-4.95 4.33a.5.5 0 0 1-.707-.706L4.674 6z">
+                    </path>
+                </svg>
+            </div>
+        </div>
+
+        <h2 style="margin: auto; font-weight: bold; width:fit-content;">Editar Prova</h2>
+
+        <form class="formPopUp" id="provaFormEdit"
+            action="<?php echo $curso['url_principal']; ?>questionario/editar_prova/" method="POST">
+
+            <div class="container" style="margin-bottom: 50px;">
+
+                <div class="row" style="justify-content: space-around;">
+
+                    <div class="col-md-5">
+                        <input type="hidden" id="idProva" name="idProva">
+
+                        <div class="mb-3">
+                            <label class="form-label" for="nomeProvaEdit">Título da prova</label>
+                            <div class="campo-popup" style="width: 100%;">
+                                <input type="text" id="nomeProvaEdit" name="nomeProva" class="campo-input"
+                                    placeholder="Digite o título da prova" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="prazoFinalEdit">Prazo Final</label>
+
+                            <div id="toggle-prazo-edit" class="toggle-button" style="margin-bottom: 15px;">
+                                <div class="ball"></div>
+                            </div>
+
+                            <div class="campo-popup" style="width: 100%; margin-bottom: 15px;">
+                                <input type="date" id="prazoFinalEdit" name="prazoFinal" class="campo-input" disabled>
+                            </div>
+
+                            <div class="campo-popup" style="width: 100%;">
+                                <input type="time" id="horaPrazoFinalEdit" name="horaPrazoFinal" class="campo-input"
+                                    value="00:00" disabled>
+                            </div>
+
+                            <script>
+                                $(document).ready(function () {
+                                    $('#toggle-prazo-edit').click(function () {
+                                        var inputs = $('#prazoFinalEdit, #horaPrazoFinalEdit');
+
+                                        if ($(this).hasClass('active')) {
+                                            inputs.prop('disabled', true).prop('required', false);
+                                        } else {
+                                            inputs.prop('disabled', false).prop('required', true);
+                                        }
+
+                                        $(this).toggleClass('active');
+                                    });
+                                });
+                            </script>
+
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="tempoRealizacaoEdit">Tempo de Realização por Tentativa
+                                (minutos)</label>
+                            <div class="campo-popup" style="width: 100%;">
+                                <input type="number" id="tempoRealizacaoEdit" name="tempoRealizacao" class="campo-input"
+                                    min="0" value="0" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="numeroTentativasEdit">Número Máximo de Tentativas</label>
+                            <div class="campo-popup" style="width: 100%;">
+                                <input type="number" id="numeroTentativasEdit" name="numeroTentativas"
+                                    class="campo-input" min="1" max="3" value="1" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="pontuacaoMinimaEdit">Porcentagem mínima de acertos (0 a
+                                100%)</label>
+                            <div class="campo-popup" style="width: 100%;">
+                                <input type="number" id="pontuacaoMinimaEdit" name="pontuacaoMinima" class="campo-input"
+                                    min="0" max="100" value="50" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="descricaoProvaEdit">Descrição da Prova</label>
+                            <div class="campo-popup" style="width: 100%;">
+                                <textarea id="descricaoProvaEdit" name="descricaoProva" class="campo-input"
+                                    placeholder="Descreva sobre o que é a Prova"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                    <div class="card" style="min-height: 100%;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items:center; margin-bottom: 40px;">
+                            <div class="texto">
+                                <h4 class="title">Questões</h4>
+                                <p>Cadastre questões para esta avaliação</p>
+                            </div>
+                            <button type="button" class="btn-2" id="novaQuestao">+ Nova Questão</button>
+                        </div>
+                    </div>
+
+                </div>
+                </div>
+
+            </div>
+
+            <button class="btn-2" type="submit" style="margin: auto; margin-top: 20px;"><i
+                        class="fa-regular fa-floppy-disk"></i>Salvar</button>
+        </form>
+
+    </div>
+
+    <script>
+        var provasData = <?php echo json_encode($provas); ?>;
+        var provasArray = Object.values(provasData);
+    </script>
 </div>

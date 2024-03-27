@@ -41,4 +41,48 @@ class Questionarios
         }
     }
 
+    public function getProvas($curso_id)
+    {
+        try {
+            // Preparar a consulta SQL
+            $stmt = $this->con->prepare("
+            SELECT 
+                provas.id, 
+                provas.titulo, 
+                provas.prazo, 
+                provas.tempo_limite, 
+                provas.numero_tentativas, 
+                provas.pontuacao_minima, 
+                provas.descricao, 
+                COUNT(questoes.id) AS numero_questoes 
+            FROM 
+                provas 
+            LEFT JOIN 
+                questoes ON provas.id = questoes.prova_id 
+            WHERE 
+                provas.curso_id = ? 
+            GROUP BY 
+                provas.id, 
+                provas.titulo, 
+                provas.prazo, 
+                provas.tempo_limite, 
+                provas.numero_tentativas, 
+                provas.pontuacao_minima
+        ");
+
+            // Vincular o ID do curso ao parâmetro da consulta
+            $stmt->bindParam(1, $curso_id);
+
+            // Executar a consulta
+            $stmt->execute();
+
+            // Retornar todas as provas encontradas
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            // Se houver algum erro, exibir uma mensagem de erro
+            echo "Erro ao obter provas por curso: " . $e->getMessage();
+            return false;
+        }
+    }
+
 }

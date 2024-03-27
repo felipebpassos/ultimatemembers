@@ -535,12 +535,15 @@ class painelController extends Controller
 
         $auth = new Auth();
         $usuarios_model = new Usuarios();
+        $questionarios_model = new Questionarios();
 
-        $integracoes = $auth->getIntegracoesAPI($this->curso);
         $num_usuarios = $usuarios_model->countUsuarios($this->curso);
+        $integracoes = $auth->getIntegracoesAPI($this->curso);
+        $provas = $questionarios_model->getProvas($this->curso);
 
         $data['integracoes'] = $integracoes;
         $data['totalPaginas'] = ceil($num_usuarios / 10);
+        $data['provas'] = $provas;
 
         //set template
         $template = 'painel-temp';

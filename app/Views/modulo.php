@@ -154,8 +154,8 @@ $video = !empty($modulo['video']) ? str_replace("./", "http://localhost/ultimate
                         // Verifica se $adm é verdadeiro
                         if ($adm) {
                             echo '<div class="opções-aula">
-                    <button class="editar-aula" id="editar-aula" data-id="' . $id_aula . '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
-                    <button class="excluir-aula" id="excluir-aula" data-id="' . $id_aula . '"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>
+                    <button class="editar-aula btn-box" id="editar-aula" data-id="' . $id_aula . '"><i class="fa-solid fa-pen-to-square"></i><span class="legenda">Editar</span></button>
+                    <button class="excluir-aula btn-box" id="excluir-aula" data-id="' . $id_aula . '"><i class="fa-solid fa-trash-can"></i><span class="legenda">Excluir</span></button>
                 </div>';
                         } else {
                             echo '<div class="opções-aula">
@@ -251,8 +251,4 @@ if ($adm) {
     <?php
 }
 
-//Carrega os pop-ups-adm
-if ($adm) {
-    include 'http://localhost/ultimatemembers/app/Views/Templates/pop-ups-adm-aulas.php';
-} 
 ?>

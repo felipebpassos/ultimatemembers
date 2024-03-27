@@ -16,7 +16,7 @@ $('#add-aula').click(function () {
             // Seleciona a div.videos.row
             var videosContainer = $('.videos .row');
             videosContainer.empty();
-    
+
             // Itera sobre os vídeos e cria as divs conforme necessário
             for (var i = 0; i < data.length; i++) {
                 // Verifica se o elemento tem success true
@@ -26,37 +26,37 @@ $('#add-aula').click(function () {
                     videos.append(errorMessage);
                     continue; // Pula para o próximo elemento do loop
                 }
-    
+
                 // Cria a div.video
                 var videoDiv = $('<div class="video col-md-3 col-lg-3"></div>');
-    
+
                 // Cria a imagem com o src definido pela thumbnailUrl
                 var thumbnailImg = $('<img src="' + data[i].thumbnailUrl + '" alt="Thumbnail">');
-    
+
                 // Cria a imagem da integração
                 let plataforma = integracoes[data[i].plataforma];
                 var plataformaImg = $('<img class="plataforma-img" src="' + plataforma['img-mini'] + '" alt="Thumbnail">');
-    
+
                 // Cria o título
                 var title = $('<p>' + data[i].title + '</p>');
-    
+
                 // Adiciona o data-id ao elemento
                 videoDiv.attr('data-id', data[i].videoId);
-    
+
                 // Adiciona o data-nome ao elemento
                 videoDiv.attr('data-nome', data[i].title);
-    
+
                 // Adiciona o data-plataforma ao elemento
                 videoDiv.attr('data-plataforma', data[i].plataforma);
-    
+
                 // Adiciona o data-integracao ao elemento
                 videoDiv.attr('data-integracao', data[i].integracao);
-    
+
                 // Adiciona a imagem e o título à div.video
                 videoDiv.append(thumbnailImg);
                 videoDiv.append(plataformaImg);
                 videoDiv.append(title);
-    
+
                 // Adiciona a div.video à div.videos
                 videosContainer.append(videoDiv);
             }
@@ -64,7 +64,7 @@ $('#add-aula').click(function () {
         error: function (error) {
             console.error('Erro na requisição AJAX:', error);
         }
-    });    
+    });
 });
 
 // Quando o botão de fechar for clicado
@@ -457,7 +457,7 @@ $('#closePopupIntAuth').click(function () {
     fecharFormulario('oauth-int');
 });
 
-//LANÇAMENTOS
+//PROVAS
 
 $('#novaProva').click(function () {
     exibirFormulario('add-prova'); // Função para exibir o formulário
@@ -466,6 +466,47 @@ $('#novaProva').click(function () {
 // Quando o botão de fechar for clicado
 $('#closePopupAddProva').click(function () {
     fecharFormulario('add-prova');
+});
+
+// Quando os botões de editar prova for clicado
+$('#provas').on('click', '.editar-prova', function () {
+    const provaId = $(this).data('id'); // Obtém o ID da prova do atributo data-id
+
+    $('#idProva').val(provaId);
+
+    // Encontra prova correspondente
+    const prova = encontrarPorId(provaId, provasArray);
+
+    // Verifique se prova é definida e possui as propriedades
+    if (prova) {
+        // Preenche os campos do popup com os valores da prova
+        $('#nomeProvaEdit').val(prova['titulo']);
+        if (prova['prazo'] !== null) {
+            // Separar data e hora
+            const prazoData = prova['prazo'].split(' ')[0];
+            const prazoHora = prova['prazo'].split(' ')[1];
+
+            $('#toggle-prazo-edit').addClass('active');
+            $('#toggle-prazo-edit').addClass('active');
+            $('#prazoFinalEdit').val(prazoData).prop('disabled', false).prop('required', true); // Preencher campo de data e remover disabled e adicionar required
+            $('#horaPrazoFinalEdit').val(prazoHora).prop('disabled', false).prop('required', true); // Preencher campo de hora e remover disabled e adicionar required
+        }
+        $('#tempoRealizacaoEdit').val(prova['tempo_limite']);
+        $('#numeroTentativasEdit').val(prova['numero_tentativas']);
+        $('#pontuacaoMinimaEdit').val(prova['pontuacao_minima']);
+        if (prova['descricao'] !== null) {
+            $('#descricaoProvaEdit').val(prova['descricao']);
+        }
+    } else {
+        console.error('Prova não encontrada ou propriedades ausentes.');
+    }
+
+    exibirFormulario('edit-prova');
+});
+
+// Quando o botão de fechar for clicado
+$('#closePopupEditProva').click(function () {
+    fecharFormulario('edit-prova');
 });
 
 // Função para encontrar aula por ID
@@ -503,6 +544,8 @@ function exibirFormulario(option) {
         $('#oauth-integracao').show();
     } else if (option === 'add-prova') {
         $('#addProva').show();
+    } else if (option === 'edit-prova') {
+        $('#editProva').show();
     }
     $('.scrollbar-container').addClass('blur');
     $('.whatsapp-button').addClass('blur');
@@ -531,6 +574,8 @@ function fecharFormulario(option) {
         $('#oauth-integracao').hide();
     } else if (option === 'add-prova') {
         $('#addProva').hide();
+    } else if (option === 'edit-prova') {
+        $('#editProva').hide();
     }
     $('.scrollbar-container').removeClass('blur');
     $('.whatsapp-button').removeClass('blur');

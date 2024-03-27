@@ -14,17 +14,17 @@
     color: var(--cor-primaria);
     border-radius: 15px;
     border: none;
-    outline: 1px solid var(--cor-secundaria-lighter);
+    outline: 1px solid var(--cor-secundaria-light);
 }
 
 .pesquisar input:hover {
-    border: 1px solid var(--cor-secundaria-lighter);
+    border: 1px solid var(--cor-secundaria-light);
     transition: outline 0.3s ease-in-out;
     outline: 4px solid var(--cor-primaria-transparent-4);
 }
 
 .pesquisar input:focus {
-    border: 1px solid var(--cor-secundaria-lighter);
+    border: 1px solid var(--cor-secundaria-light);
     transition: outline 0.3s ease-in-out;
     outline: 4px solid var(--cor-primaria-transparent-4);
 }
